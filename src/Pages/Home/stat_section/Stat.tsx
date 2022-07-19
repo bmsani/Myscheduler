@@ -3,7 +3,7 @@ import CountUp from 'react-countup';
 
 const Stat = () => {
   return (
-    <div>
+    <div className="py-16">
       <h2 className="text-primary text-4xl font-semibold w-[750px] text-center mx-auto">
         We handle 1000's of bookings for our users every single day
       </h2>
