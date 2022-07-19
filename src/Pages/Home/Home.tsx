@@ -1,9 +1,10 @@
 import React from 'react';
+import Stat from './stat_section/Stat';
 
 const Home = () => {
     return (
         <div>
-            <h1>Hello from Home</h1>
+            <Stat></Stat>
         </div>
     );
 };
