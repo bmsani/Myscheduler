@@ -1,11 +1,13 @@
-import React from 'react';
+import PowerfulFeatures from "./PowerfulFeatures/PowerfulFeatures";
+import SchedulingType from "./SchedulingType/SchedulingType";
 
 const Home = () => {
-    return (
-        <div>
-            <h1>Hello from Home</h1>
-        </div>
-    );
+  return (
+    <div className="max-w-4xl mx-auto">
+      <PowerfulFeatures />
+      <SchedulingType />
+    </div>
+  );
 };
 
 export default Home;
