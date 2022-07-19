@@ -1,9 +1,11 @@
-import React from 'react';
+import DoBest from './DoBest/DoBest';
+import Hero from './Hero/Hero';
 
 const Home = () => {
     return (
         <div>
-            <h1>Hello from Home</h1>
+            <Hero></Hero>
+            <DoBest></DoBest>
         </div>
     );
 };
