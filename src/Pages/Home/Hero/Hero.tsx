@@ -1,3 +1,4 @@
+import Button from "../../../Shared/Button/Button";
 import "./Hero.css"
 
 const Hero = () => {
@@ -10,7 +11,7 @@ const Hero = () => {
                  <h1 className="mb-2 md:lg-5 text-2xl md:text-3xl lg:text-5xl font-semibold">Interview, meetings</h1>
                  <h1 className="mb-2 md:lg-5 text-2xl md:text-3xl lg:text-5xl font-semibold">MyScheduler Website</h1>
                  <p className="mb-5 text-sm md:text-xl text-gray-100 font-light">MyScheduler is your hub for scheduling meetings professionally and efficiently, eliminating the hassle of back-and-forth emails so you can get back to work.</p>
-                 <button className="btn btn-primary">Get Started</button>
+                 <Button><span>Get Started</span></Button>
             </div>
             <div></div>
         </div>
