@@ -1,5 +1,5 @@
 import image1 from '../../../Utilities/Image/confirm.gif'
-import image2 from '../../../Utilities/Image/date set.gif'
+import image2 from '../../../Utilities/Image/date.gif'
 import image3 from '../../../Utilities/Image/alert.gif'
 
 const DoBest = () => {
