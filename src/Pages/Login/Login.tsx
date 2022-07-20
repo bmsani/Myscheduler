@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import SocialLogin from "../../Shared/SocialLogin/SocialLogin";
+import loginImg from "../../Utilities/Image/Illustration.png";
 import "./Login.css";
 const Login = () => {
   type FormValues = {
@@ -20,7 +21,9 @@ const Login = () => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 h-[90vh]">
-      <div className="login-bg hidden md:block"></div>
+      <div className="hidden bg-secondary md:flex justify-center items-center">
+        <img className="w-[350px]" src={loginImg} alt="" />
+      </div>
       <div className="flex justify-center bg-[#e1f7f7]">
         <div className="w-[500px] p-5 my-12 ">
           <form onSubmit={onSubmit}>
