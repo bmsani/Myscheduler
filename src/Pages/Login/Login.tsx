@@ -1,13 +1,15 @@
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { Link } from "react-router-dom";
 import SocialLogin from "../../Shared/SocialLogin/SocialLogin";
 import loginImg from "../../Utilities/Image/Illustration.png";
 import "./Login.css";
-const Login = () => {
-  type FormValues = {
-    email: string;
-    password: string;
-  };
+
+interface FormValues {
+  email: string;
+  password: string;
+}
+
+const Login: React.FC = () => {
 
   const {
     register,
@@ -15,9 +17,8 @@ const Login = () => {
     formState: { errors },
   } = useForm<FormValues>();
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data.email, data.password);
-  });
+  const onSubmit: SubmitHandler<FormValues> = (data) => console.log('data submitted: ', data);
+
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 h-[90vh]">
@@ -26,11 +27,10 @@ const Login = () => {
       </div>
       <div className="flex justify-center bg-[#e1f7f7]">
         <div className="w-[500px] p-5 my-12 ">
-          <form onSubmit={onSubmit}>
+          <div>
             <p className="text-secondary  text-3xl text-center">Welcome!</p>
             <p className="text-center mt-2">Enter your info below to login.</p>
-            <form>
-              <div className="form-control w-full">
+            <form onSubmit={handleSubmit(onSubmit)} className="form-control w-full">
                 <input
                   type="email"
                   placeholder="Your Email"
@@ -58,9 +58,7 @@ const Login = () => {
                     </span>
                   )}
                 </label>
-              </div>
 
-              <div className="form-control w-full">
                 <input
                   type="Password"
                   placeholder="Password"
@@ -88,10 +86,9 @@ const Login = () => {
                     </span>
                   )}
                 </label>
-              </div>
               <input
                 type="submit"
-                className=" rounded-full bg-secondary hover:bg-primary hover:shadow-lg  duration-300  w-full text-white cursor-pointer mt-7 p-2 text-1xl"
+                className="rounded-full bg-secondary hover:bg-primary hover:shadow-lg  duration-300  w-full text-white cursor-pointer mt-7 p-2 text-1xl"
                 value="Sign In"
               />
             </form>
@@ -110,7 +107,7 @@ const Login = () => {
               <span>Or login with</span>
               <SocialLogin />
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>
