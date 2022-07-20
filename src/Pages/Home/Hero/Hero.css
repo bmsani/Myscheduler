@@ -1,4 +1,5 @@
-.bgImage{
-    background-image: url(../../../Utilities/Image/top-view-arrangement-natural-material-stationery_23-2148898233.png);
+.bgImage {
+    background-image: url(../../../Utilities/Image/banner.jpg);
+    background-position: cover;
 
 }
