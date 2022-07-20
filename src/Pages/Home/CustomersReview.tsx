@@ -10,7 +10,7 @@ const CustomersReview = () => {
     return (
         <div>
             <h2 className='text-primary text-3xl text-center font-bold my-12'>Our Satisfied Customers</h2>
-            <div className='grid lg:grid-cols-3 gap-4 container mx-auto '>
+            <div className='grid lg:grid-cols-3 gap-4 container mx-auto mb-12'>
                 <div className='"my-2 mx-1 max-w-lg  gap-3 rounded-md bg-white p-2 text-black shadow'>
                     <div className='flex pt-4 pl-4'>
                         <div className="avatar">
