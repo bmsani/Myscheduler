@@ -11,21 +11,21 @@ const CustomersReview = () => {
 
     }
     const settings = {
+        speed: 500,
         dots: true,
-        infinite: true,
         autoplay: true,
-        speed: 5000,
-        autoplaySpeed: 5000,
-        cssEase: "linear",
+        autoplaySpeed: 4000,
+        cssEase: 'linear',
         slidesToShow: 3,
-        slidesToScroll: 2,
-        initialSlide: 0,
+        slidesToScroll: 1,
+        pauseOnHover: true,
+        arrows: false,
         responsive: [
             {
                 breakpoint: 1024,
                 settings: {
                     slidesToShow: 3,
-                    slidesToScroll: 2,
+                    slidesToScroll: 3,
                     infinite: true,
                     dots: true
                 }
@@ -58,7 +58,7 @@ const CustomersReview = () => {
                             <div className='flex pt-4 pl-4'>
                                 <div className="avatar">
                                     <div className="w-16 rounded-full">
-                                        <img src="https://placeimg.com/192/192/people" />
+                                        <img src="https://cdn-icons.flaticon.com/png/512/1785/premium/1785888.png?token=exp=1658301351~hmac=ddf039fe449e3be34908111d7f51886f" />
                                     </div>
                                 </div>
                                 <div className='ml-4'>
@@ -112,7 +112,7 @@ const CustomersReview = () => {
                             <div className='flex pt-4 pl-4'>
                                 <div className="avatar">
                                     <div className="w-16 rounded-full">
-                                        <img src="https://placeimg.com/192/192/people" />
+                                        <img src="https://cdn-icons.flaticon.com/png/512/1785/premium/1785896.png?token=exp=1658301322~hmac=67d668402b5cd5c94e34d405d18e2d2c" />
                                     </div>
                                 </div>
                                 <div className='ml-4'>
@@ -139,7 +139,7 @@ const CustomersReview = () => {
                             <div className='flex pt-4 pl-4'>
                                 <div className="avatar">
                                     <div className="w-16 rounded-full">
-                                        <img src="https://placeimg.com/192/192/people" />
+                                        <img src="https://cdn-icons.flaticon.com/png/512/2202/premium/2202112.png?token=exp=1658301203~hmac=59d2474e74fbe0e6c106a0b15f369e0a" />
                                     </div>
                                 </div>
                                 <div className='ml-4'>
@@ -166,7 +166,7 @@ const CustomersReview = () => {
                             <div className='flex pt-4 pl-4'>
                                 <div className="avatar">
                                     <div className="w-16 rounded-full">
-                                        <img src="https://placeimg.com/192/192/people" />
+                                        <img src="https://cdn-icons-png.flaticon.com/512/4333/4333609.png" />
                                     </div>
                                 </div>
                                 <div className='ml-4'>
