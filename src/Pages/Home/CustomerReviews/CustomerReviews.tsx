@@ -53,13 +53,12 @@ const CustomerReviews = () => {
     };
     return (
         <div className='px-10 mt-20'>
-            <h2 className='text-primary text-3xl text-center font-bold'>Our Satisfied Customers</h2>
-
+            <h2 className='text-2xl md:text-3xl lg:text-4xl text-neutral text-center font-bold'>Our Satisfied Customers</h2>
             <div className='mb-12'>
                 <Slider {...settings}>
                     {reviews.map((review: { name: string; picture: 'file'; rating: number; _review: string }) => (
                         <div>
-                            <div className=' mx-1 max-w-lg rounded-md bg-white p-2 text-black shadow-lg m-5'>
+                            <div className='mx-1 max-w-lg rounded-md bg-white p-2 text-black shadow-lg m-5'>
                                 <div className='flex pt-4 pl-4'>
                                     <div className="avatar">
                                         <div className="w-16 rounded-full">
@@ -67,12 +66,12 @@ const CustomerReviews = () => {
                                         </div>
                                     </div>
                                     <div className='ml-4'>
-                                        <h2 className='font-bold'>{review.name}</h2>
-                                        <h3 className='text-sm'>CEO menopal</h3>
+                                        <h2 className='text-sm md:text-lg text-justify font-bold'>{review.name}</h2>
+                                        <h3 className='text-xs md:text-md text-justify'>Position: CEO</h3>
                                     </div>
                                 </div>
                                 <div className='pl-4'>
-                                    <p className='mt-4 text-gray-700'>{review._review}</p>
+                                    <p className='text-sm md:text-lg text-justify mt-4'>{review._review}</p>
 
                                     <div className='mt-2'>
                                         <div className="flex items-center gap-1">
