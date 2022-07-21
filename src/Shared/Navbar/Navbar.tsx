@@ -1,46 +1,10 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../../src/Utilities/icon/calendar.png";
-import Button from "../Button/Button";
 
 const Navbar = () => {
-  const [colorChange, setColorchange] = useState(false);
-  const changeNavbarColor = () => {
-    if (window.scrollY >= 80) {
-      setColorchange(true);
-    } else {
-      setColorchange(false);
-    }
-  };
-  window.addEventListener("scroll", changeNavbarColor);
-  const items = (
-    <>
-      <li>
-        <Link to="/">Home</Link>
-      </li>
-      <li>
-        <Link to="/">About Us</Link>
-      </li>
-      <li>
-        <Link to="/">Projects</Link>
-      </li>
-      <li>
-        <Link to="/">Contac</Link>
-      </li>
-      <li>
-        <Link to="/">Admin</Link>
-      </li>
-    </>
-  );
   return (
-    <div className={"sticky top-0 z-50"}>
-      <div
-        className={
-          colorChange
-            ? "navbar bg-base-100 absolute text-black"
-            : "navbar bg-transparent absolute text-white duration-300"
-        }
-      >
+    <div>
+      <div className="navbar bg-base-100">
         <div className="w-3/4 lg:w-1/2 md:w-3/5 lg:justify-start justify-between">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -62,27 +26,57 @@ const Navbar = () => {
             <ul
               tabIndex={0}
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-            >{items}</ul>
+            >
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/">About Us</Link>
+              </li>
+              <li>
+                <Link to="/">Projects</Link>
+              </li>
+              <li>
+                <Link to="/">Contac</Link>
+              </li>
+              <li>
+                <Link to="/">Admin</Link>
+              </li>
+            </ul>
           </div>
-          <Link className="normal-case text-xl" to="/">
+          <a className="btn btn-ghost normal-case text-xl" href="/">
             <span className="flex items-center">
               <img className="w-10" src={Logo} alt="" />
-              <span className="font-bold text-secondary pl-4 hidden lg:block">
+              <span className="font-bold text-primary pl-4 hidden lg:block">
                 MyScheduler
               </span>
             </span>
-          </Link>
+          </a>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal p-0 font-semibold xl:gap-16">
-            {items}
+          <ul className="menu menu-horizontal py-2 font-bold xl:gap-16">
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/">About Us</Link>
+            </li>
+            <li>
+              <Link to="/">Projects</Link>
+            </li>
+            <li>
+              <Link to="/">Contact</Link>
+            </li>
+            <li>
+              <Link to="/">Admin</Link>
+            </li>
           </ul>
         </div>
         <div className="navbar-end">
           <Link to="/login">
-            <Button>
+            <button className="text-secondary font-semibold border-2 border-secondary hover:bg-secondary hover:text-white duration-300 rounded-lg px-2 py-1">
               <span className="px-4">Login</span>
-            </Button>
+            </button>
           </Link>
         </div>
       </div>
