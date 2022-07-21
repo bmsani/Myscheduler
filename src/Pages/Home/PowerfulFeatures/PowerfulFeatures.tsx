@@ -24,7 +24,7 @@ const PowerfulFeatures = () => {
         <h1 className="text-3xl font-bold text-primary">Powerful features</h1>
         <p className="font-medium">
           Simple, easy to use features to help automate scheduling with your
-          customers
+          customers.
         </p>
       </div>
       <div className="flex justify-center space-x-4">
