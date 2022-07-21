@@ -1,16 +1,19 @@
 const PowerfulFeatures = () => {
   const cardData = [
     {
+      id: '1',
       icon: 'https://img.freepik.com/free-vector/alert-concept-illustration_114360-238.jpg?t=st=1658382151~exp=1658382751~hmac=4ac206dffa9aa573ea315b73443fc6b7f4351ff0752424db8ae8f2cc9a69f131&w=740',
       heading: "Reduce no shows with reminders",
       para: "Automatic reminders and notifications significantly reduce no shows and admin work.",
     },
     {
-      icon: 'https://greenspector.com/wp-content/uploads/2021/03/Visioconferences_app_comparatif_greenspector_mars_20212-min.png',
+      id: '2',
+      icon: 'https://i.insider.com/606b61e6856cd700198a33a0?width=1136&format=jpeg&fbclid=IwAR116spquUnSpWLUxdMmnQ3Eob7wEG8d4fUf_4kUgY4yYZiIr2H6Ky30Gug',
       heading: "Video/Virtual meeting links",
       para: "Automatically create unique Zoom, Google Meet, and MS Teams links for meetings scheduled.",
     },
     {
+      id: '3',
       icon: 'https://img.freepik.com/free-vector/flat-hand-drawn-time-management-illustration_23-2148829093.jpg',
       heading: "Custom available and control",
       para: "Set up custom availability, padding between appointments and appointment duration.",
@@ -27,7 +30,8 @@ const PowerfulFeatures = () => {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center items-center gap-4">
         {cardData.map((data) => (
-          <PowerCard data={data} />
+          <PowerCard data={data}
+            key={data.id } />
         ))}
       </div>
     </section>
