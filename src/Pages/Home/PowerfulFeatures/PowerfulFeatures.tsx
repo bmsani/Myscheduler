@@ -19,13 +19,13 @@ const PowerfulFeatures = () => {
   return (
     <section className="w-full text-center mt-20">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-primary">Powerful features</h1>
-        <p className="font-medium">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-primary">Powerful features</h1>
+        <p className="font-medium text-justify md:text-center mx-10 md:mx-0 md:text-lg">
           Simple, easy to use features to help automate scheduling with your
           customers.
         </p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center space-x-20">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center items-center gap-4">
         {cardData.map((data) => (
           <PowerCard data={data} />
         ))}
@@ -39,7 +39,7 @@ const PowerCard = ({ data }: any) => {
     <div className="hover:bg-white text-center px-4 py-6 rounded">
       <img className="mx-auto w-40" src={data.icon} alt="" />
       <p className="font-bold text-xl bg-transparent">{data.heading}</p>
-      <p className="text-xs font-medium text-gray-400 bg-transparent">
+      <p className="text-sm md:text-lg text-justify bg-transparent">
         {data.para}
       </p>
     </div>
