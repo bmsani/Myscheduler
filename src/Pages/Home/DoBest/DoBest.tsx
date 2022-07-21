@@ -36,8 +36,8 @@ const DoBest = () => {
                         <h3 className='text-3xl my-5 font-bold'>Delight invitees with modern scheduling</h3>
                         <p className='text-xl text-justify'>Time is a precious commodity. Calendly is the courteous way to book meetings and other appointments, because scheduling with just a few clicks makes the most of everyone's time.</p>
                     </div>
-                    <div>
-                        <img src={image3} alt="" />
+                    <div className='mx-auto'>
+                        <img className='w-[350px]' src={image3} alt="" />
                     </div>
                 </div>
             </div>
