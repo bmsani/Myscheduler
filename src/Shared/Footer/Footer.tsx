@@ -9,7 +9,7 @@ import location from '../../../src/Utilities/icon/location.png'
 const Footer = () => {
     return (
         <div>
-            <footer className="footer grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-5 p-10 bg-primary text-neutral-content">
+            <footer className="footer grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-5 p-10 bg-primary text-neutral-content mt-20">
                 
                     <div className=" col-span-1 lg:col-span-2 md:order-3 lg:order-1 pl-4">
                         <span className='flex'><img className='pr-5' src={location} alt="" /> H#000 (0th Floor), Road #000 </span>
@@ -36,7 +36,7 @@ const Footer = () => {
                     </div>
                     <div className="col-span-1 md:order-4 pl-4">
                     <h2 className='text-xl font-bold'>About us</h2>
-                    <p>We’re committed to keeping our customer service human. There’s incredible power in human connection; AI simply can’t beat it!</p>
+                    <p>We're committed to keeping our customer service human. There’s incredible power in human connection; AI simply can't beat it!</p>
                     <div className="flex gap-4">
                         <img className='w-6' src={social1} alt="" />
                         <img className='w-6' src={social2} alt="" />

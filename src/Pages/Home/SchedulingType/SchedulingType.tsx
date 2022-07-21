@@ -33,9 +33,9 @@ const SchedulingType = () => {
     },
   ];
   return (
-    <section className="w-full text-center mt-12 px-10">
+    <section className="w-full text-center mt-20 px-10">
       <div className="mb-12">
-        <h1 className="text-3xl font-bold text-primary">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-primary">
           Scheduling for any meeting type.
         </h1>
       </div>
@@ -55,8 +55,8 @@ const Card = ({ data }: any) => {
     <div className="card lg:card-side bg-base-100 shadow-xl">
       <figure><img className="lg:w-[200px] xl:w-[250px] h-full" src={data.image} alt="Album" /></figure>
       <div className="card-body">
-        <h2 className="card-title">{data.heading}</h2>
-        <p className='text-justify'>{data.para}</p>
+        <h2 className="card-title font-bold text-xl">{data.heading}</h2>
+        <p className='text-sm md:text-lg text-justify'>{data.para}</p>
       </div>
     </div>
   );
