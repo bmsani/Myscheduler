@@ -6,7 +6,7 @@ type ButtonProps = {
 
 const Button = ({ children }: ButtonProps) => {
   return (
-    <button className="bg-secondary py-2 px-4 text-white font-semibold rounded hover:bg-[#01aba8] duration-300">
+    <button className="bg-secondary hover:bg-accent py-2 px-7 text-white font-semibold rounded-lg  duration-300">
       {children}
     </button>
   );
