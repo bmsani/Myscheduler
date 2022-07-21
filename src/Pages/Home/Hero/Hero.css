@@ -1,5 +1,6 @@
 .bgImage {
-    background-image: url(../../../Utilities/Image/banner.jpg);
-    background-position: cover;
-
+  background-image: url(../../../Utilities/Image/banner.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
