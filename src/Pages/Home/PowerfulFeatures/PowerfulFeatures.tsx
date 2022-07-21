@@ -17,7 +17,7 @@ const PowerfulFeatures = () => {
     },
   ];
   return (
-    <section className="w-full text-center mt-20">
+    <section className="w-full text-center mt-20 px-10">
       <div className="mb-8">
         <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-primary">Powerful features</h1>
         <p className="font-medium text-justify md:text-center mx-10 md:mx-0 md:text-lg">
@@ -38,7 +38,7 @@ const PowerCard = ({ data }: any) => {
   return (
     <div className="hover:bg-white text-center px-4 py-6 rounded">
       <img className="mx-auto w-40" src={data.icon} alt="" />
-      <p className="font-bold text-xl bg-transparent">{data.heading}</p>
+      <p className="font-bold text-xl md:text-2xl bg-transparent">{data.heading}</p>
       <p className="text-sm md:text-lg text-justify bg-transparent">
         {data.para}
       </p>

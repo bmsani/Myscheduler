@@ -3,7 +3,7 @@ import CountUp from 'react-countup';
 
 const Stat = () => {
   return (
-    <div className="mt-20">
+    <div className="mt-20 px-10">
       <h2 className="text-primary text-2xl md:text-3xl lg:text-4xl font-bold w-full lg:w-[750px] text-center mx-auto">
         We handle 1000's of bookings for our users every single day
       </h2>
