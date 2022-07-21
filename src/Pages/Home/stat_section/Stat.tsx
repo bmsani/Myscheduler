@@ -20,7 +20,7 @@ const Stat = () => {
 
         <div className="stat text-center text-secondary shadow-md">
           <div className="stat-value"><CountUp start={9900} end={10000} duration={5} /></div>
-          <div className="text-neutral font-bold">Booking al time</div>
+          <div className="text-neutral font-bold">Booking all time</div>
         </div>
       </div>
     </div>

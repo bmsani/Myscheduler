@@ -1,18 +1,33 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import Logo from "../../../src/Utilities/icon/calendar.png";
 import Button from "../Button/Button";
 
 const Navbar = () => {
+  const { pathname } = useLocation();
   const [colorChange, setColorchange] = useState(false);
-  const changeNavbarColor = () => {
-    if (window.scrollY >= 80) {
-      setColorchange(true);
-    } else {
-      setColorchange(false);
+  const [anotherRouteColorChange, setAnotherRouteColorChange] = useState(false);
+
+  useEffect(() => {
+    if (pathname !== "/") {
+      setAnotherRouteColorChange(true);
     }
-  };
-  window.addEventListener("scroll", changeNavbarColor);
+    else{
+      setAnotherRouteColorChange(false);
+    }
+  }, [pathname, anotherRouteColorChange]);
+
+  console.log(anotherRouteColorChange);
+
+  const changeNavbarColor = () => {
+  if (window.scrollY >= 80 || pathname !== "/") {
+    setColorchange(true);
+  } else {
+    setColorchange(false);
+  }
+};
+window.addEventListener("scroll", changeNavbarColor);
+
   const items = (
     <>
       <li>
@@ -25,7 +40,7 @@ const Navbar = () => {
         <Link to="/">Projects</Link>
       </li>
       <li>
-        <Link to="/">Contac</Link>
+        <Link to="/">Contact</Link>
       </li>
       <li>
         <Link to="/">Admin</Link>
@@ -36,7 +51,7 @@ const Navbar = () => {
     <div className="sticky top-0 z-50">
       <div
         className={
-          colorChange
+          colorChange || anotherRouteColorChange 
             ? "navbar bg-base-100 absolute text-black shadow-xl"
             : "navbar bg-transparent absolute text-white duration-300"
         }
@@ -62,7 +77,9 @@ const Navbar = () => {
             <ul
               tabIndex={0}
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-            >{items}</ul>
+            >
+              {items}
+            </ul>
           </div>
           <Link className="normal-case text-xl" to="/">
             <span className="flex items-center">
