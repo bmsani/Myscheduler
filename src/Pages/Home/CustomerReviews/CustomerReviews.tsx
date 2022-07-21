@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import ReactStars from 'react-stars'
+import ReactStars from 'react-stars';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-
-
-const CustomersReview = () => {
+const CustomerReviews = () => {
 
     const [reviews, setReviews] = useState([])
     useEffect(() => {
@@ -99,4 +97,4 @@ const CustomersReview = () => {
     );
 };
 
-export default CustomersReview;
+export default CustomerReviews;
