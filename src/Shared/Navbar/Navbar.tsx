@@ -33,11 +33,11 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className={"sticky top-0 z-50"}>
+    <div className="sticky top-0 z-50">
       <div
         className={
           colorChange
-            ? "navbar bg-base-100 absolute text-black"
+            ? "navbar bg-base-100 absolute text-black shadow-xl"
             : "navbar bg-transparent absolute text-white duration-300"
         }
       >
