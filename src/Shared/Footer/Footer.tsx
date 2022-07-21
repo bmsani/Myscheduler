@@ -36,7 +36,7 @@ const Footer = () => {
                     </div>
                     <div className="col-span-1 md:order-4 pl-4">
                     <h2 className='text-xl font-bold'>About us</h2>
-                    <p>We’re committed to keeping our customer service human. There’s incredible power in human connection; AI simply can’t beat it!</p>
+                    <p>We're committed to keeping our customer service human. There’s incredible power in human connection; AI simply can't beat it!</p>
                     <div className="flex gap-4">
                         <img className='w-6' src={social1} alt="" />
                         <img className='w-6' src={social2} alt="" />
