@@ -36,8 +36,8 @@ const PowerfulFeatures = () => {
 
 const PowerCard = ({ data }: any) => {
   return (
-    <div className="hover:bg-white text-center w-60 px-4 py-6 rounded">
-      <img className="mx-auto" src={data.icon} alt="" />
+    <div className="hover:bg-white text-center px-4 py-6 rounded">
+      <img className="mx-auto w-40" src={data.icon} alt="" />
       <p className="font-bold text-xl bg-transparent">{data.heading}</p>
       <p className="text-xs font-medium text-gray-400 bg-transparent">
         {data.para}
