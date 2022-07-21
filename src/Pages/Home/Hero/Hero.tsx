@@ -3,7 +3,7 @@ import "./Hero.css";
 
 const Hero = () => {
   return (
-    <div className="w-full h-[90vh] bgImage flex items-center">
+    <div className="w-full h-[100vh] bgImage flex items-center">
       <div className="md:grid md:grid-cols-2 w-full">
         <div className="mx-8">
           <div className="text-white text-2xl md:text-3xl lg:text-5xl font-semibold">
