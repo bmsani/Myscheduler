@@ -5,6 +5,7 @@ import DoBest from './DoBest/DoBest';
 import Hero from './Hero/Hero';
 import PowerfulFeatures from "./PowerfulFeatures/PowerfulFeatures";
 import SchedulingType from "./SchedulingType/SchedulingType";
+import CustomerReviews from './CustomerReviews/CustomerReviews';
 
 const Home = () => {
     return (
@@ -15,6 +16,7 @@ const Home = () => {
             <PowerfulFeatures />
             <SchedulingType />
             <DoBest></DoBest>
+            <CustomerReviews></CustomerReviews>
         </div>
     );
 }
