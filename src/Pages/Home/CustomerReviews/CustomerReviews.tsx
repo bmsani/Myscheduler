@@ -53,7 +53,7 @@ const CustomerReviews = () => {
     };
     return (
         <div>
-            <h2 className='text-primary text-3xl text-center font-bold my-12'>Our Satisfied Customers</h2>
+            <h2 className='text-primary text-3xl text-center font-bold mt-20'>Our Satisfied Customers</h2>
 
             <div className=' container mx-auto mb-12'>
                 <Slider {...settings}>

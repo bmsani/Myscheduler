@@ -17,7 +17,7 @@ const PowerfulFeatures = () => {
     },
   ];
   return (
-    <section className="w-full text-center">
+    <section className="w-full text-center mt-20">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-primary">Powerful features</h1>
         <p className="font-medium">

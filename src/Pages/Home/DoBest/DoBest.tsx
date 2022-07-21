@@ -4,7 +4,7 @@ import image3 from '../../../Utilities/Image/alert.gif'
 
 const DoBest = () => {
     return (
-        <div className='container mx-auto text-center my-16 md:px-20 px-10'>
+        <div className='container mx-auto text-center mt-20 md:px-20 px-10'>
             <div>
                 <h2 className='text-3xl md:text-5xl text-neutral font-bold'>Do more of what you do best</h2>
                 <p className='text-xl font-thin md:text-2xl md:py-6'>With scheduling hassles and interruptions gone, your day is cleared for accomplishment.</p>

@@ -33,7 +33,7 @@ const SchedulingType = () => {
     },
   ];
   return (
-    <section className="w-full text-center mt-12 px-10">
+    <section className="w-full text-center mt-20 px-10">
       <div className="mb-12">
         <h1 className="text-3xl font-bold text-primary">
           Scheduling for any meeting type.
