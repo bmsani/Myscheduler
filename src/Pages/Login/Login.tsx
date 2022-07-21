@@ -20,7 +20,7 @@ const Login: React.FC = () => {
     console.log("data submitted: ", data);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 h-[90vh]">
+    <div className="grid grid-cols-1 md:grid-cols-2 h-[100vh]">
       <div className="hidden bg-primary md:flex justify-center items-center">
         <img className="w-[350px]" src={loginImg} alt="" />
       </div>
