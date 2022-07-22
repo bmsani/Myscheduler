@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactStars from 'react-stars';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -52,10 +52,9 @@ const CustomerReviews = () => {
         ]
     };
     return (
-        <div>
-            <h2 className='text-primary text-3xl text-center font-bold my-12'>Our Satisfied Customers</h2>
-
-            <div className=' container mx-auto mb-12'>
+        <div className='px-10 mt-20'>
+            <h2 className='text-2xl md:text-3xl lg:text-4xl text-neutral text-center font-bold'>Our Satisfied Customers</h2>
+            <div className='mb-12'>
                 <Slider {...settings}>
                     {reviews.map((review: { name: string; picture: 'file'; rating: number; _review: string }) => (
                         <div>
@@ -67,12 +66,12 @@ const CustomerReviews = () => {
                                         </div>
                                     </div>
                                     <div className='ml-4'>
-                                        <h2 className='font-bold'>{review.name}</h2>
-                                        <h3 className='text-sm'>CEO menopal</h3>
+                                        <h2 className='text-sm md:text-lg text-justify font-bold'>{review.name}</h2>
+                                        <h3 className='text-xs md:text-md text-justify'>Position: CEO</h3>
                                     </div>
                                 </div>
                                 <div className='pl-4'>
-                                    <p className='mt-4 text-gray-700'>{review._review}</p>
+                                    <p className='text-sm md:text-lg text-justify mt-4'>{review._review}</p>
 
                                     <div className='mt-2'>
                                         <div className="flex items-center gap-1">
