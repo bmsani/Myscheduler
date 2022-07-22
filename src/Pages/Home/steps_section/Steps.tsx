@@ -8,10 +8,12 @@ const Steps = () => {
       </h2>
       <ul className="steps steps-vertical md:steps-horizontal w-full pb-4">
         <li className="step step-neutral">
-          <div className="card w-64 lg:w-full text-neutral border shadow-lg">
+          <div className="card m-2 w-full h-full text-neutral">
             <div className="card-body items-center text-center">
-              <h2 className="card-title text-xl md:text-2xl font-bold">Create simple rules</h2>
-              <p className="text-sm md:text-lg text-gray-600 text-justify">
+              <h2 className="card-title text-xl md:text-2xl font-bold">
+                Create simple rules
+              </h2>
+              <p className="text-gray-500 text-center">
                 Let MyScheduler know your availability preferences and it'll do
                 the work for you.
               </p>
@@ -19,18 +21,26 @@ const Steps = () => {
           </div>
         </li>
         <li className="step step-neutral">
-          <div className="card w-64 lg:w-full h-full text-neutral border shadow-lg">
+          <div className="card m-2 w-full h-full text-neutral">
             <div className="card-body items-center text-center">
-              <h2 className="card-title text-xl md:text-2xl font-bold">Share your link</h2>
-              <p className="text-sm md:text-lg text-gray-600 text-justify">Send guests your MyScheduler link or embed it on your website.</p>
+              <h2 className="card-title text-xl md:text-2xl font-bold">
+                Share your link
+              </h2>
+              <p className="text-gray-500 text-center">
+                Send guests your MyScheduler link or embed it on your website.
+              </p>
             </div>
           </div>
         </li>
         <li className="step step-neutral">
-          <div className="card w-64 lg:w-full h-full text-neutral border shadow-lg">
+          <div className="card m-2 w-full h-full text-neutral">
             <div className="card-body items-center text-center">
-              <h2 className="card-title text-xl md:text-2xl font-bold">Get booked</h2>
-              <p className="text-sm md:text-lg text-gray-600 text-justify">They pick a time and the event is added to your calendar.</p>
+              <h2 className="card-title text-xl md:text-2xl font-bold">
+                Get booked
+              </h2>
+              <p className="text-gray-500 text-center">
+                They pick a time and the event is added to your calendar.
+              </p>
             </div>
           </div>
         </li>
