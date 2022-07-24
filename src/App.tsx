@@ -6,7 +6,6 @@ import Navbar from "./Shared/Navbar/Navbar";
 import Register from "./Pages/Register/Register";
 import Types from "./Pages/Types/Types";
 import NotFound from "./Shared/NotFound/NotFound";
-import Footer from "./Shared/Footer/Footer";
 
 function App() {
   return (
