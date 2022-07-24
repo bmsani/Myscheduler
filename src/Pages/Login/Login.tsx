@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import SocialLogin from "../../Shared/SocialLogin/SocialLogin";
 import loginImg from "../../Utilities/Image/Illustration.png";
 import "./Login.css";
-import { useSignInWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
+import { useSignInWithEmailAndPassword, useSignInWithFacebook, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import auth from "../../init.firebase";
 import Loading from "../../Shared/LoadingSpinner/Loading";
 
@@ -28,7 +28,8 @@ const Login: React.FC = () => {
 
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
-    const [signInWithGoogle, GUser, GLoading, GError] = useSignInWithGoogle(auth);
+  const [signInWithGoogle, GUser, GLoading, GError] = useSignInWithGoogle(auth);
+  const [signInWithFacebook, FUser, FLoading, FError] = useSignInWithFacebook(auth);
 
 
   const navigate = useNavigate();
@@ -137,7 +138,7 @@ const Login: React.FC = () => {
 
             <div className="mt-8 flex items-center gap-5">
               <span>Or login with</span>
-              <SocialLogin signInWithGoogle={signInWithGoogle} />
+              <SocialLogin signInWithGoogle={signInWithGoogle} signInWithFacebook={signInWithFacebook} />
             </div>
           </div>
         </div>

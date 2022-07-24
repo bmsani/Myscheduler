@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Button from "../../../Shared/Button/Button";
 import "./Hero.css";
 
@@ -16,9 +17,9 @@ const Hero = () => {
             efficiently, eliminating the hassle of back-and-forth emails so you
             can get back to work.
           </p>
-          <Button>
-            <span>Get Started</span>
-          </Button>
+          <Link to="/register">
+            <Button><span>Get Start</span></Button>
+          </Link>
         </div>
         <div></div>
       </div>

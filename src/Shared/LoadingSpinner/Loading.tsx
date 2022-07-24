@@ -7,7 +7,7 @@ const Loading = () => {
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <GridLoader color={"#9c8321"} loading={loading} size={10} />
+      <GridLoader color={"#02254b"} loading={loading} size={10} />
     </div>
   );
 };
