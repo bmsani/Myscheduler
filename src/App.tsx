@@ -8,7 +8,6 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Types from "./Pages/Types/Types";
 import NotFound from "./Shared/NotFound/NotFound";
-import Footer from "./Shared/Footer/Footer";
 
 function App() {
   return (
@@ -22,7 +21,6 @@ function App() {
         <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>
       <ToastContainer />
-      <Footer></Footer>
     </div>
   );
 }
