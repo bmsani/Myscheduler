@@ -5,8 +5,9 @@ import Button from "../Button/Button";
 
 const Navbar = () => {
   const { pathname } = useLocation();
-  const [colorChange, setColorChange] = useState(false);
-  const [anotherRouteColorChange, setAnotherRouteColorChange] = useState(false);
+  const [colorChange, setColorChange] = useState<boolean>(false);
+  const [anotherRouteColorChange, setAnotherRouteColorChange] =
+    useState<boolean>(false);
 
   useEffect(() => {
     if (pathname !== "/") {
