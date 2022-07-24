@@ -6,7 +6,7 @@ const Hero = () => {
     <div className="w-full h-[60vh] md:h-[100vh] bgImage flex items-center">
       <div className="md:grid md:grid-cols-2 w-full">
         <div className="mx-2 md:mx-8">
-          <div className="text-white text-md md:text-2xl lg:text-6xl font-bold mb-3">
+          <div className="text-white text-2xl md:text-3xl lg:text-6xl font-bold mb-3">
             <h1>Easy to maintain</h1>
             <h1>Interview, meetings</h1>
             <h1>MyScheduler Website</h1>
