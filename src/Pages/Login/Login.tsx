@@ -1,7 +1,20 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import SocialLogin from "../../Shared/SocialLogin/SocialLogin";
 import loginImg from "../../Utilities/Image/login.png";
+import {
+  useSignInWithEmailAndPassword,
+  useSignInWithFacebook,
+  useSignInWithGoogle,
+} from "react-firebase-hooks/auth";
+import auth from "../../init.firebase";
+import Loading from "../../Shared/LoadingSpinner/Loading";
+
+type LocationState = {
+  from: {
+    path: string;
+  };
+};
 
 interface FormValues {
   email: string;
@@ -13,10 +26,31 @@ const Login: React.FC = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<FormValues>();
 
-  const onSubmit: SubmitHandler<FormValues> = (data) =>
-    console.log("data submitted: ", data);
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
+  const [signInWithGoogle, GUser, GLoading, GError] = useSignInWithGoogle(auth);
+  const [signInWithFacebook, FUser, FLoading, FError] =
+    useSignInWithFacebook(auth);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  let from = (location.state as LocationState)?.from.path || "/";
+
+  if (loading || GLoading) {
+    return <Loading></Loading>;
+  }
+  if (user || GUser) {
+    navigate(from, { replace: true });
+  }
+
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    await signInWithEmailAndPassword(data.email, data.password);
+    reset();
+  };
 
   return (
     <div className="grid loginRegBg grid-cols-1 md:grid-cols-2 h-[100vh] pt-12">
@@ -87,6 +121,9 @@ const Login: React.FC = () => {
                   </span>
                 )}
               </label>
+              <p className="text-error text-sm">
+                {(error || GError) && (error?.message || GError?.message)}
+              </p>
               <input
                 type="submit"
                 className="rounded-full text-white hover:bg-secondary bg-primary shadow-lg  duration-300 cursor-pointer mt-6 p-2 text-1xl"
@@ -106,7 +143,10 @@ const Login: React.FC = () => {
 
             <div className="mt-6 flex items-center gap-5">
               <span>Or login with</span>
-              <SocialLogin />
+              <SocialLogin
+                signInWithGoogle={signInWithGoogle}
+                signInWithFacebook={signInWithFacebook}
+              />
             </div>
           </div>
         </div>
