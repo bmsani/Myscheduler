@@ -6,7 +6,6 @@ import Hero from "./Hero/Hero";
 import PowerfulFeatures from "./PowerfulFeatures/PowerfulFeatures";
 import SchedulingType from "./SchedulingType/SchedulingType";
 import CustomerReviews from "./CustomerReviews/CustomerReviews";
-import Footer from "../../Shared/Footer/Footer";
 
 const Home = () => {
   return (
@@ -18,7 +17,6 @@ const Home = () => {
       <SchedulingType />
       <DoBest></DoBest>
       <CustomerReviews></CustomerReviews>
-      <Footer />
     </div>
   );
 };
