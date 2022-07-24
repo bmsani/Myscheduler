@@ -1,6 +1,6 @@
 import React from "react";
-import google from "../../Utilities/Logos/Google.png";
-import facebook from "../../Utilities/Logos/Facebook.png";
+import googleLogo from "../../Utilities/Logos/Google.png";
+import facebookLogo from "../../Utilities/Logos/Facebook.png";
 const SocialLogin = ({signInWithGoogle, signInWithFacebook}: any) => {
   return (
     <div className="flex justify-center gap-5">
