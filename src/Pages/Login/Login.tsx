@@ -23,10 +23,10 @@ const Login: React.FC = () => {
       <div className="bg-primary hidden md:flex justify-center items-center">
         <img className="w-[550px]" src={loginImg} alt="" />
       </div>
-      <div className="flex justify-center">
+      <div className="flex justify-center bg-[#e1f7f7]">
         <div className="w-[500px] p-5 my-12 ">
           <div>
-            <div className="text-secondary text-center">
+            <div className="text-primary text-center">
               <p className="text-3xl font-bold">Login</p>
               <p className="mt-2">Enter your info below to login.</p>
             </div>
@@ -35,7 +35,7 @@ const Login: React.FC = () => {
               <input
                 type="email"
                 placeholder="Your Email"
-                className="text-primary w-full mt-8 p-2 text-1xl border border-[#b4b4b4] focus:border-secondary focus:outline-none rounded-lg"
+                className="bg-[#e1f7f7] w-full border-b border-b-primary mt-4 p-2 text-1xl focus:outline-none focus:border-b-secondary"
                 {...register("email", {
                   required: {
                     value: true,
@@ -63,7 +63,7 @@ const Login: React.FC = () => {
               <input
                 type="Password"
                 placeholder="Password"
-                className="text-primary w-full mt-4 p-2 text-1xl border border-[#b4b4b4] focus:border-secondary focus:outline-none rounded-lg"
+                className="bg-[#e1f7f7] w-full border-b border-b-primary mt-4 p-2 text-1xl focus:outline-none focus:border-b-secondary"
                 {...register("password", {
                   required: {
                     value: true,
@@ -89,16 +89,16 @@ const Login: React.FC = () => {
               </label>
               <input
                 type="submit"
-                className="rounded-lg text-white bg-secondary hover:bg-primary shadow-lg  duration-300 cursor-pointer mt-4 p-2 text-1xl"
+                className="rounded-full text-white hover:bg-secondary bg-primary shadow-lg  duration-300 cursor-pointer mt-6 p-2 text-1xl"
                 value="Login"
               />
             </form>
 
             <div className="text-black mt-8 block">
               New in MyScheduler?{" "}
-              <Link to="/register" className="text-secondary font-bold">
+              <Link to="/register" className="text-primary font-bold">
                 {" "}
-                <span className="hover:text-primary duration-300">
+                <span className="hover:text-secondary duration-300">
                   Create an account
                 </span>
               </Link>
