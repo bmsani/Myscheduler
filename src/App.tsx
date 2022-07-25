@@ -10,6 +10,7 @@ import Types from "./Pages/Types/Types";
 import NotFound from "./Shared/NotFound/NotFound";
 import LoginHome from "./Pages/LoginHome/LoginHome";
 import Availability from "./Pages/Availability/Availability";
+import About from "./Pages/About/About";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
         <Route path="/types" element={<Types></Types>}></Route>
+        <Route path="/about" element={<About></About>}></Route>
         <Route path="login" element={<Login></Login>}></Route>
         <Route path="register" element={<Register></Register>}></Route>
         <Route path="*" element={<NotFound></NotFound>}></Route>
