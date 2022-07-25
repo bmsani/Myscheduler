@@ -107,20 +107,14 @@ const Navbar = () => {
                     />
                   </div>
                 </li>
-                <li tabIndex={0}>
-                  <Link to="/home">
+                <div className="dropdown dropdown-end">
+                  <label tabIndex={0} className="btn m-1">
                     Account
-                    <svg
-                      className="fill-current"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
-                    </svg>
-                  </Link>
-                  <ul className="p-2 bg-base-100">
+                  </label>
+                  <ul
+                    tabIndex={0}
+                    className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-44"
+                  >
                     <li>
                       <Link to="/profile">Account setting</Link>
                     </li>
@@ -128,7 +122,7 @@ const Navbar = () => {
                       <button onClick={() => signOut(auth)}>Logout</button>
                     </li>
                   </ul>
-                </li>
+                </div>
               </ul>
             </div>
           </div>
