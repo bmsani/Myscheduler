@@ -1,3 +1,4 @@
+import { signOut } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useLocation } from "react-router-dom";
@@ -121,10 +122,10 @@ const Navbar = () => {
                   </Link>
                   <ul className="p-2 bg-base-100">
                     <li>
-                      <Link to="/">Account setting</Link>
+                      <Link to="/profile">Account setting</Link>
                     </li>
                     <li>
-                      <Link to="/">Logout</Link>
+                      <button onClick={() => signOut(auth)}>Logout</button>
                     </li>
                   </ul>
                 </li>
