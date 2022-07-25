@@ -12,6 +12,7 @@ import Profile from "./Pages/Profile/Profile";
 import LoginHome from "./Pages/LoginHome/LoginHome";
 import Availability from "./Pages/Availability/Availability";
 import Event from "./Pages/Event/Event";
+import Story from "./Pages/Story/Story";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
         <Route path="/types" element={<Types></Types>}></Route>
+        <Route path="/story" element={<Story></Story>}></Route>
         <Route path="login" element={<Login></Login>}></Route>
         <Route path="register" element={<Register></Register>}></Route>
 
