@@ -13,6 +13,7 @@ import LoginHome from "./Pages/LoginHome/LoginHome";
 import Availability from "./Pages/Availability/Availability";
 import Event from "./Pages/Event/Event";
 import Story from "./Pages/Story/Story";
+import RequiredAuth from "./Shared/RequiredAuth/RequiredAuth";
 
 function App() {
   return (
@@ -31,9 +32,11 @@ function App() {
         <Route
           path="home"
           element={
-            <LoginHome>
-              <Route index element={<Event></Event>}></Route>
-            </LoginHome>
+            <RequiredAuth>
+              <LoginHome>
+                <Route index element={<Event></Event>}></Route>
+              </LoginHome>
+            </RequiredAuth>
           }
         ></Route>
         <Route
