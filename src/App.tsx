@@ -10,6 +10,7 @@ import Types from "./Pages/Types/Types";
 import NotFound from "./Shared/NotFound/NotFound";
 import LoginHome from "./Pages/LoginHome/LoginHome";
 import Availability from "./Pages/Availability/Availability";
+import Event from "./Pages/Event/Event";  
 
 function App() {
   return (
@@ -23,7 +24,9 @@ function App() {
         <Route path="*" element={<NotFound></NotFound>}></Route>
 
         {/* *********** After login ********* */}
-        <Route path="/home" element={<LoginHome></LoginHome>}></Route>
+        <Route path="home" element={<LoginHome>
+          <Route index element={<Event></Event>}></Route>
+        </LoginHome>}></Route>
         <Route path="/availability" element={<Availability></Availability>}></Route>
 
       </Routes>
