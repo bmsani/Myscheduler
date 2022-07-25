@@ -6,6 +6,7 @@ import Logo from "../../../src/Utilities/icon/calendar.png";
 import auth from "../../init.firebase";
 import Button from "../Button/Button";
 import Loading from "../LoadingSpinner/Loading";
+import { HiMenu } from "react-icons/hi";
 
 const Navbar = () => {
   const [user, loading] = useAuthState(auth);
@@ -78,77 +79,57 @@ const Navbar = () => {
                 </Link>
               </div>
             </div>
-          </div>
-          <div className="flex-none">
-            <ul className="menu menu-horizontal p-0">
-              <li>
-                <Link to="/home">Home</Link>
-              </li>
-              <li>
-                <Link to="/">Availability</Link>
-              </li>
-              <li>
-                <div className="w-16 rounded-full ">
-                  <img
-                    src={
-                      user.photoURL ||
-                      ("https://findicons.com/files/icons/1024/dress_it_profession/128/assassin_avatar.png" as string)
-                    }
-                    className="rounded-full border-2 border-secondary"
-                    alt=""
-                  />
-                </div>
-              </li>
-              <li tabIndex={0}>
-                <p>
-                  Account
-                  <svg
-                    className="fill-current"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
+            <div className="flex-none">
+              <ul className="menu menu-horizontal p-0">
+                <li>
+                  <label
+                    htmlFor="my-drawer-2"
+                    className="bg-transparent drawer-button lg:hidden"
                   >
-                    <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
-                  </svg>
-                </p>
-                <ul className="p-2 bg-base-100">
-                  <li>
-                    <Link to="/profile">Account setting</Link>
-                  </li>
-                  <li>
-                    <button onClick={() => signOut(auth)}>Logout</button>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-          <div className="navbar-end">
-            <div className="dropdown dropdown-end">
-              <label tabIndex={0} className="btn glass lg:hidden">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className={
-                    colorChange
-                      ? "h-5 w-5 text-secondary"
-                      : "h-5 w-5 text-white"
-                  }
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h8m-8 6h16"
-                  />
-                </svg>
-              </label>
-              <ul
-                tabIndex={0}
-                className="menu menu-compact dropdown-content mt-3 p-2 shadow-2xl bg-base-100 rounded-box w-52"
-              ></ul>
+                    <HiMenu />
+                  </label>
+                </li>
+                <li>
+                  <Link to="/home">Home</Link>
+                </li>
+                <li>
+                  <Link to="/availability">Availability</Link>
+                </li>
+                <li>
+                  <div className="w-16 rounded-full ">
+                    <img
+                      src={
+                        user.photoURL ||
+                        ("https://findicons.com/files/icons/1024/dress_it_profession/128/assassin_avatar.png" as string)
+                      }
+                      className="rounded-full border-2 border-secondary"
+                      alt=""
+                    />
+                  </div>
+                </li>
+                <li tabIndex={0}>
+                  <Link to="/home">
+                    Account
+                    <svg
+                      className="fill-current"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
+                    </svg>
+                  </Link>
+                  <ul className="p-2 bg-base-100">
+                    <li>
+                      <Link to="/profile">Account setting</Link>
+                    </li>
+                    <li>
+                      <button onClick={() => signOut(auth)}>Logout</button>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
