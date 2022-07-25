@@ -44,6 +44,9 @@ const Navbar = () => {
         <Link to="/">Admin</Link>
       </li>
       <li>
+        <Link to="/profile">profile</Link>
+      </li>
+      <li>
         <Link className="block lg:hidden text-start" to="/login">
           <Button>
             <span className="px-0 lg:px-4">Login</span>
@@ -81,7 +84,9 @@ const Navbar = () => {
             <label tabIndex={0} className="btn glass lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className={colorChange?"h-5 w-5 text-secondary" : "h-5 w-5 text-white"}
+                className={
+                  colorChange ? "h-5 w-5 text-secondary" : "h-5 w-5 text-white"
+                }
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"

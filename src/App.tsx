@@ -8,6 +8,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Types from "./Pages/Types/Types";
 import NotFound from "./Shared/NotFound/NotFound";
+import Profile from "./Pages/Profile/Profile";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/types" element={<Types></Types>}></Route>
         <Route path="login" element={<Login></Login>}></Route>
         <Route path="register" element={<Register></Register>}></Route>
+        <Route path="profile" element={<Profile />}></Route>
         <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>
       <ToastContainer />
