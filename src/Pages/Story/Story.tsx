@@ -8,6 +8,7 @@ import summa from '../../Utilities/companyLogo/summa.svg';
 import tesa from '../../Utilities/companyLogo/tesa.svg';
 import uvex from '../../Utilities/companyLogo/uvex-1.svg';
 import teaching from '../../Utilities/Image/teaching.jpg';
+import boost from '../../Utilities/Image/meetingBoost.gif';
 import class_icon from '../../Utilities/icon/class_icon.png';
 import attendance from '../../Utilities/icon/attandance_icon.png';
 import book from '../../Utilities/icon/book_icon.png';
@@ -33,7 +34,7 @@ const Story = () => {
                     <div className="grid gap-5 row-gap-10 lg:grid-cols-2">
                         <div className="flex flex-col mt-12">
                             <div className="max-w-xl mb-6">
-                                <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none">
+                                <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-primary sm:text-4xl sm:leading-none">
                                     Don’t get suffocated with
                                     <br className="hidden md:block" />
                                     overcrowded classes
@@ -76,10 +77,36 @@ const Story = () => {
                         </div>
                         <div>
                             <img
-                                className="object-cover w-full h-40 rounded shadow-lg sm:h-96"
+                                className="object-cover w-full h-40 rounded  sm:h-96"
                                 src={teaching}
                                 alt=""
                             />
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+                        <div className="grid gap-5 row-gap-10 lg:grid-cols-2">
+                            <div>
+                                <img
+                                    className="object-cover w-full h-40 rounded sm:h-96"
+                                    src={boost}
+                                    alt=""
+                                />
+                            </div>
+                            <div className="flex flex-col mt-12">
+                                <div className="max-w-xl mb-6">
+                                    <h2 className="max-w-lg mb-3 font-sans text-3xl font-bold tracking-tight text-primary sm:text-4xl sm:leading-none">
+                                        More meetings,
+                                        <br className="hidden md:block" />
+                                        better prospects boost everyone's conversions across the board
+                                    </h2>
+                                </div>
+                                <div>
+                                    <p>Very few of us are natural public speakers, so practising what you plan to say is paramount to success. If you’re giving a presentation or leading a meeting for the first time, write out a script and rehearse (yes, out loud!) in the mirror; Better yet, set up a mock interview with a friend or family member in order to get a true sense of how the conversation may flow.</p>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
