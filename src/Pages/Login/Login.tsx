@@ -40,10 +40,10 @@ const Login: React.FC = () => {
 
   let from = (location.state as LocationState)?.from.path || "/";
 
-  if (loading || GLoading) {
+  if (loading || GLoading || FLoading) {
     return <Loading></Loading>;
   }
-  if (user || GUser) {
+  if (user || GUser || FUser) {
     navigate(from, { replace: true });
   }
 
@@ -122,7 +122,7 @@ const Login: React.FC = () => {
                 )}
               </label>
               <p className="text-error text-sm">
-                {(error || GError) && (error?.message || GError?.message)}
+                {(error || GError || FError) && (error?.message || GError?.message || FError?.message)}
               </p>
               <input
                 type="submit"
