@@ -116,10 +116,13 @@ const Navbar = () => {
                   </label>
                   <ul
                     tabIndex={0}
-                    className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-44"
+                    className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
                   >
                     <li>
                       <Link to="/profile">Account setting</Link>
+                    </li>
+                    <li>
+                      <Link to="/calenderConnection">Calender Connections</Link>
                     </li>
                     <li>
                       <button onClick={() => signOut(auth)}>Logout</button>
