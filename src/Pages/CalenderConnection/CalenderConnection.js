@@ -7,7 +7,7 @@ import auth from '../../init.firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 const CalenderConnection = () => {
     const [user, loading, error] = useAuthState(auth);
-    console.log(user);
+    // console.log(user?.email);
     return (
         <div>
             <div className='shadow border container mx-auto pb-5 mt-8'>
@@ -27,7 +27,7 @@ const CalenderConnection = () => {
                             </div>
                             <div className='ml-4'>
                                 <h2 className='text-light text-sm'>Google</h2>
-                                <h2>zehadul925@gmail.com</h2>
+                                <h2>{user?.email}</h2>
                             </div>
                         </div>
                         <div>
@@ -42,7 +42,7 @@ const CalenderConnection = () => {
                     <h2 className='text-xl'>Configuration</h2>
                 </div>
                 <div className='py-8 px-8'>
-                    <div className='grid grid-cols-2 '>
+                    <div className='grid lg:grid-cols-2 sm:grid-cols-1 '>
                         <div className='flex '>
                             <div>
                                 <img src={arrowRight} className="w-[34px]" alt="" />
@@ -62,8 +62,8 @@ const CalenderConnection = () => {
                                 </div>
 
                                 <div className='ml-4'>
-                                    <h1>Check zehadul925@gmail.com</h1>
-                                    <li className='list-disc'>zehadul925@gmail.com</li>
+                                    <h1>Check {user?.email}</h1>
+                                    <li className='list-disc'>{user?.email}</li>
                                 </div>
                             </div>
                             <div>
@@ -72,7 +72,7 @@ const CalenderConnection = () => {
                         </div>
                     </div>
                     <div className='border my-6'></div>
-                    <div className='grid grid-cols-2 '>
+                    <div className='grid lg:grid-cols-2 sm:grid-cols-1 '>
                         <div className='flex '>
                             <div>
                                 <img src={arrowLeft} className="w-[34px]" alt="" />
@@ -90,8 +90,8 @@ const CalenderConnection = () => {
                                     </div>
                                 </div>
                                 <div className='ml-4'>
-                                    <h1>Check zehadul925@gmail.com</h1>
-                                    <li className='list-disc'>zehadul925@gmail.com</li>
+                                    <h1>Check {user?.email}</h1>
+                                    <li className='list-disc'>{user?.email}</li>
                                 </div>
                             </div>
                             <div>
