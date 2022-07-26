@@ -14,7 +14,6 @@ const Navbar = () => {
   const [colorChange, setColorChange] = useState<boolean>(false);
   const [anotherRouteColorChange, setAnotherRouteColorChange] =
     useState<boolean>(false);
-
   useEffect(() => {
     if (pathname !== "/") {
       setAnotherRouteColorChange(true);
