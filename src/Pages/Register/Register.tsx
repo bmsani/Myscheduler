@@ -2,19 +2,15 @@ import {
   useCreateUserWithEmailAndPassword,
   useSignInWithFacebook,
   useSignInWithGoogle,
+  useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useToken from "../../Hooks/useToken";
 import auth from "../../init.firebase";
 import Loading from "../../Shared/LoadingSpinner/Loading";
 import SocialLogin from "../../Shared/SocialLogin/SocialLogin";
 import regImg from "../../Utilities/Image/register.png";
-
-type LocationState = {
-  from: {
-    path: string;
-  };
-};
 
 interface FormValues {
   name: string;
@@ -35,21 +31,21 @@ const Register: React.FC = () => {
   const [signInWithGoogle, GUser, GLoading, GError] = useSignInWithGoogle(auth);
   const [signInWithFacebook, FUser, FLoading, FError] =
     useSignInWithFacebook(auth);
-
+  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
   const navigate = useNavigate();
-  const location = useLocation();
+  const [token] = useToken(user || GUser || FUser);
 
-  let from = (location.state as LocationState)?.from.path || "/";
 
-  if (loading || GLoading || FLoading) {
+  if (loading || GLoading || FLoading || updating) {
     return <Loading></Loading>;
   }
-  if (user || GUser || FUser) {
-    navigate(from, { replace: true });
+  if (token) {
+    navigate("/home");
   }
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     await createUserWithEmailAndPassword(data.email, data.password);
+    await updateProfile({ displayName: data.name });
     reset();
   };
   return (
