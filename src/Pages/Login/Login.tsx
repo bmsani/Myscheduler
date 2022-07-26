@@ -38,7 +38,7 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  let from = (location.state as LocationState)?.from.path || "/";
+  let from = (location.state as LocationState)?.from.path || "/home";
 
   if (loading || GLoading || FLoading) {
     return <Loading></Loading>;
