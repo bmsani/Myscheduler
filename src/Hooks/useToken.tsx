@@ -3,7 +3,9 @@ import { useEffect, useState } from "react";
 const useToken = (user: any)  => {
   const [token, setToken] = useState("");
   useEffect(() => {
-    const email = user?.user?.email;
+      const email = user?.user?.email;
+      const name = user?.user?.displayName;
+      console.log(user?.user, name, email);
     const currentUser = { email: email };
     if (email) {
       fetch(`http://localhost:5000/user/${email}`, {

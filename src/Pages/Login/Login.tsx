@@ -9,6 +9,7 @@ import {
 } from "react-firebase-hooks/auth";
 import auth from "../../init.firebase";
 import Loading from "../../Shared/LoadingSpinner/Loading";
+import useToken from "../../Hooks/useToken";
 
 type LocationState = {
   from: {
@@ -37,13 +38,14 @@ const Login: React.FC = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
+  const [token] = useToken(user || GUser || FUser)
 
   let from = (location.state as LocationState)?.from.path || "/home";
 
   if (loading || GLoading || FLoading) {
     return <Loading></Loading>;
   }
-  if (user || GUser || FUser) {
+  if (token) {
     navigate(from, { replace: true });
   }
 
