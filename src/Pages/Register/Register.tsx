@@ -1,7 +1,20 @@
+import {
+  useCreateUserWithEmailAndPassword,
+  useSignInWithFacebook,
+  useSignInWithGoogle,
+} from "react-firebase-hooks/auth";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import auth from "../../init.firebase";
+import Loading from "../../Shared/LoadingSpinner/Loading";
 import SocialLogin from "../../Shared/SocialLogin/SocialLogin";
 import regImg from "../../Utilities/Image/register.png";
+
+type LocationState = {
+  from: {
+    path: string;
+  };
+};
 
 interface FormValues {
   name: string;
@@ -14,10 +27,31 @@ const Register: React.FC = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<FormValues>();
 
-  const onSubmit: SubmitHandler<FormValues> = (data) =>
-    console.log("data submitted: ", data);
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
+  const [signInWithGoogle, GUser, GLoading, GError] = useSignInWithGoogle(auth);
+  const [signInWithFacebook, FUser, FLoading, FError] =
+    useSignInWithFacebook(auth);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  let from = (location.state as LocationState)?.from.path || "/";
+
+  if (loading || GLoading || FLoading) {
+    return <Loading></Loading>;
+  }
+  if (user || GUser || FUser) {
+    navigate(from, { replace: true });
+  }
+
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    await createUserWithEmailAndPassword(data.email, data.password);
+    reset();
+  };
   return (
     <div className="grid loginRegBg grid-cols-1 md:grid-cols-2 h-[100vh] pt-8">
       <div className="bg-primary hidden md:flex justify-center items-center">
@@ -108,6 +142,9 @@ const Register: React.FC = () => {
                   </span>
                 )}
               </label>
+              <p className="text-error text-sm">
+                {(error || GError || FError) && (error?.message || GError?.message || FError?.message)}
+              </p>
               <input
                 type="submit"
                 className="rounded-full text-white hover:bg-secondary bg-primary shadow-lg  duration-300 cursor-pointer mt-6 p-2 text-1xl"
@@ -127,7 +164,7 @@ const Register: React.FC = () => {
 
             <div className="mt-6 flex items-center gap-5">
               <span>Or create account with</span>
-              <SocialLogin />
+              <SocialLogin signInWithGoogle={signInWithGoogle} signInWithFacebook={signInWithFacebook} />
             </div>
           </div>
         </div>
