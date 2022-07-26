@@ -1,17 +1,21 @@
 import React from 'react';
-import logo from '../../Utilities/icon/class_icon.png'
 import calender from '../../Utilities/icon/calendarLogo.png'
 import arrowRight from '../../Utilities/icon/calenderArrow.png'
 import arrowLeft from '../../Utilities/icon/calederArrow2.png'
+import { Link } from 'react-router-dom';
+import auth from '../../init.firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
 const CalenderConnection = () => {
-
+    const [user, loading, error] = useAuthState(auth);
+    console.log(user);
     return (
         <div>
-            <h2>Calender connection</h2>
-            <div className='shadow border container mx-auto pb-5'>
+            <div className='shadow border container mx-auto pb-5 mt-8'>
                 <div className='flex justify-between py-4 px-8'>
                     <h2 className='text-xl'>My calender Account</h2>
-                    <button className='text-sm  rounded-lg btn btn-sm btn-outline btn-info'>Add Calender Account</button>
+                    <Link to="/addCalender">
+                        <button className='text-sm  rounded-lg btn btn-sm btn-outline btn-info'>Add Calender Account</button>
+                    </Link>
                 </div>
                 <div className=''>
                     <div className='flex justify-between border-t border-b px-8 py-8 bg-gray-50'>
@@ -74,7 +78,7 @@ const CalenderConnection = () => {
                                 <img src={arrowLeft} className="w-[34px]" alt="" />
                             </div>
                             <div className='ml-4'>
-                                <h1 className='font-bold text-lg'>Check for conflict</h1>
+                                <h1 className='font-bold text-lg'>Add to calendar</h1>
                                 <h2 className='text-light text-xs'>Set the calendar you would like to add new events to as they’re scheduled.</h2>
                             </div>
                         </div>

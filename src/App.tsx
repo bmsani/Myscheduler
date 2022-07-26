@@ -16,6 +16,7 @@ import Story from "./Pages/Story/Story";
 import RequiredAuth from "./Shared/RequiredAuth/RequiredAuth";
 import About from "./Pages/About/About";
 import CalenderConnection from "./Pages/CalenderConnection/CalenderConnection";
+import AddCalender from "./Pages/AddCalender/AddCalender";
 
 function App() {
   return (
@@ -47,7 +48,11 @@ function App() {
           element={<Availability></Availability>}
         ></Route>
         <Route path="profile" element={<Profile />}></Route>
-        <Route path="/calenderConnection" element={<CalenderConnection></CalenderConnection>}></Route>
+        <Route path="/calenderConnection" element={<CalenderConnection></CalenderConnection>}
+        >
+
+        </Route>
+        <Route path="/addCalender" element={<AddCalender></AddCalender>}></Route>
       </Routes>
       <ToastContainer />
     </div>
