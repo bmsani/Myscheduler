@@ -104,7 +104,7 @@ const Navbar = () => {
                         user.photoURL ||
                         ("https://findicons.com/files/icons/1024/dress_it_profession/128/assassin_avatar.png" as string)
                       }
-                      className="rounded-full border-2 border-secondary"
+                      className="rounded-full"
                       alt=""
                     />
                   </div>
