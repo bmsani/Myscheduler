@@ -14,7 +14,6 @@ const Navbar = () => {
   const [colorChange, setColorChange] = useState<boolean>(false);
   const [anotherRouteColorChange, setAnotherRouteColorChange] =
     useState<boolean>(false);
-
   useEffect(() => {
     if (pathname !== "/") {
       setAnotherRouteColorChange(true);
@@ -105,7 +104,7 @@ const Navbar = () => {
                         user.photoURL ||
                         ("https://findicons.com/files/icons/1024/dress_it_profession/128/assassin_avatar.png" as string)
                       }
-                      className="rounded-full border-2 border-secondary"
+                      className="rounded-full"
                       alt=""
                     />
                   </div>
@@ -119,13 +118,18 @@ const Navbar = () => {
                     className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
                   >
                     <li>
-                      <Link to="/profile">Account setting</Link>
+                      <Link className="w-full" to="/profile">
+                        Account setting
+                      </Link>
                     </li>
                     <li>
                       <Link to="/calenderConnection">Calender Connections</Link>
                     </li>
                     <li>
                       <button onClick={() => signOut(auth)}>Logout</button>
+                      <button className="w-full" onClick={() => signOut(auth)}>
+                        Logout
+                      </button>
                     </li>
                   </ul>
                 </div>
