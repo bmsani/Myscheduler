@@ -14,6 +14,7 @@ import Availability from "./Pages/Availability/Availability";
 import Event from "./Pages/Event/Event";
 import Story from "./Pages/Story/Story";
 import RequiredAuth from "./Shared/RequiredAuth/RequiredAuth";
+import About from "./Pages/About/About";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
         <Route path="/types" element={<Types></Types>}></Route>
+        <Route path="/about" element={<About></About>}></Route>
         <Route path="/story" element={<Story></Story>}></Route>
         <Route path="login" element={<Login></Login>}></Route>
         <Route path="register" element={<Register></Register>}></Route>
