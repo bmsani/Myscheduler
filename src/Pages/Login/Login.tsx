@@ -12,8 +12,8 @@ import Loading from "../../Shared/LoadingSpinner/Loading";
 import useToken from "../../Hooks/useToken";
 
 type LocationState = {
-  from: {
-    path: string;
+  from?: {
+    pathname: string;
   };
 };
 
@@ -40,7 +40,7 @@ const Login: React.FC = () => {
   const location = useLocation();
   const [token] = useToken(user || GUser || FUser)
 
-  let from = (location.state as LocationState)?.from.path || "/home";
+  let from = (location.state as LocationState)?.from?.pathname || "/home";
 
   if (loading || GLoading || FLoading) {
     return <Loading></Loading>;
