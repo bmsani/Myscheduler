@@ -17,6 +17,7 @@ import RequiredAuth from "./Shared/RequiredAuth/RequiredAuth";
 import About from "./Pages/About/About";
 import CalenderConnection from "./Pages/CalenderConnection/CalenderConnection";
 import AddCalender from "./Pages/AddCalender/AddCalender";
+import ShareLink from "./Pages/ShareLink/ShareLink";
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
         >
 
         </Route>
+        <Route path="/shareLink" element={<ShareLink></ShareLink>}></Route>
         <Route path="/addCalender" element={<AddCalender></AddCalender>}></Route>
       </Routes>
       <ToastContainer />

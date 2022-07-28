@@ -7,6 +7,7 @@ import auth from "../../init.firebase";
 import Button from "../Button/Button";
 import Loading from "../LoadingSpinner/Loading";
 import { HiMenu } from "react-icons/hi";
+import ShareLink from "../../Pages/ShareLink/ShareLink";
 
 const Navbar = () => {
   const [user, loading] = useAuthState(auth);
@@ -64,6 +65,7 @@ const Navbar = () => {
       </li>
     </>
   );
+
   return (
     <div>
       {user ? (
@@ -124,6 +126,16 @@ const Navbar = () => {
                     </li>
                     <li>
                       <Link to="/calenderConnection">Calender Connections</Link>
+
+                    </li>
+
+                    {
+
+                    }
+
+                    <li>
+                      {/* <Link to="/shareLink">Share Your Link</Link> */}
+                      <label htmlFor="my-modal-6" className="">Share Your Link</label>
                     </li>
                     <li>
                       <button onClick={() => signOut(auth)}>Logout</button>
@@ -199,6 +211,7 @@ const Navbar = () => {
           </div>
         </div>
       )}
+      <ShareLink></ShareLink>
     </div>
   );
 };
