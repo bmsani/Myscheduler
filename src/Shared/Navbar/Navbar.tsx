@@ -70,10 +70,20 @@ const Navbar = () => {
         <div className="navbar bg-base-100 shadow-xl">
           <div className="container mx-auto">
             <div className="flex-1">
-              <div className="w-3/4 lg:w-1/2 md:w-3/5 lg:justify-start justify-between">
+              <div className="w-3/4 lg:w-1/2 md:w-3/5 flex items-center lg:justify-start justify-between">
+                {pathname === "/home" ? (
+                  <label
+                    htmlFor="my-drawer-2"
+                    className="bg-transparent drawer-button lg:hidden"
+                  >
+                    <HiMenu className="text-2xl" />
+                  </label>
+                ) : (
+                  ""
+                )}
                 <Link className="normal-case text-xl" to="/home">
                   <span className="flex items-end lg:items-center">
-                    <img className="w-10" src={Logo} alt="" />
+                    <img className="w-10 hidden lg:block" src={Logo} alt="" />
                     <span className="font-bold text-secondary pl-4 hidden lg:block">
                       MyScheduler
                     </span>
@@ -83,14 +93,6 @@ const Navbar = () => {
             </div>
             <div className="flex-none">
               <ul className="menu menu-horizontal p-0">
-                <li>
-                  <label
-                    htmlFor="my-drawer-2"
-                    className="bg-transparent drawer-button lg:hidden"
-                  >
-                    <HiMenu />
-                  </label>
-                </li>
                 <li>
                   <Link to="/home">Home</Link>
                 </li>
