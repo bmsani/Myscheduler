@@ -8,13 +8,17 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Types from "./Pages/Types/Types";
 import NotFound from "./Shared/NotFound/NotFound";
-import Profile from "./Pages/Profile/Profile";
 import LoginHome from "./Pages/LoginHome/LoginHome";
 import Availability from "./Pages/Availability/Availability";
 import Event from "./Pages/Event/Event";
 import Story from "./Pages/Story/Story";
 import RequiredAuth from "./Shared/RequiredAuth/RequiredAuth";
 import About from "./Pages/About/About";
+import Profile from "./Pages/AccountSettings/Profile/Profile";
+import AccountSettings from "./Pages/AccountSettings/AccountSettings";
+import Branding from "./Pages/AccountSettings/Branding/Branding";
+import MyLink from "./Pages/AccountSettings/MyLink/MyLink";
+import PhoneNumber from "./Pages/AccountSettings/PhoneNumber/PhoneNumber";
 
 function App() {
   return (
@@ -45,7 +49,22 @@ function App() {
           path="/availability"
           element={<Availability></Availability>}
         ></Route>
-        <Route path="profile" element={<Profile />}></Route>
+        <Route
+          path="/accountSettings"
+          element={
+            <RequiredAuth>
+              <AccountSettings></AccountSettings>
+            </RequiredAuth>
+          }
+        >
+          <Route path="profile" element={<Profile></Profile>}></Route>
+          <Route path="branding" element={<Branding></Branding>}></Route>
+          <Route path="myLink" element={<MyLink></MyLink>}></Route>
+          <Route
+            path="phoneNumber"
+            element={<PhoneNumber></PhoneNumber>}
+          ></Route>
+        </Route>
       </Routes>
       <ToastContainer />
     </div>
