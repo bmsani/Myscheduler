@@ -1,21 +1,57 @@
-import React, { FormEvent } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { toast } from "react-toastify";
 import profileImg from "../../../src/Utilities/icon/profile.png";
 import auth from "../../init.firebase";
 
 const Profile = () => {
   const [user] = useAuthState(auth);
+  const [userInfo, setUserInfo] = useState({ name: "", email: "" });
+
+  useEffect(() => {
+    const url = `http://localhost:5000/user/${user?.email}`;
+    fetch(url, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setUserInfo(data);
+      });
+  }, [user]);
 
   const handleProfile = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const { name, message, mobile, profileLink } =
-      event.target as typeof event.target & {
-        name: { value: string };
-        message: { value: string };
-        mobile: { value: number };
-        profileLink: { value: string };
-      };
-    console.log(name.value, message.value, mobile.value, profileLink.value);
+    const { name, message } = event.target as typeof event.target & {
+      name: { value: string };
+      message: { value: any };
+      mobile: { value: number };
+      profileLink: { value: string };
+    };
+
+    const updatedUser = { name: name, message: message };
+    console.log(updatedUser);
+
+    const url = `http://localhost:5000/user/${user?.email}`;
+    fetch(url, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+      body: JSON.stringify(updatedUser),
+    })
+      .then((res) => res.json())
+      .then((inserted) => {
+        if (inserted.insertedId) {
+          toast.success("Profile successfully updated");
+        } else {
+          toast.error("Failed to update");
+        }
+      });
   };
 
   return (
@@ -25,7 +61,7 @@ const Profile = () => {
           {user ? (
             <img
               className="w-[120px] rounded-full border border-primary p-1"
-              src={user.photoURL as string}
+              src={user?.photoURL as string}
               alt=""
             />
           ) : (
@@ -52,14 +88,15 @@ const Profile = () => {
                 fill="currentColor"
               >
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z"
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                 />
               </svg>
             </label>
           </div>
         </div>
+
         <div className="mt-4">
           <label className="text-primary font-medium" htmlFor="name">
             Name
@@ -68,9 +105,10 @@ const Profile = () => {
             className="border border-[#b8b8b8] focus:outline-none focus:border-secondary block rounded-lg p-2 mt-1 w-full"
             type="text"
             name="name"
-            value={user?.displayName as string}
+            defaultValue={userInfo?.name}
           />
         </div>
+
         <div className="mt-4">
           <label className="text-primary font-medium" htmlFor="message">
             Welcome Message
