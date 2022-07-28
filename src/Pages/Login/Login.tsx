@@ -55,11 +55,11 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="grid loginRegBg grid-cols-1 md:grid-cols-2 h-[100vh] pt-12">
+    <div className="grid loginRegBg grid-cols-1 md:grid-cols-2 h-[100vh]">
       <div className="bg-primary hidden md:flex justify-center items-center">
         <img className="w-[550px]" src={loginImg} alt="" />
       </div>
-      <div className="flex justify-center bg-[#e1f7f7]">
+      <div className="flex justify-center bg-[#e1f7f7] pt-12">
         <div className="w-[500px] p-5 my-12 ">
           <div>
             <div className="text-primary text-center">
