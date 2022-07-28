@@ -23,7 +23,7 @@ const AccountSettings: any = () => {
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col">
         <div className="w-full navbar bg-base-300">
-          <div className="flex-none lg:hidden w-full navbar-end">
+          {/* <div className="flex-none lg:hidden w-full navbar-end">
             <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -39,17 +39,17 @@ const AccountSettings: any = () => {
                 ></path>
               </svg>
             </label>
-          </div>
-          <div className="mx-auto flex-none hidden lg:block">
+          </div> */}
+          <div className="mx-auto flex-none block">
             <ul className="menu menu-horizontal">{items}</ul>
           </div>
         </div>
         <Outlet></Outlet>
       </div>
-      <div className="drawer-side">
+      {/* <div className="drawer-side">
         <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
         <ul className="menu p-4 overflow-y-auto w-80 bg-base-100">{items}</ul>
-      </div>
+      </div> */}
     </div>
   );
 };
