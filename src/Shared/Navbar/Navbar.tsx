@@ -118,7 +118,7 @@ const Navbar = () => {
                     className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-44"
                   >
                     <li>
-                      <Link className="w-full" to="/profile">
+                      <Link className="w-full" to="/accountSettings/profile">
                         Account setting
                       </Link>
                     </li>
