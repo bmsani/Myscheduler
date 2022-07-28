@@ -38,7 +38,7 @@ const Login: React.FC = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const [token] = useToken(user || GUser || FUser)
+  const [token] = useToken(user || GUser || FUser);
 
   let from = (location.state as LocationState)?.from?.pathname || "/home";
 
@@ -124,7 +124,8 @@ const Login: React.FC = () => {
                 )}
               </label>
               <p className="text-error text-sm">
-                {(error || GError || FError) && (error?.message || GError?.message || FError?.message)}
+                {(error || GError || FError) &&
+                  (error?.message || GError?.message || FError?.message)}
               </p>
               <input
                 type="submit"
