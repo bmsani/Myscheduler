@@ -1,13 +1,11 @@
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../init.firebase";
-import Button from "../../../Shared/Button/Button";
-import brandImg from "../../../Utilities/icon/profile.png";
 
 const Branding = () => {
   const [user] = useAuthState(auth);
   return (
-    <div className="w-[500px] mx-auto py-16">
+    <div className="w-full max-w-sm lg:max-w-md mx-auto py-12">
       <h1 className="text-2xl text-gray-600 mb-2">Logo</h1>
       <div className="w-full h-[200px] border border-gray-400 rounded">
         {user ? (
