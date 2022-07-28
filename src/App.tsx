@@ -19,6 +19,8 @@ import AccountSettings from "./Pages/AccountSettings/AccountSettings";
 import Branding from "./Pages/AccountSettings/Branding/Branding";
 import MyLink from "./Pages/AccountSettings/MyLink/MyLink";
 import PhoneNumber from "./Pages/AccountSettings/PhoneNumber/PhoneNumber";
+import CalenderConnection from "./Pages/CalenderConnection/CalenderConnection";
+import AddCalender from "./Pages/AddCalender/AddCalender";
 
 function App() {
   return (
@@ -65,6 +67,15 @@ function App() {
             element={<PhoneNumber></PhoneNumber>}
           ></Route>
         </Route>
+        <Route path="profile" element={<Profile />}></Route>
+        <Route
+          path="/calenderConnection"
+          element={<CalenderConnection></CalenderConnection>}
+        ></Route>
+        <Route
+          path="/addCalender"
+          element={<AddCalender></AddCalender>}
+        ></Route>
       </Routes>
       <ToastContainer />
     </div>

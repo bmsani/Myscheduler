@@ -35,10 +35,10 @@ const Navbar = () => {
   };
   window.addEventListener("scroll", changeNavbarColor);
 
-  const handleSignOut = () =>{
+  const handleSignOut = () => {
     localStorage.removeItem("accessToken");
     signOut(auth);
-  }
+  };
 
   const items = (
     <>
@@ -105,7 +105,7 @@ const Navbar = () => {
                   <Link to="/availability">Availability</Link>
                 </li>
                 <li>
-                  <div className="w-16 rounded-full ">
+                  <div className="w-16 rounded-full hidden md:block">
                     <img
                       src={
                         user.photoURL ||
@@ -117,12 +117,14 @@ const Navbar = () => {
                   </div>
                 </li>
                 <div className="dropdown dropdown-end">
-                  <label tabIndex={0} className="btn m-1">
-                    Account
+                  <label tabIndex={0}>
+                    <Button>
+                      <span>Account</span>
+                    </Button>
                   </label>
                   <ul
                     tabIndex={0}
-                    className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-44"
+                    className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
                   >
                     <li>
                       <Link className="w-full" to="/accountSettings/profile">
@@ -130,9 +132,10 @@ const Navbar = () => {
                       </Link>
                     </li>
                     <li>
-                      <button className="w-full" onClick={handleSignOut}>
-                        Logout
-                      </button>
+                      <Link to="/calenderConnection">Calender Connections</Link>
+                    </li>
+                    <li>
+                      <button className="w-full" onClick={handleSignOut}>Logout</button>
                     </li>
                   </ul>
                 </div>
