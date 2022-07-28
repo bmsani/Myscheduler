@@ -124,7 +124,7 @@ const Navbar = () => {
                   </label>
                   <ul
                     tabIndex={0}
-                    className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-44"
+                    className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
                   >
                     <li>
                       <Link className="w-full" to="/accountSettings/profile">
@@ -132,9 +132,10 @@ const Navbar = () => {
                       </Link>
                     </li>
                     <li>
-                      <button className="w-full" onClick={handleSignOut}>
-                        Logout
-                      </button>
+                      <Link to="/calenderConnection">Calender Connections</Link>
+                    </li>
+                    <li>
+                      <button className="w-full" onClick={handleSignOut}>Logout</button>
                     </li>
                   </ul>
                 </div>
