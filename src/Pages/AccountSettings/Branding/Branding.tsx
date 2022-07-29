@@ -1,16 +1,38 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import auth from "../../../init.firebase";
 import Loading from "../../../Shared/LoadingSpinner/Loading";
 import imgIcon from "../../../Utilities/icon/image.png";
 
+interface userInfoType {
+    brandLogo: string;
+}
+
 const Branding = () => {
   const [loading, setLoading] = useState(false);
+  const [userInfo, setUserInfo] = useState({
+    brandLogo: "",
+  });
   const [user] = useAuthState(auth);
   const getImg = useRef<HTMLInputElement | null>(null);
 
   const imageStorageKey = "8c4220582d4b8f04cc8ea7c8298a1449";
+
+  useEffect(() => {
+    const url = `http://localhost:5000/user/${user?.email}`;
+    fetch(url, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setUserInfo(data)
+      });
+  }, [user]);
 
   const handleImgUpload = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -60,13 +82,13 @@ const Branding = () => {
     <div className="w-full max-w-sm lg:max-w-md mx-auto py-8">
       <h1 className="text-2xl text-gray-600 mb-2">Logo</h1>
       <div className="w-full h-[200px] border border-gray-400 rounded">
-        {user ? (
+        {userInfo.brandLogo ? (
           <div className="h-full flex items-center justify-center">
-            <img className="w-32" src={imgIcon} alt="" />
+            <img className="w-32" src={userInfo.brandLogo} alt="" />
           </div>
         ) : (
           <div className="h-full flex items-center justify-center">
-            <p className="text-4xl text-gray-600">No Logo</p>
+            <img className="w-32" src={imgIcon} alt="" />
           </div>
         )}
       </div>
