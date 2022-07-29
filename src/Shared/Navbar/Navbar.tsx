@@ -7,9 +7,7 @@ import auth from "../../init.firebase";
 import Button from "../Button/Button";
 import Loading from "../LoadingSpinner/Loading";
 import { HiMenu } from "react-icons/hi";
-import { BiDownArrow } from "react-icons/bi";
 import ShareLink from "../../Pages/ShareLink/ShareLink";
-
 
 const Navbar = () => {
   const [user, loading] = useAuthState(auth);
@@ -102,36 +100,50 @@ const Navbar = () => {
                   <Link to="/availability">Availability</Link>
                 </li>
                 <li>
-                  <div className="dropdown dropdown-end">
-                    <label
-                      tabIndex={0}
-                      className=" cursor-pointer flex justify-center items-center gap-2"
-                    >
-                      <BiDownArrow />
-                      <div className="w-8 rounded-full ">
-                        <img
-                          src={
-                            user.photoURL ||
-                            ("https://findicons.com/files/icons/1024/dress_it_profession/128/assassin_avatar.png" as string)
-                          }
-                          className="rounded-full border-2 border-secondary"
-                          alt=""
-                        />
-                      </div>
-                    </label>
-                    <ul
-                      tabIndex={0}
-                      className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 mt-40"
-                    >
-                      <li>
-                        <Link to="/accountSettings/profile">
-                          Account setting
-                        </Link>
-                      </li>
-                      <li>
-                        <button onClick={handleSignOut}>Logout</button>
-                      </li>
-                    </ul>
+                  <div className="w-16 rounded-full ">
+                    <img
+                      src={
+                        user.photoURL ||
+                        ("https://findicons.com/files/icons/1024/dress_it_profession/128/assassin_avatar.png" as string)
+                      }
+                      className="rounded-full"
+                      alt=""
+                    />
+                  </div>
+                </li>
+                <div className="dropdown dropdown-end">
+                  <label tabIndex={0} className="btn m-1">
+                    Account
+                  </label>
+                  <ul
+                    tabIndex={0}
+                    className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+                  >
+                    <li>
+                      <Link className="w-full" to="/profile">
+                        Account setting
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/calenderConnection">Calender Connections</Link>
+
+                    </li>
+
+                    {
+
+                    }
+
+                    <li>
+                      {/* <Link to="/shareLink">Share Your Link</Link> */}
+                      <label htmlFor="my-modal-6" className="">Share Your Link</label>
+                    </li>
+                    <li>
+                      <button onClick={() => signOut(auth)}>Logout</button>
+                      <button className="w-full" onClick={() => signOut(auth)}>
+                        Logout
+                      </button>
+                    </li>
+                  </ul>
                 </div>
               </ul>
             </div>
