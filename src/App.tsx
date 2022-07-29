@@ -12,10 +12,9 @@ import About from "./Pages/About/About";
 import Profile from "./Pages/AccountSettings/Profile/Profile";
 import AccountSettings from "./Pages/AccountSettings/AccountSettings";
 import Dashboard from "./Pages/Dashboard/Dashboard";
-import Event from "./Pages/Event/Event";
 import Availability from "./Pages/Availability/Availability";
 import Workflow from "./Pages/Dashboard/Workflow/Workflow";
-import EventTypes from "./Pages/Dashboard/EventTypes/EventTypes";
+import EventTypes from "./Pages/Dashboard/EventTypes/Event";
 import Scheduling from "./Pages/Dashboard/Scheduling/Scheduling";
 import RoutingForms from "./Pages/Dashboard/RoutingForms/RoutingForms";
 import CalenderConnection from "./Pages/CalenderConnection/CalenderConnection";
@@ -23,6 +22,7 @@ import AddCalender from "./Pages/AddCalender/AddCalender";
 import ShareLink from "./Pages/ShareLink/ShareLink";
 import Navbar from "./Shared/Navbar/Navbar";
 import MyLink from "./Pages/AccountSettings/MyLink/MyLink";
+import Event from "./Pages/Dashboard/EventTypes/Event";
 import Branding from "./Pages/AccountSettings/Branding/Branding";
 
 function App() {
@@ -66,7 +66,10 @@ function App() {
           <Route path="myLink" element={<MyLink />}></Route>
         </Route>
         <Route path="/shareLink" element={<ShareLink></ShareLink>}></Route>
-        <Route path="/addCalender" element={<AddCalender></AddCalender>}></Route>
+        <Route
+          path="/addCalender"
+          element={<AddCalender></AddCalender>}
+        ></Route>
         <Route path="profile" element={<Profile />}></Route>
         <Route
           path="/calenderConnection"
