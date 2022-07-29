@@ -31,8 +31,8 @@ const Story = () => {
         <div className='pt-8'>
             <div className='px-12'>
                 <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-                    <div className="grid gap-5 row-gap-10 lg:grid-cols-2">
-                        <div className="flex flex-col mt-12">
+                    <div className="grid gap-5 row-gap-10 lg:grid-cols-2 sm:grid-cols-1">
+                        <div className="flex flex-col mt-12 mb-6">
                             <div className="max-w-xl mb-6">
                                 <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-primary sm:text-4xl sm:leading-none">
                                     Don’t get suffocated with
@@ -77,7 +77,7 @@ const Story = () => {
                         </div>
                         <div>
                             <img
-                                className="object-cover w-full h-40 rounded  sm:h-96"
+                                className=" w-full h-40 rounded  sm:h-96"
                                 src={teaching}
                                 alt=""
                             />
@@ -111,31 +111,31 @@ const Story = () => {
                     </div>
                 </div>
             </div>
-            <h1 className='text-center lg:text-3xl font-bold my-8 text-primary mb-16 md:text-2xl'>Trusted by more than <span className='text-blue-700'>50,000</span> of the world’s <br /> leading organizations</h1>
-            <div className='container mx-auto md:px-9 sm:px-11'>
+            <h1 className=' text-center lg:text-3xl font-bold my-8 text-primary mb-16 md:text-2xl'>Trusted by more than <span className='text-blue-700'>50,000</span> of the world’s <br /> leading organizations</h1>
+            <div className='container mx-auto sm:px-16'>
                 <Slider {...settings}>
                     <div className=''>
                         <img className='lg:w-[120px] md:w-[120px] sm:w-[70px]' src={alca} alt="" />
                     </div>
                     <div>
-                        <img className='w-[120px]' src={impuls} alt="" />
+                        <img className='w-[120px] ' src={impuls} alt="" />
                     </div>
                     <div>
-                        <img className='w-[120px]' src={legos} alt="" />
+                        <img className='w-[120px] ' src={legos} alt="" />
                     </div>
                     <div>
-                        <img className='w-[120px]' src={summa} alt="" />
+                        <img className='w-[120px] ' src={summa} alt="" />
                     </div>
                     <div>
-                        <img className='w-[120px]' src={tesa} alt="" />
+                        <img className='w-[120px] ' src={tesa} alt="" />
                     </div>
 
                 </Slider>
             </div>
             <div>
-                <div className='my-8 mt-16'>
-                    <h2 className='text-3xl font-bold text-primary text-center mb-4'>Popular customer Says..</h2>
-                    <h2 className='text-xl font-bold text-light text-center'>Learn how My Schedular customers save time and drive revenue</h2>
+                <div className='my-8 mt-16 '>
+                    <h2 className='lg:text-3xl md:text-2xl font-bold text-primary text-center mb-4'>Popular customer Says..</h2>
+                    <h2 className='lg:text-2xl md:text-xl px-8 font-bold text-light text-center'>Learn how My Schedular customers save time and drive revenue</h2>
                 </div>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-1 gap-8 px-12 gap-x-4">
                     <div>

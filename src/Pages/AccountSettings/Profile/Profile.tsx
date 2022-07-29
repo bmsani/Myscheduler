@@ -32,8 +32,6 @@ const Profile = () => {
       });
   }, [user]);
 
-  console.log(userInfo);
-
   const handleProfile = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const name = getName?.current?.value;

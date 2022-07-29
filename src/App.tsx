@@ -11,7 +11,6 @@ import RequiredAuth from "./Shared/RequiredAuth/RequiredAuth";
 import About from "./Pages/About/About";
 import Profile from "./Pages/AccountSettings/Profile/Profile";
 import AccountSettings from "./Pages/AccountSettings/AccountSettings";
-import Branding from "./Pages/AccountSettings/Branding/Branding";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import Availability from "./Pages/Availability/Availability";
 import Workflow from "./Pages/Dashboard/Workflow/Workflow";
@@ -20,9 +19,11 @@ import Scheduling from "./Pages/Dashboard/Scheduling/Scheduling";
 import RoutingForms from "./Pages/Dashboard/RoutingForms/RoutingForms";
 import CalenderConnection from "./Pages/CalenderConnection/CalenderConnection";
 import AddCalender from "./Pages/AddCalender/AddCalender";
+import ShareLink from "./Pages/ShareLink/ShareLink";
 import Navbar from "./Shared/Navbar/Navbar";
 import MyLink from "./Pages/AccountSettings/MyLink/MyLink";
 import Event from "./Pages/Dashboard/EventTypes/Event";
+import Branding from "./Pages/AccountSettings/Branding/Branding";
 
 function App() {
   return (
@@ -35,8 +36,6 @@ function App() {
         <Route path="/story" element={<Story></Story>}></Route>
         <Route path="login" element={<Login></Login>}></Route>
         <Route path="register" element={<Register></Register>}></Route>
-
-        <Route path="*" element={<NotFound></NotFound>}></Route>
 
         {/* *********** After login ********* */}
         <Route
@@ -66,6 +65,11 @@ function App() {
           <Route path="branding" element={<Branding />}></Route>
           <Route path="myLink" element={<MyLink />}></Route>
         </Route>
+        <Route path="/shareLink" element={<ShareLink></ShareLink>}></Route>
+        <Route
+          path="/addCalender"
+          element={<AddCalender></AddCalender>}
+        ></Route>
         <Route path="profile" element={<Profile />}></Route>
         <Route
           path="/calenderConnection"
@@ -75,6 +79,7 @@ function App() {
           path="/addCalender"
           element={<AddCalender></AddCalender>}
         ></Route>
+        <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>
       <ToastContainer />
     </div>

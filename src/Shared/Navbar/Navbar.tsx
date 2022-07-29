@@ -7,6 +7,8 @@ import auth from "../../init.firebase";
 import Button from "../Button/Button";
 import Loading from "../LoadingSpinner/Loading";
 import { HiMenu } from "react-icons/hi";
+import { BiDownArrow } from "react-icons/bi";
+import ShareLink from "../../Pages/ShareLink/ShareLink";
 
 const Navbar = () => {
   const [user, loading] = useAuthState(auth);
@@ -39,7 +41,6 @@ const Navbar = () => {
     localStorage.removeItem("accessToken");
     signOut(auth);
   };
-
   const items = (
     <>
       <li>
@@ -69,14 +70,27 @@ const Navbar = () => {
       </li>
     </>
   );
+
   return (
     <div>
       {user ? (
         <div className="navbar bg-base-100 shadow-xl">
           <div className="container mx-auto">
-            <div className="flex-1">
-              <div className="flex items-center gap-5">
-                <div>
+            <div className="flex-1 hidden md:block">
+              <div className="w-3/4 lg:w-1/2 md:w-3/5 lg:justify-start justify-between">
+                <Link className="normal-case text-xl" to="/home">
+                  <span className="flex items-end lg:items-center">
+                    <img className="w-10" src={Logo} alt="" />
+                    <span className="font-bold text-secondary pl-4 hidden lg:block">
+                      MyScheduler
+                    </span>
+                  </span>
+                </Link>
+              </div>
+            </div>
+            <div className="flex-none">
+              <ul className="menu menu-horizontal p-0">
+                <li>
                   {pathname === "/dashboard" ||
                   pathname === "/dashboard/scheduling" ||
                   pathname === "/dashboard/workflow" ||
@@ -95,27 +109,16 @@ const Navbar = () => {
                       <HiMenu className="text-2xl" />
                     </label>
                   )}
-                </div>
-
-                <div className="w-3/4 lg:w-1/2 md:w-3/5 lg:justify-start justify-between">
-                  <Link className="normal-case text-xl" to="/dashboard">
-                    <span className="flex items-end lg:items-center">
-                      <img className="w-10 hidden lg:block" src={Logo} alt="" />
-                      <span className="font-bold text-secondary pl-4 hidden lg:block ">
-                        MyScheduler
-                      </span>
-                    </span>
-                  </Link>
-                </div>
-              </div>
-            </div>
-            <div className="flex-none">
-              <ul className="menu menu-horizontal p-0">
-                <li>
-                  <Link to="/dashboard">Dashboard</Link>
                 </li>
                 <li>
-                  <Link to="/availability">Availability</Link>
+                  <Link className="px-1 md:px-4" to="/dashboard">
+                    Dashboard
+                  </Link>
+                </li>
+                <li>
+                  <Link className="px-1 md:px-4" to="/availability">
+                    Availability
+                  </Link>
                 </li>
                 <li>
                   <div className="dropdown dropdown-end">
@@ -123,7 +126,7 @@ const Navbar = () => {
                       tabIndex={0}
                       className=" cursor-pointer flex justify-center items-center gap-2"
                     >
-                      Account
+                      <BiDownArrow />
                       <div className="w-8 rounded-full ">
                         <img
                           src={
@@ -216,6 +219,7 @@ const Navbar = () => {
           </div>
         </div>
       )}
+      <ShareLink></ShareLink>
     </div>
   );
 };
