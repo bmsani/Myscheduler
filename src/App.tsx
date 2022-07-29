@@ -13,16 +13,16 @@ import Profile from "./Pages/AccountSettings/Profile/Profile";
 import AccountSettings from "./Pages/AccountSettings/AccountSettings";
 import Branding from "./Pages/AccountSettings/Branding/Branding";
 import Dashboard from "./Pages/Dashboard/Dashboard";
-import Event from "./Pages/Event/Event";
 import Availability from "./Pages/Availability/Availability";
 import Workflow from "./Pages/Dashboard/Workflow/Workflow";
-import EventTypes from "./Pages/Dashboard/EventTypes/EventTypes";
+import EventTypes from "./Pages/Dashboard/EventTypes/Event";
 import Scheduling from "./Pages/Dashboard/Scheduling/Scheduling";
 import RoutingForms from "./Pages/Dashboard/RoutingForms/RoutingForms";
 import CalenderConnection from "./Pages/CalenderConnection/CalenderConnection";
 import AddCalender from "./Pages/AddCalender/AddCalender";
 import Navbar from "./Shared/Navbar/Navbar";
 import MyLink from "./Pages/AccountSettings/MyLink/MyLink";
+import Event from "./Pages/Dashboard/EventTypes/Event";
 
 function App() {
   return (
