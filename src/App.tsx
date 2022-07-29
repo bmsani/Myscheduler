@@ -24,13 +24,19 @@ import Navbar from "./Shared/Navbar/Navbar";
 import MyLink from "./Pages/AccountSettings/MyLink/MyLink";
 import Event from "./Pages/Dashboard/EventTypes/Event";
 import Branding from "./Pages/AccountSettings/Branding/Branding";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "./init.firebase";
 
 function App() {
+  const [user] = useAuthState(auth);
   return (
     <div>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home></Home>}></Route>
+        <Route
+          path="/"
+          element={user ? <Dashboard></Dashboard> : <Home></Home>}
+        ></Route>
         <Route path="/types" element={<Types></Types>}></Route>
         <Route path="/about" element={<About></About>}></Route>
         <Route path="/story" element={<Story></Story>}></Route>
