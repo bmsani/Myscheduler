@@ -17,29 +17,42 @@ const ShareLink = () => {
                                 <span className="label-text">Copy Your Link</span>
 
                             </label>
-                            <div className='grid '>
-                                <div className=' grid grid-cols-3'>
-                                    <input type="text" placeholder="Type here" className="input d-block border-blue-500 w-full max-w-xl" />
-                                </div>
-                                <div className='grid grid-cols-1'>
-                                    <img src={links} className='w-[56px]' alt="" />
-                                </div>
+                            <div className='flex gap-12 items-center '>
+
+                                <input type="text" placeholder="Type here" className="input  border-blue-500 w-full max-w-xs " />
+                                <button className="btn bg-blue-500 rounded-full border-none hover:bg-blue-300">
+                                    <img src={links} className='w-[40px]  ' alt="" />
+                                </button>
                             </div>
                             <label className="label">
                                 <span className="label-text">Email Your Link</span>
 
                             </label>
-                            <input type="text" placeholder="Type here" className="input border-blue-500 w-full max-w-xs" />
+                            <div className='flex gap-12 items-center '>
+
+                                <input type="text" placeholder="Type here" className="input  border-blue-500 w-full max-w-xs " />
+                                <button className="btn bg-blue-500 rounded-full border-none hover:bg-blue-300">
+                                    <img src={email} className='w-[40px]  ' alt="" />
+                                </button>
+                            </div>
                             <label className="label">
-                                <span className="label-text">Email Your Link</span>
+                                <span className="label-text">Add to Your Website</span>
 
                             </label>
-                            <input type="text" placeholder="Type here" className="input border-blue-500 w-full max-w-xs" />
+                            <div className='flex gap-12 items-center'>
+
+                                <input type="text" placeholder="Type here" className="input  border-blue-500 w-full max-w-xs " />
+                                <button className="btn bg-blue-500 rounded-full border-none hover:bg-blue-300">
+                                    <img src={website} className='w-[40px]  ' alt="" />
+                                </button>
+                            </div>
                         </form>
                     </div>
 
                     <div className="modal-action">
-                        <label htmlFor="my-modal-6" className="btn w-full">Close</label>
+                        <button className="btn w-full bg-primary hover:bg-blue-700 border-none">
+                            <label htmlFor="my-modal-6" className="">Close</label>
+                        </button>
                     </div>
                 </div>
             </div>
