@@ -77,47 +77,82 @@ const Navbar = () => {
         <div className="navbar bg-base-100 shadow-xl">
           <div className="container mx-auto">
             <div className="flex-1">
-              <div className="w-3/4 lg:w-1/2 md:w-3/5 flex items-center lg:justify-start justify-between">
-                {pathname === "/home" ? (
-                  <label
-                    htmlFor="my-drawer-2"
-                    className="bg-transparent drawer-button lg:hidden"
-                  >
-                    <HiMenu className="text-2xl" />
-                  </label>
-                ) : (
-                  ""
-                )}
-                <Link className="normal-case text-xl" to="/home">
-                  <span className="flex items-end lg:items-center">
-                    <img className="w-10 hidden lg:block" src={Logo} alt="" />
-                    <span className="font-bold text-secondary pl-4 hidden lg:block">
-                      MyScheduler
+              <div className="flex items-center gap-5">
+                <div>
+                  {pathname === "/dashboard" ||
+                  pathname === "/dashboard/scheduling" ||
+                  pathname === "/dashboard/workflow" ||
+                  pathname === "/dashboard/routingForms" ? (
+                    <label
+                      htmlFor="my-drawer-2"
+                      className="bg-transparent drawer-button lg:hidden"
+                    >
+                      <HiMenu className="text-2xl" />
+                    </label>
+                  ) : (
+                    <label
+                      htmlFor="my-drawer-2"
+                      className="bg-transparent drawer-button hidden"
+                    >
+                      <HiMenu className="text-2xl" />
+                    </label>
+                  )}
+                </div>
+
+                <div className="w-3/4 lg:w-1/2 md:w-3/5 lg:justify-start justify-between">
+                  <Link className="normal-case text-xl" to="/dashboard">
+                    <span className="flex items-end lg:items-center">
+                      <img className="w-10 hidden lg:block" src={Logo} alt="" />
+                      <span className="font-bold text-secondary pl-4 hidden lg:block ">
+                        MyScheduler
+                      </span>
                     </span>
-                  </span>
-                </Link>
+                  </Link>
+                </div>
               </div>
             </div>
             <div className="flex-none">
               <ul className="menu menu-horizontal p-0">
                 <li>
-                  <Link to="/home">Home</Link>
+                  <Link to="/dashboard">Dashboard</Link>
                 </li>
                 <li>
                   <Link to="/availability">Availability</Link>
                 </li>
                 <li>
-                  <div className="w-16 rounded-full hidden md:block">
-                    <img
-                      src={
-                        user.photoURL ||
-                        ("https://findicons.com/files/icons/1024/dress_it_profession/128/assassin_avatar.png" as string)
-                      }
-                      className="rounded-full"
-                      alt=""
-                    />
+                  <div className="dropdown dropdown-end">
+                    <label
+                      tabIndex={0}
+                      className=" cursor-pointer flex justify-center items-center gap-2"
+                    >
+                      Account
+                      <div className="w-8 rounded-full ">
+                        <img
+                          src={
+                            user.photoURL ||
+                            ("https://findicons.com/files/icons/1024/dress_it_profession/128/assassin_avatar.png" as string)
+                          }
+                          className="rounded-full border-2 border-secondary"
+                          alt=""
+                        />
+                      </div>
+                    </label>
+                    <ul
+                      tabIndex={0}
+                      className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 mt-40"
+                    >
+                      <li>
+                        <Link to="/accountSettings/profile">
+                          Account setting
+                        </Link>
+                      </li>
+                      <li>
+                        <button onClick={handleSignOut}>Logout</button>
+                      </li>
+                    </ul>
                   </div>
                 </li>
+<<<<<<< HEAD
                 <div className="dropdown dropdown-end">
                   <label tabIndex={0}>
                     <Button>
@@ -151,6 +186,8 @@ const Navbar = () => {
                     </li>
                   </ul>
                 </div>
+=======
+>>>>>>> 170c16f00eaf81c96a114c6c89d6545c4e554e3b
               </ul>
             </div>
           </div>
