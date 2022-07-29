@@ -65,16 +65,16 @@ function App() {
           <Route path="branding" element={<Branding />}></Route>
           <Route path="myLink" element={<MyLink />}></Route>
         </Route>
+        <Route
+          path="/calenderConnection"
+          element={<CalenderConnection></CalenderConnection>}
+        ></Route>
         <Route path="/shareLink" element={<ShareLink></ShareLink>}></Route>
         <Route
           path="/addCalender"
           element={<AddCalender></AddCalender>}
         ></Route>
         <Route path="profile" element={<Profile />}></Route>
-        <Route
-          path="/calenderConnection"
-          element={<CalenderConnection></CalenderConnection>}
-        ></Route>
         <Route
           path="/addCalender"
           element={<AddCalender></AddCalender>}
