@@ -1,10 +1,34 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../init.firebase";
 import imgIcon from "../../../Utilities/icon/image.png";
 
 const Branding = () => {
+
+  const [loading, setLoading] = useState(false);
   const [user] = useAuthState(auth);
+  const getImg = useRef<HTMLInputElement | null>(null);
+
+  const imageStorageKey = "8c4220582d4b8f04cc8ea7c8298a1449";
+
+  const handleImgUpload = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    const imgPath: any = getImg?.current?.files;
+    const formData = new FormData();
+    formData.append("image", imgPath[0]);
+    const url = `https://api.imgbb.com/1/upload?key=${imageStorageKey}`;
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        const imageUrl = result.data.url;
+        console.log(imageUrl)
+        setLoading(false);
+      });
+  }
   return (
     <div className="w-full max-w-sm lg:max-w-md mx-auto py-8">
       <h1 className="text-2xl text-gray-600 mb-2">Logo</h1>
@@ -20,9 +44,12 @@ const Branding = () => {
         )}
       </div>
 
-      <div className="flex justify-between items-center mt-6">
+      <form
+        onSubmit={(e) => handleImgUpload(e)}
+        className="flex justify-between items-center mt-6"
+      >
         <div>
-          <input type="file" name="image" id="image" hidden />
+          <input ref={getImg} type="file" name="image" id="image" hidden />
           <label
             className="flex items-center gap-3 border border-gray-500 py-2 px-4 rounded text-gray-500 hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer"
             htmlFor="image"
@@ -42,11 +69,12 @@ const Branding = () => {
             Upload Image
           </label>
         </div>
-
-        <button className="bg-primary py-2 px-4 rounded text-white hover:shadow-md hover:shadow-secondary duration-300 cursor-pointer">
-          Save Change
-        </button>
-      </div>
+        <input
+          type="submit"
+          value="Save Change"
+          className="bg-primary py-2 px-4 rounded text-white hover:shadow-md hover:shadow-secondary duration-300 cursor-pointer"
+        />
+      </form>
     </div>
   );
 };

@@ -10,7 +10,6 @@ import { HiMenu } from "react-icons/hi";
 import { BiDownArrow } from "react-icons/bi";
 import ShareLink from "../../Pages/ShareLink/ShareLink";
 
-
 const Navbar = () => {
   const [user, loading] = useAuthState(auth);
   const { pathname } = useLocation();
@@ -38,6 +37,10 @@ const Navbar = () => {
   };
   window.addEventListener("scroll", changeNavbarColor);
 
+  const handleSignOut = () => {
+    localStorage.removeItem("accessToken");
+    signOut(auth);
+  };
   const items = (
     <>
       <li>
@@ -73,7 +76,7 @@ const Navbar = () => {
       {user ? (
         <div className="navbar bg-base-100 shadow-xl">
           <div className="container mx-auto">
-            <div className="flex-1">
+            <div className="flex-1 hidden md:block">
               <div className="w-3/4 lg:w-1/2 md:w-3/5 lg:justify-start justify-between">
                 <Link className="normal-case text-xl" to="/home">
                   <span className="flex items-end lg:items-center">
@@ -88,18 +91,34 @@ const Navbar = () => {
             <div className="flex-none">
               <ul className="menu menu-horizontal p-0">
                 <li>
-                  <label
-                    htmlFor="my-drawer-2"
-                    className="bg-transparent drawer-button lg:hidden"
-                  >
-                    <HiMenu />
-                  </label>
+                  {pathname === "/dashboard" ||
+                  pathname === "/dashboard/scheduling" ||
+                  pathname === "/dashboard/workflow" ||
+                  pathname === "/dashboard/routingForms" ? (
+                    <label
+                      htmlFor="my-drawer-2"
+                      className="bg-transparent drawer-button lg:hidden"
+                    >
+                      <HiMenu className="text-2xl" />
+                    </label>
+                  ) : (
+                    <label
+                      htmlFor="my-drawer-2"
+                      className="bg-transparent drawer-button hidden"
+                    >
+                      <HiMenu className="text-2xl" />
+                    </label>
+                  )}
                 </li>
                 <li>
-                  <Link to="/home">Home</Link>
+                  <Link className="px-1" to="/dashboard">
+                    Dashboard
+                  </Link>
                 </li>
                 <li>
-                  <Link to="/availability">Availability</Link>
+                  <Link className="px-1" to="/availability">
+                    Availability
+                  </Link>
                 </li>
                 <li>
                   <div className="dropdown dropdown-end">
@@ -132,7 +151,8 @@ const Navbar = () => {
                         <button onClick={handleSignOut}>Logout</button>
                       </li>
                     </ul>
-                </div>
+                  </div>
+                </li>
               </ul>
             </div>
           </div>
