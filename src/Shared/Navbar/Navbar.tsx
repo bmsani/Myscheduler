@@ -8,6 +8,8 @@ import Button from "../Button/Button";
 import Loading from "../LoadingSpinner/Loading";
 import { HiMenu } from "react-icons/hi";
 import { BiDownArrow } from "react-icons/bi";
+import ShareLink from "../../Pages/ShareLink/ShareLink";
+
 
 const Navbar = () => {
   const [user, loading] = useAuthState(auth);
@@ -35,11 +37,6 @@ const Navbar = () => {
     }
   };
   window.addEventListener("scroll", changeNavbarColor);
-
-  const handleSignOut = () => {
-    localStorage.removeItem("accessToken");
-    signOut(auth);
-  };
 
   const items = (
     <>
@@ -70,50 +67,36 @@ const Navbar = () => {
       </li>
     </>
   );
+
   return (
     <div>
       {user ? (
         <div className="navbar bg-base-100 shadow-xl">
           <div className="container mx-auto">
             <div className="flex-1">
-              <div className="flex items-center gap-5">
-                <div>
-                  {pathname === "/dashboard" ||
-                  pathname === "/dashboard/scheduling" ||
-                  pathname === "/dashboard/workflow" ||
-                  pathname === "/dashboard/routingForms" ? (
-                    <label
-                      htmlFor="my-drawer-2"
-                      className="bg-transparent drawer-button lg:hidden"
-                    >
-                      <HiMenu className="text-2xl" />
-                    </label>
-                  ) : (
-                    <label
-                      htmlFor="my-drawer-2"
-                      className="bg-transparent drawer-button hidden"
-                    >
-                      <HiMenu className="text-2xl" />
-                    </label>
-                  )}
-                </div>
-
-                <div className="w-3/4 lg:w-1/2 md:w-3/5 lg:justify-start justify-between">
-                  <Link className="normal-case text-xl" to="/dashboard">
-                    <span className="flex items-end lg:items-center">
-                      <img className="w-10 hidden lg:block" src={Logo} alt="" />
-                      <span className="font-bold text-secondary pl-4 hidden lg:block ">
-                        MyScheduler
-                      </span>
+              <div className="w-3/4 lg:w-1/2 md:w-3/5 lg:justify-start justify-between">
+                <Link className="normal-case text-xl" to="/home">
+                  <span className="flex items-end lg:items-center">
+                    <img className="w-10" src={Logo} alt="" />
+                    <span className="font-bold text-secondary pl-4 hidden lg:block">
+                      MyScheduler
                     </span>
-                  </Link>
-                </div>
+                  </span>
+                </Link>
               </div>
             </div>
             <div className="flex-none">
               <ul className="menu menu-horizontal p-0">
                 <li>
-                  <Link to="/dashboard">Dashboard</Link>
+                  <label
+                    htmlFor="my-drawer-2"
+                    className="bg-transparent drawer-button lg:hidden"
+                  >
+                    <HiMenu />
+                  </label>
+                </li>
+                <li>
+                  <Link to="/home">Home</Link>
                 </li>
                 <li>
                   <Link to="/availability">Availability</Link>
@@ -149,8 +132,7 @@ const Navbar = () => {
                         <button onClick={handleSignOut}>Logout</button>
                       </li>
                     </ul>
-                  </div>
-                </li>
+                </div>
               </ul>
             </div>
           </div>
@@ -217,6 +199,7 @@ const Navbar = () => {
           </div>
         </div>
       )}
+      <ShareLink></ShareLink>
     </div>
   );
 };

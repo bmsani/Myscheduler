@@ -21,6 +21,7 @@ import Scheduling from "./Pages/Dashboard/Scheduling/Scheduling";
 import RoutingForms from "./Pages/Dashboard/RoutingForms/RoutingForms";
 import CalenderConnection from "./Pages/CalenderConnection/CalenderConnection";
 import AddCalender from "./Pages/AddCalender/AddCalender";
+import ShareLink from "./Pages/ShareLink/ShareLink";
 import Navbar from "./Shared/Navbar/Navbar";
 import MyLink from "./Pages/AccountSettings/MyLink/MyLink";
 
@@ -66,14 +67,12 @@ function App() {
           <Route path="branding" element={<Branding />}></Route>
           <Route path="myLink" element={<MyLink />}></Route>
         </Route>
+        <Route path="/shareLink" element={<ShareLink></ShareLink>}></Route>
+        <Route path="/addCalender" element={<AddCalender></AddCalender>}></Route>
         <Route path="profile" element={<Profile />}></Route>
         <Route
           path="/calenderConnection"
           element={<CalenderConnection></CalenderConnection>}
-        ></Route>
-        <Route
-          path="/addCalender"
-          element={<AddCalender></AddCalender>}
         ></Route>
       </Routes>
       <ToastContainer />
