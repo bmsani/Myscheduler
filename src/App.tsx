@@ -11,7 +11,6 @@ import RequiredAuth from "./Shared/RequiredAuth/RequiredAuth";
 import About from "./Pages/About/About";
 import Profile from "./Pages/AccountSettings/Profile/Profile";
 import AccountSettings from "./Pages/AccountSettings/AccountSettings";
-import Branding from "./Pages/AccountSettings/Branding/Branding";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import Event from "./Pages/Event/Event";
 import Availability from "./Pages/Availability/Availability";
@@ -23,6 +22,7 @@ import CalenderConnection from "./Pages/CalenderConnection/CalenderConnection";
 import AddCalender from "./Pages/AddCalender/AddCalender";
 import Navbar from "./Shared/Navbar/Navbar";
 import MyLink from "./Pages/AccountSettings/MyLink/MyLink";
+import Branding from "./Pages/AccountSettings/Branding/Branding";
 
 function App() {
   return (
