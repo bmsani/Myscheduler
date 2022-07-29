@@ -134,7 +134,7 @@ const Navbar = () => {
                     }
 
                     <li>
-                      {/* <Link to="/shareLink">Share Your Link</Link> */}
+                   
                       <label htmlFor="my-modal-6" className="">Share Your Link</label>
                     </li>
                     <li>
