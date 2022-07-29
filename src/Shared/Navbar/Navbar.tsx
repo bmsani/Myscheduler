@@ -111,12 +111,12 @@ const Navbar = () => {
                   )}
                 </li>
                 <li>
-                  <Link className="px-1" to="/dashboard">
+                  <Link className="px-1 md:px-4" to="/dashboard">
                     Dashboard
                   </Link>
                 </li>
                 <li>
-                  <Link className="px-1" to="/availability">
+                  <Link className="px-1 md:px-4" to="/availability">
                     Availability
                   </Link>
                 </li>
