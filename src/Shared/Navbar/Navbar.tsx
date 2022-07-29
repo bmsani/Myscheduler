@@ -35,6 +35,11 @@ const Navbar = () => {
   };
   window.addEventListener("scroll", changeNavbarColor);
 
+  const handleSignOut = () => {
+    localStorage.removeItem("accessToken");
+    signOut(auth);
+  };
+
   const items = (
     <>
       <li>
@@ -116,13 +121,13 @@ const Navbar = () => {
                   </label>
                   <ul
                     tabIndex={0}
-                    className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-44"
+                    className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
                   >
                     <li>
                       <Link to="/accountSettings/profile">Account setting</Link>
                     </li>
                     <li>
-                      <button onClick={() => signOut(auth)}>Logout</button>
+                      <button onClick={handleSignOut}>Logout</button>
                     </li>
                   </ul>
                 </div>

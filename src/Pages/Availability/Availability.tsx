@@ -7,22 +7,24 @@ import date from "../../Utilities/Image/date&time.gif";
 const Availability = () => {
   return (
     <div className="container mx-auto">
-      <h3 className="text-4xl font-bold py-4">
-        Availability & Time -{""}
-        <span className="text-3xl font-bold">Scheduling Setup</span>
+      <h3 className="text-xl md:text-2xl text-center lg:text-3xl font-bold py-4">
+        Availability & Time
+        <span className="text-xl md:text-2xl lg:text-3xl font-bold">
+          Scheduling Setup
+        </span>
       </h3>
       <div className="rounded-box shadow-md mt-10">
         <div className="flex flex-col w-full border-opacity-50">
-          <div className="grid card bg-base-100 px-10">
+          <div className="grid card bg-base-100 pl-2">
             <div className="flex justify-start gap-2">
-              <h5 className="text-xl font-bold border-2 border-primary py-1 px-2 rounded-full">
+              <h5 className="text-sm md:text-xl w-fit font-bold border-2 border-primary p-1 rounded-full">
                 Working Schedule
               </h5>
-              <div className="rounded-full border-2 border-primary flex items-center px-2">
-                <AiOutlinePlusCircle className="text-xl" />
+              <div className="rounded-full border-2 border-primary flex items-center w-fit p-1">
+                <AiOutlinePlusCircle className="text-sm md:text-xl" />
                 <label
                   htmlFor="my-modal"
-                  className="modal-button text-xl font-bold"
+                  className="modal-button text-sm md:text-xl font-bold"
                 >
                   Create new <Modal />
                 </label>
@@ -67,28 +69,30 @@ const Schedule = () => {
     "Saturday",
     "Sunday",
     "Monday",
-    "tuesday",
+    "Tuesday",
     "Wednesday",
     "Thursday",
-    "friday",
+    "Friday",
   ];
 
   return (
     <div>
-      <h6 className="text-lg font-bold">Set your weekly hours</h6>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 justify-center items-center">
+      <h6 className="text-xl md:text-2xl text-center font-bold">
+        Set your weekly hours
+      </h6>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 justify-center items-center mt-5">
         <div>
           {days.map((day) => (
-            <div className="flex items-center justify-start gap-5">
+            <div className="flex items-center justify-center gap-5 shadow-md mb-3 p-3 md:p-0">
               <div className="form-control">
-                <label className="label cursor-pointer justify-start gap-5">
+                <label className="label cursor-pointer justify-start gap-1">
                   <input type="checkbox" className="checkbox mr-2" />
-                  <div className="flex items-center justify-center gap-10">
+                  <div className="flex flex-col md:flex-row items-center md:gap-10">
                     <p className="label-text text-lg w-24">{day}</p>
                     <div className="">
                       <input
                         type="number"
-                        className="border-2 border-primary mr-3 p-1 px-2 rounded-full w-28"
+                        className="border-2 border-primary mr-3 p-1 px-2 mb-2 md:mb-0 rounded-full w-28"
                         placeholder="hour"
                       />
                       <input
@@ -107,7 +111,7 @@ const Schedule = () => {
             </div>
           ))}
         </div>
-        <div>
+        <div className="hidden lg:block">
           <img src={date} alt="" />
         </div>
       </div>
