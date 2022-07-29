@@ -11,7 +11,6 @@ import RequiredAuth from "./Shared/RequiredAuth/RequiredAuth";
 import About from "./Pages/About/About";
 import Profile from "./Pages/AccountSettings/Profile/Profile";
 import AccountSettings from "./Pages/AccountSettings/AccountSettings";
-import Branding from "./Pages/AccountSettings/Branding/Branding";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import Event from "./Pages/Event/Event";
 import Availability from "./Pages/Availability/Availability";
@@ -24,6 +23,7 @@ import AddCalender from "./Pages/AddCalender/AddCalender";
 import ShareLink from "./Pages/ShareLink/ShareLink";
 import Navbar from "./Shared/Navbar/Navbar";
 import MyLink from "./Pages/AccountSettings/MyLink/MyLink";
+import Branding from "./Pages/AccountSettings/Branding/Branding";
 
 function App() {
   return (
@@ -36,8 +36,6 @@ function App() {
         <Route path="/story" element={<Story></Story>}></Route>
         <Route path="login" element={<Login></Login>}></Route>
         <Route path="register" element={<Register></Register>}></Route>
-
-        <Route path="*" element={<NotFound></NotFound>}></Route>
 
         {/* *********** After login ********* */}
         <Route
@@ -74,6 +72,11 @@ function App() {
           path="/calenderConnection"
           element={<CalenderConnection></CalenderConnection>}
         ></Route>
+        <Route
+          path="/addCalender"
+          element={<AddCalender></AddCalender>}
+        ></Route>
+        <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>
       <ToastContainer />
     </div>

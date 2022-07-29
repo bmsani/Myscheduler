@@ -10,7 +10,6 @@ import { HiMenu } from "react-icons/hi";
 import { BiDownArrow } from "react-icons/bi";
 import ShareLink from "../../Pages/ShareLink/ShareLink";
 
-
 const Navbar = () => {
   const [user, loading] = useAuthState(auth);
   const { pathname } = useLocation();
@@ -37,6 +36,11 @@ const Navbar = () => {
     }
   };
   window.addEventListener("scroll", changeNavbarColor);
+
+  const handleSignOut = () => {
+    localStorage.removeItem("accessToken");
+    signOut(auth);
+  };
 
   const items = (
     <>
@@ -132,7 +136,8 @@ const Navbar = () => {
                         <button onClick={handleSignOut}>Logout</button>
                       </li>
                     </ul>
-                </div>
+                  </div>
+                </li>
               </ul>
             </div>
           </div>
