@@ -1,13 +1,17 @@
 import React from "react";
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 
 const AccountSettings: any = () => {
-  let activeClassName = "text-secondary font-bold";
+  // let activeClassName = "text-secondary font-bold";
   const items = (
     <>
       <li>
         <NavLink
-          className={({ isActive }) => (isActive ? activeClassName : undefined)}
+          className={({ isActive }) =>
+            isActive
+              ? " font-bold text-secondary border-b-2 border-b-secondary"
+              : ""
+          }
           to="/accountSettings/profile"
         >
           Profile
@@ -15,7 +19,11 @@ const AccountSettings: any = () => {
       </li>
       <li>
         <NavLink
-          className={({ isActive }) => (isActive ? activeClassName : undefined)}
+          className={({ isActive }) =>
+            isActive
+              ? " font-bold text-error border-b-2 border-b-error hover:bg-white"
+              : ""
+          }
           to="/accountSettings/branding"
         >
           Branding
@@ -23,18 +31,14 @@ const AccountSettings: any = () => {
       </li>
       <li>
         <NavLink
-          className={({ isActive }) => (isActive ? activeClassName : undefined)}
+          className={({ isActive }) =>
+            isActive
+              ? "font-bold text-primary border-b-2 border-b-primary hover:bg-white"
+              : ""
+          }
           to="/accountSettings/myLink"
         >
           My Link
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          className={({ isActive }) => (isActive ? activeClassName : undefined)}
-          to="/accountSettings/phoneNumber"
-        >
-          Phone Number
         </NavLink>
       </li>
     </>
