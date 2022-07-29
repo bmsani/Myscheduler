@@ -5,13 +5,13 @@ import Button from "../Button/Button";
 
 const NotFound = () => {
   return (
-    <div className="container mx-auto grid grid-cols-2 md:grid-cols-2 pt-20 justify-center items-center gap-10">
+    <div className="container mx-auto grid grid=cols-1 lg:grid-cols-2 md:grid-cols-2 pt-20 justify-center items-center gap-10">
       <img src={error} alt="" />
       <div>
-        <h2 className="text-5xl font-bold pb-10">
+        <h2 className="text-2xl text-center lg:text-5xl font-bold pb-10">
           Your searching page is not be created yet.
         </h2>
-        <Link to="/">
+        <Link className="flex justify-center" to="/">
           <Button>
             <span>Back to Home</span>
           </Button>
