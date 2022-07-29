@@ -75,20 +75,10 @@ const Navbar = () => {
         <div className="navbar bg-base-100 shadow-xl">
           <div className="container mx-auto">
             <div className="flex-1">
-              <div className="w-3/4 lg:w-1/2 md:w-3/5 flex items-center lg:justify-start justify-between">
-                {pathname === "/home" ? (
-                  <label
-                    htmlFor="my-drawer-2"
-                    className="bg-transparent drawer-button lg:hidden"
-                  >
-                    <HiMenu className="text-2xl" />
-                  </label>
-                ) : (
-                  ""
-                )}
-                <Link className="normal-case text-xl" to="/home">
+              <div className="w-3/4 lg:w-1/2 md:w-3/5 lg:justify-start justify-between">
+                <Link className="normal-case text-xl" to="/dashboard/event">
                   <span className="flex items-end lg:items-center">
-                    <img className="w-10 hidden lg:block" src={Logo} alt="" />
+                    <img className="w-10" src={Logo} alt="" />
                     <span className="font-bold text-secondary pl-4 hidden lg:block">
                       MyScheduler
                     </span>
@@ -99,43 +89,45 @@ const Navbar = () => {
             <div className="flex-none">
               <ul className="menu menu-horizontal p-0">
                 <li>
-                  <Link to="/home">Home</Link>
+                  <label
+                    htmlFor="my-drawer-2"
+                    className="bg-transparent drawer-button lg:hidden"
+                  >
+                    <HiMenu />
+                  </label>
+                </li>
+                <li>
+                  <Link to="/dashboard/event">Dashboard</Link>
                 </li>
                 <li>
                   <Link to="/availability">Availability</Link>
                 </li>
-                <li>
-                  <div className="w-16 rounded-full hidden md:block">
-                    <img
-                      src={
-                        user.photoURL ||
-                        ("https://findicons.com/files/icons/1024/dress_it_profession/128/assassin_avatar.png" as string)
-                      }
-                      className="rounded-full"
-                      alt=""
-                    />
-                  </div>
-                </li>
                 <div className="dropdown dropdown-end">
-                  <label tabIndex={0}>
-                    <Button>
-                      <span>Account</span>
-                    </Button>
+                  <label
+                    tabIndex={0}
+                    className=" cursor-pointer flex justify-center items-center gap-2"
+                  >
+                    Account
+                    <div className="w-8 rounded-full ">
+                      <img
+                        src={
+                          user.photoURL ||
+                          ("https://findicons.com/files/icons/1024/dress_it_profession/128/assassin_avatar.png" as string)
+                        }
+                        className="rounded-full border-2 border-secondary"
+                        alt=""
+                      />
+                    </div>
                   </label>
                   <ul
                     tabIndex={0}
                     className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
                   >
                     <li>
-                      <Link className="w-full" to="/accountSettings/profile">
-                        Account setting
-                      </Link>
+                      <Link to="/accountSettings/profile">Account setting</Link>
                     </li>
                     <li>
-                      <Link to="/calenderConnection">Calender Connections</Link>
-                    </li>
-                    <li>
-                      <button className="w-full" onClick={handleSignOut}>Logout</button>
+                      <button onClick={handleSignOut}>Logout</button>
                     </li>
                   </ul>
                 </div>
