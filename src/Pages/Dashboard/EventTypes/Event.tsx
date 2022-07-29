@@ -3,12 +3,12 @@ import userImg from "../../../Utilities/icon/profile.png";
 const Event = () => {
   return (
     <div className="mr-10 ml-5">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col md:flex-row items-center justify-between">
         <div className="flex items-center gap-5">
           <img className="w-[70px] rounded-full" src={userImg} alt="" />
           <div>
-            <p>Sabbir Ahmed</p>
-            <p className="text-secondary">sabbirahmed1021</p>
+            <p>Admin name</p>
+            <p className="text-secondary">Admin user</p>
           </div>
         </div>
         <button className="mt-4 bg-primary py-2 px-4 rounded text-white hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer">
@@ -17,7 +17,7 @@ const Event = () => {
       </div>
       <div className=" divider"></div>
 
-      <div className="cart border rounded-2xl w-[350px] shadow hover:shadow-xl duration-300 cursor-pointer">
+      <div className="cart border rounded-2xl w-[320] md:w-[350px] shadow hover:shadow-xl duration-300 cursor-pointer">
         <div className="bg-blue-500 h-2 w-full rounded-t-2xl"></div>
         <div className="p-5">
           <h2 className="text-xl">Business Meeting</h2>
