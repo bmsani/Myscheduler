@@ -1,10 +1,11 @@
 import React, { useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { toast } from "react-toastify";
 import auth from "../../../init.firebase";
+import Loading from "../../../Shared/LoadingSpinner/Loading";
 import imgIcon from "../../../Utilities/icon/image.png";
 
 const Branding = () => {
-
   const [loading, setLoading] = useState(false);
   const [user] = useAuthState(auth);
   const getImg = useRef<HTMLInputElement | null>(null);
@@ -15,19 +16,45 @@ const Branding = () => {
     e.preventDefault();
     setLoading(true);
     const imgPath: any = getImg?.current?.files;
-    const formData = new FormData();
-    formData.append("image", imgPath[0]);
-    const url = `https://api.imgbb.com/1/upload?key=${imageStorageKey}`;
-    fetch(url, {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        const imageUrl = result.data.url;
-        console.log(imageUrl)
-        setLoading(false);
-      });
+    console.log(imgPath[0])
+    if (!imgPath[0]) {
+      return toast.error("Upload Your Logo");
+    } else {
+      const formData = new FormData();
+      formData.append("image", imgPath[0]);
+      const url = `https://api.imgbb.com/1/upload?key=${imageStorageKey}`;
+      fetch(url, {
+        method: "POST",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          const imageUrl = result.data.url;
+          const brandLogoLink = {
+            brandLogo: imageUrl,
+          };
+          fetch(`http://localhost:5000/brandLogo/${user?.email}`, {
+            method: "PUT",
+            headers: {
+              "content-type": "application/json",
+              authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+            body: JSON.stringify(brandLogoLink),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.acknowledged === true) {
+                toast.success("Brand Logo Added Successful");
+              } else {
+                toast.error("Brand Logo Added Failed");
+              }
+            });
+          setLoading(false);
+        });
+    }
+  };
+  if (loading) {
+    return <Loading></Loading>;
   }
   return (
     <div className="w-full max-w-sm lg:max-w-md mx-auto py-8">
