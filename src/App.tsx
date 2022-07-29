@@ -34,8 +34,6 @@ function App() {
         <Route path="login" element={<Login></Login>}></Route>
         <Route path="register" element={<Register></Register>}></Route>
 
-        <Route path="*" element={<NotFound></NotFound>}></Route>
-
         {/* *********** After login ********* */}
         <Route
           path="home"
@@ -76,6 +74,7 @@ function App() {
           path="/addCalender"
           element={<AddCalender></AddCalender>}
         ></Route>
+        <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>
       <ToastContainer />
     </div>
