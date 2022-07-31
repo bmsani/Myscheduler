@@ -58,7 +58,14 @@ function App() {
           <Route path="scheduling" element={<Scheduling />}></Route>
           <Route path="routingForms" element={<RoutingForms />}></Route>
         </Route>
-        <Route path="/availability" element={<Availability />}></Route>
+        <Route
+          path="/availability"
+          element={
+            <RequiredAuth>
+              <Availability />
+            </RequiredAuth>
+          }
+        ></Route>
         <Route
           path="/accountSettings"
           element={

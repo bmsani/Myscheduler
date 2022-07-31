@@ -222,7 +222,7 @@ const Navbar = () => {
               </div>
               <Link className="hidden lg:block text-end" to="/login">
                 <Button>
-                  <span className="px-0 lg:px-4">Login</span>
+                  <span className="px-0 lg:px-4 w-full">Login</span>
                 </Button>
               </Link>
             </div>
