@@ -11,12 +11,10 @@ import RequiredAuth from "./Shared/RequiredAuth/RequiredAuth";
 import About from "./Pages/About/About";
 import Profile from "./Pages/AccountSettings/Profile/Profile";
 import AccountSettings from "./Pages/AccountSettings/AccountSettings";
-import Branding from "./Pages/AccountSettings/Branding/Branding";
 import Dashboard from "./Pages/Dashboard/Dashboard";
-import Event from "./Pages/Event/Event";
 import Availability from "./Pages/Availability/Availability";
 import Workflow from "./Pages/Dashboard/Workflow/Workflow";
-import EventTypes from "./Pages/Dashboard/EventTypes/EventTypes";
+import EventTypes from "./Pages/Dashboard/EventTypes/Event";
 import Scheduling from "./Pages/Dashboard/Scheduling/Scheduling";
 import RoutingForms from "./Pages/Dashboard/RoutingForms/RoutingForms";
 import CalenderConnection from "./Pages/CalenderConnection/CalenderConnection";
@@ -24,20 +22,26 @@ import AddCalender from "./Pages/AddCalender/AddCalender";
 import ShareLink from "./Pages/ShareLink/ShareLink";
 import Navbar from "./Shared/Navbar/Navbar";
 import MyLink from "./Pages/AccountSettings/MyLink/MyLink";
+import Event from "./Pages/Dashboard/EventTypes/Event";
+import Branding from "./Pages/AccountSettings/Branding/Branding";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "./init.firebase";
 
 function App() {
+  const [user] = useAuthState(auth);
   return (
     <div>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home></Home>}></Route>
+        <Route
+          path="/"
+          element={user ? <Dashboard></Dashboard> : <Home></Home>}
+        ></Route>
         <Route path="/types" element={<Types></Types>}></Route>
         <Route path="/about" element={<About></About>}></Route>
         <Route path="/story" element={<Story></Story>}></Route>
         <Route path="login" element={<Login></Login>}></Route>
         <Route path="register" element={<Register></Register>}></Route>
-
-        <Route path="*" element={<NotFound></NotFound>}></Route>
 
         {/* *********** After login ********* */}
         <Route
@@ -54,7 +58,14 @@ function App() {
           <Route path="scheduling" element={<Scheduling />}></Route>
           <Route path="routingForms" element={<RoutingForms />}></Route>
         </Route>
-        <Route path="/availability" element={<Availability />}></Route>
+        <Route
+          path="/availability"
+          element={
+            <RequiredAuth>
+              <Availability />
+            </RequiredAuth>
+          }
+        ></Route>
         <Route
           path="/accountSettings"
           element={
@@ -67,13 +78,21 @@ function App() {
           <Route path="branding" element={<Branding />}></Route>
           <Route path="myLink" element={<MyLink />}></Route>
         </Route>
-        <Route path="/shareLink" element={<ShareLink></ShareLink>}></Route>
-        <Route path="/addCalender" element={<AddCalender></AddCalender>}></Route>
-        <Route path="profile" element={<Profile />}></Route>
         <Route
           path="/calenderConnection"
           element={<CalenderConnection></CalenderConnection>}
         ></Route>
+        <Route path="/shareLink" element={<ShareLink></ShareLink>}></Route>
+        <Route
+          path="/addCalender"
+          element={<AddCalender></AddCalender>}
+        ></Route>
+        <Route path="profile" element={<Profile />}></Route>
+        <Route
+          path="/addCalender"
+          element={<AddCalender></AddCalender>}
+        ></Route>
+        <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>
       <ToastContainer />
     </div>

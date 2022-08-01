@@ -5,7 +5,7 @@ import auth from "../../init.firebase";
 import Loading from "../LoadingSpinner/Loading";
 
 interface childrenProps {
-    children: JSX.Element;
+  children: JSX.Element;
 }
 
 const RequiredAuth = ({ children }: childrenProps) => {
@@ -17,7 +17,7 @@ const RequiredAuth = ({ children }: childrenProps) => {
   }
 
   if (!user) {
-    return <Navigate to="/login" state={{ from: location }} replace></Navigate>;
+    return <Navigate to="/" state={{ from: location }} replace></Navigate>;
   }
   return children;
 };

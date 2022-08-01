@@ -7,6 +7,7 @@ import auth from "../../init.firebase";
 import Button from "../Button/Button";
 import Loading from "../LoadingSpinner/Loading";
 import { HiMenu } from "react-icons/hi";
+import { BiDownArrow } from "react-icons/bi";
 import ShareLink from "../../Pages/ShareLink/ShareLink";
 
 const Navbar = () => {
@@ -36,6 +37,10 @@ const Navbar = () => {
   };
   window.addEventListener("scroll", changeNavbarColor);
 
+  const handleSignOut = () => {
+    localStorage.removeItem("accessToken");
+    signOut(auth);
+  };
   const items = (
     <>
       <li>
@@ -71,9 +76,9 @@ const Navbar = () => {
       {user ? (
         <div className="navbar bg-base-100 shadow-xl">
           <div className="container mx-auto">
-            <div className="flex-1">
+            <div className="flex-1 hidden md:block">
               <div className="w-3/4 lg:w-1/2 md:w-3/5 lg:justify-start justify-between">
-                <Link className="normal-case text-xl" to="/home">
+                <Link className="normal-case text-xl" to="/dashboard">
                   <span className="flex items-end lg:items-center">
                     <img className="w-10" src={Logo} alt="" />
                     <span className="font-bold text-secondary pl-4 hidden lg:block">
@@ -86,65 +91,78 @@ const Navbar = () => {
             <div className="flex-none">
               <ul className="menu menu-horizontal p-0">
                 <li>
-                  <label
-                    htmlFor="my-drawer-2"
-                    className="bg-transparent drawer-button lg:hidden"
-                  >
-                    <HiMenu />
-                  </label>
+                  {pathname === "/dashboard" ||
+                    pathname === "/dashboard/scheduling" ||
+                    pathname === "/dashboard/workflow" ||
+                    pathname === "/dashboard/routingForms" ? (
+                    <label
+                      htmlFor="my-drawer-2"
+                      className="bg-transparent drawer-button lg:hidden"
+                    >
+                      <HiMenu className="text-2xl" />
+                    </label>
+                  ) : (
+                    <label
+                      htmlFor="my-drawer-2"
+                      className="bg-transparent drawer-button hidden"
+                    >
+                      <HiMenu className="text-2xl" />
+                    </label>
+                  )}
                 </li>
                 <li>
-                  <Link to="/home">Home</Link>
+                  <Link className="px-1 md:px-4" to="/dashboard">
+                    Dashboard
+                  </Link>
                 </li>
                 <li>
-                  <Link to="/availability">Availability</Link>
+                  <Link className="px-1 md:px-4" to="/availability">
+                    Availability
+                  </Link>
                 </li>
                 <li>
-                  <div className="w-16 rounded-full ">
-                    <img
-                      src={
-                        user.photoURL ||
-                        ("https://findicons.com/files/icons/1024/dress_it_profession/128/assassin_avatar.png" as string)
-                      }
-                      className="rounded-full"
-                      alt=""
-                    />
+                  <div className="dropdown dropdown-end">
+                    <label
+                      tabIndex={0}
+                      className=" cursor-pointer flex justify-center items-center gap-2"
+                    >
+                      <BiDownArrow />
+                      <div className="w-8 rounded-full ">
+                        <img
+                          src={
+                            user.photoURL ||
+                            ("https://findicons.com/files/icons/1024/dress_it_profession/128/assassin_avatar.png" as string)
+                          }
+                          className="rounded-full border-2 border-secondary"
+                          alt=""
+                        />
+                      </div>
+                    </label>
+                    <ul
+                      tabIndex={0}
+                      className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 mt-40"
+                    >
+                      <li>
+                        <Link to="/accountSettings/profile">
+                          Account setting
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/calenderConnection">
+                          Calender Connections
+                        </Link>
+                      </li>
+                      <li>
+                        <label htmlFor="my-modal-6" className="">
+                          Share Your Link
+                        </label>
+                      </li>
+                      <li>
+                        <button onClick={handleSignOut}>Logout</button>
+                      </li>
+                    </ul>
                   </div>
                 </li>
-                <div className="dropdown dropdown-end">
-                  <label tabIndex={0} className="btn m-1">
-                    Account
-                  </label>
-                  <ul
-                    tabIndex={0}
-                    className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
-                  >
-                    <li>
-                      <Link className="w-full" to="/profile">
-                        Account setting
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="/calenderConnection">Calender Connections</Link>
-
-                    </li>
-
-                    {
-
-                    }
-
-                    <li>
-                   
-                      <label htmlFor="my-modal-6" className="">Share Your Link</label>
-                    </li>
-                    <li>
-                      <button onClick={() => signOut(auth)}>Logout</button>
-                      <button className="w-full" onClick={() => signOut(auth)}>
-                        Logout
-                      </button>
-                    </li>
-                  </ul>
-                </div>
               </ul>
             </div>
           </div>
@@ -204,7 +222,7 @@ const Navbar = () => {
               </div>
               <Link className="hidden lg:block text-end" to="/login">
                 <Button>
-                  <span className="px-0 lg:px-4">Login</span>
+                  <span className="px-0 lg:px-4 w-full">Login</span>
                 </Button>
               </Link>
             </div>

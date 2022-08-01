@@ -40,7 +40,7 @@ const Login: React.FC = () => {
   const location = useLocation();
   const [token] = useToken(user || GUser || FUser);
 
-  let from = (location.state as LocationState)?.from?.pathname || "/home";
+  let from = (location.state as LocationState)?.from?.pathname || "/dashboard";
 
   if (loading || GLoading || FLoading) {
     return <Loading></Loading>;

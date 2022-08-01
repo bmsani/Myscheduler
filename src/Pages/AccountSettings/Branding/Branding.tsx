@@ -1,28 +1,104 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { toast } from "react-toastify";
 import auth from "../../../init.firebase";
+import Loading from "../../../Shared/LoadingSpinner/Loading";
 import imgIcon from "../../../Utilities/icon/image.png";
 
+interface userInfoType {
+    brandLogo: string;
+}
+
 const Branding = () => {
+  const [loading, setLoading] = useState(false);
+  const [userInfo, setUserInfo] = useState({
+    brandLogo: "",
+  });
   const [user] = useAuthState(auth);
+  const getImg = useRef<HTMLInputElement | null>(null);
+
+  const imageStorageKey = "8c4220582d4b8f04cc8ea7c8298a1449";
+
+  useEffect(() => {
+    const url = `http://localhost:5000/user/${user?.email}`;
+    fetch(url, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setUserInfo(data)
+      });
+  }, [user]);
+
+  const handleImgUpload = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    const imgPath: any = getImg?.current?.files;
+    console.log(imgPath[0])
+    if (!imgPath[0]) {
+      return toast.error("Upload Your Logo");
+    } else {
+      const formData = new FormData();
+      formData.append("image", imgPath[0]);
+      const url = `https://api.imgbb.com/1/upload?key=${imageStorageKey}`;
+      fetch(url, {
+        method: "POST",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          const imageUrl = result.data.url;
+          const brandLogoLink = {
+            brandLogo: imageUrl,
+          };
+          fetch(`http://localhost:5000/brandLogo/${user?.email}`, {
+            method: "PUT",
+            headers: {
+              "content-type": "application/json",
+              authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+            body: JSON.stringify(brandLogoLink),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.acknowledged === true) {
+                toast.success("Brand Logo Added Successful");
+              } else {
+                toast.error("Brand Logo Added Failed");
+              }
+            });
+          setLoading(false);
+        });
+    }
+  };
+  if (loading) {
+    return <Loading></Loading>;
+  }
   return (
     <div className="w-full max-w-sm lg:max-w-md mx-auto py-8">
       <h1 className="text-2xl text-gray-600 mb-2">Logo</h1>
       <div className="w-full h-[200px] border border-gray-400 rounded">
-        {user ? (
+        {userInfo.brandLogo ? (
           <div className="h-full flex items-center justify-center">
-            <img className="w-32" src={imgIcon} alt="" />
+            <img className="w-32" src={userInfo.brandLogo} alt="" />
           </div>
         ) : (
           <div className="h-full flex items-center justify-center">
-            <p className="text-4xl text-gray-600">No Logo</p>
+            <img className="w-32" src={imgIcon} alt="" />
           </div>
         )}
       </div>
 
-      <div className="flex justify-between items-center mt-6">
+      <form
+        onSubmit={(e) => handleImgUpload(e)}
+        className="flex justify-between items-center mt-6"
+      >
         <div>
-          <input type="file" name="image" id="image" hidden />
+          <input ref={getImg} type="file" name="image" id="image" hidden />
           <label
             className="flex items-center gap-3 border border-gray-500 py-2 px-4 rounded text-gray-500 hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer"
             htmlFor="image"
@@ -42,11 +118,12 @@ const Branding = () => {
             Upload Image
           </label>
         </div>
-
-        <button className="bg-primary py-2 px-4 rounded text-white hover:shadow-md hover:shadow-secondary duration-300 cursor-pointer">
-          Save Change
-        </button>
-      </div>
+        <input
+          type="submit"
+          value="Save Change"
+          className="bg-primary py-2 px-4 rounded text-white hover:shadow-md hover:shadow-secondary duration-300 cursor-pointer"
+        />
+      </form>
     </div>
   );
 };
