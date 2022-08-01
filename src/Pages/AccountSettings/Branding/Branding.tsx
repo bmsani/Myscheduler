@@ -4,7 +4,6 @@ import auth from "../../../init.firebase";
 import imgIcon from "../../../Utilities/icon/image.png";
 
 const Branding = () => {
-
   const [loading, setLoading] = useState(false);
   const [user] = useAuthState(auth);
   const getImg = useRef<HTMLInputElement | null>(null);
@@ -25,10 +24,10 @@ const Branding = () => {
       .then((res) => res.json())
       .then((result) => {
         const imageUrl = result.data.url;
-        console.log(imageUrl)
+        console.log(imageUrl);
         setLoading(false);
       });
-  }
+  };
   return (
     <div className="w-full max-w-sm lg:max-w-md mx-auto py-8">
       <h1 className="text-2xl text-gray-600 mb-2">Logo</h1>

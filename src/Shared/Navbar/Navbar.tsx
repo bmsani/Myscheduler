@@ -56,7 +56,7 @@ const Navbar = () => {
         <Link to="/about">About Us</Link>
       </li>
       <li>
-        <Link to="/">Contact</Link>
+        <Link to="/blogs">Blogs</Link>
       </li>
       <li>
         <Link to="/">Admin</Link>
@@ -78,7 +78,7 @@ const Navbar = () => {
           <div className="container mx-auto">
             <div className="flex-1 hidden md:block">
               <div className="w-3/4 lg:w-1/2 md:w-3/5 lg:justify-start justify-between">
-                <Link className="normal-case text-xl" to="/home">
+                <Link className="normal-case text-xl" to="/dashboard">
                   <span className="flex items-end lg:items-center">
                     <img className="w-10" src={Logo} alt="" />
                     <span className="font-bold text-secondary pl-4 hidden lg:block">
