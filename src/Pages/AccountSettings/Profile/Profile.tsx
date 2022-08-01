@@ -2,12 +2,14 @@ import React, { FormEvent, useEffect, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import auth from "../../../init.firebase";
+import Loading from "../../../Shared/LoadingSpinner/Loading";
 import profileImg from "../../../Utilities/icon/profile.png";
 
 const Profile = () => {
   const [user] = useAuthState(auth);
 
   const [userInfo, setUserInfo] = useState({
+    _id: "",
     name: "",
     message: "",
     mobile: "",
@@ -51,7 +53,6 @@ const Profile = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.acknowledged === true) {
           toast.success("Profile successfully updated");
         } else {
@@ -59,6 +60,13 @@ const Profile = () => {
         }
       });
   };
+
+  // console.log("User form firebase", user?.displayName);
+  console.log("User form Database", userInfo);
+
+  if (!userInfo._id) {
+    return <Loading />;
+  }
 
   return (
     <div className="flex justify-center items-center py-8">

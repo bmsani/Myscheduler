@@ -6,7 +6,7 @@ import Loading from "../../../Shared/LoadingSpinner/Loading";
 import imgIcon from "../../../Utilities/icon/image.png";
 
 interface userInfoType {
-    brandLogo: string;
+  brandLogo: string;
 }
 
 const Branding = () => {
@@ -30,7 +30,7 @@ const Branding = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        setUserInfo(data)
+        setUserInfo(data);
       });
   }, [user]);
 
@@ -38,7 +38,7 @@ const Branding = () => {
     e.preventDefault();
     setLoading(true);
     const imgPath: any = getImg?.current?.files;
-    console.log(imgPath[0])
+    console.log(imgPath[0]);
     if (!imgPath[0]) {
       return toast.error("Upload Your Logo");
     } else {
