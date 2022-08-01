@@ -1,0 +1,65 @@
+[
+  {
+    "day": "Saturday",
+    "name": "No appointment",
+    "meeting": [
+      {
+        "time": "00"
+      }
+    ]
+  },
+  {
+    "day": "Sunday",
+    "name": "No appointment",
+    "meeting": [
+      {
+        "time": "00"
+      }
+    ]
+  },
+  {
+    "day": "Monday",
+    "name": "No appointment",
+    "meeting": [
+      {
+        "time": "00"
+      }
+    ]
+  },
+  {
+    "day": "Tuesday",
+    "name": "No appointment",
+    "meeting": [
+      {
+        "time": "00"
+      }
+    ]
+  },
+  {
+    "day": "Wednesday",
+    "name": "No appointment",
+    "meeting": [
+      {
+        "time": "00"
+      }
+    ]
+  },
+  {
+    "day": "Thursday",
+    "name": "No appointment",
+    "meeting": [
+      {
+        "time": "00"
+      }
+    ]
+  },
+  {
+    "day": "Friday",
+    "name": "No appointment",
+    "meeting": [
+      {
+        "time": "00"
+      }
+    ]
+  }
+]
