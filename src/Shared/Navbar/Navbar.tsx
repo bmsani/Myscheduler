@@ -92,9 +92,9 @@ const Navbar = () => {
               <ul className="menu menu-horizontal p-0">
                 <li>
                   {pathname === "/dashboard" ||
-                  pathname === "/dashboard/scheduling" ||
-                  pathname === "/dashboard/workflow" ||
-                  pathname === "/dashboard/routingForms" ? (
+                    pathname === "/dashboard/scheduling" ||
+                    pathname === "/dashboard/workflow" ||
+                    pathname === "/dashboard/routingForms" ? (
                     <label
                       htmlFor="my-drawer-2"
                       className="bg-transparent drawer-button lg:hidden"
