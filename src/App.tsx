@@ -24,6 +24,7 @@ import Navbar from "./Shared/Navbar/Navbar";
 import MyLink from "./Pages/AccountSettings/MyLink/MyLink";
 import Event from "./Pages/Dashboard/EventTypes/Event";
 import Branding from "./Pages/AccountSettings/Branding/Branding";
+import Blogs from "./Pages/Blogs/Blogs";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "./init.firebase";
 
@@ -38,8 +39,10 @@ function App() {
           element={user ? <Dashboard></Dashboard> : <Home></Home>}
         ></Route>
         <Route path="/types" element={<Types></Types>}></Route>
-        <Route path="/about" element={<About></About>}></Route>
         <Route path="/story" element={<Story></Story>}></Route>
+        <Route path="/about" element={<About></About>}></Route>
+        <Route path="/blogs" element={<Blogs></Blogs>}></Route>
+
         <Route path="login" element={<Login></Login>}></Route>
         <Route path="register" element={<Register></Register>}></Route>
 
