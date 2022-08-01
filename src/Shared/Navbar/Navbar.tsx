@@ -148,6 +148,16 @@ const Navbar = () => {
                         </Link>
                       </li>
                       <li>
+                        <Link to="/calenderConnection">
+                          Calender Connections
+                        </Link>
+                      </li>
+                      <li>
+                        <label htmlFor="my-modal-6" className="">
+                          Share Your Link
+                        </label>
+                      </li>
+                      <li>
                         <button onClick={handleSignOut}>Logout</button>
                       </li>
                     </ul>
@@ -212,7 +222,7 @@ const Navbar = () => {
               </div>
               <Link className="hidden lg:block text-end" to="/login">
                 <Button>
-                  <span className="px-0 lg:px-4">Login</span>
+                  <span className="px-0 lg:px-4 w-full">Login</span>
                 </Button>
               </Link>
             </div>

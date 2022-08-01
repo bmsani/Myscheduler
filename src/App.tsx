@@ -25,13 +25,19 @@ import MyLink from "./Pages/AccountSettings/MyLink/MyLink";
 import Event from "./Pages/Dashboard/EventTypes/Event";
 import Branding from "./Pages/AccountSettings/Branding/Branding";
 import Blogs from "./Pages/Blogs/Blogs";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "./init.firebase";
 
 function App() {
+  const [user] = useAuthState(auth);
   return (
     <div>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home></Home>}></Route>
+        <Route
+          path="/"
+          element={user ? <Dashboard></Dashboard> : <Home></Home>}
+        ></Route>
         <Route path="/types" element={<Types></Types>}></Route>
         <Route path="/story" element={<Story></Story>}></Route>
         <Route path="/about" element={<About></About>}></Route>
@@ -55,7 +61,14 @@ function App() {
           <Route path="scheduling" element={<Scheduling />}></Route>
           <Route path="routingForms" element={<RoutingForms />}></Route>
         </Route>
-        <Route path="/availability" element={<Availability />}></Route>
+        <Route
+          path="/availability"
+          element={
+            <RequiredAuth>
+              <Availability />
+            </RequiredAuth>
+          }
+        ></Route>
         <Route
           path="/accountSettings"
           element={
@@ -68,16 +81,16 @@ function App() {
           <Route path="branding" element={<Branding />}></Route>
           <Route path="myLink" element={<MyLink />}></Route>
         </Route>
+        <Route
+          path="/calenderConnection"
+          element={<CalenderConnection></CalenderConnection>}
+        ></Route>
         <Route path="/shareLink" element={<ShareLink></ShareLink>}></Route>
         <Route
           path="/addCalender"
           element={<AddCalender></AddCalender>}
         ></Route>
         <Route path="profile" element={<Profile />}></Route>
-        <Route
-          path="/calenderConnection"
-          element={<CalenderConnection></CalenderConnection>}
-        ></Route>
         <Route
           path="/addCalender"
           element={<AddCalender></AddCalender>}
