@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import userImg from "../../../Utilities/icon/profile.png";
 const Event = () => {
   return (
@@ -8,7 +9,8 @@ const Event = () => {
           <img className="w-[70px] rounded-full" src={userImg} alt="" />
           <div>
             <p>Admin name</p>
-            <p className="text-secondary">Admin user</p>
+            {/* <p className="text-secondary">Admin user</p> */}
+            <Link to="/eventBooking"><p className="text-secondary">Link Here</p></Link>
           </div>
         </div>
         <button className="mt-4 bg-primary py-2 px-4 rounded text-white hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer">
