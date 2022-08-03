@@ -84,7 +84,7 @@ const Branding = () => {
       <div className="w-full h-[200px] border border-gray-400 rounded">
         {userInfo.brandLogo ? (
           <div className="h-full flex items-center justify-center">
-            <img className="w-32" src={userInfo.brandLogo} alt="" />
+            <img className="w-[350px]" src={userInfo?.brandLogo} alt="" />
           </div>
         ) : (
           <div className="h-full flex items-center justify-center">
