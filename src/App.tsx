@@ -27,6 +27,8 @@ import Branding from "./Pages/AccountSettings/Branding/Branding";
 import Blogs from "./Pages/Blogs/Blogs";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "./init.firebase";
+import EventBooking from "./Pages/EventBooking/EventBooking";
+import BookingCalender from "./Pages/EventBooking/BookingCalender";
 
 function App() {
   const [user] = useAuthState(auth);
@@ -43,6 +45,9 @@ function App() {
         <Route path="/about" element={<About></About>}></Route>
         <Route path="/blogs" element={<Blogs></Blogs>}></Route>
 
+        <Route path="/eventBooking" element={<EventBooking></EventBooking>}></Route>
+        <Route path="/bookingCalender" element={<BookingCalender></BookingCalender>}></Route>
+
         <Route path="login" element={<Login></Login>}></Route>
         <Route path="register" element={<Register></Register>}></Route>
 
@@ -55,7 +60,7 @@ function App() {
             </RequiredAuth>
           }
         >
-          <Route index element={<Event />}></Route>
+          <Route index element={<Event></Event>}></Route>
           <Route path="workflow" element={<Workflow />}></Route>
           <Route path="eventTypes" element={<EventTypes />}></Route>
           <Route path="scheduling" element={<Scheduling />}></Route>
