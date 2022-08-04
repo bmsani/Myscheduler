@@ -21,6 +21,104 @@ const useToken = (user: any) => {
         });
     }
   }, [user]);
+
+  useEffect(() => {
+    const email = user?.user?.email;
+    const userAvailability = {
+      email: email,
+      dayData: [
+        {
+          id: "1",
+          day: "Saturday",
+          start: "09:00 am",
+          end: "05:00 pm",
+          interval: {
+            starting: "01:00 pm",
+            ending: "02:00 pm",
+          },
+          checked: false,
+        },
+        {
+          id: "2",
+          day: "Sunday",
+          start: "09:00",
+          end: "05:00",
+          interval: {
+            starting: "01:00 pm",
+            ending: "02:00 pm",
+          },
+          checked: false,
+        },
+        {
+          id: "3",
+          day: "Monday",
+          start: "09:00",
+          end: "05:00",
+          interval: {
+            starting: "01:00 pm",
+            ending: "02:00 pm",
+          },
+          checked: true,
+        },
+        {
+          id: "4",
+          day: "Tuesday",
+          start: "09:00",
+          end: "05:00",
+          interval: {
+            starting: "01:00 pm",
+            ending: "02:00 pm",
+          },
+          checked: true,
+        },
+        {
+          id: "5",
+          day: "Wednesday",
+          start: "09:00",
+          end: "05:00",
+          interval: {
+            starting: "01:00 pm",
+            ending: "02:00 pm",
+          },
+          checked: true,
+        },
+        {
+          id: "6",
+          day: "Thursday",
+          start: "09:00",
+          end: "05:00",
+          interval: {
+            starting: "01:00 pm",
+            ending: "02:00 pm",
+          },
+          checked: true,
+        },
+        {
+          id: "7",
+          day: "Friday",
+          start: "09:00",
+          end: "05:00",
+          interval: {
+            starting: "01:00 pm",
+            ending: "02:00 pm",
+          },
+          checked: true,
+        },
+      ],
+    };
+    if (email) {
+      fetch(`http://localhost:5000/userAvailability/${email}`, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(userAvailability),
+      })
+        .then((res) => res.json())
+        .then((data) => console.log(data));
+    }
+  }, [user]);
+
   return [token];
 };
 

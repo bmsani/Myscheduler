@@ -62,6 +62,7 @@ function App() {
           path="/availability"
           element={
             <RequiredAuth>
+              {/* <Demo /> */}
               <Availability />
             </RequiredAuth>
           }
