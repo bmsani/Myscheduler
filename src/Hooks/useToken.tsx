@@ -41,8 +41,8 @@ const useToken = (user: any) => {
         {
           id: "2",
           day: "Sunday",
-          start: "09:00",
-          end: "05:00",
+          start: "09:00 am",
+          end: "05:00 pm",
           interval: {
             starting: "01:00 pm",
             ending: "02:00 pm",
@@ -52,8 +52,8 @@ const useToken = (user: any) => {
         {
           id: "3",
           day: "Monday",
-          start: "09:00",
-          end: "05:00",
+          start: "09:00 am",
+          end: "05:00 pm",
           interval: {
             starting: "01:00 pm",
             ending: "02:00 pm",
@@ -63,8 +63,8 @@ const useToken = (user: any) => {
         {
           id: "4",
           day: "Tuesday",
-          start: "09:00",
-          end: "05:00",
+          start: "09:00 am",
+          end: "05:00 pm",
           interval: {
             starting: "01:00 pm",
             ending: "02:00 pm",
@@ -74,8 +74,8 @@ const useToken = (user: any) => {
         {
           id: "5",
           day: "Wednesday",
-          start: "09:00",
-          end: "05:00",
+          start: "09:00 am",
+          end: "05:00 pm",
           interval: {
             starting: "01:00 pm",
             ending: "02:00 pm",
@@ -85,8 +85,8 @@ const useToken = (user: any) => {
         {
           id: "6",
           day: "Thursday",
-          start: "09:00",
-          end: "05:00",
+          start: "09:00 am",
+          end: "05:00 pm",
           interval: {
             starting: "01:00 pm",
             ending: "02:00 pm",
@@ -96,8 +96,8 @@ const useToken = (user: any) => {
         {
           id: "7",
           day: "Friday",
-          start: "09:00",
-          end: "05:00",
+          start: "09:00 am",
+          end: "05:00 pm",
           interval: {
             starting: "01:00 pm",
             ending: "02:00 pm",
