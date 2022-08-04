@@ -1,6 +1,13 @@
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { Link } from "react-router-dom";
+import auth from "../../../init.firebase";
 import userImg from "../../../Utilities/icon/profile.png";
 const Event = () => {
+  const [user] = useAuthState(auth);
+
+  const link = user?.email;
+
   return (
     <div className="mr-10 ml-5">
       <div className="flex flex-col md:flex-row items-center justify-between">
@@ -8,7 +15,10 @@ const Event = () => {
           <img className="w-[70px] rounded-full" src={userImg} alt="" />
           <div>
             <p>Admin name</p>
-            <p className="text-secondary">Admin user</p>
+            {/* <p className="text-secondary">Admin user</p> */}
+            <Link to="/eventBooking">
+              <p className="text-secondary">{link?.split("@")[0]}</p>
+            </Link>
           </div>
         </div>
         <button className="mt-4 bg-primary py-2 px-4 rounded text-white hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer">
