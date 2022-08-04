@@ -32,7 +32,7 @@ const Branding = () => {
       .then((data) => {
         setUserInfo(data);
       });
-  }, [user]);
+  }, [user, userInfo]);
 
   const handleImgUpload = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
