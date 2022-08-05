@@ -11,13 +11,15 @@ const CalendarEvent = () => {
     const summary = getSummary?.current?.value;
     const description = getDescription?.current?.value;
     const email = getEmail?.current?.value;
-    const startTime = getStartTime?.current?.value;
-    const endTime = getEndTime?.current?.value;
-    console.log(summary, description, email, startTime, endTime);
+    const startDateTime = getStartTime?.current?.value;
+    const endDateTime = getEndTime?.current?.value;
+    console.log(summary, description, email, startDateTime, endDateTime);
   };
   return (
     <div className="pt-8 pb-16">
-        <h1 className="text-3xl font-semibold text-center text-secondary py-4">Create Your Event</h1>
+      <h1 className="text-3xl font-semibold text-center text-secondary py-4">
+        Create Your Event
+      </h1>
       <div className="flex justify-center items-center">
         <form
           onSubmit={handleProfile}
