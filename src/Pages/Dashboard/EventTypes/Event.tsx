@@ -9,7 +9,7 @@ const Event = () => {
   const link = user?.email;
 
   return (
-    <div className="mr-10 ml-5">
+    <div className="mr-10 ml-5 pt-12">
       <div className="flex flex-col md:flex-row items-center justify-between">
         <div className="flex items-center gap-5">
           <img className="w-[70px] rounded-full" src={userImg} alt="" />
@@ -21,9 +21,9 @@ const Event = () => {
             </Link>
           </div>
         </div>
-        <button className="mt-4 bg-primary py-2 px-4 rounded text-white hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer">
+        <Link to="/calendarEvent" className="mt-4 bg-primary py-2 px-4 rounded text-white hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer">
           + New Event
-        </button>
+        </Link>
       </div>
       <div className=" divider"></div>
 
