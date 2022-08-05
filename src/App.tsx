@@ -30,6 +30,7 @@ import auth from "./init.firebase";
 import BlogDetails from "./Pages/Blogs/BlogDetails";
 import EventBooking from "./Pages/EventBooking/EventBooking";
 import BookingCalender from "./Pages/EventBooking/BookingCalender";
+import CalendarEvent from "./Pages/Dashboard/EventTypes/CreateCalendarEvent/CalendarEvent";
 
 function App() {
   const [user] = useAuthState(auth);
@@ -77,6 +78,10 @@ function App() {
           <Route path="scheduling" element={<Scheduling />}></Route>
           <Route path="routingForms" element={<RoutingForms />}></Route>
         </Route>
+        <Route
+          path="calendarEvent"
+          element={<CalendarEvent></CalendarEvent>}
+        ></Route>
         <Route
           path="/availability"
           element={
