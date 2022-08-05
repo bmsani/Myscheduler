@@ -2,11 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { BiMessageSquareAdd, BiEdit } from "react-icons/bi";
-import { RiDeleteBin2Line } from "react-icons/ri";
 import auth from "../../init.firebase";
 import Loading from "../../Shared/LoadingSpinner/Loading";
 import AvailabilityAdd from "./AvailabilityAdd/AvailabilityAdd";
-import AvailabilityDelete from "./AvailabilityDelete/AvailabilityDelete";
 import AvailabilityEdit from "./AvailabilityEdit/AvailabilityEdit";
 
 type UserDays = {
@@ -25,7 +23,6 @@ type UserDays = {
 const Availability = () => {
   const [user, loading] = useAuthState(auth);
   const [singleDay, setSingleDay] = useState({});
-  const [checked, SetChecked] = useState(false);
 
   const email = user?.email;
 
@@ -41,9 +38,7 @@ const Availability = () => {
 
   const handleCheckedBox = (id: string, checkedBox: boolean) => {
     const daysId = days._id;
-    SetChecked(!checked);
     const individualId = id;
-    console.log(daysId, individualId, checkedBox);
     fetch(
       `http://localhost:5000/availability/checked/${daysId}?dayStatus=${!checkedBox}&dayDataId=${individualId}&email=${email}`,
       {
@@ -56,7 +51,6 @@ const Availability = () => {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.modifiedCount) {
           refetch();
         }
@@ -67,47 +61,18 @@ const Availability = () => {
     return <Loading></Loading>;
   }
 
-  // const handleUnchecked = (singleDay: UserDays) => {
-  //   const dataId = days._id;
-  //   const { id, day, start, end, checked, interval } = singleDay;
-  //   const newDay = {
-  //     id: id,
-  //     day: day,
-  //     start: start,
-  //     end: end,
-  //     checked: !checked,
-  //     interval: interval,
-  //   };
-  //   fetch(`http://localhost:5000/availability/checked/${id}`, {
-  //     method: "PUT",
-  //     headers: {
-  //       "content-type": "application/json",
-  //       authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-  //     },
-  //     body: JSON.stringify({ newDay, dataId }),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       if (data.acknowledged === true) {
-  //         refetch();
-  //       }
-  //     });
-  // };
-
   const handleAdd = async (daysId: string, dayId: string) => {
     const response = await fetch(
       `http://localhost:5000/availability/${daysId}/${dayId}`
     );
     const data = await response.json();
     setSingleDay(data);
-    console.log(data);
   };
 
-  const handleEdit = (day: string) => {
-    // setDay(day);
-  };
-  const handleDelete = (day: string) => {
-    // setDay(day);
+  const handleEdit = async (daysId: string, dayId: string) => {
+    fetch(`http://localhost:5000/availability/${daysId}/${dayId}`)
+      .then((res) => res.json())
+      .then((data) => setSingleDay(data));
   };
 
   return (
@@ -128,7 +93,6 @@ const Availability = () => {
                     <th>
                       <label>
                         <input
-                          // onClick={() => handleUnchecked(day)}
                           type="checkbox"
                           checked={day?.checked}
                           className="checkbox"
@@ -151,30 +115,25 @@ const Availability = () => {
                       </div>
                     </td>
                     <td>
-                      <label htmlFor="addModal">
+                      <label htmlFor="add-modal">
                         <BiMessageSquareAdd
                           onClick={() => handleAdd(days._id, day.id)}
                           className="text-5xl p-3 cursor-pointer"
                         />
-                        <AvailabilityAdd singleDay={singleDay} />
+                        <AvailabilityAdd />
                       </label>
                     </td>
                     <td>
-                      <label htmlFor="editModal">
+                      <label htmlFor="edit-modal">
                         <BiEdit
                           className="text-5xl p-3 cursor-pointer"
-                          onClick={() => handleEdit(day.id)}
+                          onClick={() => handleEdit(days._id, day.id)}
                         />
-                        <AvailabilityEdit day={day} />
-                      </label>
-                    </td>
-                    <td>
-                      <label htmlFor="deleteModal">
-                        <RiDeleteBin2Line
-                          className="text-5xl p-3 cursor-pointer"
-                          onClick={() => handleDelete(day.id)}
+                        <AvailabilityEdit
+                          singleDay={singleDay}
+                          days={days._id}
+                          refetch={refetch}
                         />
-                        <AvailabilityDelete day={day} />
                       </label>
                     </td>
                   </tr>
