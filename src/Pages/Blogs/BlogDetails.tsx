@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Loading from "../../Shared/LoadingSpinner/Loading";
-import blog2 from "../../Utilities/Image/blog2.jpg";
 
 const BlogDetails = () => {
   const { id } = useParams();
@@ -10,6 +9,7 @@ const BlogDetails = () => {
     article: "",
     author: "",
     authorImg: "",
+    blogImg: "",
   });
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const BlogDetails = () => {
       .then((data) => setBlog(data));
   }, []);
 
-  const { title, article, author, authorImg } = blog;
+  const { title, article, author, authorImg, blogImg } = blog;
   if (!title) {
     return <Loading />;
   }
@@ -46,7 +46,7 @@ const BlogDetails = () => {
             </p>
           </div>
         </div>
-        <img className="rounded-lg my-5" src={blog2} alt="" />
+        <img className="rounded-lg my-5" src={blogImg} alt="" />
         <p>{article}</p>
       </div>
     </div>
