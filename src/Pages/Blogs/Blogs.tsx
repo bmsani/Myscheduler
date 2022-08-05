@@ -9,6 +9,7 @@ type blogInfo = {
   article: string;
   author: string;
   authorImg: string;
+  blogImg: string;
 };
 const Blogs = () => {
   const [blogs, setBlogs] = useState<blogInfo[]>([]);

@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import blog2 from "../../Utilities/Image/blog2.jpg";
 type blogInfo = {
   blog: {
     _id: string;
@@ -8,11 +7,12 @@ type blogInfo = {
     article: string;
     author: string;
     authorImg: string;
+    blogImg: string;
   };
   index: number;
 };
 const BlogCart = ({ blog, index }: blogInfo) => {
-  const { _id, title, article, author, authorImg } = blog;
+  const { _id, title, article, author, authorImg, blogImg } = blog;
   const navigate = useNavigate();
   const handleBlogDetails = (id: string) => {
     navigate(`/blogDetails/${id}`);
@@ -26,7 +26,7 @@ const BlogCart = ({ blog, index }: blogInfo) => {
           : "border border-primary rounded-lg cursor-pointer hover:shadow-primary hover:shadow-md duration-300"
       }
     >
-      <img src={blog2} className="w-full rounded-t-lg" alt="" />
+      <img src={blogImg} className="h-[250px] w-full rounded-t-lg" alt="" />
       <div className="p-5">
         <p className="font-bold text-3xl text-secondary" aria-label="Article">
           {title}
