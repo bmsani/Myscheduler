@@ -120,7 +120,11 @@ const Availability = () => {
                           onClick={() => handleAdd(days._id, day.id)}
                           className="text-5xl p-3 cursor-pointer"
                         />
-                        <AvailabilityAdd />
+                        <AvailabilityAdd
+                          singleDay={singleDay}
+                          days={days._id}
+                          refetch={refetch}
+                        />
                       </label>
                     </td>
                     <td>
