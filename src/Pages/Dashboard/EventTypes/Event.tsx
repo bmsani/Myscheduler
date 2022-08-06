@@ -3,16 +3,12 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import auth from "../../../init.firebase";
 import userImg from "../../../Utilities/icon/profile.png";
+import { AiOutlinePlus } from "react-icons/ai";
+
 const Event = () => {
   const [user] = useAuthState(auth);
 
   const link = user?.email;
-
-  const handleCreateEvent = () =>{
-    const url =
-      "http://localhost:3001/";
-    window.open(url, "_blank");
-  }
 
   return (
     <div className="mr-10 ml-5 pt-12">
@@ -27,9 +23,15 @@ const Event = () => {
             </Link>
           </div>
         </div>
-        <button onClick={handleCreateEvent} className="mt-4 bg-primary py-2 px-4 rounded text-white hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer">
-          + New Event
-        </button>
+        <Link
+          to="/calendarEvent"
+          className="mt-4 bg-primary py-2 px-4 rounded text-white hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer"
+        >
+          <span className="flex justify-center items-center gap-2">
+            <AiOutlinePlus />
+            New Event
+          </span>
+        </Link>
       </div>
       <div className=" divider"></div>
 

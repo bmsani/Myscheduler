@@ -80,7 +80,11 @@ function App() {
         </Route>
         <Route
           path="calendarEvent"
-          element={<CalendarEvent></CalendarEvent>}
+          element={
+            <RequiredAuth>
+              <CalendarEvent></CalendarEvent>
+            </RequiredAuth>
+          }
         ></Route>
         <Route
           path="/availability"
@@ -105,17 +109,35 @@ function App() {
         </Route>
         <Route
           path="/calenderConnection"
-          element={<CalenderConnection></CalenderConnection>}
+          element={
+            <RequiredAuth>
+              <CalenderConnection />
+            </RequiredAuth>
+          }
         ></Route>
-        <Route path="/shareLink" element={<ShareLink></ShareLink>}></Route>
+        <Route
+          path="/shareLink"
+          element={
+            <RequiredAuth>
+              <ShareLink />
+            </RequiredAuth>
+          }
+        ></Route>
         <Route
           path="/addCalender"
-          element={<AddCalender></AddCalender>}
+          element={
+            <RequiredAuth>
+              <AddCalender />
+            </RequiredAuth>
+          }
         ></Route>
-        <Route path="profile" element={<Profile />}></Route>
         <Route
-          path="/addCalender"
-          element={<AddCalender></AddCalender>}
+          path="profile"
+          element={
+            <RequiredAuth>
+              <Profile />
+            </RequiredAuth>
+          }
         ></Route>
         <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>
