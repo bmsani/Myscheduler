@@ -27,8 +27,10 @@ import Branding from "./Pages/AccountSettings/Branding/Branding";
 import Blogs from "./Pages/Blogs/Blogs";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "./init.firebase";
+import BlogDetails from "./Pages/Blogs/BlogDetails";
 import EventBooking from "./Pages/EventBooking/EventBooking";
 import BookingCalender from "./Pages/EventBooking/BookingCalender";
+import CalendarEvent from "./Pages/Dashboard/EventTypes/CreateCalendarEvent/CalendarEvent";
 
 function App() {
   const [user] = useAuthState(auth);
@@ -44,9 +46,19 @@ function App() {
         <Route path="/story" element={<Story></Story>}></Route>
         <Route path="/about" element={<About></About>}></Route>
         <Route path="/blogs" element={<Blogs></Blogs>}></Route>
+        <Route
+          path="/blogDetails/:id"
+          element={<BlogDetails></BlogDetails>}
+        ></Route>
 
-        <Route path="/eventBooking" element={<EventBooking></EventBooking>}></Route>
-        <Route path="/bookingCalender" element={<BookingCalender></BookingCalender>}></Route>
+        <Route
+          path="/eventBooking"
+          element={<EventBooking></EventBooking>}
+        ></Route>
+        <Route
+          path="/bookingCalender"
+          element={<BookingCalender></BookingCalender>}
+        ></Route>
 
         <Route path="login" element={<Login></Login>}></Route>
         <Route path="register" element={<Register></Register>}></Route>
@@ -67,9 +79,14 @@ function App() {
           <Route path="routingForms" element={<RoutingForms />}></Route>
         </Route>
         <Route
+          path="calendarEvent"
+          element={<CalendarEvent></CalendarEvent>}
+        ></Route>
+        <Route
           path="/availability"
           element={
             <RequiredAuth>
+              {/* <Demo /> */}
               <Availability />
             </RequiredAuth>
           }

@@ -1,64 +1,75 @@
 [
   {
-    "day": "Saturday",
-    "name": "No appointment",
-    "meeting": [
+    "dayData": [
       {
-        "time": "00"
-      }
-    ]
-  },
-  {
-    "day": "Sunday",
-    "name": "No appointment",
-    "meeting": [
+        "day": "Saturday",
+        "start": "09:00 am",
+        "end": "05:00 pm",
+        "interval": {
+          "starting": "01:00 pm",
+          "ending": "02:00 pm"
+        },
+        "checked": false
+      },
       {
-        "time": "00"
-      }
-    ]
-  },
-  {
-    "day": "Monday",
-    "name": "No appointment",
-    "meeting": [
+        "day": "Sunday",
+        "start": "09:00 am",
+        "end": "05:00 pm",
+        "interval": {
+          "starting": "01:00 pm",
+          "ending": "02:00 pm"
+        },
+        "checked": false
+      },
       {
-        "time": "00"
-      }
-    ]
-  },
-  {
-    "day": "Tuesday",
-    "name": "No appointment",
-    "meeting": [
+        "day": "Monday",
+        "start": "09:00 am",
+        "end": "05:00 pm",
+        "interval": {
+          "starting": "01:00 pm",
+          "ending": "02:00 pm"
+        },
+        "checked": true
+      },
       {
-        "time": "00"
-      }
-    ]
-  },
-  {
-    "day": "Wednesday",
-    "name": "No appointment",
-    "meeting": [
+        "day": "Tuesday",
+        "start": "09:00 am",
+        "end": "05:00 pm",
+        "interval": {
+          "starting": "01:00 pm",
+          "ending": "02:00 pm"
+        },
+        "checked": true
+      },
       {
-        "time": "00"
-      }
-    ]
-  },
-  {
-    "day": "Thursday",
-    "name": "No appointment",
-    "meeting": [
+        "day": "Wednesday",
+        "start": "09:00 am",
+        "end": "05:00 pm",
+        "interval": {
+          "starting": "01:00 pm",
+          "ending": "02:00 pm"
+        },
+        "checked": true
+      },
       {
-        "time": "00"
-      }
-    ]
-  },
-  {
-    "day": "Friday",
-    "name": "No appointment",
-    "meeting": [
+        "day": "Thursday",
+        "start": "09:00 am",
+        "end": "05:00 pm",
+        "interval": {
+          "starting": "01:00 pm",
+          "ending": "02:00 pm"
+        },
+        "checked": true
+      },
       {
-        "time": "00"
+        "day": "Thursday",
+        "start": "09:00 am",
+        "end": "05:00 pm",
+        "interval": {
+          "starting": "01:00 pm",
+          "ending": "02:00 pm"
+        },
+        "checked": true
       }
     ]
   }
