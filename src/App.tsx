@@ -31,6 +31,8 @@ import BlogDetails from "./Pages/Blogs/BlogDetails";
 import EventBooking from "./Pages/EventBooking/EventBooking";
 import BookingCalender from "./Pages/EventBooking/BookingCalender";
 import CalendarEvent from "./Pages/Dashboard/EventTypes/CreateCalendarEvent/CalendarEvent";
+import CreateEventType from "./Pages/CreateEventType/CreateEventType";
+import CreateIndividualEvent from "./Pages/CreateIndividualEvent/CreateIndividualEvent";
 
 function App() {
   const [user] = useAuthState(auth);
@@ -46,6 +48,8 @@ function App() {
         <Route path="/story" element={<Story></Story>}></Route>
         <Route path="/about" element={<About></About>}></Route>
         <Route path="/blogs" element={<Blogs></Blogs>}></Route>
+        <Route path="/createEvent" element={<CreateEventType></CreateEventType>}></Route>
+        <Route path="/CreateIndividualEvent" element={<CreateIndividualEvent></CreateIndividualEvent>}></Route>
         <Route
           path="/blogDetails/:id"
           element={<BlogDetails></BlogDetails>}
