@@ -1,8 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import leftArrow from '../../Utilities/icon/leftArrow.png';
-import meet from '../../Utilities/icon/meet.svg';
 const CreateIndividualEvent = () => {
+
+
     return (
         <div>
             <div className='border mt-3 shadow-lg'>
@@ -58,7 +59,7 @@ const CreateIndividualEvent = () => {
                                 </option>
                                 <option>
                                     <div>
-                                        <img src={leftArrow} alt="" />
+                                        <img src={leftArrow} className="w-[20px]" alt="" />
                                         <h2>Zoom</h2>
                                     </div>
                                 </option>

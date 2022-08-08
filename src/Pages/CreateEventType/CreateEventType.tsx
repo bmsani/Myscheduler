@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import calender from '../../Utilities/icon/calendar.png';
 import leftArrow from '../../Utilities/icon/leftArrow.png';
-import group from '../../Utilities/icon/group.png';
+import group from '../../Utilities/icon/group-call.png';
+import single from '../../Utilities/icon/single-call.png';
 const CreateEventType = () => {
     return (
         <div className=''>
@@ -19,7 +20,7 @@ const CreateEventType = () => {
                     <div>
                         <div className='flex items-center'>
                             <div>
-                                <img src={calender} className="w-[38px]" alt="" />
+                                <img src={single} className="w-[48px]" alt="" />
                             </div>
                             <div className='ml-8'>
                                 <h2 className='text-xl'>One-on-One</h2>
@@ -36,7 +37,7 @@ const CreateEventType = () => {
                     <div>
                         <div className='flex items-center'>
                             <div>
-                                <img src={group} className="w-[38px]" alt="" />
+                                <img src={group} className="w-[48px]" alt="" />
                             </div>
                             <div className='ml-8'>
                                 <h2 className='text-xl'>Group</h2>
