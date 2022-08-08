@@ -1,8 +1,8 @@
 import React from 'react';
-import { Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 import leftArrow from '../../Utilities/icon/leftArrow.png';
 const CreateIndividualEvent = () => {
-
 
     return (
         <div>
@@ -28,7 +28,9 @@ const CreateIndividualEvent = () => {
                     <div className=' mx-6 py-4'>
                         <div>
                             <button className='mr-4 hover:underline text-sm font-medium'>Cancel</button>
-                            <button className='px-4 py-1 rounded-full text-white bg-blue-500'>Next</button>
+                            <Link to="/EventDetailsAdd">
+                                <button className='px-4 py-1 rounded-full text-white bg-blue-500'>Next</button>
+                            </Link>
                         </div>
                     </div>
                 </div>
