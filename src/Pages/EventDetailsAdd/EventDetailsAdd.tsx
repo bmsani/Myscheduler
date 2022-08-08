@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import leftArrow from '../../Utilities/icon/leftArrow.png';
+import world from '../../Utilities/icon/world.png';
 const EventDetailsAdd = () => {
     return (
         <div>
@@ -106,8 +107,12 @@ const EventDetailsAdd = () => {
                             <h2 className='text-l font-light ml-4'>Select one of your schedules or define custom hours specific to this type of event.</h2>
                         </div>
                     </div>
-                    <div className='mb-8 border'>
-                        <h2>Dhaka/Bangladesh</h2>
+                    <div className='mb-8 '>
+                        <div className='flex gap-2 items-center'>
+                            <img src={world} className="w-[20px] h-[20px]" alt="" />
+                            <h2>Asia/Dhaka</h2>
+                        </div>
+
                         <div className='border grid grid-cols-2 mt-5'>
                             <div className='mx-6'>
                                 <h2 className='text-xs my-3 font-bold'>WEEKLY HOURS</h2>
