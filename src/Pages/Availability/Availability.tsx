@@ -76,7 +76,7 @@ const Availability = () => {
   };
 
   return (
-    <div>
+    <div className="w-4/6 mx-auto">
       <h2 className="text-xl md:text-3xl font-bold text-center">
         Availability setup
       </h2>
@@ -85,7 +85,7 @@ const Availability = () => {
           Working schedule
         </h4>
         <div className="mt-6">
-          <div className="overflow-x-auto w-full">
+          <div className="overflow-x-auto w-full border rounded">
             <table className="table w-full">
               <tbody>
                 {days.dayData.map((day: UserDays) => (
