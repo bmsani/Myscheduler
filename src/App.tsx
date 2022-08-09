@@ -49,6 +49,19 @@ function App() {
         <Route path="/story" element={<Story></Story>}></Route>
         <Route path="/about" element={<About></About>}></Route>
         <Route path="/blogs" element={<Blogs></Blogs>}></Route>
+        <Route path="/blogDetails/:id" element={<BlogDetails />}></Route>
+        <Route
+          path="/createEvent"
+          element={<CreateEventType></CreateEventType>}
+        ></Route>
+        <Route
+          path="/CreateIndividualEvent"
+          element={<CreateIndividualEvent></CreateIndividualEvent>}
+        ></Route>
+        <Route
+          path="/EventDetailsAdd"
+          element={<EventDetailsAdd></EventDetailsAdd>}
+        ></Route>
         <Route
           path="/createEvent"
           element={<CreateEventType></CreateEventType>}
@@ -70,10 +83,9 @@ function App() {
           path="/eventBooking"
           element={<EventBooking></EventBooking>}
         ></Route>
-        <Route
-          path="/bookingCalender"
-          element={<BookingCalender></BookingCalender>}
-        ></Route>
+        <Route path="/bookingCalender" element={<BookingCalender />}>
+          <Route path=":id" element={<BookingConfirm />} />
+        </Route>
 
         <Route path="login" element={<Login></Login>}></Route>
         <Route path="register" element={<Register></Register>}></Route>

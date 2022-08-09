@@ -17,7 +17,7 @@ const BlogDetails = () => {
     fetch(url)
       .then((res) => res.json())
       .then((data) => setBlog(data));
-  }, []);
+  }, [id]);
 
   const { title, article, author, authorImg, blogImg } = blog;
   if (!title) {
