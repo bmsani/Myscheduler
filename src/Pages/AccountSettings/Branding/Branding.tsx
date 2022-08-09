@@ -5,10 +5,6 @@ import auth from "../../../init.firebase";
 import Loading from "../../../Shared/LoadingSpinner/Loading";
 import imgIcon from "../../../Utilities/icon/image.png";
 
-interface userInfoType {
-  brandLogo: string;
-}
-
 const Branding = () => {
   const [loading, setLoading] = useState(false);
   const [userInfo, setUserInfo] = useState({
@@ -32,7 +28,7 @@ const Branding = () => {
       .then((data) => {
         setUserInfo(data);
       });
-  }, [user]);
+  }, [user, userInfo]);
 
   const handleImgUpload = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -84,7 +80,7 @@ const Branding = () => {
       <div className="w-full h-[200px] border border-gray-400 rounded">
         {userInfo.brandLogo ? (
           <div className="h-full flex items-center justify-center">
-            <img className="w-[350px]" src={userInfo?.brandLogo} alt="" />
+            <img className="w-[150px]" src={userInfo?.brandLogo} alt="" />
           </div>
         ) : (
           <div className="h-full flex items-center justify-center">
