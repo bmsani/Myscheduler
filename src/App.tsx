@@ -30,7 +30,6 @@ import auth from "./init.firebase";
 import BlogDetails from "./Pages/Blogs/BlogDetails";
 import EventBooking from "./Pages/EventBooking/EventBooking";
 import BookingCalender from "./Pages/EventBooking/BookingCalender";
-import BookingConfirm from "./Pages/EventBooking/BookingConfirm";
 import CalendarEvent from "./Pages/Dashboard/EventTypes/CreateCalendarEvent/CalendarEvent";
 import CreateEventType from "./Pages/Dashboard/EventTypes/CreateEventType/CreateEventType";
 import CreateIndividualEvent from "./Pages/Dashboard/EventTypes/CreateIndividualEvent/CreateIndividualEvent";
@@ -51,6 +50,18 @@ function App() {
         <Route path="/about" element={<About></About>}></Route>
         <Route path="/blogs" element={<Blogs></Blogs>}></Route>
         <Route path="/blogDetails/:id" element={<BlogDetails />}></Route>
+        <Route
+          path="/createEvent"
+          element={<CreateEventType></CreateEventType>}
+        ></Route>
+        <Route
+          path="/CreateIndividualEvent"
+          element={<CreateIndividualEvent></CreateIndividualEvent>}
+        ></Route>
+        <Route
+          path="/EventDetailsAdd"
+          element={<EventDetailsAdd></EventDetailsAdd>}
+        ></Route>
         <Route
           path="/createEvent"
           element={<CreateEventType></CreateEventType>}
