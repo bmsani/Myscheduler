@@ -47,9 +47,11 @@ const EventDetailsAdd = () => {
           </div>
           <div className=" mx-6 py-4">
             <div>
-              <button className="mr-4 hover:underline text-sm font-medium">
-                Cancel
-              </button>
+              <Link to="/dashboard">
+                <button className="mr-4 hover:underline text-sm font-medium">
+                  Cancel
+                </button>
+              </Link>
               <Link to="/EventDetailsAdd">
                 <button className="px-4 py-1 rounded-full text-white bg-blue-500">
                   Next

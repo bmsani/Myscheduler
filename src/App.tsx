@@ -34,6 +34,7 @@ import CalendarEvent from "./Pages/Dashboard/EventTypes/CreateCalendarEvent/Cale
 import CreateEventType from "./Pages/Dashboard/EventTypes/CreateEventType/CreateEventType";
 import CreateIndividualEvent from "./Pages/Dashboard/EventTypes/CreateIndividualEvent/CreateIndividualEvent";
 import EventDetailsAdd from "./Pages/Dashboard/EventTypes/EventDetailsAdd/EventDetailsAdd";
+import BookingConfirm from "./Pages/EventBooking/BookingConfirm";
 
 function App() {
   const [user] = useAuthState(auth);
@@ -70,10 +71,9 @@ function App() {
           path="/eventBooking"
           element={<EventBooking></EventBooking>}
         ></Route>
-        <Route
-          path="/bookingCalender"
-          element={<BookingCalender></BookingCalender>}
-        ></Route>
+        <Route path="/bookingCalender" element={<BookingCalender />}>
+          <Route path=":id" element={<BookingConfirm />} />
+        </Route>
 
         <Route path="login" element={<Login></Login>}></Route>
         <Route path="register" element={<Register></Register>}></Route>

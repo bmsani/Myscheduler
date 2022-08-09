@@ -9,12 +9,14 @@ const CreateEventType = () => {
     <div className="">
       <div className="grid grid-cols-3 sm-grid-cols-2 mt-6 py-4  xl:mx-40">
         <div>
-          <button className="px-5 border-blue-400 flex items-center border-2 py-3 rounded-full">
-            <span className="mr-1">
-              <img src={leftArrow} className="w-[20px]" alt="" />
-            </span>{" "}
-            Back
-          </button>
+          <Link to="/dashboard">
+            <button className="px-5 border-blue-400 flex items-center border-2 py-3 rounded-full">
+              <span className="mr-1">
+                <img src={leftArrow} className="w-[20px]" alt="" />
+              </span>{" "}
+              Back
+            </button>
+          </Link>
         </div>
         <div>
           <h2 className="text-xl text-center py-3">Create New Event Type</h2>
