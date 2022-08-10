@@ -19,6 +19,7 @@ const EventDetailsAdd = ({
   eventLocation,
   availabilities,
   setEventDuration,
+  eventDuration,
   handleEvent,
 }: any) => {
   return (
@@ -75,14 +76,25 @@ const EventDetailsAdd = ({
                   Cancel
                 </button>
               </Link>
-              <Link to="/dashboard">
-                <button
-                  className="px-4 py-1 rounded-full text-white bg-blue-500"
-                  onClick={handleEvent}
-                >
-                  Next
-                </button>
-              </Link>
+              {eventDuration === "" ? (
+                <Link to="/dashboard">
+                  <button
+                    className="px-4 py-1 rounded-full text-white bg-blue-500"
+                    onClick={handleEvent}
+                  >
+                    Next
+                  </button>
+                </Link>
+              ) : (
+                <Link to="/dashboard">
+                  <button
+                    className="px-4 py-1 rounded-full text-white bg-blue-500"
+                    onClick={handleEvent}
+                  >
+                    Next
+                  </button>
+                </Link>
+              )}
             </div>
           </div>
         </div>

@@ -108,12 +108,25 @@ const CreateIndividualEvent = () => {
                       Cancel
                     </button>
                   </Link>
-                  <button
-                    className="px-4 py-1 rounded-full text-white bg-blue-500"
-                    onClick={handleNext}
-                  >
-                    Next
-                  </button>
+                  {eventName === "" ||
+                  eventLocation === "" ||
+                  eventDescription === "" ||
+                  eventLink === "" ? (
+                    <button
+                      className="px-4 py-1 rounded-full text-white bg-blue-500"
+                      disabled
+                      onClick={handleNext}
+                    >
+                      Next
+                    </button>
+                  ) : (
+                    <button
+                      className="px-4 py-1 rounded-full text-white bg-blue-500"
+                      onClick={handleNext}
+                    >
+                      Next
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
@@ -124,6 +137,7 @@ const CreateIndividualEvent = () => {
                 </label>
                 <div className="">
                   <input
+                    required
                     onChange={(e) => setEventName(e.target.value)}
                     type="text"
                     placeholder="Type here"
@@ -135,6 +149,7 @@ const CreateIndividualEvent = () => {
                 </label>
                 <div className="">
                   <select
+                    required
                     className="select border-blue-500 w-full max-w-xs"
                     onChange={(e) => setEventLocation(e.target.value)}
                   >
@@ -165,6 +180,7 @@ const CreateIndividualEvent = () => {
                 </label>
                 <div className="">
                   <textarea
+                    required
                     onBlur={(e) => setEventDescription(e.target.value)}
                     className="textarea border-blue-500 w-full max-w-xs"
                     placeholder="Bio"
@@ -180,7 +196,8 @@ const CreateIndividualEvent = () => {
                 </label>
                 <div className="">
                   <input
-                    onBlur={(e) => setEventLink(e.target.value)}
+                    required
+                    onChange={(e) => setEventLink(e.target.value)}
                     type="text"
                     placeholder="Type here"
                     className="input  border-blue-500 w-full max-w-xs "
@@ -195,12 +212,25 @@ const CreateIndividualEvent = () => {
                     Cancel
                   </button>
                 </Link>
-                <button
-                  className="px-4 py-1 rounded-full text-white bg-blue-500"
-                  onClick={handleNext}
-                >
-                  Next
-                </button>
+                {eventName === "" ||
+                eventLocation === "" ||
+                eventDescription === "" ||
+                eventLink === "" ? (
+                  <button
+                    className="px-4 py-1 rounded-full text-white bg-blue-500"
+                    disabled
+                    onClick={handleNext}
+                  >
+                    Next
+                  </button>
+                ) : (
+                  <button
+                    className="px-4 py-1 rounded-full text-white bg-blue-500"
+                    onClick={handleNext}
+                  >
+                    Next
+                  </button>
+                )}
               </div>
             </div>
           </div>
@@ -210,6 +240,7 @@ const CreateIndividualEvent = () => {
           availabilities={availabilities}
           eventName={eventName}
           eventLocation={eventLocation}
+          eventDuration={eventDuration}
           setEventDuration={setEventDuration}
           handleEvent={handleEvent}
         ></EventDetailsAdd>
