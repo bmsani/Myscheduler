@@ -5,10 +5,6 @@ import auth from "../../../init.firebase";
 import Loading from "../../../Shared/LoadingSpinner/Loading";
 import imgIcon from "../../../Utilities/icon/image.png";
 
-interface userInfoType {
-  brandLogo: string;
-}
-
 const Branding = () => {
   const [loading, setLoading] = useState(false);
   const [userInfo, setUserInfo] = useState({

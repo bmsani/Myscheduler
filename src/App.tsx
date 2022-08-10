@@ -36,6 +36,7 @@ import CreateIndividualEvent from "./Pages/Dashboard/EventTypes/CreateIndividual
 import EventDetailsAdd from "./Pages/Dashboard/EventTypes/EventDetailsAdd/EventDetailsAdd";
 import BookingConfirm from "./Pages/EventBooking/BookingConfirm";
 
+
 function App() {
   const [user] = useAuthState(auth);
   return (
@@ -50,6 +51,19 @@ function App() {
         <Route path="/story" element={<Story></Story>}></Route>
         <Route path="/about" element={<About></About>}></Route>
         <Route path="/blogs" element={<Blogs></Blogs>}></Route>
+        <Route path="/blogDetails/:id" element={<BlogDetails />}></Route>
+        <Route
+          path="/createEvent"
+          element={<CreateEventType></CreateEventType>}
+        ></Route>
+        <Route
+          path="/CreateIndividualEvent"
+          element={<CreateIndividualEvent></CreateIndividualEvent>}
+        ></Route>
+        <Route
+          path="/EventDetailsAdd"
+          element={<EventDetailsAdd></EventDetailsAdd>}
+        ></Route>
         <Route
           path="/createEvent"
           element={<CreateEventType></CreateEventType>}

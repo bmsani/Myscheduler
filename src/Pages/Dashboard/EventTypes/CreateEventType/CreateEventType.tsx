@@ -1,6 +1,4 @@
-import React from "react";
 import { Link } from "react-router-dom";
-import calender from "../../../../Utilities/icon/calendar.png";
 import leftArrow from "../../../../Utilities/icon/leftArrow.png";
 import group from "../../../../Utilities/icon/group-call.png";
 import single from "../../../../Utilities/icon/single-call.png";
@@ -30,7 +28,9 @@ const CreateEventType = () => {
                 <img src={single} className="w-[48px]" alt="" />
               </div>
               <div className="ml-8">
-                <h2 className="text-xl">One-on-One</h2>
+                <h2 className="text-xl" id="one-on-one">
+                  One-on-One
+                </h2>
                 <h2 className="text-l">
                   Let an invitee pick a time to meet with you.
                 </h2>
@@ -52,7 +52,9 @@ const CreateEventType = () => {
                 <img src={group} className="w-[48px]" alt="" />
               </div>
               <div className="ml-8">
-                <h2 className="text-xl">Group</h2>
+                <h2 className="text-xl" id="group">
+                  Group
+                </h2>
                 <h2 className="text-l">
                   Let multiple invitees meet with you at one time.
                 </h2>
@@ -61,7 +63,7 @@ const CreateEventType = () => {
           </div>
           <div>
             <button className="bg-blue-500 text-white px-7 py-3 rounded-full">
-              Create
+              Coming soon
             </button>
           </div>
         </div>
