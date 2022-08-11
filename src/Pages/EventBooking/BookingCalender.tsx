@@ -59,7 +59,7 @@ const BookingCalender = () => {
   }, [singleEvent?.email]);
 
   const backButton = () => {
-    window.location.reload();
+    setClick(false)
   };
   const dayFromCalendar = format(selected, "PPPPP").split(",")[0].slice(0, 3);
   const dayFromDB = times?.find((d: any) => d.day === dayFromCalendar);
