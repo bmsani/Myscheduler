@@ -74,25 +74,14 @@ const EventDetailsAdd = ({
                   Cancel
                 </button>
               </Link>
-              {eventDuration === "" ? (
-                <Link to="/dashboard">
-                  <button
-                    className="px-4 py-1 rounded-full text-white bg-blue-500"
-                    onClick={handleEvent}
-                  >
-                    Next
-                  </button>
-                </Link>
-              ) : (
-                <Link to="/dashboard">
-                  <button
-                    className="px-4 py-1 rounded-full text-white bg-blue-500"
-                    onClick={handleEvent}
-                  >
-                    Next
-                  </button>
-                </Link>
-              )}
+              <Link to="/dashboard">
+                <button
+                  className="px-4 py-1 rounded-full text-white bg-blue-500"
+                  onClick={handleEvent}
+                >
+                  Next
+                </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -139,25 +128,14 @@ const EventDetailsAdd = ({
             <button className="mr-4 hover:underline text-sm font-medium">
               Cancel
             </button>
-            {eventDuration === "" ? (
-              <Link to="/dashboard">
-                <button
-                  className="px-4 py-1 rounded-full text-white bg-blue-500"
-                  onClick={handleEvent}
-                >
-                  Next
-                </button>
-              </Link>
-            ) : (
-              <Link to="/dashboard">
-                <button
-                  className="px-4 py-1 rounded-full text-white bg-blue-500"
-                  onClick={handleEvent}
-                >
-                  Next
-                </button>
-              </Link>
-            )}
+            <Link to="/dashboard">
+              <button
+                className="px-4 py-1 rounded-full text-white bg-blue-500"
+                onClick={handleEvent}
+              >
+                Next
+              </button>
+            </Link>
           </div>
         </div>
       </div>
