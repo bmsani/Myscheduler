@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -20,9 +20,9 @@ const CreateIndividualEvent = () => {
   const [eventLocation, setEventLocation] = useState("");
   const [eventDescription, setEventDescription] = useState("");
   const [eventLink, setEventLink] = useState("");
-  const [eventDuration, setEventDuration] = useState("");
   const [availabilities, setAvailabilities] = useState<any>([]);
   const [next, setNext] = useState(false);
+  const durationRef = useRef<HTMLInputElement | null>(null);
   const [user] = useAuthState(auth);
   const email = user?.email;
 
@@ -37,6 +37,7 @@ const CreateIndividualEvent = () => {
   };
 
   const handleEvent = () => {
+    const eventDuration = durationRef?.current?.value;
     const event = {
       email: email,
       eventName: eventName,
@@ -46,7 +47,6 @@ const CreateIndividualEvent = () => {
       eventDuration: eventDuration,
       availabilities: availabilities?.dayData,
     };
-
     fetch("http://localhost:5000/updateEvent", {
       method: "POST",
       headers: {
@@ -62,7 +62,6 @@ const CreateIndividualEvent = () => {
         }
       });
   };
-
   return (
     <div>
       {!next ? (
@@ -113,7 +112,7 @@ const CreateIndividualEvent = () => {
                   eventDescription === "" ||
                   eventLink === "" ? (
                     <button
-                      className="px-4 py-1 rounded-full text-white bg-blue-500"
+                      className="px-4 py-1 rounded-full text-white bg-gray-400"
                       disabled
                       onClick={handleNext}
                     >
@@ -169,11 +168,6 @@ const CreateIndividualEvent = () => {
                       </div>
                     </option>
                   </select>
-                  {/* <input
-                                type="text"
-                                placeholder="Type here"
-                                className="input  border-blue-500 w-full max-w-xs "
-                              /> */}
                 </div>
                 <label className="label">
                   <span className="label-text">Description/Instructions</span>
@@ -185,11 +179,6 @@ const CreateIndividualEvent = () => {
                     className="textarea border-blue-500 w-full max-w-xs"
                     placeholder="Bio"
                   ></textarea>
-                  {/* <input
-                                type="text"
-                                placeholder="Type here"
-                                className="input   "
-                            /> */}
                 </div>
                 <label className="label">
                   <span className="label-text">Event Link</span>
@@ -217,7 +206,7 @@ const CreateIndividualEvent = () => {
                 eventDescription === "" ||
                 eventLink === "" ? (
                   <button
-                    className="px-4 py-1 rounded-full text-white bg-blue-500"
+                    className="px-4 py-1 rounded-full text-white bg-gray-400"
                     disabled
                     onClick={handleNext}
                   >
@@ -240,8 +229,7 @@ const CreateIndividualEvent = () => {
           availabilities={availabilities}
           eventName={eventName}
           eventLocation={eventLocation}
-          eventDuration={eventDuration}
-          setEventDuration={setEventDuration}
+          durationRef={durationRef}
           handleEvent={handleEvent}
         ></EventDetailsAdd>
       )}

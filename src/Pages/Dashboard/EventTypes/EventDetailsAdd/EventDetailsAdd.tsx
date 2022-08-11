@@ -18,7 +18,7 @@ const EventDetailsAdd = ({
   eventName,
   eventLocation,
   availabilities,
-  setEventDuration,
+  durationRef,
   eventDuration,
   handleEvent,
 }: any) => {
@@ -65,9 +65,7 @@ const EventDetailsAdd = ({
         <div className="flex items-center justify-between mx-8 border-b">
           <div>
             <h2>What event is this?</h2>
-            <h2 className="text-sm font-light">
-              30 min, 60 rolling calendar days
-            </h2>
+            <h2 className="text-sm font-light">30 min</h2>
           </div>
           <div className=" mx-6 py-4">
             <div>
@@ -99,30 +97,17 @@ const EventDetailsAdd = ({
           </div>
         </div>
         <div className="mx-8 mb-6 ">
-          <div className="mt-5 grid grid-cols-2 border-b pb-10">
-            <div className="form-control w-full max-w-xs">
-              <label className="label">
-                <span className="label-text font-bold">Duration</span>
-              </label>
-              <select
-                className="select w-full select-bordered"
-                onChange={(e) => setEventDuration(e.target.value)}
-              >
-                <option disabled selected>
-                  Pick one
-                </option>
-                {/* <option>15</option> */}
-                <option>30</option>
-                {/* <option>40</option>
-                <option>60</option> */}
-              </select>
-            </div>
-            <div>
-              <h2 className="text-l font-light ml-4">
-                Define how long your event will be. It can be as long as 12
-                hours.
-              </h2>
-            </div>
+          <div className="form-control w-full max-w-xs">
+            <label className="label">
+              <span className="label-text font-bold">Duration</span>
+            </label>
+            <input
+              type="number"
+              value={30}
+              readOnly
+              className="input  border-blue-500 w-full max-w-xs "
+              ref={durationRef}
+            />
           </div>
 
           <div className="mb-8 ">
@@ -154,14 +139,25 @@ const EventDetailsAdd = ({
             <button className="mr-4 hover:underline text-sm font-medium">
               Cancel
             </button>
-            <Link to="/dashboard">
-              <button
-                className="px-4 py-1 rounded-full text-white bg-blue-600"
-                onClick={handleEvent}
-              >
-                Next
-              </button>
-            </Link>
+            {eventDuration === "" ? (
+              <Link to="/dashboard">
+                <button
+                  className="px-4 py-1 rounded-full text-white bg-blue-500"
+                  onClick={handleEvent}
+                >
+                  Next
+                </button>
+              </Link>
+            ) : (
+              <Link to="/dashboard">
+                <button
+                  className="px-4 py-1 rounded-full text-white bg-blue-500"
+                  onClick={handleEvent}
+                >
+                  Next
+                </button>
+              </Link>
+            )}
           </div>
         </div>
       </div>

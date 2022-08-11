@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import auth from "../../../init.firebase";
 import Loading from "../../../Shared/LoadingSpinner/Loading";
 import userImg from "../../../Utilities/icon/profile.png";
@@ -9,13 +10,34 @@ const Event = () => {
   const [user] = useAuthState(auth);
 
   const link = user?.email;
-  const { data: events, isLoading } = useQuery(["events", link], () =>
+  const {
+    data: events,
+    isLoading,
+    refetch,
+  } = useQuery(["events", link], () =>
     fetch(`http://localhost:5000/getEvent/${link}`).then((res) => res.json())
   );
 
   if (isLoading) {
     return <Loading />;
   }
+  const handleDelete = (id: string) => {
+    fetch(`http://localhost:5000/deleteEvent/${id}?email=${link}`, {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          toast.error("Event delete successful");
+          refetch();
+        }
+      });
+  };
+
   return (
     <div className="mr-10 ml-5 pt-12">
       <div className="flex flex-col md:flex-row items-center justify-between">
@@ -48,9 +70,17 @@ const Event = () => {
               <p className="text-sm">{e.eventDuration} mins, One-on-One</p>
               <p className="text-secondary mt-2">View booking page</p>
               <div className="divider"></div>
-              <button className="mt-4 py-1 px-4 border border-primary rounded-full text-primary hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer">
-                Share
-              </button>
+              <div className="flex justify-between">
+                <button className="mt-4 py-1 px-4 border border-primary rounded-full text-primary hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer">
+                  Share
+                </button>
+                <button
+                  className="mt-4 py-1 px-4 border border-primary rounded-full text-primary hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer"
+                  onClick={() => handleDelete(e._id)}
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           </div>
         ))}
