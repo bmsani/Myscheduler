@@ -19,7 +19,7 @@ const CreateIndividualEvent = () => {
   const [eventName, setEventName] = useState("");
   const [eventLocation, setEventLocation] = useState("");
   const [eventDescription, setEventDescription] = useState("");
-  const [eventLink, setEventLink] = useState("");
+  // const [eventLink, setEventLink] = useState("");
   const [availabilities, setAvailabilities] = useState<any>([]);
   const [next, setNext] = useState(false);
   const durationRef = useRef<HTMLInputElement | null>(null);
@@ -43,7 +43,7 @@ const CreateIndividualEvent = () => {
       eventName: eventName,
       eventLocation: eventLocation,
       eventDescription: eventDescription,
-      eventLink: eventLink,
+      // eventLink: eventLink,
       eventDuration: eventDuration,
       availabilities: availabilities?.dayData,
     };
@@ -109,8 +109,8 @@ const CreateIndividualEvent = () => {
                   </Link>
                   {eventName === "" ||
                   eventLocation === "" ||
-                  eventDescription === "" ||
-                  eventLink === "" ? (
+                  eventDescription === "" ? (
+                    // || eventLink === ""
                     <button
                       className="px-4 py-1 rounded-full text-white bg-gray-400"
                       disabled
@@ -180,7 +180,7 @@ const CreateIndividualEvent = () => {
                     placeholder="Bio"
                   ></textarea>
                 </div>
-                <label className="label">
+                {/* <label className="label">
                   <span className="label-text">Event Link</span>
                 </label>
                 <div className="">
@@ -191,7 +191,7 @@ const CreateIndividualEvent = () => {
                     placeholder="Type here"
                     className="input  border-blue-500 w-full max-w-xs "
                   />
-                </div>
+                </div> */}
               </form>
             </div>
             <div className="border-t mx-10 py-4  grid place-items-end">
@@ -203,8 +203,9 @@ const CreateIndividualEvent = () => {
                 </Link>
                 {eventName === "" ||
                 eventLocation === "" ||
-                eventDescription === "" ||
-                eventLink === "" ? (
+                  eventDescription === ""
+                  // || eventLink === ""
+                  ? (
                   <button
                     className="px-4 py-1 rounded-full text-white bg-gray-400"
                     disabled
