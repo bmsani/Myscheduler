@@ -4,19 +4,19 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../../init.firebase";
 import Loading from "../../../Shared/LoadingSpinner/Loading";
-import userImg from "../../../Utilities/icon/profile.png";
 const Event = () => {
   const [user] = useAuthState(auth);
-  const link = user?.email;
+  const email = user?.email;
+  const photo: any = user?.photoURL;
   const {
     data: events,
     isLoading,
     refetch,
-  } = useQuery(["events", link], () =>
-    fetch(`http://localhost:5000/getEvent/${link}`).then((res) => res.json())
+  } = useQuery(["events", email], () =>
+    fetch(`http://localhost:5000/getEvent/${email}`).then((res) => res.json())
   );
-  const { data: singleUser } = useQuery(["singleUser", link], () =>
-    fetch(`http://localhost:5000/user/${link}`, {
+  const { data: singleUser } = useQuery(["singleUser", email], () =>
+    fetch(`http://localhost:5000/user/${email}`, {
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -29,7 +29,7 @@ const Event = () => {
     return <Loading />;
   }
   const handleDelete = (id: string) => {
-    fetch(`http://localhost:5000/deleteEvent/${id}?email=${link}`, {
+    fetch(`http://localhost:5000/deleteEvent/${id}?email=${email}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",
@@ -48,14 +48,12 @@ const Event = () => {
     <div className="mr-10 ml-5 pt-12">
       <div className="flex flex-col md:flex-row items-center justify-between">
         <div className="flex items-center gap-5">
-          <img
-            className="w-[70px] rounded-full"
-            src={user?.photoURL || userImg}
-            alt=""
-          />
+          <img className="w-[70px] rounded-full" src={photo} alt="" />
           <div>
-            <p>{singleUser?.name}</p>
-            <p className="text-secondary">{link}</p>
+            <p>{user?.displayName}</p>
+            <Link to="/eventBooking">
+              <p className="text-secondary">{email}</p>
+            </Link>
           </div>
         </div>
         <Link to="/createEvent">
@@ -66,10 +64,10 @@ const Event = () => {
       </div>
       <div className=" divider"></div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {events.map((e: any) => (
           <div
-            className="cart border rounded-2xl w-[320] md:w-[350px] shadow hover:shadow-xl duration-300 cursor-pointer"
+            className="cart border rounded-2xl w-[300] md:w-[320px] shadow hover:shadow-xl duration-300 cursor-pointer"
             key={e._id}
           >
             <div className="bg-blue-500 h-2 w-full rounded-t-2xl"></div>

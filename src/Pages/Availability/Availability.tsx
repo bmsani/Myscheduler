@@ -76,7 +76,7 @@ const Availability = () => {
   };
 
   return (
-    <div className="w-4/6 mx-auto">
+    <div className="w-4/6 mx-auto py-10">
       <h2 className="text-xl md:text-3xl font-bold text-center">
         Availability setup
       </h2>
