@@ -35,7 +35,9 @@ import CreateEventType from "./Pages/Dashboard/EventTypes/CreateEventType/Create
 import CreateIndividualEvent from "./Pages/Dashboard/EventTypes/CreateIndividualEvent/CreateIndividualEvent";
 import EventDetailsAdd from "./Pages/Dashboard/EventTypes/EventDetailsAdd/EventDetailsAdd";
 import BookingConfirm from "./Pages/EventBooking/BookingConfirm";
-
+import Admin from "./Pages/Admin/Admin";
+import Users from "./Pages/Admin/Users/Users";
+import UserDetails from "./Pages/Admin/UserDetails/UserDetails";
 
 function App() {
   const [user] = useAuthState(auth);
@@ -120,6 +122,17 @@ function App() {
             </RequiredAuth>
           }
         ></Route>
+        <Route
+          path="/admin"
+          element={
+            <RequiredAuth>
+              <Admin />
+            </RequiredAuth>
+          }
+        >
+          <Route index element={<Users></Users>}></Route>
+          <Route path="userDetails" element={<UserDetails />}></Route>
+        </Route>
         <Route
           path="/accountSettings"
           element={

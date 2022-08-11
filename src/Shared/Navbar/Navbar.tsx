@@ -9,9 +9,11 @@ import Loading from "../LoadingSpinner/Loading";
 import { HiMenu } from "react-icons/hi";
 import { BiDownArrow } from "react-icons/bi";
 import ShareLink from "../../Pages/ShareLink/ShareLink";
+import useAdmin from "../../Hooks/useAdmin";
 
 const Navbar = () => {
   const [user, loading] = useAuthState(auth);
+  const [admin] = useAdmin(user);
   const { pathname } = useLocation();
   const [colorChange, setColorChange] = useState<boolean>(false);
   const [anotherRouteColorChange, setAnotherRouteColorChange] =
@@ -92,9 +94,9 @@ const Navbar = () => {
               <ul className="menu menu-horizontal p-0">
                 <li>
                   {pathname === "/dashboard" ||
-                    pathname === "/dashboard/scheduling" ||
-                    pathname === "/dashboard/workflow" ||
-                    pathname === "/dashboard/routingForms" ? (
+                  pathname === "/dashboard/scheduling" ||
+                  pathname === "/dashboard/workflow" ||
+                  pathname === "/dashboard/routingForms" ? (
                     <label
                       htmlFor="my-drawer-2"
                       className="bg-transparent drawer-button lg:hidden"
@@ -115,6 +117,13 @@ const Navbar = () => {
                     Dashboard
                   </Link>
                 </li>
+                {admin && (
+                  <li>
+                    <Link className="px-1 md:px-4" to="/admin">
+                      Admin
+                    </Link>
+                  </li>
+                )}
                 <li>
                   <Link className="px-1 md:px-4" to="/availability">
                     Availability

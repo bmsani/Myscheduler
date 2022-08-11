@@ -1,28 +1,26 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../../init.firebase";
 import Loading from "../../../Shared/LoadingSpinner/Loading";
-import userImg from "../../../Utilities/icon/profile.png";
 const Event = () => {
   const [user] = useAuthState(auth);
-
-  const link = user?.email;
+  const photo: any = user?.photoURL;
+  const email = user?.email;
   const {
     data: events,
     isLoading,
     refetch,
-  } = useQuery(["events", link], () =>
-    fetch(`http://localhost:5000/getEvent/${link}`).then((res) => res.json())
+  } = useQuery(["events", email], () =>
+    fetch(`http://localhost:5000/getEvent/${email}`).then((res) => res.json())
   );
 
   if (isLoading) {
     return <Loading />;
   }
   const handleDelete = (id: string) => {
-    fetch(`http://localhost:5000/deleteEvent/${id}?email=${link}`, {
+    fetch(`http://localhost:5000/deleteEvent/${id}?email=${email}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",
@@ -42,11 +40,11 @@ const Event = () => {
     <div className="mr-10 ml-5 pt-12">
       <div className="flex flex-col md:flex-row items-center justify-between">
         <div className="flex items-center gap-5">
-          <img className="w-[70px] rounded-full" src={userImg} alt="" />
+          <img className="w-[70px] rounded-full" src={photo} alt="" />
           <div>
-            <p>Admin name</p>
+            <p>{user?.displayName}</p>
             <Link to="/eventBooking">
-              <p className="text-secondary">{link?.split("@")[0]}</p>
+              <p className="text-secondary">{email?.split("@")[0]}</p>
             </Link>
           </div>
         </div>
