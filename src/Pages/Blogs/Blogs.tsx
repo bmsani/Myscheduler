@@ -22,6 +22,7 @@ const Blogs = () => {
   if (blogs.length === 0) {
     return <Loading />;
   }
+  console.log(blogs);
   return (
     <div>
       <div className="py-14  flex justify-center">

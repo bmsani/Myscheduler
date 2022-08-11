@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import calender from "../../../../Utilities/icon/calendar.png";
 import leftArrow from "../../../../Utilities/icon/leftArrow.png";
 import group from "../../../../Utilities/icon/group-call.png";
 import single from "../../../../Utilities/icon/single-call.png";

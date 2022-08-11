@@ -63,17 +63,17 @@ function App() {
           path="/EventDetailsAdd"
           element={<EventDetailsAdd></EventDetailsAdd>}
         ></Route>
-        <Route
-          path="/blogDetails/:id"
-          element={<BlogDetails></BlogDetails>}
-        ></Route>
 
         <Route
           path="/eventBooking"
           element={<EventBooking></EventBooking>}
         ></Route>
+
         <Route path="/bookingCalender" element={<BookingCalender />}>
-          <Route path=":id" element={<BookingConfirm />} />
+          <Route
+            path="/bookingCalender/:startEnd"
+            element={<BookingConfirm />}
+          />
         </Route>
 
         <Route path="login" element={<Login></Login>}></Route>
