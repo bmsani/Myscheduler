@@ -1,8 +1,7 @@
 import React, { FormEvent, useRef } from "react";
-import { useParams } from "react-router-dom";
 
-const BookingConfirm = () => {
-  const { startEnd } = useParams();
+const BookingConfirm = ({ startEndTime }: any) => {
+  console.log(startEndTime);
 
   const getName = useRef<HTMLInputElement | null>(null);
   const getMessage = useRef<HTMLTextAreaElement | null>(null);
@@ -10,8 +9,8 @@ const BookingConfirm = () => {
 
   const handleBooking = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const startTime = startEnd?.split("_")[0];
-    const endTime = startEnd?.split("_")[1];
+    const startTime = startEndTime?.split("_")[0];
+    const endTime = startEndTime?.split("_")[1];
     const name = getName?.current?.value;
     const email = getEmail?.current?.value;
     const message = getMessage?.current?.value;

@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { format } from "date-fns";
 import "react-day-picker/dist/style.css";
-import { useAuthState } from "react-firebase-hooks/auth";
-import auth from "../../init.firebase";
 import Loading from "../../Shared/LoadingSpinner/Loading";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import BookingConfirm from "./BookingConfirm";
 import defaultImg from "../../Utilities/icon/image.png";
 import { FaArrowLeft } from "react-icons/fa";
@@ -13,27 +11,32 @@ import Timezone from "./Timezone";
 import DatePicker from "react-datetime";
 import moment from "moment";
 import "react-datetime/css/react-datetime.css";
+import { useQuery } from "@tanstack/react-query";
 
 const BookingCalender = () => {
-  const [user, gLoading] = useAuthState(auth);
-  const { pathname } = useLocation();
+  const { id } = useParams();
   const [selected, setSelected] = React.useState<any>(new Date());
+  console.log(selected);
   const [userInfo, setUserInfo] = useState({
     _id: "",
     name: "",
     brandLogo: "",
+    message: "",
   });
 
+  const [startEndTime, setStartEndTime] = useState(" ");
   const [times, setTimes] = useState<any>([]);
-  const [startEndTime, setStartEnd] = useState<string>(" ");
-
   const { name, brandLogo } = userInfo;
   const [click, setClick] = useState(false);
 
-  const navigate = useNavigate();
+  const { data: singleEvent } = useQuery(["singleEvent", id], () =>
+    fetch(`http://localhost:5000/getSingleEvent/${id}`, {
+      method: "GET",
+    }).then((res) => res.json())
+  );
 
   useEffect(() => {
-    const url = `http://localhost:5000/user/${user?.email}`;
+    const url = `http://localhost:5000/user/${singleEvent?.email}`;
     fetch(url, {
       method: "GET",
       headers: {
@@ -45,24 +48,19 @@ const BookingCalender = () => {
       .then((data) => {
         setUserInfo(data);
       });
-  }, [user]);
+  }, [singleEvent?.email]);
 
   // ================Times Slots ============================
   useEffect(() => {
-    if (user?.email) {
-      fetch(`http://localhost:5000/availability/${user?.email}`)
+    if (singleEvent?.email) {
+      fetch(`http://localhost:5000/availability/${singleEvent?.email}`)
         .then((res) => res.json())
         .then((data) => setTimes(data?.dayData));
     }
-  }, [user]);
+  }, [singleEvent?.email]);
 
   const backButton = () => {
-    if (pathname === "/bookingCalender") {
-      navigate("/eventBooking");
-    } else {
-      navigate("/bookingCalender");
-      setClick(false);
-    }
+    window.location.reload();
   };
 
   const dayFromCalendar = format(selected, "PPPPP").split(",")[0].slice(0, 3);
@@ -107,8 +105,6 @@ const BookingCalender = () => {
 
   const handleDate = (date: any) => {
     setSelected(date.toDate());
-    // console.log(moment(`${selected}${date.toDate()}`).format());
-    // console.log(moment(date.toDate()).format());
   };
 
   const handleConfirmBooking = (selectedTime: string) => {
@@ -118,12 +114,11 @@ const BookingCalender = () => {
       .add(30, "minutes")
       .format();
     const startEnd = startTime + "_" + endTime;
-    setStartEnd(startEnd);
-    navigate(`/bookingCalender/${startEnd}`);
+    setStartEndTime(startEnd);
+    // navigate(`/bookingCalender/${id}/${startEnd}`);
     setClick(true);
   };
-  console.log(startEndTime);
-  if (!times || gLoading) {
+  if (!times) {
     return <Loading />;
   }
 
@@ -149,12 +144,16 @@ const BookingCalender = () => {
               {name}
             </h3>
             <h1 className="font-bold text-3xl text-center md:text-left">
-              Doctors Meeting
+              {singleEvent?.eventName}
             </h1>
             <div className="flex gap-2 mt-8">
               <FiClock className="text-2xl" />
               <h2 className="font-bold text-gray-500">30 Minute</h2>
             </div>
+            <p className="mt-2">{startEndTime?.split("T")[0]}</p>
+            <p className="text-sm text-slate-500 mt-2">
+              {singleEvent?.eventDescription}
+            </p>
           </div>
         </div>
         {!click ? (
@@ -203,7 +202,7 @@ const BookingCalender = () => {
             </div>
           </div>
         ) : (
-          <BookingConfirm />
+          <BookingConfirm startEndTime={startEndTime} />
         )}
       </div>
     </div>

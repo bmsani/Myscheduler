@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Home from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
 import Register from "./Pages/Register/Register";
@@ -30,7 +30,6 @@ import auth from "./init.firebase";
 import BlogDetails from "./Pages/Blogs/BlogDetails";
 import EventBooking from "./Pages/EventBooking/EventBooking";
 import BookingCalender from "./Pages/EventBooking/BookingCalender";
-import BookingConfirm from "./Pages/EventBooking/BookingConfirm";
 import CalendarEvent from "./Pages/Dashboard/EventTypes/CreateCalendarEvent/CalendarEvent";
 import CreateEventType from "./Pages/Dashboard/EventTypes/CreateEventType/CreateEventType";
 import CreateIndividualEvent from "./Pages/Dashboard/EventTypes/CreateIndividualEvent/CreateIndividualEvent";
@@ -38,9 +37,13 @@ import EventDetailsAdd from "./Pages/Dashboard/EventTypes/EventDetailsAdd/EventD
 
 function App() {
   const [user] = useAuthState(auth);
+  const location = useLocation().pathname.split("/")[1];
+  console.log();
+
   return (
     <div>
-      <Navbar />
+      {location !== "bookingCalender" ? <Navbar /> : <></>}
+
       <Routes>
         <Route
           path="/"
@@ -63,18 +66,15 @@ function App() {
           path="/EventDetailsAdd"
           element={<EventDetailsAdd></EventDetailsAdd>}
         ></Route>
-
         <Route
           path="/eventBooking"
           element={<EventBooking></EventBooking>}
         ></Route>
 
-        <Route path="/bookingCalender" element={<BookingCalender />}>
-          <Route
-            path="/bookingCalender/:startEnd"
-            element={<BookingConfirm />}
-          />
-        </Route>
+        <Route
+          path="/bookingCalender/:id"
+          element={<BookingCalender />}
+        ></Route>
 
         <Route path="login" element={<Login></Login>}></Route>
         <Route path="register" element={<Register></Register>}></Route>
