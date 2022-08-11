@@ -29,7 +29,7 @@ const useToken = (user: any) => {
       dayData: [
         {
           id: "1",
-          day: "Saturday",
+          day: "Sat",
           start: "09:00",
           end: "17:00",
           interval: {
@@ -40,7 +40,7 @@ const useToken = (user: any) => {
         },
         {
           id: "2",
-          day: "Sunday",
+          day: "Sun",
           start: "09:00",
           end: "17:00",
           interval: {
@@ -51,7 +51,7 @@ const useToken = (user: any) => {
         },
         {
           id: "3",
-          day: "Monday",
+          day: "Mon",
           start: "09:00",
           end: "17:00",
           interval: {
@@ -62,7 +62,7 @@ const useToken = (user: any) => {
         },
         {
           id: "4",
-          day: "Tuesday",
+          day: "Tue",
           start: "09:00",
           end: "17:00",
           interval: {
@@ -73,7 +73,7 @@ const useToken = (user: any) => {
         },
         {
           id: "5",
-          day: "Wednesday",
+          day: "Wed",
           start: "09:00",
           end: "17:00",
           interval: {
@@ -84,7 +84,7 @@ const useToken = (user: any) => {
         },
         {
           id: "6",
-          day: "Thursday",
+          day: "Thu",
           start: "09:00",
           end: "17:00",
           interval: {
@@ -95,7 +95,7 @@ const useToken = (user: any) => {
         },
         {
           id: "7",
-          day: "Friday",
+          day: "Fri",
           start: "09:00",
           end: "17:00",
           interval: {
