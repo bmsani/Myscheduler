@@ -1,39 +1,41 @@
 import React, { useEffect, useState } from "react";
 import { format } from "date-fns";
-import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
-import { useAuthState } from "react-firebase-hooks/auth";
-import auth from "../../init.firebase";
 import Loading from "../../Shared/LoadingSpinner/Loading";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import BookingConfirm from "./BookingConfirm";
 import defaultImg from "../../Utilities/icon/image.png";
 import { FaArrowLeft } from "react-icons/fa";
+import { FiClock } from "react-icons/fi";
+import { AiOutlineCalendar } from "react-icons/ai";
 import Timezone from "./Timezone";
-
-type timeType = {
-  _id: string;
-  time: string;
-};
+import DatePicker from "react-datetime";
+import moment from "moment";
+import "react-datetime/css/react-datetime.css";
+import { useQuery } from "@tanstack/react-query";
 
 const BookingCalender = () => {
-  const [user, gLoading] = useAuthState(auth);
-  const { pathname } = useLocation();
+  const { id } = useParams();
   const [selected, setSelected] = React.useState<any>(new Date());
   const [userInfo, setUserInfo] = useState({
     _id: "",
     name: "",
     brandLogo: "",
+    message: "",
   });
+  const [startEndTime, setStartEndTime] = useState(" ");
+  const [times, setTimes] = useState<any>([]);
   const { name, brandLogo } = userInfo;
-
-  const [times, setTimes] = useState<timeType[]>([]);
   const [click, setClick] = useState(false);
-  const minDate = new Date();
-  const navigate = useNavigate();
+
+  const { data: singleEvent } = useQuery(["singleEvent", id], () =>
+    fetch(`http://localhost:5000/getSingleEvent/${id}`, {
+      method: "GET",
+    }).then((res) => res.json())
+  );
 
   useEffect(() => {
-    const url = `http://localhost:5000/user/${user?.email}`;
+    const url = `http://localhost:5000/user/${singleEvent?.email}`;
     fetch(url, {
       method: "GET",
       headers: {
@@ -45,80 +47,140 @@ const BookingCalender = () => {
       .then((data) => {
         setUserInfo(data);
       });
-  }, [user]);
+  }, [singleEvent?.email]);
 
+  // ================Times Slots ============================
   useEffect(() => {
-    fetch(`http://localhost:5000/times`)
-      .then((res) => res.json())
-      .then((data) => setTimes(data));
-  }, []);
-
-  const handleConfirmBooking = (id: string) => {
-    navigate(`/bookingCalender/${id}`);
-    setClick(true);
-  };
+    if (singleEvent?.email) {
+      fetch(`http://localhost:5000/availability/${singleEvent?.email}`)
+        .then((res) => res.json())
+        .then((data) => setTimes(data?.dayData));
+    }
+  }, [singleEvent?.email]);
 
   const backButton = () => {
-    if (pathname === "/bookingCalender") {
-      navigate("/eventBooking");
-    } else {
-      navigate("/bookingCalender");
-      setClick(false);
-    }
+    setClick(false)
+  };
+  const dayFromCalendar = format(selected, "PPPPP").split(",")[0].slice(0, 3);
+  const dayFromDB = times?.find((d: any) => d.day === dayFromCalendar);
+  const yesterday = moment().subtract(1, "day");
+  const valid = function (current: any) {
+    return (
+      current.isAfter(yesterday) && current.day() !== 0 && current.day() !== 6
+    );
   };
 
-  console.log(selected.toDateString());
+  const start = dayFromDB?.start;
+  const end = dayFromDB?.end;
+  const intervalStart = dayFromDB?.interval?.starting;
+  const intervalEnd = dayFromDB?.interval?.ending;
+  const x = {
+    nextSlot: 30,
+    breakTime: [[intervalStart, intervalEnd]],
+    startTime: start,
+    endTime: end,
+  };
 
-  if (!times || gLoading) {
+  let slotTime = moment(x.startTime, "HH:mm");
+  let endTime = moment(x.endTime, "HH:mm");
+
+  function isInBreak(slotTime: any, breakTimes: any) {
+    return breakTimes.some((br: any) => {
+      return (
+        slotTime >= moment(br[0], "HH:mm") && slotTime < moment(br[1], "HH:mm")
+      );
+    });
+  }
+
+  let timeCollection = [];
+  while (slotTime < endTime) {
+    if (!isInBreak(slotTime, x.breakTime)) {
+      timeCollection.push(slotTime.format("HH:mm"));
+    }
+    slotTime = slotTime.add(x.nextSlot, "minutes");
+  }
+
+  const handleDate = (date: any) => {
+    setSelected(date.toDate());
+  };
+  const handleConfirmBooking = (selectedTime: string) => {
+    const selectDate = moment(selected).format().split("T")[0];
+    const startTime = moment(selectDate + " " + selectedTime).format();
+    const endTime = moment(selectDate + " " + selectedTime)
+      .add(30, "minutes")
+      .format();
+    const startEnd = startTime + "_" + endTime;
+    setStartEndTime(startEnd);
+    setClick(true);
+  };
+  if (!times) {
     return <Loading />;
   }
+
+  const startWithDate = startEndTime?.split("_")[0];
+  const startWithUTC = startWithDate?.split("T")[1];
+  const startTime = startWithUTC?.split("+")[0]
+  const endWithDate = startEndTime?.split("_")[1];
+  const endWithUTC = endWithDate?.split("T")[1];
+  const endTimee = endWithUTC?.split("+")[0]
+  const eventDate = moment(startEndTime?.split("T")[0]).format('MMMM Do YYYY');
+  
+  console.log(eventDate, startTime, endTimee)
+
   return (
-    <div className="lg:mx-20 xl:mt-12 border">
-      <div className="grid lg:grid-cols-3 sm:grid-cols-1 ">
-        <div className=" col-span-1 xl:border-r sm:border-b">
+    <div className="lg:mx-20 lg:mt-12 border">
+      <div className="grid grid-cols-1 lg:grid-cols-3  ">
+        <div className=" lg:col-span-1 lg:border-r sm:border-b">
           <div className="flex gap-5 border-b p-5">
             <button
               onClick={backButton}
-              className="text-xl text-primary border border-primary hover:bg-blue-100 duration-300 h-12 w-12 rounded-full flex justify-center items-center"
+              className="text-xl text-primary border border-primary hover:bg-blue-100 duration-300 h-10 w-10 rounded-full flex justify-center items-center"
             >
               <FaArrowLeft />
             </button>
-            <img className="w-[250px]" src={brandLogo || defaultImg} alt="" />
+            <img
+              className="w-[250px] h-[200px] object-cover mx-auto"
+              src={brandLogo || defaultImg}
+              alt=""
+            />
           </div>
           <div className="p-5">
-            <h2 className="font-bold text-gray-500">{name}</h2>
-            <h1 className="text-2xl font-bold">30 Minute Meeting</h1>
-            <div className="flex gap-2 mt-8">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
+            <h3 className="font-bold text-gray-500 text-center md:text-left">
+              {name}
+            </h3>
+            <h1 className="font-bold text-3xl text-center md:text-left">
+              {singleEvent?.eventName}
+            </h1>
+            <div className="flex gap-2 mt-4">
+              <FiClock className="text-2xl" />
               <h2 className="font-bold text-gray-500">30 Minute</h2>
             </div>
+            {(startTime && endTimee) && <div className="flex gap-2 mt-4">
+              <AiOutlineCalendar className="text-2xl" />
+              <h2 className="font-bold text-gray-500">{`${startTime} - ${endTimee}, ${eventDate}`}</h2>
+            </div>}
+            <p className="mt-4 text-md font-semibold text-slate-500">
+              {singleEvent?.eventDescription}
+            </p>
           </div>
         </div>
         {!click ? (
           <div className="p-5 col-span-2">
-            <h2 className="text-xl font-bold">Select Date and Time</h2>
-            <div className="grid grid-cols-3 mt-4">
+            <h2 className="text-xl font-bold text-center lg:text-left">
+              Select Date and Time
+            </h2>
+            <div className="grid grid-cols-1 lg:grid-cols-3 mt-4">
               <div className=" col-span-2">
-                <DayPicker
+                <DatePicker
                   className="m-0 col-span-2"
-                  mode="single"
-                  selected={selected}
-                  onDayClick={setSelected}
-                  fromDate={minDate}
-                ></DayPicker>
+                  displayTimeZone=""
+                  dateFormat={true}
+                  isValidDate={valid}
+                  open={true}
+                  input={false}
+                  timeFormat={false}
+                  onChange={handleDate}
+                />
                 <div className="mt-4">
                   <Timezone />
                 </div>
@@ -127,17 +189,16 @@ const BookingCalender = () => {
                 <p className="mt-2 ml-2 mb-5">{format(selected, "PP")}</p>
                 <div>
                   <div className="h-[300px] overflow-x-hidden scroll-smooth scroll-p-8 ">
-                    {times.map((data) => (
+                    {timeCollection.map((time, index) => (
                       <button
-                        onClick={() => handleConfirmBooking(data._id)}
-                        className="text-primary border border-blue-400 hover:border-blue-600 shadow hover:shadow-blue-600/70n rounded m-2 p-2 relative group"
+                        key={index}
+                        onClick={() => handleConfirmBooking(time)}
+                        className="text-primary border border-blue-400 hover:border-blue-600 shadow hover:shadow-blue-600/70n rounded m-2 px-20 py-2 relative group"
                       >
-                        {data.time}
+                        {time}
                         <div className="text-base-100  absolute top-0 left-0 w-full hidden group-hover:block duration-300">
                           <div className="grid grid-cols-2">
-                            <p className="bg-blue-500 py-2">
-                              {data.time.slice(0, 8)}
-                            </p>
+                            <p className="bg-blue-500 py-2">{time}</p>
                             <p className="bg-primary py-2">Confirm</p>
                           </div>
                         </div>
@@ -149,7 +210,7 @@ const BookingCalender = () => {
             </div>
           </div>
         ) : (
-          <BookingConfirm selected={selected} />
+          <BookingConfirm startEndTime={startEndTime} singleEvent={singleEvent} />
         )}
       </div>
     </div>

@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query";
 import React, { useEffect, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
@@ -7,34 +8,23 @@ import imgIcon from "../../../Utilities/icon/image.png";
 
 const Branding = () => {
   const [loading, setLoading] = useState(false);
-  const [userInfo, setUserInfo] = useState({
-    brandLogo: "",
-  });
   const [user] = useAuthState(auth);
   const getImg = useRef<HTMLInputElement | null>(null);
 
   const imageStorageKey = "8c4220582d4b8f04cc8ea7c8298a1449";
 
-  useEffect(() => {
-    const url = `http://localhost:5000/user/${user?.email}`;
-    fetch(url, {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setUserInfo(data);
-      });
-  }, [user, userInfo]);
+  const {
+    data: brandLogo,
+    isLoading,
+    refetch,
+  } = useQuery(["brandLogo", user?.email], () =>
+    fetch(`http://localhost:5000/user/${user?.email}`).then((res) => res.json())
+  );
 
   const handleImgUpload = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     const imgPath: any = getImg?.current?.files;
-    console.log(imgPath[0]);
     if (!imgPath[0]) {
       return toast.error("Upload Your Logo");
     } else {
@@ -51,6 +41,7 @@ const Branding = () => {
           const brandLogoLink = {
             brandLogo: imageUrl,
           };
+          console.log(brandLogoLink);
           fetch(`http://localhost:5000/brandLogo/${user?.email}`, {
             method: "PUT",
             headers: {
@@ -63,24 +54,26 @@ const Branding = () => {
             .then((data) => {
               if (data.acknowledged === true) {
                 toast.success("Brand Logo Added Successful");
+                refetch();
               } else {
                 toast.error("Brand Logo Added Failed");
+                refetch();
               }
             });
           setLoading(false);
         });
     }
   };
-  if (loading) {
+  if (loading || isLoading) {
     return <Loading></Loading>;
   }
   return (
     <div className="w-full max-w-sm lg:max-w-md mx-auto py-8">
       <h1 className="text-2xl text-gray-600 mb-2">Logo</h1>
       <div className="w-full h-[200px] border border-gray-400 rounded">
-        {userInfo.brandLogo ? (
+        {brandLogo ? (
           <div className="h-full flex items-center justify-center">
-            <img className="w-[150px]" src={userInfo?.brandLogo} alt="" />
+            <img className="w-[150px]" src={brandLogo.brandLogo} alt="" />
           </div>
         ) : (
           <div className="h-full flex items-center justify-center">

@@ -1,9 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import Loading from "../../Shared/LoadingSpinner/Loading";
-import Moment from "react-moment";
-import moment from "moment";
 import "moment-timezone";
+import Moment from "react-moment";
 
 const Timezone = () => {
   const [select, setSelect] = useState("");

@@ -1,75 +1,51 @@
-import React, { FormEvent, useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import axios from "axios";
+import React, { FormEvent, useRef } from "react";
 import { toast } from "react-toastify";
-import Loading from "../../Shared/LoadingSpinner/Loading";
 
-type timeType = {
-  _id: string;
-  time: string;
-};
-
-const BookingConfirm = ({ selected }: any) => {
-  const { id } = useParams();
-  const [times, setTimes] = useState<timeType>();
+const BookingConfirm = ({ startEndTime, singleEvent }: any) => {
 
   const getName = useRef<HTMLInputElement | null>(null);
   const getMessage = useRef<HTMLTextAreaElement | null>(null);
   const getEmail = useRef<HTMLInputElement | null>(null);
 
-  useEffect(() => {
-    const url = `http://localhost:5000/times/${id}`;
-    fetch(url, {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setTimes(data);
-      });
-  }, [id]);
-
-  const handleBooking = (event: FormEvent<HTMLFormElement>) => {
+  const handleBooking = (event: any) => {
     event.preventDefault();
-    const time = times?.time;
-    const date = selected;
+    const startTime = startEndTime?.split("_")[0];
+    const endTime = startEndTime?.split("_")[1];
     const name = getName?.current?.value;
     const email = getEmail?.current?.value;
     const message = getMessage?.current?.value;
+    const eventName = singleEvent?.eventName;
+    const eventDescription = singleEvent?.eventDescription;
 
     const bookingConfirm = {
-      time: time,
-      date: date,
-      name: name,
+      startTime: startTime,
+      endTime: endTime,
       email: email,
-      message: message,
+      summary: eventName,
+      description: eventDescription
     };
-    console.log(bookingConfirm);
-    const url = `http://localhost:5000/d`;
-    fetch(url, {
-      method: "PUT",
+    const getRefreshToken = {
       headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        Authorization: `Bearer ${localStorage.getItem("refreshToken")}`,
       },
-      body: JSON.stringify(bookingConfirm),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.acknowledged === true) {
-          toast.success("Successful");
-        } else {
-          toast.error("Fail");
+    };
+    axios
+      .post(
+        "http://localhost:5000/api/create-event",
+        { bookingConfirm },
+        getRefreshToken
+      )
+      .then((response) => {
+        console.log(response);
+        if(response.status === 200){
+          toast.success('Event create success');
+          event.target.reset()
         }
-      });
+      })
+      .catch((error) => console.log(error.message));
   };
 
-  if (!times) {
-    return <Loading />;
-  }
-  // console.log(selected, "And Selected Time is:", times.time);
   return (
     <div className="p-5">
       <p className="font-bold text-xl">Enter Details</p>
@@ -84,6 +60,7 @@ const BookingConfirm = ({ selected }: any) => {
             className="border border-[#b8b8b8] focus:outline-none focus:border-secondary block rounded-lg p-2 mt-1 w-full"
             type="text"
             ref={getName}
+            required
           />
         </div>
         <div className="mt-4">
@@ -95,12 +72,13 @@ const BookingConfirm = ({ selected }: any) => {
             className="border border-[#b8b8b8] focus:outline-none focus:border-secondary block rounded-lg p-2 mt-1 w-full"
             type="text"
             ref={getEmail}
+            required
           />
         </div>
 
         <div className="mt-4">
-          <label className="text-primary font-medium" htmlFor="message">
-            Welcome Message
+          <label className="text-primary text-sm font-medium" htmlFor="message">
+            Please share anything that will help prepare for our meeting.
           </label>
 
           <textarea
