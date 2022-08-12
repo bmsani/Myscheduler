@@ -1,0 +1,76 @@
+[
+  {
+    "dayData": [
+      {
+        "day": "Saturday",
+        "start": "09:00 am",
+        "end": "05:00 pm",
+        "interval": {
+          "starting": "01:00 pm",
+          "ending": "02:00 pm"
+        },
+        "checked": false
+      },
+      {
+        "day": "Sunday",
+        "start": "09:00 am",
+        "end": "05:00 pm",
+        "interval": {
+          "starting": "01:00 pm",
+          "ending": "02:00 pm"
+        },
+        "checked": false
+      },
+      {
+        "day": "Monday",
+        "start": "09:00 am",
+        "end": "05:00 pm",
+        "interval": {
+          "starting": "01:00 pm",
+          "ending": "02:00 pm"
+        },
+        "checked": true
+      },
+      {
+        "day": "Tuesday",
+        "start": "09:00 am",
+        "end": "05:00 pm",
+        "interval": {
+          "starting": "01:00 pm",
+          "ending": "02:00 pm"
+        },
+        "checked": true
+      },
+      {
+        "day": "Wednesday",
+        "start": "09:00 am",
+        "end": "05:00 pm",
+        "interval": {
+          "starting": "01:00 pm",
+          "ending": "02:00 pm"
+        },
+        "checked": true
+      },
+      {
+        "day": "Thursday",
+        "start": "09:00 am",
+        "end": "05:00 pm",
+        "interval": {
+          "starting": "01:00 pm",
+          "ending": "02:00 pm"
+        },
+        "checked": true
+      },
+      {
+        "day": "Thursday",
+        "start": "09:00 am",
+        "end": "05:00 pm",
+        "interval": {
+          "starting": "01:00 pm",
+          "ending": "02:00 pm"
+        },
+        "checked": true
+      }
+    ]
+  }
+]

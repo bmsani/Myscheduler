@@ -35,12 +35,11 @@ const Register: React.FC = () => {
   const navigate = useNavigate();
   const [token] = useToken(user || GUser || FUser);
 
-
   if (loading || GLoading || FLoading || updating) {
     return <Loading></Loading>;
   }
   if (token) {
-    navigate("/home");
+    navigate("/dashboard/event");
   }
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
@@ -139,7 +138,8 @@ const Register: React.FC = () => {
                 )}
               </label>
               <p className="text-error text-sm">
-                {(error || GError || FError) && (error?.message || GError?.message || FError?.message)}
+                {(error || GError || FError) &&
+                  (error?.message || GError?.message || FError?.message)}
               </p>
               <input
                 type="submit"
@@ -160,7 +160,10 @@ const Register: React.FC = () => {
 
             <div className="mt-6 flex items-center gap-5">
               <span>Or create account with</span>
-              <SocialLogin signInWithGoogle={signInWithGoogle} signInWithFacebook={signInWithFacebook} />
+              <SocialLogin
+                signInWithGoogle={signInWithGoogle}
+                signInWithFacebook={signInWithFacebook}
+              />
             </div>
           </div>
         </div>

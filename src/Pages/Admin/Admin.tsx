@@ -1,35 +1,30 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
 
-const LoginHome: any = () => {
+const Admin: any = () => {
   return (
-    <div className="drawer drawer-mobile">
+    <div className="">
+      <div className="drawer drawer-mobile">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
         {/* <!-- Page content here --> */}
-        <h1 className="text-4xl font-bold text-center pt-2">Your Dashboard</h1>
         <Outlet></Outlet>
       </div>
-      <div className="drawer-side">
+      <div className="drawer-side w-48">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
         <ul className="menu p-4 overflow-y-auto w-full bg-base-100 text-base-content">
           {/* <!-- Sidebar content here --> */}
           <li>
-            <Link to="/home">Event Type</Link>
+            <Link to="/admin">Users Details</Link>
           </li>
           <li>
-            <Link to="/home">Scheduling event</Link>
-          </li>
-          <li>
-            <Link to="/home">Workflows</Link>
-          </li>
-          <li>
-            <Link to="/home">Routing forms</Link>
+            <Link to="/admin/userDetails">User events</Link>
           </li>
         </ul>
       </div>
     </div>
+    </div>
   );
 };
 
-export default LoginHome;
+export default Admin;

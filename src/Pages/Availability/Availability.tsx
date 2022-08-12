@@ -1,114 +1,150 @@
-import React from "react";
-import { AiOutlinePlusCircle } from "react-icons/ai";
-import { AiFillDelete } from "react-icons/ai";
-import { IoIosAddCircle } from "react-icons/io";
-import date from "../../Utilities/Image/date&time.gif";
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { BiMessageSquareAdd, BiEdit } from "react-icons/bi";
+import auth from "../../init.firebase";
+import Loading from "../../Shared/LoadingSpinner/Loading";
+import AvailabilityAdd from "./AvailabilityAdd/AvailabilityAdd";
+import AvailabilityEdit from "./AvailabilityEdit/AvailabilityEdit";
+
+type UserDays = {
+  id: "string";
+  day: "string";
+  start: "string";
+  end: "string";
+  checked: boolean;
+  user: "any";
+  interval: {
+    starting: "string";
+    ending: "string";
+  };
+};
 
 const Availability = () => {
-  return (
-    <div className="container mx-auto">
-      <h3 className="text-4xl font-bold py-4">
-        Availability & Time -{" "}
-        <span className="text-3xl font-bold">Scheduling Setup</span>
-      </h3>
-      <div className="rounded-box shadow-md mt-10">
-        <div className="flex flex-col w-full border-opacity-50">
-          <div className="grid card bg-base-100 px-10">
-            <div className="flex justify-start gap-2">
-              <h5 className="text-xl font-bold border-2 border-primary py-1 px-2 rounded-full">
-                Working Schedule
-              </h5>
-              <div className="rounded-full border-2 border-primary flex items-center px-2">
-                <AiOutlinePlusCircle className="text-xl" />
-                <label
-                  htmlFor="my-modal"
-                  className="modal-button text-xl font-bold"
-                >
-                  Create new <Modal />
-                </label>
-              </div>
-            </div>
-          </div>
-          <div className="divider"></div>
-          <div className="grid card bg-base-100 p-5">
-            <Schedule></Schedule>
-          </div>
-        </div>
-      </div>
-    </div>
+  const [user, loading] = useAuthState(auth);
+  const [singleDay, setSingleDay] = useState({});
+
+  const email = user?.email;
+
+  const {
+    data: days,
+    isLoading,
+    refetch,
+  } = useQuery(["days", email], () =>
+    fetch(`http://localhost:5000/availability/${email}`).then((res) =>
+      res.json()
+    )
   );
-};
 
-const Modal = () => {
+  const handleCheckedBox = (id: string, checkedBox: boolean) => {
+    const daysId = days._id;
+    const individualId = id;
+    fetch(
+      `http://localhost:5000/availability/checked/${daysId}?dayStatus=${!checkedBox}&dayDataId=${individualId}&email=${email}`,
+      {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount) {
+          refetch();
+        }
+      });
+  };
+
+  if (isLoading || loading) {
+    return <Loading></Loading>;
+  }
+
+  const handleAdd = async (daysId: string, dayId: string) => {
+    const response = await fetch(
+      `http://localhost:5000/availability/${daysId}/${dayId}`
+    );
+    const data = await response.json();
+    setSingleDay(data);
+  };
+
+  const handleEdit = async (daysId: string, dayId: string) => {
+    fetch(`http://localhost:5000/availability/${daysId}/${dayId}`)
+      .then((res) => res.json())
+      .then((data) => setSingleDay(data));
+  };
+
   return (
-    <div>
-      <input type="checkbox" id="my-modal" className="modal-toggle" />
-      <div className="modal">
-        <div className="modal-box">
-          <h3 className="font-bold text-lg">Add new working schedule</h3>
-          <input
-            type="text"
-            name="scheduling"
-            className="border-b-2 border-primary rounded-full shadow px-2"
-          />
-          <div className="modal-action">
-            <label htmlFor="my-modal" className="btn">
-              Create now
-            </label>
+    <div className="w-4/6 mx-auto py-10">
+      <h2 className="text-xl md:text-3xl font-bold text-center">
+        Availability setup
+      </h2>
+      <div>
+        <h4 className="text-lg md:text-2xl border-2 px-4 py-1 w-60 rounded-lg text-center border-gray-600 mx-auto my-3">
+          Working schedule
+        </h4>
+        <div className="mt-6">
+          <div className="overflow-x-auto w-full border rounded">
+            <table className="table w-full">
+              <tbody>
+                {days.dayData.map((day: UserDays) => (
+                  <tr key={day.id} className="hover">
+                    <th>
+                      <label>
+                        <input
+                          type="checkbox"
+                          checked={day?.checked}
+                          className="checkbox"
+                          onChange={() => handleCheckedBox(day.id, day.checked)}
+                        />
+                      </label>
+                    </th>
+                    <td>
+                      <div className="font-bold">{day.day}</div>
+                    </td>
+                    <td>
+                      <div>
+                        {day.checked ? (
+                          <span>
+                            {day.start} - {day.end}
+                          </span>
+                        ) : (
+                          <span>Unavailable</span>
+                        )}
+                      </div>
+                    </td>
+                    <td>
+                      <label htmlFor="add-modal">
+                        <BiMessageSquareAdd
+                          onClick={() => handleAdd(days._id, day.id)}
+                          className="text-5xl p-3 cursor-pointer"
+                        />
+                        <AvailabilityAdd
+                          singleDay={singleDay}
+                          days={days._id}
+                          refetch={refetch}
+                        />
+                      </label>
+                    </td>
+                    <td>
+                      <label htmlFor="edit-modal">
+                        <BiEdit
+                          className="text-5xl p-3 cursor-pointer"
+                          onClick={() => handleEdit(days._id, day.id)}
+                        />
+                        <AvailabilityEdit
+                          singleDay={singleDay}
+                          days={days._id}
+                          refetch={refetch}
+                        />
+                      </label>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const Schedule = () => {
-  const days: string[] = [
-    "Saturday",
-    "Sunday",
-    "Monday",
-    "tuesday",
-    "Wednesday",
-    "Thursday",
-    "friday",
-  ];
-
-  return (
-    <div>
-      <h6 className="text-lg font-bold">Set your weekly hours</h6>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 justify-center items-center">
-        <div>
-          {days.map((day) => (
-            <div className="flex items-center justify-start gap-5">
-              <div className="form-control">
-                <label className="label cursor-pointer justify-start gap-5">
-                  <input type="checkbox" className="checkbox mr-2" />
-                  <div className="flex items-center justify-center gap-10">
-                    <p className="label-text text-lg w-24">{day}</p>
-                    <div className="">
-                      <input
-                        type="number"
-                        className="border-2 border-primary mr-3 p-1 px-2 rounded-full w-28"
-                        placeholder="hour"
-                      />
-                      <input
-                        type="number"
-                        className="border-2 border-primary p-1 px-2 rounded-full w-28"
-                        placeholder="minutes"
-                      />
-                    </div>
-                  </div>
-                </label>
-              </div>
-              <div className="flex justify-center items-center gap-4">
-                <AiFillDelete className=" text-2xl" />
-                <IoIosAddCircle className=" text-2xl" />
-              </div>
-            </div>
-          ))}
-        </div>
-        <div>
-          <img src={date} alt="" />
         </div>
       </div>
     </div>
