@@ -3,7 +3,8 @@ import { Link, Outlet } from "react-router-dom";
 
 const Admin: any = () => {
   return (
-    <div className="drawer drawer-mobile">
+    <div className="">
+      <div className="drawer drawer-mobile">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
         {/* <!-- Page content here --> */}
@@ -21,6 +22,7 @@ const Admin: any = () => {
           </li>
         </ul>
       </div>
+    </div>
     </div>
   );
 };

@@ -66,7 +66,7 @@ const Profile = () => {
   if (!userInfo._id) {
     return <Loading />;
   }
-
+console.log(user?.photoURL);
   return (
     <div className="flex justify-center items-center py-8">
       <form

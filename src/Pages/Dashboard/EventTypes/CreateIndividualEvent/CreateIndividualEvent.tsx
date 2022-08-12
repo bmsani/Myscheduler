@@ -43,7 +43,6 @@ const CreateIndividualEvent = () => {
       eventName: eventName,
       eventLocation: eventLocation,
       eventDescription: eventDescription,
-      // eventLink: eventLink,
       eventDuration: eventDuration,
       availabilities: availabilities?.dayData,
     };
@@ -110,7 +109,6 @@ const CreateIndividualEvent = () => {
                   {eventName === "" ||
                   eventLocation === "" ||
                   eventDescription === "" ? (
-                    // || eventLink === ""
                     <button
                       className="px-4 py-1 rounded-full text-white bg-gray-400"
                       disabled
@@ -203,9 +201,8 @@ const CreateIndividualEvent = () => {
                 </Link>
                 {eventName === "" ||
                 eventLocation === "" ||
-                  eventDescription === ""
+                eventDescription === "" ? (
                   // || eventLink === ""
-                  ? (
                   <button
                     className="px-4 py-1 rounded-full text-white bg-gray-400"
                     disabled

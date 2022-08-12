@@ -74,9 +74,9 @@ const Navbar = () => {
   );
 
   return (
-    <div>
+    <div className="sticky top-0 z-50">
       {user ? (
-        <div className="navbar bg-base-100 shadow-xl">
+        <div className="navbar bg-base-100 shadow-xl px-4">
           <div className="container mx-auto">
             <div className="flex-1 hidden md:block">
               <div className="w-3/4 lg:w-1/2 md:w-3/5 lg:justify-start justify-between">
@@ -177,7 +177,7 @@ const Navbar = () => {
           </div>
         </div>
       ) : (
-        <div className="sticky top-0 z-50">
+        <div>
           <div
             className={
               colorChange || anotherRouteColorChange
@@ -196,7 +196,7 @@ const Navbar = () => {
               </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
-              <ul className="menu menu-horizontal p-0 font-semibold xl:gap-16">
+              <ul className="menu menu-horizontal p-0 font-semibold xl:gap-8">
                 {items}
               </ul>
             </div>
