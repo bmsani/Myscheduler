@@ -5,7 +5,7 @@ const UserRow = ({ user, refetch, index }: any) => {
   const { email, role } = user;
 
   const makeAdmin = () => {
-    fetch(`http://localhost:5000/user/admin/${email}`, {
+    fetch(`https://secure-chamber-99191.herokuapp.com/user/admin/${email}`, {
       method: "PUT",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -26,7 +26,7 @@ const UserRow = ({ user, refetch, index }: any) => {
   };
 
   const removeUser = (id: string) => {
-    fetch(`http://localhost:5000/removeUser/${email}`, {
+    fetch(`https://secure-chamber-99191.herokuapp.com/removeUser/${email}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",
