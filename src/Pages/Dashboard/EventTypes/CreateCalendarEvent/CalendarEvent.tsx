@@ -2,7 +2,7 @@ import axios from "axios";
 import { gapi } from "gapi-script";
 import React, { useEffect, useRef, useState } from "react";
 import GoogleLogin from "react-google-login";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 
 const clientId =
   "246190552758-iv4qnbua1chul41b87mfch0gsoeqe8bj.apps.googleusercontent.com";
