@@ -20,7 +20,7 @@ const AvailabilityAdd = ({ singleDay, days, refetch }: any) => {
               </label>
               <input
                 type="text"
-                placeholder="Starting time"
+                placeholder={singleDay?.interval?.starting}
                 className="input input-bordered w-full  border-2 border-primary"
               />
             </div>
@@ -30,7 +30,7 @@ const AvailabilityAdd = ({ singleDay, days, refetch }: any) => {
               </label>
               <input
                 type="text"
-                placeholder="Ending time"
+                placeholder={singleDay?.interval?.ending}
                 className="input input-bordered w-full border-2 border-primary"
               />
             </div>

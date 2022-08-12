@@ -2,14 +2,13 @@ import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
 
 const AccountSettings: any = () => {
-  // let activeClassName = "text-secondary font-bold";
   const items = (
     <>
       <li>
         <NavLink
           className={({ isActive }) =>
             isActive
-              ? " font-bold text-secondary border-b-2 border-b-secondary"
+              ? "font-bold text-secondary border-b-2 border-b-secondary"
               : ""
           }
           to="/accountSettings/profile"
@@ -21,7 +20,7 @@ const AccountSettings: any = () => {
         <NavLink
           className={({ isActive }) =>
             isActive
-              ? " font-bold text-error border-b-2 border-b-error hover:bg-white"
+              ? "font-bold text-error border-b-2 border-b-error hover:bg-white"
               : ""
           }
           to="/accountSettings/branding"

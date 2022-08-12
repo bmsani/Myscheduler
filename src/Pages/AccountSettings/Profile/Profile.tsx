@@ -7,7 +7,6 @@ import profileImg from "../../../Utilities/icon/profile.png";
 
 const Profile = () => {
   const [user] = useAuthState(auth);
-
   const [userInfo, setUserInfo] = useState({
     _id: "",
     name: "",
@@ -62,7 +61,7 @@ const Profile = () => {
   };
 
   // console.log("User form firebase", user?.displayName);
-  console.log("User form Database", userInfo);
+  // console.log(userInfo);
 
   if (!userInfo._id) {
     return <Loading />;
@@ -161,9 +160,9 @@ const Profile = () => {
             type="submit"
             value="Save Change"
           />
-          <button className="mt-4 bg-error py-2 px-4 rounded-lg text-white hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer">
+          {/* <button className="mt-4 bg-error py-2 px-4 rounded-lg text-white hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer">
             Cancel
-          </button>
+          </button> */}
         </div>
       </form>
     </div>

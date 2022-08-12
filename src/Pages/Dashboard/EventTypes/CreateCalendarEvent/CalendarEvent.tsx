@@ -1,12 +1,12 @@
 import axios from "axios";
 import { gapi } from "gapi-script";
+import moment from "moment";
 import React, { useEffect, useRef, useState } from "react";
 import GoogleLogin from "react-google-login";
 // import { toast } from "react-toastify";
 
 const clientId =
   "246190552758-iv4qnbua1chul41b87mfch0gsoeqe8bj.apps.googleusercontent.com";
-// const ClintSecret= "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";
 
 const CalendarEvent = () => {
   const [signedIn, setSignedIn] = useState<boolean>(false);
@@ -28,7 +28,11 @@ const CalendarEvent = () => {
     axios
       .post("http://localhost:5000/api/create-tokens", { code })
       .then((response) => {
-        console.log(response.data);
+        console.log(response?.data);
+        const refreshToken = response?.data?.refresh_token;
+        if (refreshToken) {
+          localStorage.setItem("refreshToken", refreshToken);
+        }
         setSignedIn(true);
       })
       .catch((error) => console.log(error.message));
@@ -51,59 +55,40 @@ const CalendarEvent = () => {
     const description = getDescription?.current?.value;
     const location = getLocation?.current?.value;
     const email = getEmail?.current?.value;
-    const startDateTime = getStartTime?.current?.value;
-    const endDateTime = getEndTime?.current?.value;
-    console.log(
+    const startDateTime = moment(getStartTime?.current?.value).format();
+    const endDateTime = moment(getEndTime?.current?.value).format();
+
+    const eventData = {
       summary,
       description,
       location,
       email,
       startDateTime,
-      endDateTime
-    );
-
-    try {
-      const response = await fetch("http://localhost:5000/api/create-event", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({
-          summary: summary,
-          description: description,
-          location: location,
-          email: email,
-          startDateTime: startDateTime,
-          endDateTime: endDateTime,
-        }),
+      endDateTime,
+    };
+    const getRefreshToken = {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("refreshToken")}`,
+      },
+    };
+    axios
+      .post(
+        "http://localhost:5000/api/create-event",
+        { eventData },
+        getRefreshToken
+      )
+      .then((response) => {
+        console.log(response);
+        setSignedIn(true);
       })
-      const responseData = response.json();
-      console.log(responseData);
-    } catch (err) {
-      console.log(err);
-    }
-
-    // axios
-    //   .post("http://localhost:5000/api/create-event", {
-    //     summary,
-    //     description,
-    //     location,
-    //     email,
-    //     startDateTime,
-    //     endDateTime,
-    //   })
-    //   .then((response) => {
-    //     console.log(response);
-    //     setSignedIn(true);
-    //   })
-    //   .catch((error) => console.log(error.message));
+      .catch((error) => console.log(error.message));
   };
   return (
     <div className="pt-8 pb-16">
       <h1 className="text-3xl font-semibold text-center text-secondary py-4">
         Create Your Event
       </h1>
-      {!signedIn ? (
+      {/* {!signedIn ? ( */}
         <div className="text-center mt-16">
           <GoogleLogin
             clientId="246190552758-iv4qnbua1chul41b87mfch0gsoeqe8bj.apps.googleusercontent.com"
@@ -116,7 +101,7 @@ const CalendarEvent = () => {
             scope="openid email profile https://www.googleapis.com/auth/calendar"
           />
         </div>
-      ) : (
+      {/* ) : ( */}
         <div className="flex justify-center items-center">
           <form
             onSubmit={handleCreateEvent}
@@ -200,7 +185,7 @@ const CalendarEvent = () => {
             />
           </form>
         </div>
-      )}
+      {/* )} */}
     </div>
   );
 };
