@@ -27,7 +27,7 @@ const CreateIndividualEvent = () => {
   const email = user?.email;
 
   useEffect(() => {
-    fetch(`http://localhost:5000/availability/${email}`)
+    fetch(`https://secure-chamber-99191.herokuapp.com/availability/${email}`)
       .then((res) => res.json())
       .then((data) => setAvailabilities(data));
   }, [email]);
@@ -46,7 +46,7 @@ const CreateIndividualEvent = () => {
       eventDuration: eventDuration,
       availabilities: availabilities?.dayData,
     };
-    fetch("http://localhost:5000/updateEvent", {
+    fetch("https://secure-chamber-99191.herokuapp.com/updateEvent", {
       method: "POST",
       headers: {
         "content-type": "application/json",
