@@ -29,17 +29,6 @@ const useToken = (user: any) => {
       dayData: [
         {
           id: "1",
-          day: "Sat",
-          start: "09:00",
-          end: "17:00",
-          interval: {
-            starting: "13:00",
-            ending: "14:00",
-          },
-          checked: false,
-        },
-        {
-          id: "2",
           day: "Sun",
           start: "09:00",
           end: "17:00",
@@ -50,7 +39,7 @@ const useToken = (user: any) => {
           checked: false,
         },
         {
-          id: "3",
+          id: "2",
           day: "Mon",
           start: "09:00",
           end: "17:00",
@@ -61,7 +50,7 @@ const useToken = (user: any) => {
           checked: true,
         },
         {
-          id: "4",
+          id: "3",
           day: "Tue",
           start: "09:00",
           end: "17:00",
@@ -72,7 +61,7 @@ const useToken = (user: any) => {
           checked: true,
         },
         {
-          id: "5",
+          id: "4",
           day: "Wed",
           start: "09:00",
           end: "17:00",
@@ -83,7 +72,7 @@ const useToken = (user: any) => {
           checked: true,
         },
         {
-          id: "6",
+          id: "5",
           day: "Thu",
           start: "09:00",
           end: "17:00",
@@ -94,7 +83,7 @@ const useToken = (user: any) => {
           checked: true,
         },
         {
-          id: "7",
+          id: "6",
           day: "Fri",
           start: "09:00",
           end: "17:00",
@@ -104,6 +93,17 @@ const useToken = (user: any) => {
           },
           checked: true,
         },
+        {
+          id: "7",
+          day: "Sat",
+          start: "09:00",
+          end: "17:00",
+          interval: {
+            starting: "13:00",
+            ending: "14:00",
+          },
+          checked: false,
+        }
       ],
     };
     if (email) {

@@ -59,14 +59,23 @@ const BookingCalender = () => {
   }, [singleEvent?.email]);
 
   const backButton = () => {
-    setClick(false)
+    setClick(false);
   };
+
   const dayFromCalendar = format(selected, "PPPPP").split(",")[0].slice(0, 3);
   const dayFromDB = times?.find((d: any) => d.day === dayFromCalendar);
+
+  // disable unavailable day
+  const checked = times.filter((d: any) => d.checked === false);
+  const day = checked.map((d: any) => d.id - 1);
+  console.log(day[0], day[1]);
+
   const yesterday = moment().subtract(1, "day");
   const valid = function (current: any) {
     return (
-      current.isAfter(yesterday) && current.day() !== 0 && current.day() !== 6
+      current.isAfter(yesterday) &&
+      current.day() !== day[0] &&
+      current.day() !== day[1] 
     );
   };
 
@@ -103,6 +112,7 @@ const BookingCalender = () => {
   const handleDate = (date: any) => {
     setSelected(date.toDate());
   };
+
   const handleConfirmBooking = (selectedTime: string) => {
     const selectDate = moment(selected).format().split("T")[0];
     const startTime = moment(selectDate + " " + selectedTime).format();
@@ -113,19 +123,21 @@ const BookingCalender = () => {
     setStartEndTime(startEnd);
     setClick(true);
   };
+
   if (!times) {
     return <Loading />;
   }
 
+  // start and end time of event
   const startWithDate = startEndTime?.split("_")[0];
   const startWithUTC = startWithDate?.split("T")[1];
-  const startTime = startWithUTC?.split("+")[0]
+  const startTime = startWithUTC?.split("+")[0];
+
   const endWithDate = startEndTime?.split("_")[1];
   const endWithUTC = endWithDate?.split("T")[1];
-  const endTimee = endWithUTC?.split("+")[0]
-  const eventDate = moment(startEndTime?.split("T")[0]).format('MMMM Do YYYY');
-  
-  console.log(eventDate, startTime, endTimee)
+  const endTimee = endWithUTC?.split("+")[0];
+
+  const eventDate = moment(startEndTime?.split("T")[0]).format("MMMM Do YYYY");
 
   return (
     <div className="lg:mx-20 lg:mt-12 border">
@@ -155,10 +167,12 @@ const BookingCalender = () => {
               <FiClock className="text-2xl" />
               <h2 className="font-bold text-gray-500">30 Minute</h2>
             </div>
-            {(startTime && endTimee) && <div className="flex gap-2 mt-4">
-              <AiOutlineCalendar className="text-2xl" />
-              <h2 className="font-bold text-gray-500">{`${startTime} - ${endTimee}, ${eventDate}`}</h2>
-            </div>}
+            {startTime && endTimee && (
+              <div className="flex gap-2 mt-4">
+                <AiOutlineCalendar className="text-2xl" />
+                <h2 className="font-bold text-gray-500">{`${startTime} - ${endTimee}, ${eventDate}`}</h2>
+              </div>
+            )}
             <p className="mt-4 text-md font-semibold text-slate-500">
               {singleEvent?.eventDescription}
             </p>
@@ -210,7 +224,10 @@ const BookingCalender = () => {
             </div>
           </div>
         ) : (
-          <BookingConfirm startEndTime={startEndTime} singleEvent={singleEvent} />
+          <BookingConfirm
+            startEndTime={startEndTime}
+            singleEvent={singleEvent}
+          />
         )}
       </div>
     </div>
