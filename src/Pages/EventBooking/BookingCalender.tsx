@@ -68,17 +68,21 @@ const BookingCalender = () => {
   // disable unavailable day
   const checked = times.filter((d: any) => d.checked === false);
   const day = checked.map((d: any) => d.id - 1);
-  console.log(day[0], day[1]);
-
   const yesterday = moment().subtract(1, "day");
   const valid = function (current: any) {
     return (
       current.isAfter(yesterday) &&
       current.day() !== day[0] &&
-      current.day() !== day[1] 
+      current.day() !== day[1] &&
+      current.day() !== day[2] &&
+      current.day() !== day[3] &&
+      current.day() !== day[4] &&
+      current.day() !== day[5] &&
+      current.day() !== day[6] 
     );
   };
 
+  // split start and end time and create slots
   const start = dayFromDB?.start;
   const end = dayFromDB?.end;
   const intervalStart = dayFromDB?.interval?.starting;
