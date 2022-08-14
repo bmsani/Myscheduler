@@ -64,7 +64,7 @@ const BookingConfirm = ({ startEndTime, singleEvent, hostEmail }: any) => {
 
           <input
             className="border border-[#b8b8b8] focus:outline-none focus:border-secondary block rounded-lg p-2 mt-1 w-full"
-            type="text"
+            type="email"
             ref={getEmail}
             required
           />
