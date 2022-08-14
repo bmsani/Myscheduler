@@ -69,13 +69,13 @@ const BookingCalender = () => {
   };
 
   const { data: singleEvent } = useQuery(["singleEvent", id], () =>
-    fetch(`http://localhost:5000/getSingleEvent/${id}`, {
+    fetch(`https://secure-chamber-99191.herokuapp.com/getSingleEvent/${id}`, {
       method: "GET",
     }).then((res) => res.json())
   );
 
   useEffect(() => {
-    const url = `http://localhost:5000/user/${singleEvent?.email}`;
+    const url = `https://secure-chamber-99191.herokuapp.com/user/${singleEvent?.email}`;
     fetch(url, {
       method: "GET",
       headers: {
@@ -91,7 +91,9 @@ const BookingCalender = () => {
   // ================Times Slots ============================
   useEffect(() => {
     if (singleEvent?.email) {
-      fetch(`http://localhost:5000/availability/${singleEvent?.email}`)
+      fetch(
+        `https://secure-chamber-99191.herokuapp.com/availability/${singleEvent?.email}`
+      )
         .then((res) => res.json())
         .then((data) => setTimes(data?.dayData));
     }
@@ -179,7 +181,6 @@ const BookingCalender = () => {
   const endWithDate = startEndTime?.split("_")[1];
   const endWithUTC = endWithDate?.split("T")[1];
   const endTimee = endWithUTC?.split("+")[0];
-
   const eventDate = moment(startEndTime?.split("T")[0]).format("MMMM Do YYYY");
 
   return (

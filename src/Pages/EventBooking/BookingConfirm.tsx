@@ -23,24 +23,18 @@ const BookingConfirm = ({ startEndTime, singleEvent, hostEmail }: any) => {
       endTime: endTime,
       email: email,
       summary: eventName,
-      description: eventDescription
-    };
-    const getRefreshToken = {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("refreshToken")}`,
-      },
+      description: eventDescription,
     };
     axios
       .post(
         "http://localhost:5000/api/create-event",
         { bookingConfirm, hostEmail },
-        getRefreshToken
       )
       .then((response) => {
         console.log(response);
-        if(response.status === 200){
-          toast.success('Event create success');
-          event.target.reset()
+        if (response.status === 200) {
+          toast.success("Event create success");
+          event.target.reset();
         }
       })
       .catch((error) => console.log(error.message));
