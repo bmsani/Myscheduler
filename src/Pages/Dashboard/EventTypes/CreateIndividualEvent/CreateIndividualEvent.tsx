@@ -80,14 +80,6 @@ const CreateIndividualEvent = () => {
               <div>
                 <h2 className="text-xl py-3">Add One-on-One Event Type</h2>
               </div>
-              <div>
-                <h2 className="text-base py-3 text-end">
-                  Your event type is{" "}
-                  <span className="px-5 py-1 text-base ml-1 text-white bg-gray-400 rounded-sm">
-                    OFF
-                  </span>{" "}
-                </h2>
-              </div>
             </div>
           </div>
           <div className="xl:mx-48 sm:mx-8 border-2 border-zinc-500 mt-8 mb-8 pb-4">
@@ -173,7 +165,7 @@ const CreateIndividualEvent = () => {
                 <div className="">
                   <textarea
                     required
-                    onBlur={(e) => setEventDescription(e.target.value)}
+                    onChange={(e) => setEventDescription(e.target.value)}
                     className="textarea border-blue-500 w-full max-w-xs"
                     placeholder="Bio"
                   ></textarea>

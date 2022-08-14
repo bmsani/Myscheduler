@@ -1,8 +1,7 @@
 import axios from "axios";
 import React, { FormEvent, useRef } from "react";
 import { toast } from "react-toastify";
-
-const BookingConfirm = ({ startEndTime, singleEvent }: any) => {
+const BookingConfirm = ({ startEndTime, singleEvent, hostEmail }: any) => {
   const getName = useRef<HTMLInputElement | null>(null);
   const getMessage = useRef<HTMLTextAreaElement | null>(null);
   const getEmail = useRef<HTMLInputElement | null>(null);
@@ -31,8 +30,8 @@ const BookingConfirm = ({ startEndTime, singleEvent }: any) => {
     };
     axios
       .post(
-        "https://secure-chamber-99191.herokuapp.com/api/create-event",
-        { bookingConfirm },
+        "http://localhost:5000/api/create-event",
+        { bookingConfirm, hostEmail },
         getRefreshToken
       )
       .then((response) => {

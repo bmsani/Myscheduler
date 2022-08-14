@@ -113,19 +113,22 @@ const Navbar = () => {
                   )}
                 </li>
                 <li>
-                  <Link className="px-1 md:px-4" to="/dashboard">
+                  <Link className="px-1 md:px-4 font-semibold" to="/dashboard">
                     Dashboard
                   </Link>
                 </li>
                 {admin && (
                   <li>
-                    <Link className="px-1 md:px-4" to="/admin">
+                    <Link className="px-1 md:px-4 font-semibold" to="/admin">
                       Admin
                     </Link>
                   </li>
                 )}
                 <li>
-                  <Link className="px-1 md:px-4" to="/availability">
+                  <Link
+                    className="px-1 md:px-4 font-semibold"
+                    to="/availability"
+                  >
                     Availability
                   </Link>
                 </li>
@@ -133,7 +136,7 @@ const Navbar = () => {
                   <div className="dropdown dropdown-end">
                     <label
                       tabIndex={0}
-                      className=" cursor-pointer flex justify-center items-center gap-2"
+                      className="cursor-pointer flex justify-center items-center gap-2"
                     >
                       <BiDownArrow />
                       <div className="w-8 rounded-full ">
@@ -152,22 +155,36 @@ const Navbar = () => {
                       className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 mt-40"
                     >
                       <li>
-                        <Link to="/accountSettings/profile">
+                        <Link
+                          to="/accountSettings/profile"
+                          className="w-full font-semibold"
+                        >
                           Account setting
                         </Link>
                       </li>
                       <li>
-                        <Link to="/calenderConnection">
+                        <Link
+                          to="/calenderConnection"
+                          className="w-full font-semibold"
+                        >
                           Calender Connections
                         </Link>
                       </li>
                       <li>
-                        <label htmlFor="my-modal-6" className="">
+                        <label
+                          htmlFor="my-modal-6"
+                          className="w-full font-semibold"
+                        >
                           Share Your Link
                         </label>
                       </li>
                       <li>
-                        <button onClick={handleSignOut}>Logout</button>
+                        <button
+                          className="w-full font-semibold"
+                          onClick={handleSignOut}
+                        >
+                          Logout
+                        </button>
                       </li>
                     </ul>
                   </div>

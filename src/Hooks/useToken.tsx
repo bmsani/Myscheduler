@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const useToken = (user: any) => {
   const [token, setToken] = useState("");
@@ -29,80 +30,80 @@ const useToken = (user: any) => {
       dayData: [
         {
           id: "1",
-          day: "Sat",
+          day: "Sun",
           start: "09:00",
           end: "17:00",
           interval: {
-            starting: "13:00",
-            ending: "14:00",
+            starting: "00:00",
+            ending: "00:00",
           },
           checked: false,
         },
         {
           id: "2",
-          day: "Sun",
-          start: "09:00",
-          end: "17:00",
-          interval: {
-            starting: "13:00",
-            ending: "14:00",
-          },
-          checked: false,
-        },
-        {
-          id: "3",
           day: "Mon",
           start: "09:00",
           end: "17:00",
           interval: {
-            starting: "13:00",
-            ending: "14:00",
+            starting: "00:00",
+            ending: "00:00",
+          },
+          checked: true,
+        },
+        {
+          id: "3",
+          day: "Tue",
+          start: "09:00",
+          end: "17:00",
+          interval: {
+            starting: "00:00",
+            ending: "00:00",
           },
           checked: true,
         },
         {
           id: "4",
-          day: "Tue",
+          day: "Wed",
           start: "09:00",
           end: "17:00",
           interval: {
-            starting: "13:00",
-            ending: "14:00",
+            starting: "00:00",
+            ending: "00:00",
           },
           checked: true,
         },
         {
           id: "5",
-          day: "Wed",
+          day: "Thu",
           start: "09:00",
           end: "17:00",
           interval: {
-            starting: "13:00",
-            ending: "14:00",
+            starting: "00:00",
+            ending: "00:00",
           },
           checked: true,
         },
         {
           id: "6",
-          day: "Thu",
+          day: "Fri",
           start: "09:00",
           end: "17:00",
           interval: {
-            starting: "13:00",
-            ending: "14:00",
+            starting: "00:00",
+            ending: "00:00",
           },
           checked: true,
         },
         {
           id: "7",
-          day: "Fri",
+          day: "Sat",
           start: "09:00",
           end: "17:00",
           interval: {
-            starting: "13:00",
-            ending: "14:00",
+            starting: "00:00",
+            ending: "00:00",
           },
-          checked: true,
+          checked: false,
         },
       ],
     };
@@ -118,8 +119,11 @@ const useToken = (user: any) => {
         }
       )
         .then((res) => res.json())
-        .then((data) => console.log(data));
-      console.log("user avaialelity");
+        .then((data) => {
+          if (data.acknowledged) {
+            toast.success("Availability create successful");
+          }
+        });
     }
   }, [user]);
 
