@@ -38,7 +38,7 @@ const CreateEventType = () => {
             </div>
           </div>
           <div>
-            <Link to="/CreateIndividualEvent">
+            <Link to="/createIndividualEvent">
               <button className="bg-blue-500 text-white px-7 py-3 rounded-full">
                 Create
               </button>
