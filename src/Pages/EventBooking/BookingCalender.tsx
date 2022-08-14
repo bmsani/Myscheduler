@@ -13,6 +13,12 @@ import DatePicker from "react-datetime";
 import moment from "moment";
 import "react-datetime/css/react-datetime.css";
 import { useQuery } from "@tanstack/react-query";
+import GoogleLogin from "react-google-login";
+import axios from "axios";
+import { gapi } from "gapi-script";
+
+const clientId =
+  "246190552758-iv4qnbua1chul41b87mfch0gsoeqe8bj.apps.googleusercontent.com";
 
 const BookingCalender = () => {
   const { id } = useParams();
@@ -28,6 +34,40 @@ const BookingCalender = () => {
   const { name, brandLogo } = userInfo;
   const [click, setClick] = useState(false);
 
+  // connect google calendar
+  useEffect(() => {
+    function start() {
+      gapi.client.init({
+        clientId: clientId,
+        scope: "openid email profile https://www.googleapis.com/auth/calendar",
+      });
+    }
+
+    gapi.load("client:auth2", start);
+  });
+
+  const responseGoogle = (response: any) => {
+    console.log(response);
+    const { code } = response;
+    axios
+      .post("http://localhost:5000/api/create-tokens", { code })
+      .then((response) => {
+        console.log(response?.data);
+        const refreshToken = response?.data?.refresh_token;
+        if (refreshToken) {
+          axios
+            .put(`http://localhost:5000/user/${singleEvent?.email}`, {
+              refreshToken,
+            })
+            .then((res) => console.log(res));
+        }
+      })
+      .catch((error) => console.log(error.message));
+  };
+  const responseError = (error: any) => {
+    console.log(error);
+  };
+
   const { data: singleEvent } = useQuery(["singleEvent", id], () =>
     fetch(`https://secure-chamber-99191.herokuapp.com/getSingleEvent/${id}`, {
       method: "GET",
@@ -40,7 +80,6 @@ const BookingCalender = () => {
       method: "GET",
       headers: {
         "content-type": "application/json",
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     })
       .then((res) => res.json())
@@ -63,15 +102,28 @@ const BookingCalender = () => {
   const backButton = () => {
     setClick(false);
   };
+
   const dayFromCalendar = format(selected, "PPPPP").split(",")[0].slice(0, 3);
   const dayFromDB = times?.find((d: any) => d.day === dayFromCalendar);
+
+  // disable unavailable day
+  const checked = times.filter((d: any) => d.checked === false);
+  const day = checked.map((d: any) => d.id - 1);
   const yesterday = moment().subtract(1, "day");
   const valid = function (current: any) {
     return (
-      current.isAfter(yesterday) && current.day() !== 0 && current.day() !== 6
+      current.isAfter(yesterday) &&
+      current.day() !== day[0] &&
+      current.day() !== day[1] &&
+      current.day() !== day[2] &&
+      current.day() !== day[3] &&
+      current.day() !== day[4] &&
+      current.day() !== day[5] &&
+      current.day() !== day[6]
     );
   };
 
+  // split start and end time and create slots
   const start = dayFromDB?.start;
   const end = dayFromDB?.end;
   const intervalStart = dayFromDB?.interval?.starting;
@@ -105,6 +157,7 @@ const BookingCalender = () => {
   const handleDate = (date: any) => {
     setSelected(date.toDate());
   };
+
   const handleConfirmBooking = (selectedTime: string) => {
     const selectDate = moment(selected).format().split("T")[0];
     const startTime = moment(selectDate + " " + selectedTime).format();
@@ -115,10 +168,12 @@ const BookingCalender = () => {
     setStartEndTime(startEnd);
     setClick(true);
   };
+
   if (!times) {
     return <Loading />;
   }
 
+  // start and end time of event
   const startWithDate = startEndTime?.split("_")[0];
   const startWithUTC = startWithDate?.split("T")[1];
   const startTime = startWithUTC?.split("+")[0];
@@ -127,10 +182,20 @@ const BookingCalender = () => {
   const endTimee = endWithUTC?.split("+")[0];
   const eventDate = moment(startEndTime?.split("T")[0]).format("MMMM Do YYYY");
 
-  console.log(eventDate, startTime, endTimee);
-
   return (
-    <div className="lg:mx-20 lg:mt-12 border">
+    <div className="lg:mx-20 lg:my-12 border">
+      <div className="text-center mt-8">
+        <GoogleLogin
+          clientId="246190552758-iv4qnbua1chul41b87mfch0gsoeqe8bj.apps.googleusercontent.com"
+          buttonText="Connect your calendar"
+          onSuccess={responseGoogle}
+          onFailure={responseError}
+          cookiePolicy={"single_host_origin"}
+          responseType="code"
+          accessType="offline"
+          scope="openid email profile https://www.googleapis.com/auth/calendar"
+        />
+      </div>
       <div className="grid grid-cols-1 lg:grid-cols-3  ">
         <div className=" lg:col-span-1 lg:border-r sm:border-b">
           <div className="flex gap-5 border-b p-5">
@@ -217,6 +282,7 @@ const BookingCalender = () => {
           <BookingConfirm
             startEndTime={startEndTime}
             singleEvent={singleEvent}
+            hostEmail={singleEvent?.email}
           />
         )}
       </div>

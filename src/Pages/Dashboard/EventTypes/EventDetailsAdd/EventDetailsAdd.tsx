@@ -19,7 +19,6 @@ const EventDetailsAdd = ({
   eventLocation,
   availabilities,
   durationRef,
-  eventDuration,
   handleEvent,
 }: any) => {
   return (
@@ -114,6 +113,13 @@ const EventDetailsAdd = ({
                           </span>
                         ) : (
                           "unavailable"
+                        )}
+                      </p>
+                      <p>
+                        {a.checked && (
+                          <span>
+                            {a.interval.starting} - {a.interval.ending}
+                          </span>
                         )}
                       </p>
                     </div>
