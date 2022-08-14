@@ -42,7 +42,7 @@ const AddCalender = () => {
             })
             .then((res) => {
               if (res.status === 200) {
-                navigate("/calenderConnection");
+                navigate("/createEvent");
                 toast.success("Your Google Calendar Connected");
               }
             });

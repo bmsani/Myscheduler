@@ -32,13 +32,13 @@ const CalenderConnection = () => {
         <div className="flex justify-between py-4 px-8">
           <h2 className="text-xl">My calender Account</h2>
           {singleUser.refreshToken ? (
-            <button className="rounded-lg btn btn-disabled btn-md btn-outline btn-info">
-              Connected
+            <button className="rounded-lg btn btn-disabled btn-md btn-outline">
+              Your Google Calendar Connected
             </button>
           ) : (
             <Link to="/addCalender">
-              <button className="text-sm rounded-lg btn btn-md btn-outline btn-info">
-                Add Calender Account
+              <button className="text-sm rounded-lg btn btn-md btn-outline btn-secondary">
+                Connect Your Calendar
               </button>
             </Link>
           )}

@@ -8,6 +8,16 @@ const Event = () => {
   const [user] = useAuthState(auth);
   const email = user?.email;
   const photo: any = user?.photoURL;
+
+  const { data: singleUser } = useQuery(["singleUser", user?.email], () =>
+    fetch(`http://localhost:5000/user/${user?.email}`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }).then((res) => res.json())
+  );
   const {
     data: events,
     isLoading,
@@ -45,13 +55,21 @@ const Event = () => {
             <p className="text-secondary">{email}</p>
           </div>
         </div>
-        <Link to="/createEvent">
-          <button className="mt-4 bg-primary py-2 px-4 rounded text-white hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer">
-            + New Event
-          </button>
-        </Link>
+        {singleUser.refreshToken ? (
+          <Link to="/createEvent">
+            <button className="mt-4 bg-primary py-2 px-4 rounded text-white hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer">
+              + New Event
+            </button>
+          </Link>
+        ) : (
+          <Link to="/calenderConnection">
+            <button className="mt-4 bg-primary py-2 px-4 rounded text-white hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer">
+              + New Event
+            </button>
+          </Link>
+        )}
       </div>
-      <div className=" divider"></div>
+      <div className="divider"></div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {events.map((e: any) => (
