@@ -88,7 +88,7 @@ const CalendarEvent = () => {
       <h1 className="text-3xl font-semibold text-center text-secondary py-4">
         Create Your Event
       </h1>
-      {/* {!signedIn ? ( */}
+      {!signedIn ? (
         <div className="text-center mt-16">
           <GoogleLogin
             clientId="246190552758-iv4qnbua1chul41b87mfch0gsoeqe8bj.apps.googleusercontent.com"
@@ -101,7 +101,7 @@ const CalendarEvent = () => {
             scope="openid email profile https://www.googleapis.com/auth/calendar"
           />
         </div>
-      {/* ) : ( */}
+        ) : ( 
         <div className="flex justify-center items-center">
           <form
             onSubmit={handleCreateEvent}
@@ -185,7 +185,7 @@ const CalendarEvent = () => {
             />
           </form>
         </div>
-      {/* )} */}
+      )}
     </div>
   );
 };

@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { FormEvent, useRef } from "react";
 import { toast } from "react-toastify";
 
-const BookingConfirm = ({ startEndTime, singleEvent }: any) => {
+const BookingConfirm = ({ startEndTime, singleEvent, hostEmail }: any) => {
 
   const getName = useRef<HTMLInputElement | null>(null);
   const getMessage = useRef<HTMLTextAreaElement | null>(null);
@@ -33,7 +33,7 @@ const BookingConfirm = ({ startEndTime, singleEvent }: any) => {
     axios
       .post(
         "http://localhost:5000/api/create-event",
-        { bookingConfirm },
+        { bookingConfirm, hostEmail },
         getRefreshToken
       )
       .then((response) => {
