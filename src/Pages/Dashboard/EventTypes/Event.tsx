@@ -15,15 +15,6 @@ const Event = () => {
   } = useQuery(["events", email], () =>
     fetch(`http://localhost:5000/getEvent/${email}`).then((res) => res.json())
   );
-  const { data: singleUser } = useQuery(["singleUser", email], () =>
-    fetch(`http://localhost:5000/user/${email}`, {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        authorization: `bearer ${localStorage.getItem("accessToken")}`,
-      },
-    }).then((res) => res.json())
-  );
 
   if (isLoading) {
     return <Loading />;
@@ -51,9 +42,7 @@ const Event = () => {
           <img className="w-[70px] rounded-full" src={photo} alt="" />
           <div>
             <p>{user?.displayName}</p>
-            {/* <Link to="/eventBooking"> */}
             <p className="text-secondary">{email}</p>
-            {/* </Link> */}
           </div>
         </div>
         <Link to="/createEvent">
