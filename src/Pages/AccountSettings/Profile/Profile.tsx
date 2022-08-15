@@ -7,7 +7,6 @@ import profileImg from "../../../Utilities/icon/profile.png";
 
 const Profile = () => {
   const [user] = useAuthState(auth);
-
   const [userInfo, setUserInfo] = useState({
     _id: "",
     name: "",
@@ -20,7 +19,7 @@ const Profile = () => {
   const getMobile = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
-    const url = `http://localhost:5000/user/${user?.email}`;
+    const url = `https://secure-chamber-99191.herokuapp.com/user/${user?.email}`;
     fetch(url, {
       method: "GET",
       headers: {
@@ -42,7 +41,7 @@ const Profile = () => {
 
     const updatedUser = { name: name, message: message, mobile: mobile };
 
-    const url = `http://localhost:5000/updatedUser/${user?.email}`;
+    const url = `https://secure-chamber-99191.herokuapp.com/updatedUser/${user?.email}`;
     fetch(url, {
       method: "PUT",
       headers: {
@@ -62,12 +61,12 @@ const Profile = () => {
   };
 
   // console.log("User form firebase", user?.displayName);
-  console.log("User form Database", userInfo);
+  // console.log(userInfo);
 
   if (!userInfo._id) {
     return <Loading />;
   }
-
+  console.log(user?.photoURL);
   return (
     <div className="flex justify-center items-center py-8">
       <form
@@ -161,9 +160,9 @@ const Profile = () => {
             type="submit"
             value="Save Change"
           />
-          <button className="mt-4 bg-error py-2 px-4 rounded-lg text-white hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer">
+          {/* <button className="mt-4 bg-error py-2 px-4 rounded-lg text-white hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer">
             Cancel
-          </button>
+          </button> */}
         </div>
       </form>
     </div>

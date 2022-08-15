@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Home from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
 import Register from "./Pages/Register/Register";
@@ -31,15 +31,22 @@ import BlogDetails from "./Pages/Blogs/BlogDetails";
 import EventBooking from "./Pages/EventBooking/EventBooking";
 import BookingCalender from "./Pages/EventBooking/BookingCalender";
 import CalendarEvent from "./Pages/Dashboard/EventTypes/CreateCalendarEvent/CalendarEvent";
-import CreateEventType from "./Pages/CreateEventType/CreateEventType";
-import CreateIndividualEvent from "./Pages/CreateIndividualEvent/CreateIndividualEvent";
-import EventDetailsAdd from "./Pages/EventDetailsAdd/EventDetailsAdd";
+import CreateEventType from "./Pages/Dashboard/EventTypes/CreateEventType/CreateEventType";
+import CreateIndividualEvent from "./Pages/Dashboard/EventTypes/CreateIndividualEvent/CreateIndividualEvent";
+import EventDetailsAdd from "./Pages/Dashboard/EventTypes/EventDetailsAdd/EventDetailsAdd";
+import Admin from "./Pages/Admin/Admin";
+import Users from "./Pages/Admin/Users/Users";
+import UserDetails from "./Pages/Admin/UserDetails/UserDetails";
 
 function App() {
   const [user] = useAuthState(auth);
+  const location = useLocation().pathname.split("/")[1];
+  console.log();
+
   return (
     <div>
-      <Navbar />
+      {location !== "bookingCalender" ? <Navbar /> : <></>}
+
       <Routes>
         <Route
           path="/"
@@ -49,27 +56,33 @@ function App() {
         <Route path="/story" element={<Story></Story>}></Route>
         <Route path="/about" element={<About></About>}></Route>
         <Route path="/blogs" element={<Blogs></Blogs>}></Route>
-        <Route path="/createEvent" element={<CreateEventType></CreateEventType>}></Route>
-        <Route path="/CreateIndividualEvent" element={<CreateIndividualEvent></CreateIndividualEvent>}></Route>
-        <Route path="/EventDetailsAdd" element={<EventDetailsAdd></EventDetailsAdd>}></Route>
+        <Route path="/blogDetails/:id" element={<BlogDetails />}></Route>
         <Route
-          path="/blogDetails/:id"
-          element={<BlogDetails></BlogDetails>}
+          path="/createEvent"
+          element={<CreateEventType></CreateEventType>}
         ></Route>
-
+        <Route
+          path="/CreateIndividualEvent"
+          element={<CreateIndividualEvent></CreateIndividualEvent>}
+        ></Route>
+        <Route
+          path="/EventDetailsAdd"
+          element={<EventDetailsAdd></EventDetailsAdd>}
+        ></Route>
         <Route
           path="/eventBooking"
           element={<EventBooking></EventBooking>}
         ></Route>
+
         <Route
-          path="/bookingCalender"
-          element={<BookingCalender></BookingCalender>}
+          path="/bookingCalender/:id"
+          element={<BookingCalender />}
         ></Route>
 
         <Route path="login" element={<Login></Login>}></Route>
         <Route path="register" element={<Register></Register>}></Route>
 
-        {/* *********** After login ********* */}
+        {/* ******* After login ***** */}
         <Route
           path="/dashboard"
           element={
@@ -86,7 +99,11 @@ function App() {
         </Route>
         <Route
           path="calendarEvent"
-          element={<CalendarEvent></CalendarEvent>}
+          element={
+            <RequiredAuth>
+              <CalendarEvent></CalendarEvent>
+            </RequiredAuth>
+          }
         ></Route>
         <Route
           path="/availability"
@@ -97,6 +114,17 @@ function App() {
             </RequiredAuth>
           }
         ></Route>
+        <Route
+          path="/admin"
+          element={
+            <RequiredAuth>
+              <Admin />
+            </RequiredAuth>
+          }
+        >
+          <Route index element={<Users></Users>}></Route>
+          <Route path="userDetails" element={<UserDetails />}></Route>
+        </Route>
         <Route
           path="/accountSettings"
           element={
@@ -111,17 +139,35 @@ function App() {
         </Route>
         <Route
           path="/calenderConnection"
-          element={<CalenderConnection></CalenderConnection>}
+          element={
+            <RequiredAuth>
+              <CalenderConnection />
+            </RequiredAuth>
+          }
         ></Route>
-        <Route path="/shareLink" element={<ShareLink></ShareLink>}></Route>
+        <Route
+          path="/shareLink"
+          element={
+            <RequiredAuth>
+              <ShareLink />
+            </RequiredAuth>
+          }
+        ></Route>
         <Route
           path="/addCalender"
-          element={<AddCalender></AddCalender>}
+          element={
+            <RequiredAuth>
+              <AddCalender />
+            </RequiredAuth>
+          }
         ></Route>
-        <Route path="profile" element={<Profile />}></Route>
         <Route
-          path="/addCalender"
-          element={<AddCalender></AddCalender>}
+          path="profile"
+          element={
+            <RequiredAuth>
+              <Profile />
+            </RequiredAuth>
+          }
         ></Route>
         <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>

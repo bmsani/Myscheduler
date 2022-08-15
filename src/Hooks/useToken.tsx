@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const useToken = (user: any) => {
   const [token, setToken] = useState("");
@@ -6,7 +7,7 @@ const useToken = (user: any) => {
     const email = user?.user?.email;
     const currentUser = { email: email };
     if (email) {
-      fetch(`http://localhost:5000/user/${email}`, {
+      fetch(`https://secure-chamber-99191.herokuapp.com/user/${email}`, {
         method: "PUT",
         headers: {
           "content-type": "application/json",
@@ -29,93 +30,100 @@ const useToken = (user: any) => {
       dayData: [
         {
           id: "1",
-          day: "Saturday",
+          day: "Sun",
           start: "09:00",
           end: "17:00",
           interval: {
-            starting: "13:00",
-            ending: "14:00",
+            starting: "00:00",
+            ending: "00:00",
           },
           checked: false,
         },
         {
           id: "2",
-          day: "Sunday",
+          day: "Mon",
           start: "09:00",
           end: "17:00",
           interval: {
-            starting: "13:00",
-            ending: "14:00",
+            starting: "00:00",
+            ending: "00:00",
           },
-          checked: false,
+          checked: true,
         },
         {
           id: "3",
-          day: "Monday",
+          day: "Tue",
           start: "09:00",
           end: "17:00",
           interval: {
-            starting: "13:00",
-            ending: "14:00",
+            starting: "00:00",
+            ending: "00:00",
           },
           checked: true,
         },
         {
           id: "4",
-          day: "Tuesday",
+          day: "Wed",
           start: "09:00",
           end: "17:00",
           interval: {
-            starting: "13:00",
-            ending: "14:00",
+            starting: "00:00",
+            ending: "00:00",
           },
           checked: true,
         },
         {
           id: "5",
-          day: "Wednesday",
+          day: "Thu",
           start: "09:00",
           end: "17:00",
           interval: {
-            starting: "13:00",
-            ending: "14:00",
+            starting: "00:00",
+            ending: "00:00",
           },
           checked: true,
         },
         {
           id: "6",
-          day: "Thursday",
+          day: "Fri",
           start: "09:00",
           end: "17:00",
           interval: {
-            starting: "13:00",
-            ending: "14:00",
+            starting: "00:00",
+            ending: "00:00",
           },
           checked: true,
         },
         {
           id: "7",
-          day: "Friday",
+          day: "Sat",
           start: "09:00",
           end: "17:00",
           interval: {
-            starting: "13:00",
-            ending: "14:00",
+            starting: "00:00",
+            ending: "00:00",
           },
-          checked: true,
+          checked: false,
         },
       ],
     };
     if (email) {
-      fetch(`http://localhost:5000/userAvailability/${email}`, {
-        method: "PUT",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(userAvailability),
-      })
+      fetch(
+        `https://secure-chamber-99191.herokuapp.com/userAvailability/${email}`,
+        {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(userAvailability),
+        }
+      )
         .then((res) => res.json())
-        .then((data) => console.log(data));
+        .then((data) => {
+          if (data.acknowledged) {
+            toast.success("Availability create successful");
+          }
+        });
     }
   }, [user]);
 
