@@ -23,9 +23,9 @@ const BookingCalender = () => {
     brandLogo: "",
     message: "",
   });
+  const { name, brandLogo } = userInfo;
   const [startEndTime, setStartEndTime] = useState(" ");
   const [times, setTimes] = useState<any>([]);
-  const { name, brandLogo } = userInfo;
   const [click, setClick] = useState(false);
 
   const { data: singleEvent } = useQuery(["singleEvent", id], () =>
@@ -51,12 +51,12 @@ const BookingCalender = () => {
 
   // ================Times Slots ============================
   useEffect(() => {
-    if (singleEvent?.email) {
-      fetch(`http://localhost:5000/availability/${singleEvent?.email}`)
+    if (id) {
+      fetch(`http://localhost:5000/getSingleEvent/${id}`)
         .then((res) => res.json())
-        .then((data) => setTimes(data?.dayData));
+        .then((data) => setTimes(data?.availabilities));
     }
-  }, [singleEvent?.email]);
+  }, [id]);
 
   const backButton = () => {
     setClick(false);
@@ -161,9 +161,16 @@ const BookingCalender = () => {
             />
           </div>
           <div className="p-5">
-            <h3 className="font-bold text-gray-500 text-center md:text-left">
-              {name}
-            </h3>
+            {name ? (
+              <h3 className="font-bold text-gray-500 text-center md:text-left">
+                {name}
+              </h3>
+            ) : (
+              <p className="font-bold text-error text-center md:text-left">
+                Name not found!{" "}
+              </p>
+            )}
+
             <h1 className="font-bold text-3xl text-center md:text-left">
               {singleEvent?.eventName}
             </h1>
