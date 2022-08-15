@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
-import leftArrow from "../../../../Utilities/icon/leftArrow.png";
-// import world from "../../../../Utilities/icon/world.png";
+import { MdArrowBackIos } from "react-icons/md";
 
 type userDay = {
   id: string;
@@ -24,23 +23,23 @@ const EventDetailsAdd = ({
 }: any) => {
   return (
     <div>
-      <div className="border mt-3 shadow-lg">
-        <div className="grid grid-cols-3 sm-grid-cols-2  py-4 xl:mx-40">
+      <div className="mt-4">
+        <div className="md:flex justify-center md:justify-between items-center py-4 mx-4 lg:mx-40">
           <div>
             <Link to="/createEvent">
-              <button className="px-5 border-blue-400 flex items-center border-2 py-3 rounded-full">
-                <span className="mr-1">
-                  <img src={leftArrow} className="w-[20px]" alt="" />
-                </span>{" "}
+              <button className="text-blue-500 border-blue-400  md:border md:px-7 py-2 rounded-full flex items-center">
+                <MdArrowBackIos />
                 Back
               </button>
             </Link>
           </div>
           <div>
-            <h2 className="text-xl  py-3">Add One-on-One Event Type</h2>
+            <h2 className="md:text-xl py-3 text-center">
+              Add One-on-One Event Type
+            </h2>
           </div>
           <div>
-            <h2 className="text-base py-3 text-end">
+            <h2 className="text-base py-3 text-center">
               Your event type is{" "}
               <span className="px-5 py-1 text-base ml-1 text-white bg-gray-400 rounded-sm">
                 OFF
@@ -49,7 +48,7 @@ const EventDetailsAdd = ({
           </div>
         </div>
       </div>
-      <div className="xl:mx-48 sm:mx-8 py-4 border-2 border-zinc-200 mt-8 ">
+      <div className="xl:mx-48 sm:mx-8 py-4 border-2 border-zinc-200 mt-4 ">
         <div className="flex mx-6">
           <div className="rounded-full h-[18px] w-[18px] bg-violet-600 mr-2"></div>
           <div>
@@ -62,7 +61,7 @@ const EventDetailsAdd = ({
         </div>
       </div>
       <div className="xl:mx-48 sm:mx-8 border-2 border-zinc-500 mt-2 mb-8 pb-4">
-        <div className="flex items-center justify-between mx-8 border-b">
+        <div className="flex items-center justify-between mx-4 lg:mx-8 border-b">
           <div>
             <h2>What event is this?</h2>
             <h2 className="text-sm font-light">30 min</h2>
@@ -85,8 +84,8 @@ const EventDetailsAdd = ({
             </div>
           </div>
         </div>
-        <div className="mx-8 mb-6 ">
-          <div className="form-control w-full max-w-xs">
+        <div className="mx-4 md:mx-8 mb-6 ">
+          <div className="form-control w-full max-w-sm">
             <label className="label">
               <span className="label-text font-bold">Duration</span>
             </label>
@@ -94,24 +93,24 @@ const EventDetailsAdd = ({
               type="number"
               value={30}
               readOnly
-              className="input  border-blue-500 w-full max-w-xs "
+              className="input  border-blue-500 w-full max-w-sm "
               ref={durationRef}
             />
           </div>
 
           <div className="mb-8 ">
-            <div className="border grid grid-cols-2 mt-5">
-              <div className="mx-6">
+            <div className="border mt-5">
+              <div className="mx-4 md:mx-8">
                 <h2 className="text-xs my-3 font-bold">WEEKLY HOURS</h2>
-                <div className="">
+                <div>
                   {availabilities?.dayData?.map((a: userDay) => (
-                    <div className="grid grid-cols-3 mb-6" key={a.id}>
+                    <div className="grid grid-cols-2 mb-6" key={a.id}>
                       <h2 className="font-bold text-sm">{a.day}</h2>
                       <p className="font-light text-left">
                         {a.checked ? (
-                          <span>
+                          <p>
                             {a.start} - {a.end}
-                          </span>
+                          </p>
                         ) : (
                           "unavailable"
                         )}

@@ -31,7 +31,7 @@ const BookingConfirm = ({ startEndTime, singleEvent }: any) => {
     };
     axios
       .post(
-        "https://secure-chamber-99191.herokuapp.com/api/create-event",
+        "http://localhost:5000/api/create-event",
         { bookingConfirm },
         getRefreshToken
       )

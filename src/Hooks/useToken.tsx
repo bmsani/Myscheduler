@@ -5,8 +5,9 @@ const useToken = (user: any) => {
   useEffect(() => {
     const email = user?.user?.email;
     const currentUser = { email: email };
+    console.log(currentUser);
     if (email) {
-      fetch(`https://secure-chamber-99191.herokuapp.com/user/${email}`, {
+      fetch(`http://localhost:5000/user/${email}`, {
         method: "PUT",
         headers: {
           "content-type": "application/json",
@@ -17,6 +18,7 @@ const useToken = (user: any) => {
         .then((data) => {
           const accessToken = data.token;
           localStorage.setItem("accessToken", accessToken);
+          console.log(data);
           setToken(accessToken);
         });
     }
@@ -29,17 +31,6 @@ const useToken = (user: any) => {
       dayData: [
         {
           id: "1",
-          day: "Sat",
-          start: "09:00",
-          end: "17:00",
-          interval: {
-            starting: "13:00",
-            ending: "14:00",
-          },
-          checked: false,
-        },
-        {
-          id: "2",
           day: "Sun",
           start: "09:00",
           end: "17:00",
@@ -50,7 +41,7 @@ const useToken = (user: any) => {
           checked: false,
         },
         {
-          id: "3",
+          id: "2",
           day: "Mon",
           start: "09:00",
           end: "17:00",
@@ -61,7 +52,7 @@ const useToken = (user: any) => {
           checked: true,
         },
         {
-          id: "4",
+          id: "3",
           day: "Tue",
           start: "09:00",
           end: "17:00",
@@ -72,7 +63,7 @@ const useToken = (user: any) => {
           checked: true,
         },
         {
-          id: "5",
+          id: "4",
           day: "Wed",
           start: "09:00",
           end: "17:00",
@@ -83,7 +74,7 @@ const useToken = (user: any) => {
           checked: true,
         },
         {
-          id: "6",
+          id: "5",
           day: "Thu",
           start: "09:00",
           end: "17:00",
@@ -94,7 +85,7 @@ const useToken = (user: any) => {
           checked: true,
         },
         {
-          id: "7",
+          id: "6",
           day: "Fri",
           start: "09:00",
           end: "17:00",
@@ -104,19 +95,27 @@ const useToken = (user: any) => {
           },
           checked: true,
         },
+        {
+          id: "7",
+          day: "Sat",
+          start: "09:00",
+          end: "17:00",
+          interval: {
+            starting: "13:00",
+            ending: "14:00",
+          },
+          checked: false,
+        },
       ],
     };
     if (email) {
-      fetch(
-        `https://secure-chamber-99191.herokuapp.com/userAvailability/${email}`,
-        {
-          method: "PUT",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(userAvailability),
-        }
-      )
+      fetch(`http://localhost:5000/userAvailability/${email}`, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(userAvailability),
+      })
         .then((res) => res.json())
         .then((data) => console.log(data));
       console.log("user avaialelity");

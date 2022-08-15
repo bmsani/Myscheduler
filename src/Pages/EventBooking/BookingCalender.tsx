@@ -29,13 +29,13 @@ const BookingCalender = () => {
   const [click, setClick] = useState(false);
 
   const { data: singleEvent } = useQuery(["singleEvent", id], () =>
-    fetch(`https://secure-chamber-99191.herokuapp.com/getSingleEvent/${id}`, {
+    fetch(`http://localhost:5000/getSingleEvent/${id}`, {
       method: "GET",
     }).then((res) => res.json())
   );
 
   useEffect(() => {
-    const url = `https://secure-chamber-99191.herokuapp.com/user/${singleEvent?.email}`;
+    const url = `http://localhost:5000/user/${singleEvent?.email}`;
     fetch(url, {
       method: "GET",
       headers: {
@@ -52,9 +52,7 @@ const BookingCalender = () => {
   // ================Times Slots ============================
   useEffect(() => {
     if (singleEvent?.email) {
-      fetch(
-        `https://secure-chamber-99191.herokuapp.com/availability/${singleEvent?.email}`
-      )
+      fetch(`http://localhost:5000/availability/${singleEvent?.email}`)
         .then((res) => res.json())
         .then((data) => setTimes(data?.dayData));
     }
@@ -63,15 +61,28 @@ const BookingCalender = () => {
   const backButton = () => {
     setClick(false);
   };
+
   const dayFromCalendar = format(selected, "PPPPP").split(",")[0].slice(0, 3);
   const dayFromDB = times?.find((d: any) => d.day === dayFromCalendar);
+
+  // disable unavailable day
+  const checked = times.filter((d: any) => d.checked === false);
+  const day = checked.map((d: any) => d.id - 1);
   const yesterday = moment().subtract(1, "day");
   const valid = function (current: any) {
     return (
-      current.isAfter(yesterday) && current.day() !== 0 && current.day() !== 6
+      current.isAfter(yesterday) &&
+      current.day() !== day[0] &&
+      current.day() !== day[1] &&
+      current.day() !== day[2] &&
+      current.day() !== day[3] &&
+      current.day() !== day[4] &&
+      current.day() !== day[5] &&
+      current.day() !== day[6]
     );
   };
 
+  // split start and end time and create slots
   const start = dayFromDB?.start;
   const end = dayFromDB?.end;
   const intervalStart = dayFromDB?.interval?.starting;
@@ -105,6 +116,7 @@ const BookingCalender = () => {
   const handleDate = (date: any) => {
     setSelected(date.toDate());
   };
+
   const handleConfirmBooking = (selectedTime: string) => {
     const selectDate = moment(selected).format().split("T")[0];
     const startTime = moment(selectDate + " " + selectedTime).format();
@@ -115,10 +127,12 @@ const BookingCalender = () => {
     setStartEndTime(startEnd);
     setClick(true);
   };
+
   if (!times) {
     return <Loading />;
   }
 
+  // start and end time of event
   const startWithDate = startEndTime?.split("_")[0];
   const startWithUTC = startWithDate?.split("T")[1];
   const startTime = startWithUTC?.split("+")[0];

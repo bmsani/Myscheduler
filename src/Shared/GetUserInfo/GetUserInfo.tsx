@@ -6,7 +6,7 @@ const GetUserInfo = (user: any) => {
   //   console.log("from getuser", userInfo);
   useEffect(() => {
     if (user?.email) {
-      const url = `https://secure-chamber-99191.herokuapp.com/user/${user?.email}`;
+      const url = `http://localhost:5000/user/${user?.email}`;
       fetch(url, {
         method: "GET",
         headers: {

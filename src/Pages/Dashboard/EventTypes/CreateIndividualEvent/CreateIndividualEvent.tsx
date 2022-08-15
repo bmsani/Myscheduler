@@ -3,8 +3,9 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../../../init.firebase";
-import leftArrow from "../../../../Utilities/icon/leftArrow.png";
 import EventDetailsAdd from "../EventDetailsAdd/EventDetailsAdd";
+import { MdArrowBackIos } from "react-icons/md";
+
 // interface data {
 //   dayData: {
 //     id: string;
@@ -27,7 +28,7 @@ const CreateIndividualEvent = () => {
   const email = user?.email;
 
   useEffect(() => {
-    fetch(`https://secure-chamber-99191.herokuapp.com/availability/${email}`)
+    fetch(`http://localhost:5000/availability/${email}`)
       .then((res) => res.json())
       .then((data) => setAvailabilities(data));
   }, [email]);
@@ -46,7 +47,7 @@ const CreateIndividualEvent = () => {
       eventDuration: eventDuration,
       availabilities: availabilities?.dayData,
     };
-    fetch("https://secure-chamber-99191.herokuapp.com/updateEvent", {
+    fetch("http://localhost:5000/updateEvent", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -65,23 +66,23 @@ const CreateIndividualEvent = () => {
     <div>
       {!next ? (
         <div>
-          <div className="border mt-3 shadow-lg">
-            <div className="grid grid-cols-3 sm-grid-cols-2  py-4 xl:mx-40">
+          <div className="mt-4">
+            <div className="md:flex justify-center md:justify-between items-center py-4 mx-4 lg:mx-40">
               <div>
                 <Link to="/createEvent">
-                  <button className="px-5 border-blue-400 flex items-center border-2 py-3 rounded-full">
-                    <span className="mr-1">
-                      <img src={leftArrow} className="w-[20px]" alt="" />
-                    </span>{" "}
+                  <button className="text-blue-500 border-blue-400  md:border md:px-7 py-2 rounded-full flex items-center ">
+                    <MdArrowBackIos />
                     Back
                   </button>
                 </Link>
               </div>
               <div>
-                <h2 className="text-xl py-3">Add One-on-One Event Type</h2>
+                <h2 className="md:text-xl py-3 text-center">
+                  Add One-on-One Event Type
+                </h2>
               </div>
               <div>
-                <h2 className="text-base py-3 text-end">
+                <h2 className="text-base py-3 text-center">
                   Your event type is{" "}
                   <span className="px-5 py-1 text-base ml-1 text-white bg-gray-400 rounded-sm">
                     OFF
@@ -90,8 +91,8 @@ const CreateIndividualEvent = () => {
               </div>
             </div>
           </div>
-          <div className="xl:mx-48 sm:mx-8 border-2 border-zinc-500 mt-8 mb-8 pb-4">
-            <div className="flex items-center justify-between mx-8 border-b">
+          <div className="mx-4 lg:mx-40 sm:mx-8 border-2 border-zinc-500 mt-4 mb-8">
+            <div className="flex items-center justify-between border-b px-2 md:px-8 py-2">
               <div>
                 <h2>What event is this?</h2>
                 <h2 className="text-sm font-light">
@@ -99,7 +100,7 @@ const CreateIndividualEvent = () => {
                   {eventLocation ? eventLocation : "No location given"}
                 </h2>
               </div>
-              <div className=" mx-6 py-4">
+              <div className="py-4">
                 <div>
                   <Link to="/dashboard">
                     <button className="mr-4 hover:underline text-sm font-medium">
@@ -127,7 +128,7 @@ const CreateIndividualEvent = () => {
                 </div>
               </div>
             </div>
-            <div className="mx-8 mb-6">
+            <div className="mx-2 md:mx-8 mb-6">
               <form className="form-control">
                 <label className="label">
                   <span className="label-text">Event Name</span>
@@ -138,7 +139,7 @@ const CreateIndividualEvent = () => {
                     onChange={(e) => setEventName(e.target.value)}
                     type="text"
                     placeholder="Type here"
-                    className="input border-blue-500 w-full max-w-xs "
+                    className="input border-blue-500 w-full max-w-sm"
                   />
                 </div>
                 <label className="label">
@@ -147,7 +148,7 @@ const CreateIndividualEvent = () => {
                 <div className="">
                   <select
                     required
-                    className="select border-blue-500 w-full max-w-xs"
+                    className="select border-blue-500 w-full max-w-sm"
                     onChange={(e) => setEventLocation(e.target.value)}
                   >
                     <option disabled selected className="text-light">
@@ -155,13 +156,13 @@ const CreateIndividualEvent = () => {
                     </option>
                     <option>
                       <div>
-                        <img src={leftArrow} alt="" />
+                        <MdArrowBackIos />
                         <h2>Google Meet</h2>
                       </div>
                     </option>
                     <option>
                       <div>
-                        <img src={leftArrow} className="w-[20px]" alt="" />
+                        <MdArrowBackIos />
                         <h2>Zoom</h2>
                       </div>
                     </option>
@@ -174,7 +175,7 @@ const CreateIndividualEvent = () => {
                   <textarea
                     required
                     onBlur={(e) => setEventDescription(e.target.value)}
-                    className="textarea border-blue-500 w-full max-w-xs"
+                    className="textarea border-blue-500 w-full max-w-sm"
                     placeholder="Bio"
                   ></textarea>
                 </div>
@@ -192,8 +193,8 @@ const CreateIndividualEvent = () => {
                 </div> */}
               </form>
             </div>
-            <div className="border-t mx-10 py-4  grid place-items-end">
-              <div>
+            <div className="border-t grid place-items-end">
+              <div className="mx-2 md:mx-8 py-4">
                 <Link to="/dashboard">
                   <button className="mr-4 hover:underline text-sm font-medium">
                     Cancel

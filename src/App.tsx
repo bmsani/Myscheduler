@@ -34,7 +34,6 @@ import CalendarEvent from "./Pages/Dashboard/EventTypes/CreateCalendarEvent/Cale
 import CreateEventType from "./Pages/Dashboard/EventTypes/CreateEventType/CreateEventType";
 import CreateIndividualEvent from "./Pages/Dashboard/EventTypes/CreateIndividualEvent/CreateIndividualEvent";
 import EventDetailsAdd from "./Pages/Dashboard/EventTypes/EventDetailsAdd/EventDetailsAdd";
-import BookingConfirm from "./Pages/EventBooking/BookingConfirm";
 import Admin from "./Pages/Admin/Admin";
 import Users from "./Pages/Admin/Users/Users";
 import UserDetails from "./Pages/Admin/UserDetails/UserDetails";
@@ -83,7 +82,7 @@ function App() {
         <Route path="login" element={<Login></Login>}></Route>
         <Route path="register" element={<Register></Register>}></Route>
 
-        {/* *********** After login ********* */}
+        {/* ********* After login ******* */}
         <Route
           path="/dashboard"
           element={
