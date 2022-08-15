@@ -13,11 +13,11 @@ const BlogDetails = () => {
   });
 
   useEffect(() => {
-    const url = `http://localhost:5000/blogs/${id}`;
+    const url = `https://secure-chamber-99191.herokuapp.com/blogs/${id}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => setBlog(data));
-  }, []);
+  }, [id]);
 
   const { title, article, author, authorImg, blogImg } = blog;
   if (!title) {

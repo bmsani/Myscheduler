@@ -38,6 +38,7 @@ import Admin from "./Pages/Admin/Admin";
 import Users from "./Pages/Admin/Users/Users";
 import UserDetails from "./Pages/Admin/UserDetails/UserDetails";
 
+
 function App() {
   const [user] = useAuthState(auth);
   const location = useLocation().pathname.split("/")[1];

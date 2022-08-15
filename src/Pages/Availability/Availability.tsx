@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { BiMessageSquareAdd, BiEdit } from "react-icons/bi";
+import { BiMessageSquareEdit, BiEdit } from "react-icons/bi";
 import auth from "../../init.firebase";
 import Loading from "../../Shared/LoadingSpinner/Loading";
-import AvailabilityAdd from "./AvailabilityAdd/AvailabilityAdd";
+import IntervalEdit from "./IntervalEdit/IntervalEdit";
 import AvailabilityEdit from "./AvailabilityEdit/AvailabilityEdit";
 
 type UserDays = {
@@ -31,16 +31,16 @@ const Availability = () => {
     isLoading,
     refetch,
   } = useQuery(["days", email], () =>
-    fetch(`http://localhost:5000/availability/${email}`).then((res) =>
-      res.json()
-    )
+    fetch(
+      `https://secure-chamber-99191.herokuapp.com/availability/${email}`
+    ).then((res) => res.json())
   );
 
   const handleCheckedBox = (id: string, checkedBox: boolean) => {
     const daysId = days._id;
     const individualId = id;
     fetch(
-      `http://localhost:5000/availability/checked/${daysId}?dayStatus=${!checkedBox}&dayDataId=${individualId}&email=${email}`,
+      `https://secure-chamber-99191.herokuapp.com/availability/checked/${daysId}?dayStatus=${!checkedBox}&dayDataId=${individualId}&email=${email}`,
       {
         method: "PUT",
         headers: {
@@ -63,20 +63,22 @@ const Availability = () => {
 
   const handleAdd = async (daysId: string, dayId: string) => {
     const response = await fetch(
-      `http://localhost:5000/availability/${daysId}/${dayId}`
+      `https://secure-chamber-99191.herokuapp.com/availability/${daysId}/${dayId}`
     );
     const data = await response.json();
     setSingleDay(data);
   };
 
   const handleEdit = async (daysId: string, dayId: string) => {
-    fetch(`http://localhost:5000/availability/${daysId}/${dayId}`)
+    fetch(
+      `https://secure-chamber-99191.herokuapp.com/availability/${daysId}/${dayId}`
+    )
       .then((res) => res.json())
       .then((data) => setSingleDay(data));
   };
 
   return (
-    <div>
+    <div className="w-4/6 mx-auto py-10">
       <h2 className="text-xl md:text-3xl font-bold text-center">
         Availability setup
       </h2>
@@ -85,8 +87,18 @@ const Availability = () => {
           Working schedule
         </h4>
         <div className="mt-6">
-          <div className="overflow-x-auto w-full">
+          <div className="overflow-x-auto w-full border rounded">
             <table className="table w-full">
+              <thead>
+                <tr>
+                  <th>CheckBox</th>
+                  <th>Day name</th>
+                  <th>Available time</th>
+                  <th>Availability edit</th>
+                  <th>Interval Time</th>
+                  <th>Interval edit</th>
+                </tr>
+              </thead>
               <tbody>
                 {days.dayData.map((day: UserDays) => (
                   <tr key={day.id} className="hover">
@@ -114,31 +126,42 @@ const Availability = () => {
                         )}
                       </div>
                     </td>
-                    <td>
-                      <label htmlFor="add-modal">
-                        <BiMessageSquareAdd
-                          onClick={() => handleAdd(days._id, day.id)}
-                          className="text-5xl p-3 cursor-pointer"
-                        />
-                        <AvailabilityAdd
-                          singleDay={singleDay}
-                          days={days._id}
-                          refetch={refetch}
-                        />
-                      </label>
+                    <td className="text-center">
+                      {day.checked && (
+                        <label htmlFor="edit-modal">
+                          <BiEdit
+                            className="text-5xl p-3 cursor-pointer text-center"
+                            onClick={() => handleEdit(days._id, day.id)}
+                          />
+                          <AvailabilityEdit
+                            singleDay={singleDay}
+                            days={days._id}
+                            refetch={refetch}
+                          />
+                        </label>
+                      )}
                     </td>
                     <td>
-                      <label htmlFor="edit-modal">
-                        <BiEdit
-                          className="text-5xl p-3 cursor-pointer"
-                          onClick={() => handleEdit(days._id, day.id)}
-                        />
-                        <AvailabilityEdit
-                          singleDay={singleDay}
-                          days={days._id}
-                          refetch={refetch}
-                        />
-                      </label>
+                      {day.checked && (
+                        <span>
+                          {day.interval.starting} - {day.interval.ending}
+                        </span>
+                      )}
+                    </td>
+                    <td>
+                      {day.checked && (
+                        <label htmlFor="add-modal">
+                          <BiMessageSquareEdit
+                            onClick={() => handleAdd(days._id, day.id)}
+                            className="text-5xl p-3 cursor-pointer"
+                          />
+                          <IntervalEdit
+                            singleDay={singleDay}
+                            days={days._id}
+                            refetch={refetch}
+                          />
+                        </label>
+                      )}
                     </td>
                   </tr>
                 ))}

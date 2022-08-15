@@ -9,9 +9,11 @@ import Loading from "../LoadingSpinner/Loading";
 import { HiMenu } from "react-icons/hi";
 import { BiDownArrow } from "react-icons/bi";
 import ShareLink from "../../Pages/ShareLink/ShareLink";
+import useAdmin from "../../Hooks/useAdmin";
 
 const Navbar = () => {
   const [user, loading] = useAuthState(auth);
+  const [admin] = useAdmin(user);
   const { pathname } = useLocation();
   const [colorChange, setColorChange] = useState<boolean>(false);
   const [anotherRouteColorChange, setAnotherRouteColorChange] =
@@ -72,9 +74,9 @@ const Navbar = () => {
   );
 
   return (
-    <div>
+    <div className="sticky top-0 z-50">
       {user ? (
-        <div className="navbar bg-base-100 shadow-xl">
+        <div className="navbar bg-base-100 shadow-xl px-4">
           <div className="container mx-auto">
             <div className="flex-1 hidden md:block">
               <div className="w-3/4 lg:w-1/2 md:w-3/5 lg:justify-start justify-between">
@@ -92,9 +94,9 @@ const Navbar = () => {
               <ul className="menu menu-horizontal p-0">
                 <li>
                   {pathname === "/dashboard" ||
-                    pathname === "/dashboard/scheduling" ||
-                    pathname === "/dashboard/workflow" ||
-                    pathname === "/dashboard/routingForms" ? (
+                  pathname === "/dashboard/scheduling" ||
+                  pathname === "/dashboard/workflow" ||
+                  pathname === "/dashboard/routingForms" ? (
                     <label
                       htmlFor="my-drawer-2"
                       className="bg-transparent drawer-button lg:hidden"
@@ -111,12 +113,22 @@ const Navbar = () => {
                   )}
                 </li>
                 <li>
-                  <Link className="px-1 md:px-4" to="/dashboard">
+                  <Link className="px-1 md:px-4 font-semibold" to="/dashboard">
                     Dashboard
                   </Link>
                 </li>
+                {admin && (
+                  <li>
+                    <Link className="px-1 md:px-4 font-semibold" to="/admin">
+                      Admin
+                    </Link>
+                  </li>
+                )}
                 <li>
-                  <Link className="px-1 md:px-4" to="/availability">
+                  <Link
+                    className="px-1 md:px-4 font-semibold"
+                    to="/availability"
+                  >
                     Availability
                   </Link>
                 </li>
@@ -124,7 +136,7 @@ const Navbar = () => {
                   <div className="dropdown dropdown-end">
                     <label
                       tabIndex={0}
-                      className=" cursor-pointer flex justify-center items-center gap-2"
+                      className="cursor-pointer flex justify-center items-center gap-2"
                     >
                       <BiDownArrow />
                       <div className="w-8 rounded-full ">
@@ -143,22 +155,36 @@ const Navbar = () => {
                       className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 mt-40"
                     >
                       <li>
-                        <Link to="/accountSettings/profile">
+                        <Link
+                          to="/accountSettings/profile"
+                          className="w-full font-semibold"
+                        >
                           Account setting
                         </Link>
                       </li>
                       <li>
-                        <Link to="/calenderConnection">
+                        <Link
+                          to="/calenderConnection"
+                          className="w-full font-semibold"
+                        >
                           Calender Connections
                         </Link>
                       </li>
                       <li>
-                        <label htmlFor="my-modal-6" className="">
+                        <label
+                          htmlFor="my-modal-6"
+                          className="w-full font-semibold"
+                        >
                           Share Your Link
                         </label>
                       </li>
                       <li>
-                        <button onClick={handleSignOut}>Logout</button>
+                        <button
+                          className="w-full font-semibold"
+                          onClick={handleSignOut}
+                        >
+                          Logout
+                        </button>
                       </li>
                     </ul>
                   </div>
@@ -168,7 +194,7 @@ const Navbar = () => {
           </div>
         </div>
       ) : (
-        <div className="sticky top-0 z-50">
+        <div>
           <div
             className={
               colorChange || anotherRouteColorChange
@@ -187,7 +213,7 @@ const Navbar = () => {
               </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
-              <ul className="menu menu-horizontal p-0 font-semibold xl:gap-16">
+              <ul className="menu menu-horizontal p-0 font-semibold xl:gap-8">
                 {items}
               </ul>
             </div>
