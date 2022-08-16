@@ -1,7 +1,9 @@
 import axios from "axios";
 import React, { FormEvent, useRef } from "react";
 import { toast } from "react-toastify";
+
 const BookingConfirm = ({ startEndTime, singleEvent, hostEmail }: any) => {
+
   const getName = useRef<HTMLInputElement | null>(null);
   const getMessage = useRef<HTMLTextAreaElement | null>(null);
   const getEmail = useRef<HTMLInputElement | null>(null);
@@ -23,16 +25,10 @@ const BookingConfirm = ({ startEndTime, singleEvent, hostEmail }: any) => {
       summary: eventName,
       description: eventDescription,
     };
-    const getRefreshToken = {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("refreshToken")}`,
-      },
-    };
     axios
       .post(
         "http://localhost:5000/api/create-event",
         { bookingConfirm, hostEmail },
-        getRefreshToken
       )
       .then((response) => {
         console.log(response);
@@ -68,7 +64,7 @@ const BookingConfirm = ({ startEndTime, singleEvent, hostEmail }: any) => {
 
           <input
             className="border border-[#b8b8b8] focus:outline-none focus:border-secondary block rounded-lg p-2 mt-1 w-full"
-            type="text"
+            type="email"
             ref={getEmail}
             required
           />

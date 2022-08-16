@@ -1,6 +1,5 @@
 import {
   useCreateUserWithEmailAndPassword,
-  useSignInWithFacebook,
   useSignInWithGoogle,
   useUpdateProfile,
 } from "react-firebase-hooks/auth";
@@ -29,13 +28,11 @@ const Register: React.FC = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
   const [signInWithGoogle, GUser, GLoading, GError] = useSignInWithGoogle(auth);
-  const [signInWithFacebook, FUser, FLoading, FError] =
-    useSignInWithFacebook(auth);
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
   const navigate = useNavigate();
-  const [token] = useToken(user || GUser || FUser);
+  const [token] = useToken(user || GUser);
 
-  if (loading || GLoading || FLoading || updating) {
+  if (loading || GLoading || updating) {
     return <Loading></Loading>;
   }
   if (token) {
@@ -138,8 +135,7 @@ const Register: React.FC = () => {
                 )}
               </label>
               <p className="text-error text-sm">
-                {(error || GError || FError) &&
-                  (error?.message || GError?.message || FError?.message)}
+                {(error || GError) && (error?.message || GError?.message)}
               </p>
               <input
                 type="submit"
@@ -160,10 +156,7 @@ const Register: React.FC = () => {
 
             <div className="mt-6 flex items-center gap-5">
               <span>Or create account with</span>
-              <SocialLogin
-                signInWithGoogle={signInWithGoogle}
-                signInWithFacebook={signInWithFacebook}
-              />
+              <SocialLogin signInWithGoogle={signInWithGoogle} />
             </div>
           </div>
         </div>

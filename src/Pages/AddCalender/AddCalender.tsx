@@ -1,6 +1,58 @@
+import React, { useEffect } from "react";
 import calender from "../../Utilities/icon/calendarLogo.png";
 import google from "../../Utilities/icon/google.png";
+import GoogleLogin from "react-google-login";
+import { gapi } from "gapi-script";
+import axios from "axios";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../init.firebase";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
+const clientId =
+  "246190552758-iv4qnbua1chul41b87mfch0gsoeqe8bj.apps.googleusercontent.com";
+
 const AddCalender = () => {
+  const [user] = useAuthState(auth);
+  const navigate = useNavigate();
+  // connect google calendar
+  useEffect(() => {
+    function start() {
+      gapi.client.init({
+        clientId: clientId,
+        scope: "openid email profile https://www.googleapis.com/auth/calendar",
+      });
+    }
+
+    gapi.load("client:auth2", start);
+  });
+
+  const responseGoogle = (response: any) => {
+    console.log(response);
+    const { code } = response;
+    axios
+      .post("http://localhost:5000/api/create-tokens", { code })
+      .then((response) => {
+        console.log(response?.data);
+        const refreshToken = response?.data?.refresh_token;
+        if (refreshToken) {
+          axios
+            .put(`http://localhost:5000/user/${user?.email}`, {
+              refreshToken,
+            })
+            .then((res) => {
+              if (res.status === 200) {
+                navigate("/createEvent");
+                toast.success("Your Google Calendar Connected");
+              }
+            });
+        }
+      })
+      .catch((error) => console.log(error.message));
+  };
+  const responseError = (error: any) => {
+    console.log(error);
+  };
   return (
     <div>
       <div className="shadow border container mx-auto pb-5 mt-6">
@@ -30,9 +82,16 @@ const AddCalender = () => {
             <h2>Gmail, G Suite</h2>
           </div>
           <div>
-            <button className="text-sm px-8  rounded-lg btn btn-sm btn-outline btn-info">
-              Connect
-            </button>
+            <GoogleLogin
+              clientId="246190552758-iv4qnbua1chul41b87mfch0gsoeqe8bj.apps.googleusercontent.com"
+              buttonText="Connect"
+              onSuccess={responseGoogle}
+              onFailure={responseError}
+              cookiePolicy={"single_host_origin"}
+              responseType="code"
+              accessType="offline"
+              scope="openid email profile https://www.googleapis.com/auth/calendar"
+            />
           </div>
         </div>
       </div>

@@ -3,7 +3,7 @@ import { gapi } from "gapi-script";
 import moment from "moment";
 import React, { useEffect, useRef, useState } from "react";
 import GoogleLogin from "react-google-login";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const clientId =
   "246190552758-iv4qnbua1chul41b87mfch0gsoeqe8bj.apps.googleusercontent.com";
@@ -26,9 +26,7 @@ const CalendarEvent = () => {
     console.log(response);
     const { code } = response;
     axios
-      .post("https://secure-chamber-99191.herokuapp.com/api/create-tokens", {
-        code,
-      })
+      .post("http://localhost:5000/api/create-tokens", { code })
       .then((response) => {
         console.log(response?.data);
         const refreshToken = response?.data?.refresh_token;
@@ -75,7 +73,7 @@ const CalendarEvent = () => {
     };
     axios
       .post(
-        "https://secure-chamber-99191.herokuapp.com/api/create-event",
+        "http://localhost:5000/api/create-event",
         { eventData },
         getRefreshToken
       )
@@ -113,6 +111,7 @@ const CalendarEvent = () => {
               <label className="text-primary font-medium" htmlFor="name">
                 Summary
               </label>
+
               <input
                 className="border border-[#b8b8b8] focus:outline-none focus:border-secondary block rounded-lg p-2 mt-1 w-full"
                 type="text"

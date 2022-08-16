@@ -19,7 +19,7 @@ const Profile = () => {
   const getMobile = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
-    const url = `https://secure-chamber-99191.herokuapp.com/user/${user?.email}`;
+    const url = `http://localhost:5000/user/${user?.email}`;
     fetch(url, {
       method: "GET",
       headers: {
@@ -41,7 +41,7 @@ const Profile = () => {
 
     const updatedUser = { name: name, message: message, mobile: mobile };
 
-    const url = `https://secure-chamber-99191.herokuapp.com/updatedUser/${user?.email}`;
+    const url = `http://localhost:5000/updatedUser/${user?.email}`;
     fetch(url, {
       method: "PUT",
       headers: {

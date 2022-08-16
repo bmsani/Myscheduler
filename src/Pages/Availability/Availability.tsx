@@ -31,16 +31,16 @@ const Availability = () => {
     isLoading,
     refetch,
   } = useQuery(["days", email], () =>
-    fetch(
-      `https://secure-chamber-99191.herokuapp.com/availability/${email}`
-    ).then((res) => res.json())
+    fetch(`http://localhost:5000/availability/${email}`).then((res) =>
+      res.json()
+    )
   );
 
   const handleCheckedBox = (id: string, checkedBox: boolean) => {
     const daysId = days._id;
     const individualId = id;
     fetch(
-      `https://secure-chamber-99191.herokuapp.com/availability/checked/${daysId}?dayStatus=${!checkedBox}&dayDataId=${individualId}&email=${email}`,
+      `http://localhost:5000/availability/checked/${daysId}?dayStatus=${!checkedBox}&dayDataId=${individualId}&email=${email}`,
       {
         method: "PUT",
         headers: {
@@ -63,16 +63,14 @@ const Availability = () => {
 
   const handleAdd = async (daysId: string, dayId: string) => {
     const response = await fetch(
-      `https://secure-chamber-99191.herokuapp.com/availability/${daysId}/${dayId}`
+      `http://localhost:5000/availability/${daysId}/${dayId}`
     );
     const data = await response.json();
     setSingleDay(data);
   };
 
   const handleEdit = async (daysId: string, dayId: string) => {
-    fetch(
-      `https://secure-chamber-99191.herokuapp.com/availability/${daysId}/${dayId}`
-    )
+    fetch(`http://localhost:5000/availability/${daysId}/${dayId}`)
       .then((res) => res.json())
       .then((data) => setSingleDay(data));
   };
