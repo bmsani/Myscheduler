@@ -5,19 +5,43 @@ import arrowLeft from "../../Utilities/icon/calederArrow2.png";
 import { Link } from "react-router-dom";
 import auth from "../../init.firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useQuery } from "@tanstack/react-query";
+import Loading from "../../Shared/LoadingSpinner/Loading";
+
 const CalenderConnection = () => {
   const [user] = useAuthState(auth);
 
+  const { data: singleUser, isLoading } = useQuery(
+    ["singleUser", user?.email],
+    () =>
+      fetch(`http://localhost:5000/user/${user?.email}`, {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }).then((res) => res.json())
+  );
+
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
-    <div className="md:mx-4 lg:mx-32">
-      <div className="md:shadow-md md:border-[1px] pb-5 mt-8 rounded mx-2">
-        <div className="flex justify-between items-center py-4 px-2 md:px-8">
-          <h2 className="text-lg md:text-xl">My calender Account</h2>
-          <Link to="/addCalender">
-            <button className="text-sm md:text-lg rounded-lg border border-info text-info p-2 hover:shadow-lg ">
-              Add Calender Account
+    <div>
+      <div className="shadow border container mx-auto pb-5 mt-8">
+        <div className="flex justify-between py-4 px-8">
+          <h2 className="text-xl">My calender Account</h2>
+          {singleUser.refreshToken ? (
+            <button className="rounded-lg btn btn-disabled btn-md btn-outline">
+              Your Google Calendar Connected
             </button>
-          </Link>
+          ) : (
+            <Link to="/addCalender">
+              <button className="text-sm rounded-lg btn btn-md btn-outline btn-secondary">
+                Connect Your Calendar
+              </button>
+            </Link>
+          )}
         </div>
         <div className="">
           <div className="flex justify-between items-center border-t border-b px-2 md:px-8 py-8 bg-gray-50">

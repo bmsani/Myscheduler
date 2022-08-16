@@ -62,11 +62,11 @@ function App() {
           element={<CreateEventType></CreateEventType>}
         ></Route>
         <Route
-          path="/CreateIndividualEvent"
+          path="/createIndividualEvent"
           element={<CreateIndividualEvent></CreateIndividualEvent>}
         ></Route>
         <Route
-          path="/EventDetailsAdd"
+          path="/eventDetailsAdd"
           element={<EventDetailsAdd></EventDetailsAdd>}
         ></Route>
         <Route

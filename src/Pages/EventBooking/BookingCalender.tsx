@@ -40,7 +40,6 @@ const BookingCalender = () => {
       method: "GET",
       headers: {
         "content-type": "application/json",
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     })
       .then((res) => res.json())
@@ -141,10 +140,8 @@ const BookingCalender = () => {
   const endTimee = endWithUTC?.split("+")[0];
   const eventDate = moment(startEndTime?.split("T")[0]).format("MMMM Do YYYY");
 
-  console.log(eventDate, startTime, endTimee);
-
   return (
-    <div className="lg:mx-20 lg:mt-12 border">
+    <div className="lg:mx-20 lg:my-12 border">
       <div className="grid grid-cols-1 lg:grid-cols-3  ">
         <div className=" lg:col-span-1 lg:border-r sm:border-b">
           <div className="flex gap-5 border-b p-5">
@@ -236,8 +233,10 @@ const BookingCalender = () => {
           </div>
         ) : (
           <BookingConfirm
+            userInfo={userInfo}
             startEndTime={startEndTime}
             singleEvent={singleEvent}
+            hostEmail={singleEvent?.email}
           />
         )}
       </div>
