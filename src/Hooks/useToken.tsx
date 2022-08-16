@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const useToken = (user: any) => {
   const [token, setToken] = useState("");
@@ -33,8 +34,8 @@ const useToken = (user: any) => {
           start: "09:00",
           end: "17:00",
           interval: {
-            starting: "13:00",
-            ending: "14:00",
+            starting: "00:00",
+            ending: "00:00",
           },
           checked: false,
         },
@@ -44,8 +45,8 @@ const useToken = (user: any) => {
           start: "09:00",
           end: "17:00",
           interval: {
-            starting: "13:00",
-            ending: "14:00",
+            starting: "00:00",
+            ending: "00:00",
           },
           checked: true,
         },
@@ -55,8 +56,8 @@ const useToken = (user: any) => {
           start: "09:00",
           end: "17:00",
           interval: {
-            starting: "13:00",
-            ending: "14:00",
+            starting: "00:00",
+            ending: "00:00",
           },
           checked: true,
         },
@@ -66,8 +67,8 @@ const useToken = (user: any) => {
           start: "09:00",
           end: "17:00",
           interval: {
-            starting: "13:00",
-            ending: "14:00",
+            starting: "00:00",
+            ending: "00:00",
           },
           checked: true,
         },
@@ -77,8 +78,8 @@ const useToken = (user: any) => {
           start: "09:00",
           end: "17:00",
           interval: {
-            starting: "13:00",
-            ending: "14:00",
+            starting: "00:00",
+            ending: "00:00",
           },
           checked: true,
         },
@@ -88,8 +89,8 @@ const useToken = (user: any) => {
           start: "09:00",
           end: "17:00",
           interval: {
-            starting: "13:00",
-            ending: "14:00",
+            starting: "00:00",
+            ending: "00:00",
           },
           checked: true,
         },
@@ -99,8 +100,8 @@ const useToken = (user: any) => {
           start: "09:00",
           end: "17:00",
           interval: {
-            starting: "13:00",
-            ending: "14:00",
+            starting: "00:00",
+            ending: "00:00",
           },
           checked: false,
         },
@@ -115,8 +116,11 @@ const useToken = (user: any) => {
         body: JSON.stringify(userAvailability),
       })
         .then((res) => res.json())
-        .then((data) => console.log(data));
-      console.log("user avaialelity");
+        .then((data) => {
+          if (data.acknowledged) {
+            toast.success("Availability create successful");
+          }
+        });
     }
   }, [user]);
 

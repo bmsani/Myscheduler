@@ -135,7 +135,6 @@ const BookingCalender = () => {
   const startWithDate = startEndTime?.split("_")[0];
   const startWithUTC = startWithDate?.split("T")[1];
   const startTime = startWithUTC?.split("+")[0];
-
   const endWithDate = startEndTime?.split("_")[1];
   const endWithUTC = endWithDate?.split("T")[1];
   const endTimee = endWithUTC?.split("+")[0];

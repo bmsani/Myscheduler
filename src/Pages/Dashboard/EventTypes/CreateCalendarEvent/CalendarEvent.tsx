@@ -101,7 +101,7 @@ const CalendarEvent = () => {
             scope="openid email profile https://www.googleapis.com/auth/calendar"
           />
         </div>
-        ) : ( 
+      ) : (
         <div className="flex justify-center items-center">
           <form
             onSubmit={handleCreateEvent}
