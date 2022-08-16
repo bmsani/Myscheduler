@@ -13,12 +13,6 @@ import DatePicker from "react-datetime";
 import moment from "moment";
 import "react-datetime/css/react-datetime.css";
 import { useQuery } from "@tanstack/react-query";
-import GoogleLogin from "react-google-login";
-import axios from "axios";
-import { gapi } from "gapi-script";
-
-const clientId =
-  "246190552758-iv4qnbua1chul41b87mfch0gsoeqe8bj.apps.googleusercontent.com";
 
 const BookingCalender = () => {
   const { id } = useParams();
@@ -33,40 +27,6 @@ const BookingCalender = () => {
   const [times, setTimes] = useState<any>([]);
   const { name, brandLogo } = userInfo;
   const [click, setClick] = useState(false);
-
-  // connect google calendar
-  useEffect(() => {
-    function start() {
-      gapi.client.init({
-        clientId: clientId,
-        scope: "openid email profile https://www.googleapis.com/auth/calendar",
-      });
-    }
-
-    gapi.load("client:auth2", start);
-  });
-
-  const responseGoogle = (response: any) => {
-    console.log(response);
-    const { code } = response;
-    axios
-      .post("http://localhost:5000/api/create-tokens", { code })
-      .then((response) => {
-        console.log(response?.data);
-        const refreshToken = response?.data?.refresh_token;
-        if (refreshToken) {
-          axios
-            .put(`http://localhost:5000/user/${singleEvent?.email}`, {
-              refreshToken,
-            })
-            .then((res) => console.log(res));
-        }
-      })
-      .catch((error) => console.log(error.message));
-  };
-  const responseError = (error: any) => {
-    console.log(error);
-  };
 
   const { data: singleEvent } = useQuery(["singleEvent", id], () =>
     fetch(`http://localhost:5000/getSingleEvent/${id}`, {
@@ -182,18 +142,6 @@ const BookingCalender = () => {
 
   return (
     <div className="lg:mx-20 lg:my-12 border">
-      <div className="text-center mt-8">
-        <GoogleLogin
-          clientId="246190552758-iv4qnbua1chul41b87mfch0gsoeqe8bj.apps.googleusercontent.com"
-          buttonText="Connect your calendar"
-          onSuccess={responseGoogle}
-          onFailure={responseError}
-          cookiePolicy={"single_host_origin"}
-          responseType="code"
-          accessType="offline"
-          scope="openid email profile https://www.googleapis.com/auth/calendar"
-        />
-      </div>
       <div className="grid grid-cols-1 lg:grid-cols-3  ">
         <div className=" lg:col-span-1 lg:border-r sm:border-b">
           <div className="flex gap-5 border-b p-5">

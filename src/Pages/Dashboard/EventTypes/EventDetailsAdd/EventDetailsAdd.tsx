@@ -29,10 +29,9 @@ const EventDetailsAdd = ({
   handleEvent,
 }: any) => {
   const [availabilityModify, setAvailabilityModify] = useState(false);
-  const [eventAvailability, setEventAvailability] = useState<any>([]);
+  const [eventAvailability, setEventAvailability] = useState<any>({});
   const [user, loading] = useAuthState(auth);
   const email = user?.email;
-
   const handleCheckedBox = (id: string, checkedBox: boolean) => {
     const daysId = availabilities._id;
     fetch(
@@ -48,23 +47,29 @@ const EventDetailsAdd = ({
     )
       .then((res) => res.json())
       .then((data) => {
-        setEventId(data?.eventID);
-        if (data?.eventID) {
+        if(data?.eventID){
+          setEventId(data?.eventID);
           fetch(`http://localhost:5000/customAvailability/${data?.eventID}`)
             .then((res) => res.json())
             .then((data) => {
-              console.log(data);
+              setEventAvailability(data);
+              refetch();
+            });
+        }
+        if(data?.eventId){
+          setEventId(data?.eventId);
+          fetch(`http://localhost:5000/customAvailability/${data?.eventId}`)
+            .then((res) => res.json())
+            .then((data) => {
               setEventAvailability(data);
               refetch();
             });
         }
       });
   };
-
   if (loading) {
     return <Loading></Loading>;
   }
-
   return (
     <div>
       <div className="border mt-3 shadow-lg">
@@ -130,7 +135,7 @@ const EventDetailsAdd = ({
                 type="number"
                 value={30}
                 readOnly
-                className="input  border-blue-500 w-full "
+                className="input border-blue-500 w-full "
                 ref={durationRef}
               />
             </div>
@@ -138,16 +143,16 @@ const EventDetailsAdd = ({
               <p className="text-md font-semibold">
                 How do you want to offer your availability for this event type?
               </p>
-              <div className="mt-4">
+              <div className="mt-4 flex">
                 <input
-                  className="border-2 mr-2 rounded-full p-3 text-center focus-within:border-indigo-400"
+                  className="border-2 mr-2 rounded-full p-3 text-center focus-within:border-indigo-400 w-1/2 cursor-pointer"
                   type="text"
                   readOnly
                   onClick={() => setAvailabilityModify(false)}
                   value={"Use an existing schedule"}
                 />
                 <input
-                  className="border-2 rounded-full p-3 text-center"
+                  className="border-2 rounded-full p-3 text-center w-1/2 cursor-pointer"
                   type="text"
                   readOnly
                   onClick={() => setAvailabilityModify(true)}

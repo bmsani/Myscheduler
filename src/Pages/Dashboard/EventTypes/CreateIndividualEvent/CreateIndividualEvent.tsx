@@ -48,29 +48,49 @@ const CreateIndividualEvent = () => {
 
   const handleEvent = () => {
     const eventDuration = durationRef?.current?.value;
-    const event = {
-      email: email,
-      eventName: eventName,
-      eventLocation: eventLocation,
-      eventDescription: eventDescription,
-      eventDuration: eventDuration,
-      availabilities: availabilities?.dayData,
-    };
-
-    fetch(`http://localhost:5000/createNewEvent?evemtId=${eventId}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(event),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.acknowledged) {
-          toast.success("Add event successfully");
-        }
-      });
+    if (eventId) {
+      const event = {
+        eventName: eventName,
+        eventLocation: eventLocation,
+        eventDescription: eventDescription,
+        eventDuration: eventDuration,
+      };
+      fetch(`http://localhost:5000/createNewEvent/${eventId}`, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(event),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.acknowledged) {
+            toast.success("Add event successfully");
+          }
+        });
+    } else {
+      const event = {
+        email: email,
+        eventName: eventName,
+        eventLocation: eventLocation,
+        eventDescription: eventDescription,
+        eventDuration: eventDuration,
+        dayData: availabilities?.dayData
+      };
+      fetch(`http://localhost:5000/createNewEvent`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(event),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.acknowledged) {
+            toast.success("Add event successfully");
+          }
+        });
+    }
   };
   return (
     <div>
