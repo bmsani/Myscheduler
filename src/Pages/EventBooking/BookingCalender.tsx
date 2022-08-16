@@ -54,10 +54,14 @@ const BookingCalender = () => {
   };
 
   const dayFromCalendar = format(selected, "PPPPP").split(",")[0].slice(0, 3);
-  const dayFromDB = singleEvent?.dayData?.find((d: any) => d?.day === dayFromCalendar);
+  const dayFromDB = singleEvent?.dayData?.find(
+    (d: any) => d?.day === dayFromCalendar
+  );
 
   // disable unavailable day
-  const checked = singleEvent?.dayData?.filter((d: any) => d?.checked === false);
+  const checked = singleEvent?.dayData?.filter(
+    (d: any) => d?.checked === false
+  );
   const day = checked?.map((d: any) => d.id - 1);
   const yesterday = moment().subtract(1, "day");
   const valid = function (current: any) {
@@ -196,7 +200,7 @@ const BookingCalender = () => {
                 <p className="mt-2 ml-2 mb-5">{format(selected, "PP")}</p>
                 <div>
                   <div className="h-[300px] overflow-x-hidden scroll-smooth scroll-p-8 ">
-                    {timeCollection.map((time, index) => (
+                    {timeCollection?.map((time, index) => (
                       <button
                         key={index}
                         onClick={() => handleConfirmBooking(time)}
