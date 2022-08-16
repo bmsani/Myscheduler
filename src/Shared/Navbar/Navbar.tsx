@@ -61,9 +61,6 @@ const Navbar = () => {
         <Link to="/blogs">Blogs</Link>
       </li>
       <li>
-        <Link to="/">Admin</Link>
-      </li>
-      <li>
         <Link className="block lg:hidden text-start" to="/login">
           <Button>
             <span className="px-0 lg:px-4">Login</span>
