@@ -24,11 +24,11 @@ const BookingCalender = () => {
     message: "",
   });
   const [startEndTime, setStartEndTime] = useState(" ");
-  const [times, setTimes] = useState<any>([]);
+  // const [times, setTimes] = useState<any>([]);
   const { name, brandLogo } = userInfo;
   const [click, setClick] = useState(false);
 
-  const { data: singleEvent } = useQuery(["singleEvent", id], () =>
+  const { data: singleEvent, isLoading } = useQuery(["singleEvent", id], () =>
     fetch(`http://localhost:5000/getSingleEvent/${id}`, {
       method: "GET",
     }).then((res) => res.json())
@@ -49,24 +49,16 @@ const BookingCalender = () => {
   }, [singleEvent?.email]);
 
   // ================Times Slots ============================
-  useEffect(() => {
-    if (singleEvent?.email) {
-      fetch(`http://localhost:5000/availability/${singleEvent?.email}`)
-        .then((res) => res.json())
-        .then((data) => setTimes(data?.dayData));
-    }
-  }, [singleEvent?.email]);
-
   const backButton = () => {
     setClick(false);
   };
 
   const dayFromCalendar = format(selected, "PPPPP").split(",")[0].slice(0, 3);
-  const dayFromDB = times?.find((d: any) => d.day === dayFromCalendar);
+  const dayFromDB = singleEvent?.dayData?.find((d: any) => d?.day === dayFromCalendar);
 
   // disable unavailable day
-  const checked = times.filter((d: any) => d.checked === false);
-  const day = checked.map((d: any) => d.id - 1);
+  const checked = singleEvent?.dayData?.filter((d: any) => d?.checked === false);
+  const day = checked?.map((d: any) => d.id - 1);
   const yesterday = moment().subtract(1, "day");
   const valid = function (current: any) {
     return (
@@ -127,7 +119,7 @@ const BookingCalender = () => {
     setClick(true);
   };
 
-  if (!times) {
+  if (isLoading) {
     return <Loading />;
   }
 
