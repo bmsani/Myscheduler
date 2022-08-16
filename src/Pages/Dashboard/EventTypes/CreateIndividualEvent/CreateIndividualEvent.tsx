@@ -1,8 +1,10 @@
+import { useQuery } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../../../init.firebase";
+import Loading from "../../../../Shared/LoadingSpinner/Loading";
 import leftArrow from "../../../../Utilities/icon/leftArrow.png";
 import EventDetailsAdd from "../EventDetailsAdd/EventDetailsAdd";
 // interface data {
@@ -19,22 +21,30 @@ const CreateIndividualEvent = () => {
   const [eventName, setEventName] = useState("");
   const [eventLocation, setEventLocation] = useState("");
   const [eventDescription, setEventDescription] = useState("");
+  const [eventId, setEventId] = useState("");
   // const [eventLink, setEventLink] = useState("");
-  const [availabilities, setAvailabilities] = useState<any>([]);
+  // const [availabilities, setAvailabilities] = useState<any>([]);
   const [next, setNext] = useState(false);
   const durationRef = useRef<HTMLInputElement | null>(null);
   const [user] = useAuthState(auth);
   const email = user?.email;
 
-  useEffect(() => {
-    fetch(`https://secure-chamber-99191.herokuapp.com/availability/${email}`)
-      .then((res) => res.json())
-      .then((data) => setAvailabilities(data));
-  }, [email]);
-
+  const {
+    data: availabilities,
+    isLoading,
+    refetch,
+  } = useQuery(["availabilities", email], () =>
+    fetch(`http://localhost:5000/availability/${email}`).then((res) =>
+      res.json()
+    )
+  );
   const handleNext = () => {
     setNext(true);
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   const handleEvent = () => {
     const eventDuration = durationRef?.current?.value;
@@ -46,16 +56,17 @@ const CreateIndividualEvent = () => {
       eventDuration: eventDuration,
       availabilities: availabilities?.dayData,
     };
-    fetch("https://secure-chamber-99191.herokuapp.com/updateEvent", {
-      method: "POST",
+
+    fetch(`http://localhost:5000/createNewEvent?evemtId=${eventId}`, {
+      method: "PUT",
       headers: {
         "content-type": "application/json",
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
       body: JSON.stringify(event),
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         if (data.acknowledged) {
           toast.success("Add event successfully");
         }
@@ -170,18 +181,6 @@ const CreateIndividualEvent = () => {
                     placeholder="Bio"
                   ></textarea>
                 </div>
-                {/* <label className="label">
-                  <span className="label-text">Event Link</span>
-                </label>
-                <div className="">
-                  <input
-                    required
-                    onChange={(e) => setEventLink(e.target.value)}
-                    type="text"
-                    placeholder="Type here"
-                    className="input  border-blue-500 w-full max-w-xs "
-                  />
-                </div> */}
               </form>
             </div>
             <div className="border-t mx-10 py-4  grid place-items-end">
@@ -198,7 +197,6 @@ const CreateIndividualEvent = () => {
                   <button
                     className="px-4 py-1 rounded-full text-white bg-gray-400"
                     disabled
-                    onClick={handleNext}
                   >
                     Next
                   </button>
@@ -221,6 +219,9 @@ const CreateIndividualEvent = () => {
           eventLocation={eventLocation}
           durationRef={durationRef}
           handleEvent={handleEvent}
+          refetch={refetch}
+          eventId={eventId}
+          setEventId={setEventId}
         ></EventDetailsAdd>
       )}
     </div>
