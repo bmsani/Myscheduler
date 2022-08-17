@@ -78,8 +78,7 @@ const PastEvent = () => {
                   <div>
                     <p className="font-bold">Invitee Message</p>
                     <span>
-                      {event?.inviteeMessage} Please share anything that will
-                      help prepare for our meeting.
+                      {event?.inviteeMessage}
                     </span>
                   </div>
                 </div>
