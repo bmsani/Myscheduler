@@ -4,11 +4,16 @@ import React from "react";
 import { FcOvertime } from "react-icons/fc";
 import { GoCalendar, GoDash } from "react-icons/go";
 import Loading from "../../../../Shared/LoadingSpinner/Loading";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../../../init.firebase";
+
 
 const PendingEvent = () => {
+    const [user] = useAuthState(auth);
   const today = moment(new Date()).format().split("T")[0];
+  const todayWithDate = moment(new Date()).format();
   const { data: bookedEvents, isLoading } = useQuery(["bookedEvents"], () =>
-    fetch(`http://localhost:5000/api/bookedEvents`, {
+    fetch(`http://localhost:5000/api/bookedEvents/${user?.email}`, {
       method: "GET",
     }).then((res) => res.json())
   );
@@ -16,7 +21,7 @@ const PendingEvent = () => {
     <Loading />;
   }
   const pendingEvents = bookedEvents?.filter(
-    (singleEvent: any) => singleEvent?.date === today
+    (singleEvent: any) => singleEvent?.date === today && moment(singleEvent?.date + " " + singleEvent?.eventStartTime).format() > todayWithDate
   );
   return (
     <div>

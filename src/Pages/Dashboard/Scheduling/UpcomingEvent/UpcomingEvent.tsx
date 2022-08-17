@@ -5,11 +5,14 @@ import { GoCalendar, GoDash } from "react-icons/go";
 import { Link } from "react-router-dom";
 import Loading from "../../../../Shared/LoadingSpinner/Loading";
 import { FcOvertime } from "react-icons/fc";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../../../init.firebase";
 
 const UpcomingEvent = () => {
+    const [user] = useAuthState(auth);
   const today = moment(new Date()).format().split("T")[0];
   const { data: bookedEvents, isLoading } = useQuery(["bookedEvents"], () =>
-    fetch(`http://localhost:5000/api/bookedEvents`, {
+    fetch(`http://localhost:5000/api/bookedEvents/${user?.email}`, {
       method: "GET",
     }).then((res) => res.json())
   );

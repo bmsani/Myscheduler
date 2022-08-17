@@ -4,11 +4,16 @@ import React from "react";
 import { FcOvertime } from "react-icons/fc";
 import { GoCalendar, GoDash } from "react-icons/go";
 import Loading from "../../../../Shared/LoadingSpinner/Loading";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../../../init.firebase";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const PastEvent = () => {
-  const today = moment(new Date()).format().split("T")[0];
-  const { data: bookedEvents, isLoading } = useQuery(["bookedEvents"], () =>
-    fetch(`http://localhost:5000/api/bookedEvents`, {
+  const [user] = useAuthState(auth);
+  const today = moment(new Date()).format();
+  const { data: bookedEvents, isLoading, refetch } = useQuery(["bookedEvents"], () =>
+    fetch(`http://localhost:5000/api/bookedEvents/${user?.email}`, {
       method: "GET",
     }).then((res) => res.json())
   );
@@ -16,8 +21,19 @@ const PastEvent = () => {
     <Loading />;
   }
   const pastEvents = bookedEvents?.filter(
-    (singleEvent: any) => singleEvent?.date === today
+    (singleEvent: any) =>
+      moment(singleEvent?.date + " " + singleEvent?.eventStartTime).format() <
+      today
   );
+  const handleDelete = (id: string) => {
+    axios.delete(`http://localhost:5000/api/bookedEventDelete/${id}`)
+    .then(response => {
+        if(response?.status === 200){
+            toast.error("Past event deleted")
+            refetch()
+        }
+    })
+  };
   return (
     <div>
       {pastEvents?.length ? (
@@ -66,6 +82,14 @@ const PastEvent = () => {
                       help prepare for our meeting.
                     </span>
                   </div>
+                </div>
+                <div className="text-end">
+                  <button
+                    className="w-20 mt-4 py-1 px-4 border border-primary rounded-full text-primary hover:shadow-md hover:shadow-gray-500 hover:bg-gray-500 hover:text-white duration-300 cursor-pointer"
+                    onClick={() => handleDelete(event._id)}
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
             </div>
