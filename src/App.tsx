@@ -37,6 +37,9 @@ import EventDetailsAdd from "./Pages/Dashboard/EventTypes/EventDetailsAdd/EventD
 import Admin from "./Pages/Admin/Admin";
 import Users from "./Pages/Admin/Users/Users";
 import UserDetails from "./Pages/Admin/UserDetails/UserDetails";
+import Payment from "./Pages/Payment/Payment";
+import CreateGroupEvent from "./Pages/Dashboard/EventTypes/CreacteGroupEvent/CreateGroupEvent";
+import PricingCard from "./Pages/Payment/PricingCard/PricingCard";
 
 function App() {
   const [user] = useAuthState(auth);
@@ -65,6 +68,11 @@ function App() {
           path="/createIndividualEvent"
           element={<CreateIndividualEvent></CreateIndividualEvent>}
         ></Route>
+        <Route
+          path="/createGroupEvent"
+          element={<CreateGroupEvent></CreateGroupEvent>}
+        ></Route>
+
         <Route
           path="/eventDetailsAdd"
           element={<EventDetailsAdd></EventDetailsAdd>}
@@ -169,6 +177,16 @@ function App() {
             </RequiredAuth>
           }
         ></Route>
+        <Route path="/priceCart" element={<PricingCard />}></Route>
+        <Route
+          path="payment"
+          element={
+            <RequiredAuth>
+              <Payment />
+            </RequiredAuth>
+          }
+        ></Route>
+
         <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>
       <ToastContainer />

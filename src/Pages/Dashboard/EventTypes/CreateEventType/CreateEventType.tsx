@@ -2,7 +2,9 @@ import { Link } from "react-router-dom";
 import group from "../../../../Utilities/icon/group-call.png";
 import single from "../../../../Utilities/icon/single-call.png";
 import { MdArrowBackIos } from "react-icons/md";
+import GetUserInfo from "../../../../Shared/GetUserInfo/GetUserInfo";
 const CreateEventType = () => {
+  const [userInfo] = GetUserInfo();
   return (
     <div>
       <div className="flex items-center justify-between my-4 mx-4 lg:mx-40 ">
@@ -58,9 +60,21 @@ const CreateEventType = () => {
             </div>
           </div>
           <div>
-            <button className="w-full mt-3 lg:mt-0 bg-blue-500 text-white px-7 py-3 rounded-full">
-              Coming soon
-            </button>
+            {userInfo.paymentStatus ? (
+              <Link
+                to="/createGroupEvent"
+                className="w-full mt-3 lg:mt-0 bg-blue-500 text-white px-7 py-3 rounded-full"
+              >
+                Create
+              </Link>
+            ) : (
+              <Link
+                to="/priceCart"
+                className="w-full mt-3 lg:mt-0 bg-blue-500 text-white px-7 py-3 rounded-full"
+              >
+                Create
+              </Link>
+            )}
           </div>
         </div>
         <div className="md:flex items-center justify-between mx-4 lg:mx-40 mt-20 bg-slate-200 p-4 rounded-md">

@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../init.firebase";
 
-const GetUserInfo = (user: any) => {
-  const [userInfo, setUserInfo] = useState({});
+const GetUserInfo = () => {
+  const [user] = useAuthState(auth);
+  const [userInfo, setUserInfo] = useState<any>({});
 
   //   console.log("from getuser", userInfo);
   useEffect(() => {
