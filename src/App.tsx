@@ -34,10 +34,12 @@ import CalendarEvent from "./Pages/Dashboard/EventTypes/CreateCalendarEvent/Cale
 import CreateEventType from "./Pages/Dashboard/EventTypes/CreateEventType/CreateEventType";
 import CreateIndividualEvent from "./Pages/Dashboard/EventTypes/CreateIndividualEvent/CreateIndividualEvent";
 import EventDetailsAdd from "./Pages/Dashboard/EventTypes/EventDetailsAdd/EventDetailsAdd";
-import BookingConfirm from "./Pages/EventBooking/BookingConfirm";
 import Admin from "./Pages/Admin/Admin";
 import Users from "./Pages/Admin/Users/Users";
 import UserDetails from "./Pages/Admin/UserDetails/UserDetails";
+import UpcomingEvent from "./Pages/Dashboard/Scheduling/UpcomingEvent/UpcomingEvent";
+import PendingEvent from "./Pages/Dashboard/Scheduling/PendingEvent/PendingEvent";
+import PastEvent from "./Pages/Dashboard/Scheduling/PastEvent/PastEvent";
 
 function App() {
   const [user] = useAuthState(auth);
@@ -95,7 +97,11 @@ function App() {
           <Route index element={<Event></Event>}></Route>
           <Route path="workflow" element={<Workflow />}></Route>
           <Route path="eventTypes" element={<EventTypes />}></Route>
-          <Route path="scheduling" element={<Scheduling />}></Route>
+          <Route path="scheduling" element={<Scheduling />}>
+            <Route path="upcomingEvent" element={<UpcomingEvent />} />
+            <Route path="pendingEvent" element={<PendingEvent />} />
+            <Route path="pastEvent" element={<PastEvent />} />
+          </Route>
           <Route path="routingForms" element={<RoutingForms />}></Route>
         </Route>
         <Route
