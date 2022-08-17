@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { FormEvent, useRef } from "react";
 import { toast } from "react-toastify";
 
-const BookingConfirm = ({ startEndTime, singleEvent, hostEmail }: any) => {
+const BookingConfirm = ({ startEndTime, singleEvent, hostEmail, eventLocation }: any) => {
   const getName = useRef<HTMLInputElement | null>(null);
   const getMessage = useRef<HTMLTextAreaElement | null>(null);
   const getEmail = useRef<HTMLInputElement | null>(null);
@@ -32,6 +32,7 @@ const BookingConfirm = ({ startEndTime, singleEvent, hostEmail }: any) => {
       date: eventDate,
       eventStartTime: startTime,
       eventEndTime: endTime,
+      eventLocation: eventLocation
     };
 
     const bookingConfirm = {

@@ -225,6 +225,7 @@ const BookingCalender = () => {
             startEndTime={startEndTime}
             singleEvent={singleEvent}
             hostEmail={singleEvent?.email}
+            eventLocation={singleEvent?.eventLocation}
           />
         )}
       </div>

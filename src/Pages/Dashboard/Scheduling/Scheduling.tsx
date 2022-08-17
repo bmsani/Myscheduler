@@ -52,7 +52,7 @@ const Scheduling = () => {
         <div className="drawer-content flex flex-col">
           <div className="w-full navbar border-b">
             <div className="mx-auto flex-none block">
-              <ul className="menu menu-horizontal">{items}</ul>
+              <ul className="menu menu-horizontal gap-4">{items}</ul>
             </div>
           </div>
           <Outlet></Outlet>
