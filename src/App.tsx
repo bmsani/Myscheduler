@@ -40,6 +40,10 @@ import UserDetails from "./Pages/Admin/UserDetails/UserDetails";
 import Payment from "./Pages/Payment/Payment";
 import CreateGroupEvent from "./Pages/Dashboard/EventTypes/CreacteGroupEvent/CreateGroupEvent";
 import PricingCard from "./Pages/Payment/PricingCard/PricingCard";
+import UpcomingEvent from "./Pages/Dashboard/Scheduling/UpcomingEvent/UpcomingEvent";
+import PendingEvent from "./Pages/Dashboard/Scheduling/PendingEvent/PendingEvent";
+import PastEvent from "./Pages/Dashboard/Scheduling/PastEvent/PastEvent";
+import EventSuccessMessage from "./Pages/EventBooking/EventSuccessMessage";
 
 function App() {
   const [user] = useAuthState(auth);
@@ -48,7 +52,11 @@ function App() {
 
   return (
     <div>
-      {location !== "bookingCalender" ? <Navbar /> : <></>}
+      {location === "bookingCalender" || location === "eventSuccessMessage" ? (
+        <></>
+      ) : (
+        <Navbar />
+      )}
 
       <Routes>
         <Route
@@ -86,6 +94,10 @@ function App() {
           path="/bookingCalender/:id"
           element={<BookingCalender />}
         ></Route>
+        <Route
+          path="/eventSuccessMessage"
+          element={<EventSuccessMessage />}
+        ></Route>
 
         <Route path="login" element={<Login></Login>}></Route>
         <Route path="register" element={<Register></Register>}></Route>
@@ -102,7 +114,11 @@ function App() {
           <Route index element={<Event></Event>}></Route>
           <Route path="workflow" element={<Workflow />}></Route>
           <Route path="eventTypes" element={<EventTypes />}></Route>
-          <Route path="scheduling" element={<Scheduling />}></Route>
+          <Route path="scheduling" element={<Scheduling />}>
+            <Route path="upcomingEvent" element={<UpcomingEvent />} />
+            <Route path="pendingEvent" element={<PendingEvent />} />
+            <Route path="pastEvent" element={<PastEvent />} />
+          </Route>
           <Route path="routingForms" element={<RoutingForms />}></Route>
         </Route>
         <Route

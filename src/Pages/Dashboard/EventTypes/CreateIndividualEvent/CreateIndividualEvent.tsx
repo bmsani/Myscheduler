@@ -1,8 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../../../init.firebase";
+import Loading from "../../../../Shared/LoadingSpinner/Loading";
 import EventDetailsAdd from "../EventDetailsAdd/EventDetailsAdd";
 import { MdArrowBackIos } from "react-icons/md";
 
@@ -20,47 +22,76 @@ const CreateIndividualEvent = () => {
   const [eventName, setEventName] = useState("");
   const [eventLocation, setEventLocation] = useState("");
   const [eventDescription, setEventDescription] = useState("");
+  const [eventId, setEventId] = useState("");
   // const [eventLink, setEventLink] = useState("");
-  const [availabilities, setAvailabilities] = useState<any>([]);
+  // const [availabilities, setAvailabilities] = useState<any>([]);
   const [next, setNext] = useState(false);
   const durationRef = useRef<HTMLInputElement | null>(null);
   const [user] = useAuthState(auth);
   const email = user?.email;
 
-  useEffect(() => {
-    fetch(`http://localhost:5000/availability/${email}`)
-      .then((res) => res.json())
-      .then((data) => setAvailabilities(data));
-  }, [email]);
-
+  const {
+    data: availabilities,
+    isLoading,
+    refetch,
+  } = useQuery(["availabilities", email], () =>
+    fetch(`http://localhost:5000/availability/${email}`).then((res) =>
+      res.json()
+    )
+  );
   const handleNext = () => {
     setNext(true);
   };
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
   const handleEvent = () => {
     const eventDuration = durationRef?.current?.value;
-    const event = {
-      email: email,
-      eventName: eventName,
-      eventLocation: eventLocation,
-      eventDescription: eventDescription,
-      eventDuration: eventDuration,
-      availabilities: availabilities?.dayData,
-    };
-    fetch("http://localhost:5000/updateEvent", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-      body: JSON.stringify(event),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.acknowledged) {
-          toast.success("Add event successfully");
-        }
-      });
+    if (eventId) {
+      const event = {
+        eventName: eventName,
+        eventLocation: eventLocation,
+        eventDescription: eventDescription,
+        eventDuration: eventDuration,
+      };
+      fetch(`http://localhost:5000/createNewEvent/${eventId}`, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(event),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.acknowledged) {
+            toast.success("Add event successfully");
+          }
+        });
+    } else {
+      const event = {
+        email: email,
+        eventName: eventName,
+        eventLocation: eventLocation,
+        eventDescription: eventDescription,
+        eventDuration: eventDuration,
+        dayData: availabilities?.dayData,
+      };
+      fetch(`http://localhost:5000/createNewEvent`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(event),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.acknowledged) {
+            toast.success("Add event successfully");
+          }
+        });
+    }
   };
   return (
     <div>
@@ -79,14 +110,6 @@ const CreateIndividualEvent = () => {
               <div>
                 <h2 className="md:text-xl py-3 text-center">
                   Add One-on-One Event Type
-                </h2>
-              </div>
-              <div>
-                <h2 className="text-base py-3 text-center">
-                  Your event type is{" "}
-                  <span className="px-5 py-1 text-base ml-1 text-white bg-gray-400 rounded-sm">
-                    OFF
-                  </span>{" "}
                 </h2>
               </div>
             </div>
@@ -174,23 +197,11 @@ const CreateIndividualEvent = () => {
                 <div className="">
                   <textarea
                     required
-                    onBlur={(e) => setEventDescription(e.target.value)}
+                    onChange={(e) => setEventDescription(e.target.value)}
                     className="textarea border-blue-500 w-full max-w-sm"
                     placeholder="Bio"
                   ></textarea>
                 </div>
-                {/* <label className="label">
-                  <span className="label-text">Event Link</span>
-                </label>
-                <div className="">
-                  <input
-                    required
-                    onChange={(e) => setEventLink(e.target.value)}
-                    type="text"
-                    placeholder="Type here"
-                    className="input  border-blue-500 w-full max-w-xs "
-                  />
-                </div> */}
               </form>
             </div>
             <div className="border-t grid place-items-end">
@@ -207,7 +218,6 @@ const CreateIndividualEvent = () => {
                   <button
                     className="px-4 py-1 rounded-full text-white bg-gray-400"
                     disabled
-                    onClick={handleNext}
                   >
                     Next
                   </button>
@@ -230,6 +240,9 @@ const CreateIndividualEvent = () => {
           eventLocation={eventLocation}
           durationRef={durationRef}
           handleEvent={handleEvent}
+          refetch={refetch}
+          eventId={eventId}
+          setEventId={setEventId}
         ></EventDetailsAdd>
       )}
     </div>

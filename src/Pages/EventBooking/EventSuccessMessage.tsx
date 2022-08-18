@@ -1,14 +1,16 @@
 import React from "react";
-
-const EventSuccessMessage = ({ userInfo }: any) => {
-  const { name } = userInfo;
+const EventSuccessMessage = () => {
   return (
-    <div className="flex justify-end items-center h-[60vh]">
-      <div className="text-center">
-        <h1 className="text-2xl font-bold text-success">Confirm</h1>
-        <h2 className="text-lg">
-          You are scheduled with <span className="text-blue-500">{name}</span>
-        </h2>
+    <div className="flex justify-center items-center h-screen">
+      <div className="flex flex-col justify-center items-center">
+        <img
+          className=" w-96"
+          src="https://i.ibb.co/yPwYvxF/event.png"
+          alt=""
+        />
+        <h1 className="text-4xl text-primary">
+          Your Event Successfully Created
+        </h1>
       </div>
     </div>
   );

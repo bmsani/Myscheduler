@@ -26,8 +26,6 @@ const EventBooking = () => {
               </div>
             </Link>
           </div>
-
-          <div className="flex items-end">{/* <h2>cooking</h2> */}</div>
         </div>
       </div>
     </div>

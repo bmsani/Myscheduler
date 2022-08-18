@@ -1,30 +1,15 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../init.firebase";
 
 const GetUserInfo = () => {
   const [user] = useAuthState(auth);
-  const [userInfo, setUserInfo] = useState<any>({});
+  const email = user?.email;
+  const { data: userInfo, isLoading } = useQuery(["userInfo", email], () =>
+    fetch(`http://localhost:5000/user/${email}`).then((res) => res.json())
+  );
 
-  //   console.log("from getuser", userInfo);
-  useEffect(() => {
-    if (user?.email) {
-      const url = `http://localhost:5000/user/${user?.email}`;
-      fetch(url, {
-        method: "GET",
-        headers: {
-          "content-type": "application/json",
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setUserInfo(data);
-        });
-    }
-  }, [user]);
-
-  return [userInfo, setUserInfo];
+  return { userInfo, isLoading };
 };
 
 export default GetUserInfo;

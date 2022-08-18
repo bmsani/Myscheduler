@@ -1,4 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -8,15 +10,14 @@ const Event = () => {
   const [user] = useAuthState(auth);
   const email = user?.email;
   const photo: any = user?.photoURL;
-  const { data: singleUser } = useQuery(["singleUser", user?.email], () =>
-    fetch(`http://localhost:5000/user/${user?.email}`, {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        authorization: `bearer ${localStorage.getItem("accessToken")}`,
-      },
-    }).then((res) => res.json())
-  );
+  const [singleUser, setSingleUser] = useState<any>({});
+
+  useEffect(() => {
+    axios.get(`http://localhost:5000/user/${email}`).then((response) => {
+      setSingleUser(response.data);
+    });
+  }, [email]);
+
   const {
     data: events,
     isLoading,

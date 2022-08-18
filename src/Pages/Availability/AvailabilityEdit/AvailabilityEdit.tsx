@@ -64,7 +64,7 @@ const AvailabilityEdit = ({ singleDay, days, refetch }: any) => {
               onClick={() => editHandle(singleDay.id)}
               className="btn w-80"
             >
-              Yay!
+              Edit time schedule
             </label>
           </div>
         </div>

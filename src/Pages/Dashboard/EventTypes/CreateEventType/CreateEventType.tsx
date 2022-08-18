@@ -3,8 +3,12 @@ import group from "../../../../Utilities/icon/group-call.png";
 import single from "../../../../Utilities/icon/single-call.png";
 import { MdArrowBackIos } from "react-icons/md";
 import GetUserInfo from "../../../../Shared/GetUserInfo/GetUserInfo";
+import Loading from "../../../../Shared/LoadingSpinner/Loading";
 const CreateEventType = () => {
-  const [userInfo] = GetUserInfo();
+  const { userInfo, isLoading } = GetUserInfo();
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <div>
       <div className="flex items-center justify-between my-4 mx-4 lg:mx-40 ">
@@ -60,7 +64,7 @@ const CreateEventType = () => {
             </div>
           </div>
           <div>
-            {userInfo.paymentStatus ? (
+            {userInfo?.paymentStatus ? (
               <Link
                 to="/createGroupEvent"
                 className="w-full mt-3 lg:mt-0 bg-blue-500 text-white px-7 py-3 rounded-full"
