@@ -9,7 +9,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../../init.firebase";
 
 const UpcomingEvent = () => {
-    const [user] = useAuthState(auth);
+  const [user] = useAuthState(auth);
   const today = moment(new Date()).format().split("T")[0];
   const { data: bookedEvents, isLoading } = useQuery(["bookedEvents"], () =>
     fetch(`http://localhost:5000/api/bookedEvents/${user?.email}`, {
@@ -25,10 +25,10 @@ const UpcomingEvent = () => {
   return (
     <div>
       {upcomingEvents?.length ? (
-        <div className="grid grid-cols-2 gap-8 p-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8">
           {upcomingEvents?.map((event: any) => (
             <div className="text-primary card shadow-2xl">
-              <div className="p-3 flex justify-between border bg-gray-50">
+              <div className="p-3 flex justify-between border bg-blue-200">
                 <p className="text-lg">
                   {moment(event?.date?.split("T")[0]).format("MMMM Do YYYY")}
                 </p>
@@ -40,7 +40,7 @@ const UpcomingEvent = () => {
                 </div>
               </div>
               <div className="p-4">
-                <div className="text-lg">
+                <div>
                   <div className="flex items-baseline justify-between gap-4">
                     <div className="w-1/2">
                       <p className="font-bold">Invitee Name</p>
@@ -51,23 +51,24 @@ const UpcomingEvent = () => {
                       <span className="">{event?.eventName}</span>
                     </div>
                   </div>
-                  <div className="flex items-baseline justify-between gap-4 my-8">
-                    <div className="w-1/2">
-                      <p className="font-bold">Email</p>
-                      <span className="">{event?.inviteeEmail}</span>
-                    </div>
-                    <div className="w-1/2">
-                      <p className="font-bold">Location</p>
-                      <span className="">
-                        This is a {event?.eventLocation} web conference.
-                      </span>
-                    </div>
-                  </div>
+
                   <div>
-                    <p className="font-bold">Invitee Message</p>
-                    <span>
-                      {event?.inviteeMessage}
-                    </span>
+                    <div className="flex items-baseline justify-between gap-4 my-8">
+                      <div className="w-1/2">
+                        <p className="font-bold">Email</p>
+                        <span className="">{event?.inviteeEmail}</span>
+                      </div>
+                      <div className="w-1/2">
+                        <p className="font-bold">Location</p>
+                        <span className="">
+                          This is a {event?.eventLocation} web conference.
+                        </span>
+                      </div>
+                    </div>
+                    <div>
+                      <p className="font-bold">Invitee Message</p>
+                      <span>{event?.inviteeMessage}</span>
+                    </div>
                   </div>
                 </div>
               </div>

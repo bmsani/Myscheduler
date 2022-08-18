@@ -37,9 +37,13 @@ import EventDetailsAdd from "./Pages/Dashboard/EventTypes/EventDetailsAdd/EventD
 import Admin from "./Pages/Admin/Admin";
 import Users from "./Pages/Admin/Users/Users";
 import UserDetails from "./Pages/Admin/UserDetails/UserDetails";
+import Payment from "./Pages/Payment/Payment";
+import CreateGroupEvent from "./Pages/Dashboard/EventTypes/CreacteGroupEvent/CreateGroupEvent";
+import PricingCard from "./Pages/Payment/PricingCard/PricingCard";
 import UpcomingEvent from "./Pages/Dashboard/Scheduling/UpcomingEvent/UpcomingEvent";
 import PendingEvent from "./Pages/Dashboard/Scheduling/PendingEvent/PendingEvent";
 import PastEvent from "./Pages/Dashboard/Scheduling/PastEvent/PastEvent";
+import EventSuccessMessage from "./Pages/EventBooking/EventSuccessMessage";
 
 function App() {
   const [user] = useAuthState(auth);
@@ -48,7 +52,11 @@ function App() {
 
   return (
     <div>
-      {location !== "bookingCalender" ? <Navbar /> : <></>}
+      {location === "bookingCalender" || location === "eventSuccessMessage" ? (
+        <></>
+      ) : (
+        <Navbar />
+      )}
 
       <Routes>
         <Route
@@ -69,6 +77,11 @@ function App() {
           element={<CreateIndividualEvent></CreateIndividualEvent>}
         ></Route>
         <Route
+          path="/createGroupEvent"
+          element={<CreateGroupEvent></CreateGroupEvent>}
+        ></Route>
+
+        <Route
           path="/eventDetailsAdd"
           element={<EventDetailsAdd></EventDetailsAdd>}
         ></Route>
@@ -81,11 +94,15 @@ function App() {
           path="/bookingCalender/:id"
           element={<BookingCalender />}
         ></Route>
+        <Route
+          path="/eventSuccessMessage"
+          element={<EventSuccessMessage />}
+        ></Route>
 
         <Route path="login" element={<Login></Login>}></Route>
         <Route path="register" element={<Register></Register>}></Route>
 
-        {/* *********** After login ********* */}
+        {/* ********* After login ******* */}
         <Route
           path="/dashboard"
           element={
@@ -176,6 +193,16 @@ function App() {
             </RequiredAuth>
           }
         ></Route>
+        <Route path="/priceCart" element={<PricingCard />}></Route>
+        <Route
+          path="payment"
+          element={
+            <RequiredAuth>
+              <Payment />
+            </RequiredAuth>
+          }
+        ></Route>
+
         <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>
       <ToastContainer />

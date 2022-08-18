@@ -1,8 +1,15 @@
 import axios from "axios";
-import React, { FormEvent, useRef } from "react";
+import React, { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const BookingConfirm = ({ startEndTime, singleEvent, hostEmail, eventLocation }: any) => {
+const BookingConfirm = ({
+  startEndTime,
+  singleEvent,
+  hostEmail,
+  eventLocation,
+}: any) => {
+  const navigate = useNavigate();
   const getName = useRef<HTMLInputElement | null>(null);
   const getMessage = useRef<HTMLTextAreaElement | null>(null);
   const getEmail = useRef<HTMLInputElement | null>(null);
@@ -21,7 +28,7 @@ const BookingConfirm = ({ startEndTime, singleEvent, hostEmail, eventLocation }:
     const startTime = startWithUTC?.split("+")[0];
     const endWithUTC = endTimeDate?.split("T")[1];
     const endTime = endWithUTC?.split("+")[0];
-    const eventDate = startEndTime?.split("T")[0]
+    const eventDate = startEndTime?.split("T")[0];
 
     const confirmEvent = {
       eventName: eventName,
@@ -32,7 +39,7 @@ const BookingConfirm = ({ startEndTime, singleEvent, hostEmail, eventLocation }:
       date: eventDate,
       eventStartTime: startTime,
       eventEndTime: endTime,
-      eventLocation: eventLocation
+      eventLocation: eventLocation,
     };
 
     const bookingConfirm = {
@@ -56,6 +63,7 @@ const BookingConfirm = ({ startEndTime, singleEvent, hostEmail, eventLocation }:
               console.log(response);
               toast.success("Event create success");
               event.target.reset();
+              navigate("/eventSuccessMessage");
             });
         }
       })

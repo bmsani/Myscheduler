@@ -40,7 +40,7 @@ const PastEvent = () => {
         <div className="grid grid-cols-2 gap-8 p-8">
           {pastEvents?.map((event: any) => (
             <div className="text-primary card shadow-2xl">
-              <div className="p-3 flex justify-between border bg-gray-50">
+              <div className="p-3 flex justify-between border bg-blue-200">
                 <p className="text-lg">
                   {moment(event?.date?.split("T")[0]).format("MMMM Do YYYY")}
                 </p>

@@ -1,37 +1,25 @@
+import { useQuery } from "@tanstack/react-query";
 import React, { FormEvent, useEffect, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import auth from "../../../init.firebase";
+import GetUserInfo from "../../../Shared/GetUserInfo/GetUserInfo";
 import Loading from "../../../Shared/LoadingSpinner/Loading";
 import profileImg from "../../../Utilities/icon/profile.png";
 
 const Profile = () => {
+  const imageStorageKey = "8c4220582d4b8f04cc8ea7c8298a1449";
+  const { userInfo, isLoading, refetch } = GetUserInfo();
+
   const [user] = useAuthState(auth);
-  const [userInfo, setUserInfo] = useState({
-    _id: "",
-    name: "",
-    message: "",
-    mobile: "",
-  });
+  const [loading, setLoading] = useState(false);
 
   const getName = useRef<HTMLInputElement | null>(null);
   const getMessage = useRef<HTMLTextAreaElement | null>(null);
   const getMobile = useRef<HTMLInputElement | null>(null);
+  const getImg = useRef<HTMLInputElement | null>(null);
 
-  useEffect(() => {
-    const url = `http://localhost:5000/user/${user?.email}`;
-    fetch(url, {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setUserInfo(data);
-      });
-  }, [user]);
+  const firstLetter = user?.displayName?.slice(0, 1);
 
   const handleProfile = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -39,34 +27,54 @@ const Profile = () => {
     const message = getMessage?.current?.value;
     const mobile = getMobile?.current?.value;
 
-    const updatedUser = { name: name, message: message, mobile: mobile };
-
-    const url = `http://localhost:5000/updatedUser/${user?.email}`;
-    fetch(url, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-      body: JSON.stringify(updatedUser),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.acknowledged === true) {
-          toast.success("Profile successfully updated");
-        } else {
-          toast.error("Failed to update");
-        }
-      });
+    setLoading(true);
+    const imgPath: any = getImg?.current?.files;
+    if (!imgPath[0]) {
+      return toast.error("Upload Your Logo");
+    } else {
+      const formData = new FormData();
+      formData.append("image", imgPath[0]);
+      const url = `https://api.imgbb.com/1/upload?key=${imageStorageKey}`;
+      fetch(url, {
+        method: "POST",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          const imageUrl = result.data.url;
+          const updatedUser = {
+            name: name,
+            message: message,
+            mobile: mobile,
+            imageURL: imageUrl,
+          };
+          const url = `http://localhost:5000/updatedUser/${user?.email}`;
+          fetch(url, {
+            method: "PUT",
+            headers: {
+              "content-type": "application/json",
+              authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+            body: JSON.stringify(updatedUser),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.acknowledged === true) {
+                toast.success("Profile successfully updated");
+                refetch();
+              } else {
+                toast.error("Failed to update");
+                refetch();
+              }
+            });
+          setLoading(false);
+        });
+    }
   };
 
-  // console.log("User form firebase", user?.displayName);
-  // console.log(userInfo);
-
-  if (!userInfo._id) {
+  if (loading || isLoading) {
     return <Loading />;
   }
-  console.log(user?.photoURL);
   return (
     <div className="flex justify-center items-center py-8">
       <form
@@ -74,21 +82,19 @@ const Profile = () => {
         className="mx-2 w-full md:w-[500px] md:mx-0"
       >
         <div className="flex items-center gap-5">
-          {user ? (
+          {userInfo?.imageURL ? (
             <img
-              className="w-[120px] rounded-full border border-primary p-1"
-              src={user?.photoURL as string}
+              className="w-[120px] rounded-full border border-primary"
+              src={userInfo?.imageURL as string}
               alt=""
             />
           ) : (
-            <img
-              className="w-[120px] rounded-full border border-primary p-1"
-              src={profileImg}
-              alt=""
-            />
+            <p className="w-[120px] h-[120px] rounded-full border border-primary p-1 flex justify-center items-center bg-gray-200">
+              <span className="text-8xl font-semibold">{firstLetter}</span>
+            </p>
           )}
 
-          <input type="file" name="image" id="image" hidden />
+          <input ref={getImg} type="file" name="image" id="image" hidden />
           <div
             className="tooltip tooltip-primary hover:tooltip-open tooltip-right"
             data-tip="Upload Image"
@@ -160,9 +166,6 @@ const Profile = () => {
             type="submit"
             value="Save Change"
           />
-          {/* <button className="mt-4 bg-error py-2 px-4 rounded-lg text-white hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer">
-            Cancel
-          </button> */}
         </div>
       </form>
     </div>

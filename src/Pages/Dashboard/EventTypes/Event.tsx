@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { AiOutlinePlus } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../../init.firebase";
@@ -55,19 +56,21 @@ const Event = () => {
             <p className="text-secondary">{email}</p>
           </div>
         </div>
-        {singleUser.refreshToken ? (
-          <Link to="/createEvent">
-            <button className="mt-4 bg-primary py-2 px-4 rounded text-white hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer">
-              + New Event
-            </button>
-          </Link>
-        ) : (
-          <Link to="/calenderConnection">
-            <button className="mt-4 bg-primary py-2 px-4 rounded text-white hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer">
-              + New Event
-            </button>
-          </Link>
-        )}
+        <div>
+          {singleUser.refreshToken ? (
+            <Link to="/createEvent">
+              <button className="mt-4 bg-primary py-2 px-4 text-white rounded-full hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer">
+                <span className="flex items-center gap-1"><AiOutlinePlus /> New Event</span>
+              </button>
+            </Link>
+          ) : (
+            <Link to="/createEvent">
+              <button className="mt-4 bg-primary py-2 px-4 rounded text-white hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer">
+                + New Event
+              </button>
+            </Link>
+          )}
+        </div>
       </div>
       <div className="divider"></div>
 
