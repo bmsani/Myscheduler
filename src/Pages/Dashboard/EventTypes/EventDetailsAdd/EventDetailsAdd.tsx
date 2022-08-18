@@ -167,7 +167,7 @@ const EventDetailsAdd = ({
               {eventAvailability?.dayData ? (
                 <div>
                   <h2 className="text-xs my-3 font-bold">
-                    SET INDIVIDUAL EVENT HOURS
+                    SET INDIVIDUAL EVENT DAY
                   </h2>
                   <div className="mt-6">
                     <div className="overflow-x-auto w-full border rounded">
@@ -259,7 +259,7 @@ const EventDetailsAdd = ({
               ) : (
                 <div>
                   <h2 className="text-xs my-3 font-bold">
-                    SET INDIVIDUAL EVENT HOURS
+                    SET INDIVIDUAL EVENT DAY
                   </h2>
                   <div className="mt-6">
                     <div className="overflow-x-auto w-full border rounded">
