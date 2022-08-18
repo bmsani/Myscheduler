@@ -187,7 +187,7 @@ const BookingCalender = () => {
                 Select Date and Time
               </h2>
               <div className="grid grid-cols-1 lg:grid-cols-3 mt-4">
-                <div className=" col-span-2">
+                <div className="col-span-2">
                   <DatePicker
                     className="m-0 col-span-2"
                     displayTimeZone=""
@@ -198,9 +198,9 @@ const BookingCalender = () => {
                     timeFormat={false}
                     onChange={handleDate}
                   />
-                  <div className="mt-4">
+                  {/* <div className="mt-4">
                     <Timezone />
-                  </div>
+                  </div> */}
                 </div>
                 <div className=" col-span-1">
                   <p className="mt-2 ml-2 mb-5">{format(selected, "PP")}</p>

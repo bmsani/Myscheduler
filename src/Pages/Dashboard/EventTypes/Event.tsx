@@ -60,7 +60,9 @@ const Event = () => {
           {singleUser.refreshToken ? (
             <Link to="/createEvent">
               <button className="mt-4 bg-primary py-2 px-4 text-white rounded-full hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer">
-                <span className="flex items-center gap-1"><AiOutlinePlus /> New Event</span>
+                <span className="flex items-center gap-1">
+                  <AiOutlinePlus /> New Event
+                </span>
               </button>
             </Link>
           ) : (
@@ -75,7 +77,7 @@ const Event = () => {
       <div className="divider"></div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {events.map((e: any) => (
+        {events?.map((e: any) => (
           <div
             className="cart border rounded-2xl w-[300] md:w-[320px] shadow hover:shadow-xl duration-300 cursor-pointer"
             key={e._id}
