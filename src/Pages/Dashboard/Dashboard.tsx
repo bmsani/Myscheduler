@@ -11,19 +11,27 @@ const Dashboard: any = () => {
       </div>
       <div className="drawer-side w-48">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-        <ul className="menu p-4 overflow-y-auto w-full bg-base-100 text-base-content">
+        <ul className="menu p-4 overflow-y-auto w-full bg-slate-100 text-base-content">
           {/* <!-- Sidebar content here --> */}
           <li>
-            <Link to="/dashboard">Event Type</Link>
+            <Link to="/dashboard" className="font-semibold">
+              Event Type
+            </Link>
           </li>
           <li>
-            <Link to="/dashboard/scheduling">Scheduling event</Link>
+            <Link to="/dashboard/scheduling/upcomingEvent" className="font-semibold">
+              Scheduled event
+            </Link>
           </li>
           <li>
-            <Link to="/dashboard/workflow">Workflows</Link>
+            <Link to="/dashboard/workflow" className="font-semibold">
+              Workflows
+            </Link>
           </li>
           <li>
-            <Link to="/dashboard/routingForms">Routing forms</Link>
+            <Link to="/dashboard/routingForms" className="font-semibold">
+              Routing forms
+            </Link>
           </li>
         </ul>
       </div>

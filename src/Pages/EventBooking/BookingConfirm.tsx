@@ -1,45 +1,73 @@
 import axios from "axios";
-import React, { FormEvent, useRef } from "react";
+import React, { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const BookingConfirm = ({ startEndTime, singleEvent }: any) => {
+const BookingConfirm = ({
+  startEndTime,
+  singleEvent,
+  hostEmail,
+  eventLocation,
+}: any) => {
+  const navigate = useNavigate();
   const getName = useRef<HTMLInputElement | null>(null);
   const getMessage = useRef<HTMLTextAreaElement | null>(null);
   const getEmail = useRef<HTMLInputElement | null>(null);
 
   const handleBooking = (event: any) => {
     event.preventDefault();
-    const startTime = startEndTime?.split("_")[0];
-    const endTime = startEndTime?.split("_")[1];
+    const startTimeDate = startEndTime?.split("_")[0];
+    const endTimeDate = startEndTime?.split("_")[1];
     const name = getName?.current?.value;
     const email = getEmail?.current?.value;
     const message = getMessage?.current?.value;
     const eventName = singleEvent?.eventName;
     const eventDescription = singleEvent?.eventDescription;
 
+    const startWithUTC = startTimeDate?.split("T")[1];
+    const startTime = startWithUTC?.split("+")[0];
+    const endWithUTC = endTimeDate?.split("T")[1];
+    const endTime = endWithUTC?.split("+")[0];
+    const eventDate = startEndTime?.split("T")[0];
+
+    const confirmEvent = {
+      eventName: eventName,
+      hostEmail: hostEmail,
+      inviteeName: name,
+      inviteeEmail: email,
+      inviteeMessage: message,
+      date: eventDate,
+      eventStartTime: startTime,
+      eventEndTime: endTime,
+      eventLocation: eventLocation,
+    };
+
     const bookingConfirm = {
-      startTime: startTime,
-      endTime: endTime,
+      startTime: startTimeDate,
+      endTime: endTimeDate,
       email: email,
       summary: eventName,
       description: eventDescription,
     };
-    const getRefreshToken = {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("refreshToken")}`,
-      },
-    };
     axios
-      .post(
-        "https://secure-chamber-99191.herokuapp.com/api/create-event",
-        { bookingConfirm },
-        getRefreshToken
-      )
+      .post("https://secure-chamber-99191.herokuapp.com/api/create-event", {
+        bookingConfirm,
+        hostEmail,
+      })
       .then((response) => {
-        console.log(response);
         if (response.status === 200) {
-          toast.success("Event create success");
-          event.target.reset();
+          console.log(confirmEvent);
+          axios
+            .post(
+              "https://secure-chamber-99191.herokuapp.com/api/createConfirmEvent",
+              confirmEvent
+            )
+            .then((response) => {
+              console.log(response);
+              toast.success("Event create success");
+              event.target.reset();
+              navigate("/eventSuccessMessage");
+            });
         }
       })
       .catch((error) => console.log(error.message));
@@ -69,7 +97,7 @@ const BookingConfirm = ({ startEndTime, singleEvent }: any) => {
 
           <input
             className="border border-[#b8b8b8] focus:outline-none focus:border-secondary block rounded-lg p-2 mt-1 w-full"
-            type="text"
+            type="email"
             ref={getEmail}
             required
           />

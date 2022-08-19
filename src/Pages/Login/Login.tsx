@@ -4,7 +4,6 @@ import SocialLogin from "../../Shared/SocialLogin/SocialLogin";
 import loginImg from "../../Utilities/Image/login.png";
 import {
   useSignInWithEmailAndPassword,
-  useSignInWithFacebook,
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
 import auth from "../../init.firebase";
@@ -33,16 +32,14 @@ const Login: React.FC = () => {
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
   const [signInWithGoogle, GUser, GLoading, GError] = useSignInWithGoogle(auth);
-  const [signInWithFacebook, FUser, FLoading, FError] =
-    useSignInWithFacebook(auth);
 
   const navigate = useNavigate();
   const location = useLocation();
-  const [token] = useToken(user || GUser || FUser);
+  const [token] = useToken(user || GUser);
 
   let from = (location.state as LocationState)?.from?.pathname || "/dashboard";
 
-  if (loading || GLoading || FLoading) {
+  if (loading || GLoading) {
     return <Loading></Loading>;
   }
   if (token) {
@@ -124,8 +121,8 @@ const Login: React.FC = () => {
                 )}
               </label>
               <p className="text-error text-sm">
-                {(error || GError || FError) &&
-                  (error?.message || GError?.message || FError?.message)}
+                {(error || GError) &&
+                  (error?.message || GError?.message)}
               </p>
               <input
                 type="submit"
@@ -148,7 +145,6 @@ const Login: React.FC = () => {
               <span>Or login with</span>
               <SocialLogin
                 signInWithGoogle={signInWithGoogle}
-                signInWithFacebook={signInWithFacebook}
               />
             </div>
           </div>

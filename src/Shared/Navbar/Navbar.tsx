@@ -10,12 +10,14 @@ import { HiMenu } from "react-icons/hi";
 import { BiDownArrow } from "react-icons/bi";
 import ShareLink from "../../Pages/ShareLink/ShareLink";
 import useAdmin from "../../Hooks/useAdmin";
+import GetUserInfo from "../GetUserInfo/GetUserInfo";
 
 const Navbar = () => {
   const [user, loading] = useAuthState(auth);
   const [admin] = useAdmin(user);
   const { pathname } = useLocation();
   const [colorChange, setColorChange] = useState<boolean>(false);
+
   const [anotherRouteColorChange, setAnotherRouteColorChange] =
     useState<boolean>(false);
   useEffect(() => {
@@ -61,9 +63,6 @@ const Navbar = () => {
         <Link to="/blogs">Blogs</Link>
       </li>
       <li>
-        <Link to="/">Admin</Link>
-      </li>
-      <li>
         <Link className="block lg:hidden text-start" to="/login">
           <Button>
             <span className="px-0 lg:px-4">Login</span>
@@ -72,6 +71,7 @@ const Navbar = () => {
       </li>
     </>
   );
+  const firstLetter = user?.displayName?.slice(0, 1);
 
   return (
     <div className="sticky top-0 z-50">
@@ -113,19 +113,22 @@ const Navbar = () => {
                   )}
                 </li>
                 <li>
-                  <Link className="px-1 md:px-4" to="/dashboard">
+                  <Link className="px-1 md:px-4 font-semibold" to="/dashboard">
                     Dashboard
                   </Link>
                 </li>
                 {admin && (
                   <li>
-                    <Link className="px-1 md:px-4" to="/admin">
+                    <Link className="px-1 md:px-4 font-semibold" to="/admin">
                       Admin
                     </Link>
                   </li>
                 )}
                 <li>
-                  <Link className="px-1 md:px-4" to="/availability">
+                  <Link
+                    className="px-1 md:px-4 font-semibold"
+                    to="/availability"
+                  >
                     Availability
                   </Link>
                 </li>
@@ -133,18 +136,15 @@ const Navbar = () => {
                   <div className="dropdown dropdown-end">
                     <label
                       tabIndex={0}
-                      className=" cursor-pointer flex justify-center items-center gap-2"
+                      className="cursor-pointer flex justify-center items-center gap-2"
                     >
                       <BiDownArrow />
                       <div className="w-8 rounded-full ">
-                        <img
-                          src={
-                            user.photoURL ||
-                            ("https://findicons.com/files/icons/1024/dress_it_profession/128/assassin_avatar.png" as string)
-                          }
-                          className="rounded-full border-2 border-secondary"
-                          alt=""
-                        />
+                        <p className="w-full rounded-full border border-primary p-1 flex justify-center items-center bg-gray-200">
+                          <span className="text-md font-semibold">
+                            {firstLetter}
+                          </span>
+                        </p>
                       </div>
                     </label>
                     <ul
@@ -152,22 +152,36 @@ const Navbar = () => {
                       className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 mt-40"
                     >
                       <li>
-                        <Link to="/accountSettings/profile">
+                        <Link
+                          to="/accountSettings/profile"
+                          className="w-full font-semibold"
+                        >
                           Account setting
                         </Link>
                       </li>
                       <li>
-                        <Link to="/calenderConnection">
+                        <Link
+                          to="/calenderConnection"
+                          className="w-full font-semibold"
+                        >
                           Calender Connections
                         </Link>
                       </li>
                       <li>
-                        <label htmlFor="my-modal-6" className="">
+                        <label
+                          htmlFor="my-modal-6"
+                          className="w-full font-semibold"
+                        >
                           Share Your Link
                         </label>
                       </li>
                       <li>
-                        <button onClick={handleSignOut}>Logout</button>
+                        <button
+                          className="w-full font-semibold"
+                          onClick={handleSignOut}
+                        >
+                          Logout
+                        </button>
                       </li>
                     </ul>
                   </div>

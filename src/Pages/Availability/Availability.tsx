@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { BiMessageSquareAdd, BiEdit } from "react-icons/bi";
+import { BiMessageSquareEdit, BiEdit } from "react-icons/bi";
 import auth from "../../init.firebase";
 import Loading from "../../Shared/LoadingSpinner/Loading";
-import AvailabilityAdd from "./AvailabilityAdd/AvailabilityAdd";
+import IntervalEdit from "./IntervalEdit/IntervalEdit";
 import AvailabilityEdit from "./AvailabilityEdit/AvailabilityEdit";
 
 type UserDays = {
@@ -89,8 +89,18 @@ const Availability = () => {
         <div className="mt-6">
           <div className="overflow-x-auto w-full border rounded">
             <table className="table w-full">
+              <thead>
+                <tr>
+                  <th>CheckBox</th>
+                  <th>Day name</th>
+                  <th>Available time</th>
+                  <th>Availability edit</th>
+                  <th>Interval Time</th>
+                  <th>Interval edit</th>
+                </tr>
+              </thead>
               <tbody>
-                {days.dayData.map((day: UserDays) => (
+                {days?.dayData?.map((day: UserDays) => (
                   <tr key={day.id} className="hover">
                     <th>
                       <label>
@@ -116,31 +126,42 @@ const Availability = () => {
                         )}
                       </div>
                     </td>
-                    <td>
-                      <label htmlFor="add-modal">
-                        <BiMessageSquareAdd
-                          onClick={() => handleAdd(days._id, day.id)}
-                          className="text-5xl p-3 cursor-pointer"
-                        />
-                        <AvailabilityAdd
-                          singleDay={singleDay}
-                          days={days._id}
-                          refetch={refetch}
-                        />
-                      </label>
+                    <td className="text-center">
+                      {day.checked && (
+                        <label htmlFor="edit-modal">
+                          <BiEdit
+                            className="text-5xl p-3 cursor-pointer text-center"
+                            onClick={() => handleEdit(days._id, day.id)}
+                          />
+                          <AvailabilityEdit
+                            singleDay={singleDay}
+                            days={days._id}
+                            refetch={refetch}
+                          />
+                        </label>
+                      )}
                     </td>
                     <td>
-                      <label htmlFor="edit-modal">
-                        <BiEdit
-                          className="text-5xl p-3 cursor-pointer"
-                          onClick={() => handleEdit(days._id, day.id)}
-                        />
-                        <AvailabilityEdit
-                          singleDay={singleDay}
-                          days={days._id}
-                          refetch={refetch}
-                        />
-                      </label>
+                      {day.checked && (
+                        <span>
+                          {day.interval.starting} - {day.interval.ending}
+                        </span>
+                      )}
+                    </td>
+                    <td>
+                      {day.checked && (
+                        <label htmlFor="add-modal">
+                          <BiMessageSquareEdit
+                            onClick={() => handleAdd(days._id, day.id)}
+                            className="text-5xl p-3 cursor-pointer"
+                          />
+                          <IntervalEdit
+                            singleDay={singleDay}
+                            days={days._id}
+                            refetch={refetch}
+                          />
+                        </label>
+                      )}
                     </td>
                   </tr>
                 ))}

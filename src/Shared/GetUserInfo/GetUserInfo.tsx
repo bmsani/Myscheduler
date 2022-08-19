@@ -1,27 +1,21 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../init.firebase";
 
-const GetUserInfo = (user: any) => {
-  const [userInfo, setUserInfo] = useState({});
+const GetUserInfo = () => {
+  const [user] = useAuthState(auth);
+  const email = user?.email;
+  const {
+    data: userInfo,
+    isLoading,
+    refetch,
+  } = useQuery(["userInfo", email], () =>
+    fetch(`https://secure-chamber-99191.herokuapp.com/user/${email}`).then(
+      (res) => res.json()
+    )
+  );
 
-  //   console.log("from getuser", userInfo);
-  useEffect(() => {
-    if (user?.email) {
-      const url = `https://secure-chamber-99191.herokuapp.com/user/${user?.email}`;
-      fetch(url, {
-        method: "GET",
-        headers: {
-          "content-type": "application/json",
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setUserInfo(data);
-        });
-    }
-  }, [user]);
-
-  return [userInfo, setUserInfo];
+  return { userInfo, isLoading, refetch };
 };
 
 export default GetUserInfo;

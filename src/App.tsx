@@ -34,10 +34,16 @@ import CalendarEvent from "./Pages/Dashboard/EventTypes/CreateCalendarEvent/Cale
 import CreateEventType from "./Pages/Dashboard/EventTypes/CreateEventType/CreateEventType";
 import CreateIndividualEvent from "./Pages/Dashboard/EventTypes/CreateIndividualEvent/CreateIndividualEvent";
 import EventDetailsAdd from "./Pages/Dashboard/EventTypes/EventDetailsAdd/EventDetailsAdd";
-import BookingConfirm from "./Pages/EventBooking/BookingConfirm";
 import Admin from "./Pages/Admin/Admin";
 import Users from "./Pages/Admin/Users/Users";
 import UserDetails from "./Pages/Admin/UserDetails/UserDetails";
+import Payment from "./Pages/Payment/Payment";
+import CreateGroupEvent from "./Pages/Dashboard/EventTypes/CreacteGroupEvent/CreateGroupEvent";
+import PricingCard from "./Pages/Payment/PricingCard/PricingCard";
+import UpcomingEvent from "./Pages/Dashboard/Scheduling/UpcomingEvent/UpcomingEvent";
+import PendingEvent from "./Pages/Dashboard/Scheduling/PendingEvent/PendingEvent";
+import PastEvent from "./Pages/Dashboard/Scheduling/PastEvent/PastEvent";
+import EventSuccessMessage from "./Pages/EventBooking/EventSuccessMessage";
 
 function App() {
   const [user] = useAuthState(auth);
@@ -46,7 +52,11 @@ function App() {
 
   return (
     <div>
-      {location !== "bookingCalender" ? <Navbar /> : <></>}
+      {location === "bookingCalender" || location === "eventSuccessMessage" ? (
+        <></>
+      ) : (
+        <Navbar />
+      )}
 
       <Routes>
         <Route
@@ -63,11 +73,16 @@ function App() {
           element={<CreateEventType></CreateEventType>}
         ></Route>
         <Route
-          path="/CreateIndividualEvent"
+          path="/createIndividualEvent"
           element={<CreateIndividualEvent></CreateIndividualEvent>}
         ></Route>
         <Route
-          path="/EventDetailsAdd"
+          path="/createGroupEvent"
+          element={<CreateGroupEvent></CreateGroupEvent>}
+        ></Route>
+
+        <Route
+          path="/eventDetailsAdd"
           element={<EventDetailsAdd></EventDetailsAdd>}
         ></Route>
         <Route
@@ -79,11 +94,15 @@ function App() {
           path="/bookingCalender/:id"
           element={<BookingCalender />}
         ></Route>
+        <Route
+          path="/eventSuccessMessage"
+          element={<EventSuccessMessage />}
+        ></Route>
 
         <Route path="login" element={<Login></Login>}></Route>
         <Route path="register" element={<Register></Register>}></Route>
 
-        {/* *********** After login ********* */}
+        {/* ********* After login ******* */}
         <Route
           path="/dashboard"
           element={
@@ -95,7 +114,11 @@ function App() {
           <Route index element={<Event></Event>}></Route>
           <Route path="workflow" element={<Workflow />}></Route>
           <Route path="eventTypes" element={<EventTypes />}></Route>
-          <Route path="scheduling" element={<Scheduling />}></Route>
+          <Route path="scheduling" element={<Scheduling />}>
+            <Route path="upcomingEvent" element={<UpcomingEvent />} />
+            <Route path="pendingEvent" element={<PendingEvent />} />
+            <Route path="pastEvent" element={<PastEvent />} />
+          </Route>
           <Route path="routingForms" element={<RoutingForms />}></Route>
         </Route>
         <Route
@@ -170,6 +193,16 @@ function App() {
             </RequiredAuth>
           }
         ></Route>
+        <Route path="/priceCart" element={<PricingCard />}></Route>
+        <Route
+          path="payment"
+          element={
+            <RequiredAuth>
+              <Payment />
+            </RequiredAuth>
+          }
+        ></Route>
+
         <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>
       <ToastContainer />

@@ -1,5 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { AiOutlinePlus } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../../init.firebase";
@@ -8,6 +11,16 @@ const Event = () => {
   const [user] = useAuthState(auth);
   const email = user?.email;
   const photo: any = user?.photoURL;
+  const [singleUser, setSingleUser] = useState<any>({});
+
+  useEffect(() => {
+    axios
+      .get(`https://secure-chamber-99191.herokuapp.com/user/${email}`)
+      .then((response) => {
+        setSingleUser(response.data);
+      });
+  }, [email]);
+
   const {
     data: events,
     isLoading,
@@ -16,15 +29,6 @@ const Event = () => {
     fetch(`https://secure-chamber-99191.herokuapp.com/getEvent/${email}`).then(
       (res) => res.json()
     )
-  );
-  const { data: singleUser } = useQuery(["singleUser", email], () =>
-    fetch(`https://secure-chamber-99191.herokuapp.com/user/${email}`, {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        authorization: `bearer ${localStorage.getItem("accessToken")}`,
-      },
-    }).then((res) => res.json())
   );
 
   if (isLoading) {
@@ -56,21 +60,33 @@ const Event = () => {
           <img className="w-[70px] rounded-full" src={photo} alt="" />
           <div>
             <p>{user?.displayName}</p>
-            {/* <Link to="/eventBooking"> */}
             <p className="text-secondary">{email}</p>
-            {/* </Link> */}
           </div>
         </div>
-        <Link to="/createEvent">
-          <button className="mt-4 bg-primary py-2 px-4 rounded text-white hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer">
-            + New Event
-          </button>
-        </Link>
+        <div>
+          {singleUser.refreshToken ? (
+            <Link to="/createEvent">
+              <button className="mt-4 bg-primary py-2 px-4 text-white rounded-full hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer">
+                <span className="flex items-center gap-1">
+                  <AiOutlinePlus /> New Event
+                </span>
+              </button>
+            </Link>
+          ) : (
+            <Link to="/calenderConnection">
+              <button className="mt-4 bg-primary py-2 px-4 rounded text-white hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer">
+                <span className="flex items-center gap-1">
+                  <AiOutlinePlus /> New Event
+                </span>
+              </button>
+            </Link>
+          )}
+        </div>
       </div>
-      <div className=" divider"></div>
+      <div className="divider"></div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {events.map((e: any) => (
+        {events?.map((e: any) => (
           <div
             className="cart border rounded-2xl w-[300] md:w-[320px] shadow hover:shadow-xl duration-300 cursor-pointer"
             key={e._id}

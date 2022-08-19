@@ -4,7 +4,10 @@ import "./Hero.css";
 
 const Hero = () => {
   return (
-    <div className="w-full h-[60vh] md:h-[100vh] bgImage flex items-center">
+    <div
+      className="w-full h-[60vh] md:h-[100vh] bgImage flex items-center"
+      data-testid="heroDiv"
+    >
       <div className="md:grid md:grid-cols-2 w-full">
         <div className="mx-2 md:mx-8">
           <div className="text-white text-2xl md:text-3xl lg:text-6xl font-bold mb-3">
@@ -18,7 +21,9 @@ const Hero = () => {
             can get back to work.
           </p>
           <Link to="/register">
-            <Button><span>Get Start</span></Button>
+            <Button>
+              <span>Get Start</span>
+            </Button>
           </Link>
         </div>
         <div></div>
