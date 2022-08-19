@@ -26,13 +26,7 @@ const CalendarEvent = () => {
     console.log(response);
     const { code } = response;
     axios
-<<<<<<< HEAD
-      .post("http://localhost:5000/api/create-tokens", {
-        code,
-      })
-=======
       .post("http://localhost:5000/api/create-tokens", { code })
->>>>>>> f3fa67c37b75413f0d2d20b419f80dc44202d77a
       .then((response) => {
         console.log(response?.data);
         const refreshToken = response?.data?.refresh_token;
