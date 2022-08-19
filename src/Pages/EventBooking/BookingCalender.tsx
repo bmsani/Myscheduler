@@ -23,12 +23,11 @@ const BookingCalender = () => {
     brandLogo: "",
     message: "",
   });
-  const [startEndTime, setStartEndTime] = useState(" ");
-  const [times, setTimes] = useState<any>([]);
   const { name, brandLogo } = userInfo;
+  const [startEndTime, setStartEndTime] = useState(" ");
   const [click, setClick] = useState(false);
 
-  const { data: singleEvent } = useQuery(["singleEvent", id], () =>
+  const { data: singleEvent, isLoading } = useQuery(["singleEvent", id], () =>
     fetch(`http://localhost:5000/getSingleEvent/${id}`, {
       method: "GET",
     }).then((res) => res.json())
@@ -48,25 +47,20 @@ const BookingCalender = () => {
       });
   }, [singleEvent?.email]);
 
-  // ================Times Slots ============================
-  useEffect(() => {
-    if (singleEvent?.email) {
-      fetch(`http://localhost:5000/availability/${singleEvent?.email}`)
-        .then((res) => res.json())
-        .then((data) => setTimes(data?.dayData));
-    }
-  }, [singleEvent?.email]);
-
   const backButton = () => {
     setClick(false);
   };
 
   const dayFromCalendar = format(selected, "PPPPP").split(",")[0].slice(0, 3);
-  const dayFromDB = times?.find((d: any) => d.day === dayFromCalendar);
+  const dayFromDB = singleEvent?.dayData?.find(
+    (d: any) => d?.day === dayFromCalendar
+  );
 
   // disable unavailable day
-  const checked = times.filter((d: any) => d.checked === false);
-  const day = checked.map((d: any) => d.id - 1);
+  const checked = singleEvent?.dayData?.filter(
+    (d: any) => d?.checked === false
+  );
+  const day = checked?.map((d: any) => d.id - 1);
   const yesterday = moment().subtract(1, "day");
   const valid = function (current: any) {
     return (
@@ -127,7 +121,7 @@ const BookingCalender = () => {
     setClick(true);
   };
 
-  if (!times) {
+  if (isLoading) {
     return <Loading />;
   }
 
@@ -141,96 +135,107 @@ const BookingCalender = () => {
   const eventDate = moment(startEndTime?.split("T")[0]).format("MMMM Do YYYY");
 
   return (
-    <div className="lg:mx-20 lg:my-12 border">
-      <div className="grid grid-cols-1 lg:grid-cols-3  ">
-        <div className=" lg:col-span-1 lg:border-r sm:border-b">
-          <div className="flex gap-5 border-b p-5">
-            <button
-              onClick={backButton}
-              className="text-xl text-primary border border-primary hover:bg-blue-100 duration-300 h-10 w-10 rounded-full flex justify-center items-center"
-            >
-              <FaArrowLeft />
-            </button>
-            <img
-              className="w-[250px] h-[200px] object-cover mx-auto"
-              src={brandLogo || defaultImg}
-              alt=""
-            />
-          </div>
-          <div className="p-5">
-            <h3 className="font-bold text-gray-500 text-center md:text-left">
-              {name}
-            </h3>
-            <h1 className="font-bold text-3xl text-center md:text-left">
-              {singleEvent?.eventName}
-            </h1>
-            <div className="flex gap-2 mt-4">
-              <FiClock className="text-2xl" />
-              <h2 className="font-bold text-gray-500">30 Minute</h2>
+    <div className="h-screen flex justify-center items-center">
+      <div className="lg:mx-20 border">
+        <div className="grid grid-cols-1 lg:grid-cols-3  ">
+          <div className=" lg:col-span-1 lg:border-r sm:border-b">
+            <div className="flex gap-5 border-b p-5">
+              <button
+                onClick={backButton}
+                className="text-xl text-primary border border-primary hover:bg-blue-100 duration-300 h-10 w-10 rounded-full flex justify-center items-center"
+              >
+                <FaArrowLeft />
+              </button>
+              <img
+                className="w-[250px] h-[200px] object-cover mx-auto"
+                src={brandLogo || defaultImg}
+                alt=""
+              />
             </div>
-            {startTime && endTimee && (
+            <div className="p-5">
+              {name ? (
+                <h3 className="font-bold text-gray-500 text-center md:text-left">
+                  {name}
+                </h3>
+              ) : (
+                <p className="font-bold text-error text-center md:text-left">
+                  Name not found!{" "}
+                </p>
+              )}
+
+              <h1 className="font-bold text-3xl text-center md:text-left">
+                {singleEvent?.eventName}
+              </h1>
               <div className="flex gap-2 mt-4">
-                <AiOutlineCalendar className="text-2xl" />
-                <h2 className="font-bold text-gray-500">{`${startTime} - ${endTimee}, ${eventDate}`}</h2>
+                <FiClock className="text-2xl" />
+                <h2 className="font-bold text-gray-500">30 Minute</h2>
               </div>
-            )}
-            <p className="mt-4 text-md font-semibold text-slate-500">
-              {singleEvent?.eventDescription}
-            </p>
-          </div>
-        </div>
-        {!click ? (
-          <div className="p-5 col-span-2">
-            <h2 className="text-xl font-bold text-center lg:text-left">
-              Select Date and Time
-            </h2>
-            <div className="grid grid-cols-1 lg:grid-cols-3 mt-4">
-              <div className=" col-span-2">
-                <DatePicker
-                  className="m-0 col-span-2"
-                  displayTimeZone=""
-                  dateFormat={true}
-                  isValidDate={valid}
-                  open={true}
-                  input={false}
-                  timeFormat={false}
-                  onChange={handleDate}
-                />
-                <div className="mt-4">
-                  <Timezone />
+              {startTime && endTimee && (
+                <div className="flex gap-2 mt-4">
+                  <AiOutlineCalendar className="text-2xl" />
+                  <h2 className="font-bold text-gray-500">{`${startTime} - ${endTimee}, ${eventDate}`}</h2>
                 </div>
-              </div>
-              <div className=" col-span-1">
-                <p className="mt-2 ml-2 mb-5">{format(selected, "PP")}</p>
-                <div>
-                  <div className="h-[300px] overflow-x-hidden scroll-smooth scroll-p-8 ">
-                    {timeCollection.map((time, index) => (
-                      <button
-                        key={index}
-                        onClick={() => handleConfirmBooking(time)}
-                        className="text-primary border border-blue-400 hover:border-blue-600 shadow hover:shadow-blue-600/70n rounded m-2 px-20 py-2 relative group"
-                      >
-                        {time}
-                        <div className="text-base-100  absolute top-0 left-0 w-full hidden group-hover:block duration-300">
-                          <div className="grid grid-cols-2">
-                            <p className="bg-blue-500 py-2">{time}</p>
-                            <p className="bg-primary py-2">Confirm</p>
+              )}
+              <p className="mt-4 text-md font-semibold text-slate-500">
+                {singleEvent?.eventDescription}
+              </p>
+            </div>
+          </div>
+          {!click ? (
+            <div className="p-5 col-span-2">
+              <h2 className="text-xl font-bold text-center lg:text-left">
+                Select Date and Time
+              </h2>
+              <div className="grid grid-cols-1 lg:grid-cols-3 mt-4">
+                <div className="col-span-2">
+                  <DatePicker
+                    className="m-0 col-span-2"
+                    displayTimeZone=""
+                    dateFormat={true}
+                    isValidDate={valid}
+                    open={true}
+                    input={false}
+                    timeFormat={false}
+                    onChange={handleDate}
+                  />
+                  {/* <div className="mt-4">
+                    <Timezone />
+                  </div> */}
+                </div>
+                <div className=" col-span-1">
+                  <p className="mt-2 ml-2 mb-5">{format(selected, "PP")}</p>
+                  <div>
+                    <div className="h-[300px] overflow-x-hidden scroll-smooth scroll-p-8 ">
+                      {timeCollection?.map((time, index) => (
+                        <button
+                          key={index}
+                          onClick={() => handleConfirmBooking(time)}
+                          className="text-primary border border-blue-400 hover:border-blue-600 shadow hover:shadow-blue-600/70n rounded m-2 px-20 py-2 relative group"
+                        >
+                          {time}
+                          <div className="text-base-100  absolute top-0 left-0 w-full hidden group-hover:block duration-300">
+                            <div className="grid grid-cols-2">
+                              <p className="bg-blue-500 py-2">{time}</p>
+                              <p className="bg-primary py-2">Confirm</p>
+                            </div>
                           </div>
-                        </div>
-                      </button>
-                    ))}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        ) : (
-          <BookingConfirm
-            startEndTime={startEndTime}
-            singleEvent={singleEvent}
-            hostEmail={singleEvent?.email}
-          />
-        )}
+          ) : (
+            <BookingConfirm
+              userInfo={userInfo}
+              startEndTime={startEndTime}
+              singleEvent={singleEvent}
+              hostEmail={singleEvent?.email}
+              eventLocation={singleEvent?.eventLocation}
+            />
+          )}
+        </div>
       </div>
     </div>
   );
