@@ -10,12 +10,14 @@ import { HiMenu } from "react-icons/hi";
 import { BiDownArrow } from "react-icons/bi";
 import ShareLink from "../../Pages/ShareLink/ShareLink";
 import useAdmin from "../../Hooks/useAdmin";
+import GetUserInfo from "../GetUserInfo/GetUserInfo";
 
 const Navbar = () => {
   const [user, loading] = useAuthState(auth);
   const [admin] = useAdmin(user);
   const { pathname } = useLocation();
   const [colorChange, setColorChange] = useState<boolean>(false);
+
   const [anotherRouteColorChange, setAnotherRouteColorChange] =
     useState<boolean>(false);
   useEffect(() => {
@@ -69,6 +71,7 @@ const Navbar = () => {
       </li>
     </>
   );
+  const firstLetter = user?.displayName?.slice(0, 1);
 
   return (
     <div className="sticky top-0 z-50">
@@ -137,14 +140,11 @@ const Navbar = () => {
                     >
                       <BiDownArrow />
                       <div className="w-8 rounded-full ">
-                        <img
-                          src={
-                            user.photoURL ||
-                            ("https://findicons.com/files/icons/1024/dress_it_profession/128/assassin_avatar.png" as string)
-                          }
-                          className="rounded-full border-2 border-secondary"
-                          alt=""
-                        />
+                        <p className="w-full rounded-full border border-primary p-1 flex justify-center items-center bg-gray-200">
+                          <span className="text-md font-semibold">
+                            {firstLetter}
+                          </span>
+                        </p>
                       </div>
                     </label>
                     <ul

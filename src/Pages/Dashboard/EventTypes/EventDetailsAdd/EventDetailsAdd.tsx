@@ -1,22 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import leftArrow from "../../../../Utilities/icon/leftArrow.png";
 import { BiMessageSquareEdit, BiEdit } from "react-icons/bi";
+import { MdArrowBackIos } from "react-icons/md";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../../init.firebase";
 import Loading from "../../../../Shared/LoadingSpinner/Loading";
-
-type userDay = {
-  id: string;
-  day: string;
-  start: any;
-  end: any;
-  checked: boolean;
-  interval: {
-    starting: string;
-    ending: string;
-  };
-};
 
 const EventDetailsAdd = ({
   eventName,
@@ -47,7 +35,7 @@ const EventDetailsAdd = ({
     )
       .then((res) => res.json())
       .then((data) => {
-        if(data?.eventID){
+        if (data?.eventID) {
           setEventId(data?.eventID);
           fetch(`http://localhost:5000/customAvailability/${data?.eventID}`)
             .then((res) => res.json())
@@ -56,7 +44,7 @@ const EventDetailsAdd = ({
               refetch();
             });
         }
-        if(data?.eventId){
+        if (data?.eventId) {
           setEventId(data?.eventId);
           fetch(`http://localhost:5000/customAvailability/${data?.eventId}`)
             .then((res) => res.json())
@@ -72,24 +60,24 @@ const EventDetailsAdd = ({
   }
   return (
     <div>
-      <div className="border mt-3 shadow-lg">
-        <div className="grid grid-cols-3 sm-grid-cols-2  py-4 xl:mx-40">
+      <div className="mt-4">
+        <div className="md:flex justify-center md:justify-between items-center py-4 mx-4 lg:mx-40">
           <div>
             <Link to="/createEvent">
-              <button className="px-5 border-blue-400 flex items-center border-2 py-3 rounded-full">
-                <span className="mr-1">
-                  <img src={leftArrow} className="w-[20px]" alt="" />
-                </span>{" "}
+              <button className="text-blue-500 border-blue-400  md:border md:px-7 py-2 rounded-full flex items-center">
+                <MdArrowBackIos />
                 Back
               </button>
             </Link>
           </div>
           <div>
-            <h2 className="text-xl  py-3">Add One-on-One Event Type</h2>
+            <h2 className="md:text-xl py-3 text-center">
+              Add One-on-One Event Type
+            </h2>
           </div>
         </div>
       </div>
-      <div className="xl:mx-48 sm:mx-8 py-4 border-2 border-zinc-200 mt-8 ">
+      <div className="xl:mx-48 sm:mx-8 py-4 border-2 border-zinc-200 mt-4 ">
         <div className="flex mx-6">
           <div className="rounded-full h-[18px] w-[18px] bg-violet-600 mr-2"></div>
           <div>
@@ -102,7 +90,7 @@ const EventDetailsAdd = ({
         </div>
       </div>
       <div className="xl:mx-48 sm:mx-8 border-2 border-zinc-500 mt-2 mb-8 pb-4">
-        <div className="flex items-center justify-between mx-8 border-b">
+        <div className="flex items-center justify-between mx-4 lg:mx-8 border-b">
           <div>
             <h2>What event is this?</h2>
             <h2 className="text-sm font-light">30 min</h2>
@@ -167,7 +155,7 @@ const EventDetailsAdd = ({
               {eventAvailability?.dayData ? (
                 <div>
                   <h2 className="text-xs my-3 font-bold">
-                    SET INDIVIDUAL EVENT HOURS
+                    SET INDIVIDUAL EVENT DAY
                   </h2>
                   <div className="mt-6">
                     <div className="overflow-x-auto w-full border rounded">
@@ -177,9 +165,7 @@ const EventDetailsAdd = ({
                             <th>CheckBox</th>
                             <th>Day name</th>
                             <th>Available time</th>
-                            <th>Availability edit</th>
                             <th>Interval Time</th>
-                            <th>Interval edit</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -211,21 +197,7 @@ const EventDetailsAdd = ({
                                   )}
                                 </div>
                               </td>
-                              <td className="text-center">
-                                {day.checked && (
-                                  <label htmlFor="edit-modal">
-                                    <BiEdit
-                                      className="text-5xl p-3 cursor-pointer text-center"
-                                      // onClick={() => handleEdit(days._id, day.id)}
-                                    />
-                                    {/* <AvailabilityEdit
-                              singleDay={singleDay}
-                              days={days._id}
-                              refetch={refetch} */}
-                                    {/* /> */}
-                                  </label>
-                                )}
-                              </td>
+                              
                               <td>
                                 {day.checked && (
                                   <span>
@@ -234,21 +206,7 @@ const EventDetailsAdd = ({
                                   </span>
                                 )}
                               </td>
-                              <td>
-                                {day.checked && (
-                                  <label htmlFor="add-modal">
-                                    <BiMessageSquareEdit
-                                      // onClick={() => handleAdd(days._id, day.id)}
-                                      className="text-5xl p-3 cursor-pointer"
-                                    />
-                                    {/* <IntervalEdit
-                              singleDay={singleDay}
-                              days={days._id}
-                              refetch={refetch}
-                            /> */}
-                                  </label>
-                                )}
-                              </td>
+                              
                             </tr>
                           ))}
                         </tbody>
@@ -259,7 +217,7 @@ const EventDetailsAdd = ({
               ) : (
                 <div>
                   <h2 className="text-xs my-3 font-bold">
-                    SET INDIVIDUAL EVENT HOURS
+                    SET INDIVIDUAL EVENT DAY
                   </h2>
                   <div className="mt-6">
                     <div className="overflow-x-auto w-full border rounded">
@@ -269,9 +227,7 @@ const EventDetailsAdd = ({
                             <th>CheckBox</th>
                             <th>Day name</th>
                             <th>Available time</th>
-                            <th>Availability edit</th>
                             <th>Interval Time</th>
-                            <th>Interval edit</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -303,21 +259,7 @@ const EventDetailsAdd = ({
                                   )}
                                 </div>
                               </td>
-                              <td className="text-center">
-                                {day.checked && (
-                                  <label htmlFor="edit-modal">
-                                    <BiEdit
-                                      className="text-5xl p-3 cursor-pointer text-center"
-                                      // onClick={() => handleEdit(days._id, day.id)}
-                                    />
-                                    {/* <AvailabilityEdit
-                              singleDay={singleDay}
-                              days={days._id}
-                              refetch={refetch} */}
-                                    {/* /> */}
-                                  </label>
-                                )}
-                              </td>
+                              
                               <td>
                                 {day.checked && (
                                   <span>
@@ -326,21 +268,7 @@ const EventDetailsAdd = ({
                                   </span>
                                 )}
                               </td>
-                              <td>
-                                {day.checked && (
-                                  <label htmlFor="add-modal">
-                                    <BiMessageSquareEdit
-                                      // onClick={() => handleAdd(days._id, day.id)}
-                                      className="text-5xl p-3 cursor-pointer"
-                                    />
-                                    {/* <IntervalEdit
-                              singleDay={singleDay}
-                              days={days._id}
-                              refetch={refetch}
-                            /> */}
-                                  </label>
-                                )}
-                              </td>
+                              
                             </tr>
                           ))}
                         </tbody>
