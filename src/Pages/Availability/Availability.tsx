@@ -98,7 +98,7 @@ const Availability = () => {
                 </tr>
               </thead>
               <tbody>
-                {days.dayData.map((day: UserDays) => (
+                {days?.dayData?.map((day: UserDays) => (
                   <tr key={day.id} className="hover">
                     <th>
                       <label>

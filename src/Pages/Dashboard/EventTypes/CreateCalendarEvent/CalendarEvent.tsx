@@ -3,7 +3,6 @@ import { gapi } from "gapi-script";
 import moment from "moment";
 import React, { useEffect, useRef, useState } from "react";
 import GoogleLogin from "react-google-login";
-import { toast } from "react-toastify";
 
 const clientId =
   "246190552758-iv4qnbua1chul41b87mfch0gsoeqe8bj.apps.googleusercontent.com";
