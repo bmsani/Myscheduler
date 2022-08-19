@@ -50,7 +50,7 @@ const BookingConfirm = ({
       description: eventDescription,
     };
     axios
-      .post("http://localhost:5000/api/create-event", {
+      .post("https://secure-chamber-99191.herokuapp.com/api/create-event", {
         bookingConfirm,
         hostEmail,
       })
@@ -58,7 +58,10 @@ const BookingConfirm = ({
         if (response.status === 200) {
           console.log(confirmEvent);
           axios
-            .post("http://localhost:5000/api/createConfirmEvent", confirmEvent)
+            .post(
+              "https://secure-chamber-99191.herokuapp.com/api/createConfirmEvent",
+              confirmEvent
+            )
             .then((response) => {
               console.log(response);
               toast.success("Event create success");

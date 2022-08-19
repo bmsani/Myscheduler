@@ -14,7 +14,7 @@ const CalenderConnection = () => {
   const { data: singleUser, isLoading } = useQuery(
     ["singleUser", user?.email],
     () =>
-      fetch(`http://localhost:5000/user/${user?.email}`, {
+      fetch(`https://secure-chamber-99191.herokuapp.com/user/${user?.email}`, {
         method: "GET",
         headers: {
           "content-type": "application/json",

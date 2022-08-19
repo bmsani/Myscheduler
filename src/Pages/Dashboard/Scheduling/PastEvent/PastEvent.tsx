@@ -12,10 +12,17 @@ import { toast } from "react-toastify";
 const PastEvent = () => {
   const [user] = useAuthState(auth);
   const today = moment(new Date()).format();
-  const { data: bookedEvents, isLoading, refetch } = useQuery(["bookedEvents"], () =>
-    fetch(`http://localhost:5000/api/bookedEvents/${user?.email}`, {
-      method: "GET",
-    }).then((res) => res.json())
+  const {
+    data: bookedEvents,
+    isLoading,
+    refetch,
+  } = useQuery(["bookedEvents"], () =>
+    fetch(
+      `https://secure-chamber-99191.herokuapp.com/api/bookedEvents/${user?.email}`,
+      {
+        method: "GET",
+      }
+    ).then((res) => res.json())
   );
   if (isLoading) {
     <Loading />;
@@ -26,13 +33,16 @@ const PastEvent = () => {
       today
   );
   const handleDelete = (id: string) => {
-    axios.delete(`http://localhost:5000/api/bookedEventDelete/${id}`)
-    .then(response => {
-        if(response?.status === 200){
-            toast.error("Past event deleted")
-            refetch()
+    axios
+      .delete(
+        `https://secure-chamber-99191.herokuapp.com/api/bookedEventDelete/${id}`
+      )
+      .then((response) => {
+        if (response?.status === 200) {
+          toast.error("Past event deleted");
+          refetch();
         }
-    })
+      });
   };
   return (
     <div>
@@ -77,9 +87,7 @@ const PastEvent = () => {
                   </div>
                   <div>
                     <p className="font-bold">Invitee Message</p>
-                    <span>
-                      {event?.inviteeMessage}
-                    </span>
+                    <span>{event?.inviteeMessage}</span>
                   </div>
                 </div>
                 <div className="text-end">

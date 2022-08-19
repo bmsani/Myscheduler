@@ -25,7 +25,9 @@ const CalendarEvent = () => {
     console.log(response);
     const { code } = response;
     axios
-      .post("http://localhost:5000/api/create-tokens", { code })
+      .post("https://secure-chamber-99191.herokuapp.com/api/create-tokens", {
+        code,
+      })
       .then((response) => {
         console.log(response?.data);
         const refreshToken = response?.data?.refresh_token;
@@ -72,7 +74,7 @@ const CalendarEvent = () => {
     };
     axios
       .post(
-        "http://localhost:5000/api/create-event",
+        "https://secure-chamber-99191.herokuapp.com/api/create-event",
         { eventData },
         getRefreshToken
       )
