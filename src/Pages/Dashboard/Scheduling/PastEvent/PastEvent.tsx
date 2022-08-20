@@ -12,7 +12,11 @@ import { toast } from "react-toastify";
 const PastEvent = () => {
   const [user] = useAuthState(auth);
   const today = moment(new Date()).format();
-  const { data: bookedEvents, isLoading, refetch } = useQuery(["bookedEvents"], () =>
+  const {
+    data: bookedEvents,
+    isLoading,
+    refetch,
+  } = useQuery(["bookedEvents"], () =>
     fetch(`http://localhost:5000/api/bookedEvents/${user?.email}`, {
       method: "GET",
     }).then((res) => res.json())
@@ -26,13 +30,14 @@ const PastEvent = () => {
       today
   );
   const handleDelete = (id: string) => {
-    axios.delete(`http://localhost:5000/api/bookedEventDelete/${id}`)
-    .then(response => {
-        if(response?.status === 200){
-            toast.error("Past event deleted")
-            refetch()
+    axios
+      .delete(`http://localhost:5000/api/bookedEventDelete/${id}`)
+      .then((response) => {
+        if (response?.status === 200) {
+          toast.error("Past event deleted");
+          refetch();
         }
-    })
+      });
   };
   return (
     <div>
@@ -77,9 +82,7 @@ const PastEvent = () => {
                   </div>
                   <div>
                     <p className="font-bold">Invitee Message</p>
-                    <span>
-                      {event?.inviteeMessage}
-                    </span>
+                    <span>{event?.inviteeMessage}</span>
                   </div>
                 </div>
                 <div className="text-end">

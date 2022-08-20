@@ -2,9 +2,6 @@ import React from "react";
 import oneOnOne from "../../Utilities/Image/one-on-one.gif";
 import team from "../../Utilities/Image/team.gif";
 import group from "../../Utilities/Image/group.gif";
-import assistant from "../../Utilities/Image/assistant-meeting.jpg";
-import scheduling from "../../Utilities/Image/scheduling.jpg";
-import GroupMeeting from "../../Utilities/Image/team-meet.jpg";
 import Footer from "../../Shared/Footer/Footer";
 
 const Types = () => {
@@ -34,7 +31,10 @@ const Types = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 justify-center items-center px-5 md:px-10">
             <div className="md:order-2">
-              <img src={assistant} alt="" />
+              <img
+                src={"https://i.ibb.co/dppvYJQ/assistant-meeting.webp"}
+                alt=""
+              />
             </div>
             <div className="md:order-1">
               <h6 className="text-sm lg:text-xl font-bold">
@@ -74,7 +74,7 @@ const Types = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 justify-center items-center px-5 md:px-10">
             <div className="md:order-2">
-              <img src={scheduling} alt="" />
+              <img src={"https://i.ibb.co/hD8kLCY/scheduling.jpg"} alt="" />
             </div>
             <div className="md:order-1">
               <h6 className="text-2xl font-bold">TIME MANAGEMENT</h6>
@@ -118,7 +118,7 @@ const Types = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 justify-center items-center px-5 md:px-10">
             <div className="md:order-2">
-              <img src={GroupMeeting} alt="" />
+              <img src={"https://i.ibb.co/Z8pyKWd/team-meet.jpg"} alt="" />
             </div>
             <div className="md:order-1">
               <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold my-3">

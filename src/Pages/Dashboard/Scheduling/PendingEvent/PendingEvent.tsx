@@ -7,9 +7,8 @@ import Loading from "../../../../Shared/LoadingSpinner/Loading";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../../init.firebase";
 
-
 const PendingEvent = () => {
-    const [user] = useAuthState(auth);
+  const [user] = useAuthState(auth);
   const today = moment(new Date()).format().split("T")[0];
   const todayWithDate = moment(new Date()).format();
   const { data: bookedEvents, isLoading } = useQuery(["bookedEvents"], () =>
@@ -21,7 +20,10 @@ const PendingEvent = () => {
     <Loading />;
   }
   const pendingEvents = bookedEvents?.filter(
-    (singleEvent: any) => singleEvent?.date === today && moment(singleEvent?.date + " " + singleEvent?.eventStartTime).format() > todayWithDate
+    (singleEvent: any) =>
+      singleEvent?.date === today &&
+      moment(singleEvent?.date + " " + singleEvent?.eventStartTime).format() >
+        todayWithDate
   );
   return (
     <div>
@@ -66,9 +68,7 @@ const PendingEvent = () => {
                   </div>
                   <div>
                     <p className="font-bold">Invitee Message</p>
-                    <span>
-                      {event?.inviteeMessage}
-                    </span>
+                    <span>{event?.inviteeMessage}</span>
                   </div>
                 </div>
               </div>
