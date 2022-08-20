@@ -44,6 +44,7 @@ import UpcomingEvent from "./Pages/Dashboard/Scheduling/UpcomingEvent/UpcomingEv
 import PendingEvent from "./Pages/Dashboard/Scheduling/PendingEvent/PendingEvent";
 import PastEvent from "./Pages/Dashboard/Scheduling/PastEvent/PastEvent";
 import EventSuccessMessage from "./Pages/EventBooking/EventSuccessMessage";
+import AllEvent from "./Pages/EventBooking/AllEvent";
 
 function App() {
   const [user] = useAuthState(auth);
@@ -52,7 +53,7 @@ function App() {
 
   return (
     <div>
-      {location === "bookingCalender" || location === "eventSuccessMessage" ? (
+      {location === "bookingCalender" || location === "eventSuccessMessage" || location === "allEvent" ? (
         <></>
       ) : (
         <Navbar />
@@ -97,6 +98,10 @@ function App() {
         <Route
           path="/eventSuccessMessage"
           element={<EventSuccessMessage />}
+        ></Route>
+        <Route
+          path="/allEvent/:email"
+          element={<AllEvent />}
         ></Route>
 
         <Route path="login" element={<Login></Login>}></Route>

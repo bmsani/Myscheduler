@@ -53,7 +53,7 @@ const Event = () => {
           <img className="w-[70px] rounded-full" src={photo} alt="" />
           <div>
             <p>{user?.displayName}</p>
-            <p className="text-secondary">{email}</p>
+            <Link target="_blank" to={`/allEvent/${email}`} className="text-secondary">{email}</Link>
           </div>
         </div>
         <div>
@@ -67,7 +67,7 @@ const Event = () => {
             </Link>
           ) : (
             <Link to="/calenderConnection">
-              <button className="mt-4 bg-primary py-2 px-4 rounded text-white hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer">
+              <button className="mt-4 bg-primary py-2 px-4 rounded-full text-white hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer">
                 <span className="flex items-center gap-1">
                   <AiOutlinePlus /> New Event
                 </span>
