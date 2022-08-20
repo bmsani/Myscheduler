@@ -7,9 +7,10 @@ import Loading from "../../../Shared/LoadingSpinner/Loading";
 
 const Profile = () => {
   const imageStorageKey = "8c4220582d4b8f04cc8ea7c8298a1449";
-  const { userInfo, isLoading, refetch } = GetUserInfo();
-
   const [user] = useAuthState(auth);
+  const email = user?.email;
+  const { userInfo, isLoading, refetch } = GetUserInfo(email);
+
   const [loading, setLoading] = useState(false);
 
   const getName = useRef<HTMLInputElement | null>(null);
@@ -46,7 +47,7 @@ const Profile = () => {
             mobile: mobile,
             imageURL: imageUrl,
           };
-          const url = `https://secure-chamber-99191.herokuapp.com/updatedUser/${user?.email}`;
+          const url = `http://localhost:5000/updatedUser/${user?.email}`;
           fetch(url, {
             method: "PUT",
             headers: {
