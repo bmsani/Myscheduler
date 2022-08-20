@@ -1,23 +1,20 @@
-import img1 from "../../../Utilities/Image/image-1.jpg";
-import img2 from "../../../Utilities/Image/image-3.jpg";
-import img3 from "../../../Utilities/Image/image-2.jpg";
 const PowerfulFeatures = () => {
   const cardData = [
     {
       id: "1",
-      icon: img1,
+      icon: "https://i.ibb.co/yFMQDXr/image-1.jpg",
       heading: "Reduce no shows with reminders",
       para: "Automatic reminders and notifications significantly reduce no shows and admin work.",
     },
     {
       id: "2",
-      icon: img2,
+      icon: "https://i.ibb.co/T13t4h9/image-2.jpg",
       heading: "Video/Virtual meeting links",
       para: "Automatically create unique Zoom, Google Meet, and MS Teams links for meetings scheduled.",
     },
     {
       id: "3",
-      icon: img3,
+      icon: "https://i.ibb.co/NtsCP18/image-3.jpg",
       heading: "Custom available and control",
       para: "Set up custom availability, padding between appointments and appointment duration.",
     },

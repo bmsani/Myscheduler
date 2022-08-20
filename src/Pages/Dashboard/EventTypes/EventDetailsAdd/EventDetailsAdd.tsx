@@ -197,7 +197,7 @@ const EventDetailsAdd = ({
                                   )}
                                 </div>
                               </td>
-                              
+
                               <td>
                                 {day.checked && (
                                   <span>
@@ -206,7 +206,6 @@ const EventDetailsAdd = ({
                                   </span>
                                 )}
                               </td>
-                              
                             </tr>
                           ))}
                         </tbody>
@@ -259,7 +258,7 @@ const EventDetailsAdd = ({
                                   )}
                                 </div>
                               </td>
-                              
+
                               <td>
                                 {day.checked && (
                                   <span>
@@ -268,7 +267,6 @@ const EventDetailsAdd = ({
                                   </span>
                                 )}
                               </td>
-                              
                             </tr>
                           ))}
                         </tbody>
