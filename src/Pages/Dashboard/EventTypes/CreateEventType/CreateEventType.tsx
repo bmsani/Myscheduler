@@ -4,8 +4,14 @@ import single from "../../../../Utilities/icon/single-call.png";
 import { MdArrowBackIos } from "react-icons/md";
 import GetUserInfo from "../../../../Shared/GetUserInfo/GetUserInfo";
 import Loading from "../../../../Shared/LoadingSpinner/Loading";
+import auth from "../../../../init.firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+
+
 const CreateEventType = () => {
-  const { userInfo, isLoading } = GetUserInfo();
+  const [user] = useAuthState(auth);
+  const email = user?.email;
+  const { userInfo, isLoading } = GetUserInfo(email);
   if (isLoading) {
     return <Loading />;
   }

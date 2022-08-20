@@ -5,13 +5,13 @@ import { toast } from "react-toastify";
 import auth from "../../../init.firebase";
 import GetUserInfo from "../../../Shared/GetUserInfo/GetUserInfo";
 import Loading from "../../../Shared/LoadingSpinner/Loading";
-import profileImg from "../../../Utilities/icon/profile.png";
 
 const Profile = () => {
   const imageStorageKey = "8c4220582d4b8f04cc8ea7c8298a1449";
-  const { userInfo, isLoading, refetch } = GetUserInfo();
-
   const [user] = useAuthState(auth);
+  const email = user?.email;
+  const { userInfo, isLoading, refetch } = GetUserInfo(email);
+
   const [loading, setLoading] = useState(false);
 
   const getName = useRef<HTMLInputElement | null>(null);
