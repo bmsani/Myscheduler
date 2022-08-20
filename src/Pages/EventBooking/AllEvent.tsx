@@ -27,7 +27,7 @@ const AllEvent = () => {
         <div className="w-4/5 mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 py-16">
           {events?.map((e: any) => (
             <Link to={`/bookingCalender/${e._id}`} key={e._id}>
-              <div className="w-full h-full card shadow cursor-pointer hover:bg-gray-100 duration-300">
+              <div className="w-full h-full border-t cursor-pointer hover:bg-gray-100 duration-300">
                 <div className="p-5">
                   <div className="flex items-center justify-between">
                     <span className="flex items-center gap-2">
