@@ -26,7 +26,7 @@ const Blogs = () => {
     <div>
       <div className="py-14  flex justify-center">
         <div className="mx-3 max-w-4xl grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8 ">
-          {blogs.map((blog, index: number) => (
+          {blogs?.map((blog, index: number) => (
             <BlogCart blog={blog} index={index + 1} key={blog._id} />
           ))}
         </div>
