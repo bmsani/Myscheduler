@@ -66,9 +66,11 @@ const Event = () => {
               </button>
             </Link>
           ) : (
-            <Link to="/createEvent">
+            <Link to="/calenderConnection">
               <button className="mt-4 bg-primary py-2 px-4 rounded text-white hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer">
-                + New Event
+              <span className="flex items-center gap-1">
+                  <AiOutlinePlus /> New Event
+                </span>
               </button>
             </Link>
           )}
