@@ -18,7 +18,7 @@ const AllEvent = () => {
     <div className="p-20 min-h-screen bg-gray-50">
       <div className="card shadow-xl border bg-base-100">
         <div className="absolute">
-          <div className="p-2 bg-blue-200 rounded-br-xl">
+          <div className="p-2 text-gray-400 bg-blue-50 rounded-br-xl">
             <p className="text-sm font-bold text-center">Powered By</p>
             <h4 className="text-md font-bold">MyScheduler</h4>
           </div>
