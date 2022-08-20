@@ -6,11 +6,13 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../../init.firebase";
+import GetUserInfo from "../../../Shared/GetUserInfo/GetUserInfo";
 import Loading from "../../../Shared/LoadingSpinner/Loading";
 const Event = () => {
+  const { userInfo } = GetUserInfo();
   const [user] = useAuthState(auth);
+  const firstLetter = user?.displayName?.slice(0, 1);
   const email = user?.email;
-  const photo: any = user?.photoURL;
   const [singleUser, setSingleUser] = useState<any>({});
 
   useEffect(() => {
@@ -57,7 +59,19 @@ const Event = () => {
     <div className="mr-10 ml-5 pt-12">
       <div className="flex flex-col md:flex-row items-center justify-between">
         <div className="flex items-center gap-5">
-          <img className="w-[70px] rounded-full" src={photo} alt="" />
+          {userInfo?.imageURL ? (
+            <img
+              className="w-[80px] rounded-full border border-primary"
+              src={userInfo?.imageURL as string}
+              alt=""
+            />
+          ) : (
+            <p className="w-[80px] h-[80px] rounded-full border border-primary p-1 flex justify-center items-center bg-gray-200">
+              <span className="text-5xl font-semibold uppercase">
+                {firstLetter}
+              </span>
+            </p>
+          )}
           <div>
             <p>{user?.displayName}</p>
             <p className="text-secondary">{email}</p>
