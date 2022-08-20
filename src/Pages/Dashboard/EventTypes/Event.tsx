@@ -53,7 +53,13 @@ const Event = () => {
           <img className="w-[70px] rounded-full" src={photo} alt="" />
           <div>
             <p>{user?.displayName}</p>
-            <Link target="_blank" to={`/allEvent/${email}`} className="text-secondary">{email}</Link>
+            <Link
+              target="_blank"
+              to={`/allEvent/${email}`}
+              className="text-secondary"
+            >
+              myscheduler.com/{email}
+            </Link>
           </div>
         </div>
         <div>
@@ -78,39 +84,46 @@ const Event = () => {
       </div>
       <div className="divider"></div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {events?.map((e: any) => (
-          <div
-            className="card w-[300] md:w-[320px] shadow hover:shadow-xl duration-300 cursor-pointer"
-            key={e._id}
-          >
-            <div className="bg-blue-500 h-2 w-full rounded-t-2xl"></div>
-            <div className="p-5">
-              <h2 className="text-xl">{e.eventName}</h2>
-              <p className="text-sm">{e.eventDuration} mins, One-on-One</p>
-              <Link
-                target="_blank"
-                to={`/bookingCalender/${e._id}`}
-                className="text-secondary mt-2"
-              >
-                View booking page
-              </Link>
-              <div className="divider"></div>
-              <div className="flex justify-between">
-                <button className="mt-4 py-1 px-4 border border-primary rounded-full text-primary hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer">
-                  Share
-                </button>
-                <button
-                  className="mt-4 py-1 px-4 border border-primary rounded-full text-primary hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer"
-                  onClick={() => handleDelete(e._id)}
+      {events.length ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {events?.map((e: any) => (
+            <div
+              className="card w-[300] md:w-[320px] shadow hover:shadow-xl duration-300 cursor-pointer"
+              key={e._id}
+            >
+              <div className="bg-blue-500 h-2 w-full rounded-t-2xl"></div>
+              <div className="p-5">
+                <h2 className="text-xl">{e.eventName}</h2>
+                <p className="text-sm">{e.eventDuration} mins, One-on-One</p>
+                <Link
+                  target="_blank"
+                  to={`/bookingCalender/${e._id}`}
+                  className="text-secondary mt-2"
                 >
-                  Delete
-                </button>
+                  View booking page
+                </Link>
+                <div className="divider"></div>
+                <div className="flex justify-between">
+                  <button className="mt-4 py-1 px-4 border border-primary rounded-full text-primary hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer">
+                    Share
+                  </button>
+                  <button
+                    className="mt-4 py-1 px-4 border border-primary rounded-full text-primary hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer"
+                    onClick={() => handleDelete(e._id)}
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <div className="">
+          <h2>You don't have any event types yet.</h2>
+          <p className="text-sm mt-4 font-thin">You'll want to add an event type to allow people to schedule with you.</p>
+        </div>
+      )}
     </div>
   );
 };
