@@ -10,9 +10,7 @@ const GetUserInfo = () => {
     isLoading,
     refetch,
   } = useQuery(["userInfo", email], () =>
-    fetch(`https://secure-chamber-99191.herokuapp.com/user/${email}`).then(
-      (res) => res.json()
-    )
+    fetch(`http://localhost:5000/user/${email}`).then((res) => res.json())
   );
 
   return { userInfo, isLoading, refetch };

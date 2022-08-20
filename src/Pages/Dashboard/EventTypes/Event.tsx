@@ -14,11 +14,9 @@ const Event = () => {
   const [singleUser, setSingleUser] = useState<any>({});
 
   useEffect(() => {
-    axios
-      .get(`https://secure-chamber-99191.herokuapp.com/user/${email}`)
-      .then((response) => {
-        setSingleUser(response.data);
-      });
+    axios.get(`http://localhost:5000/user/${email}`).then((response) => {
+      setSingleUser(response.data);
+    });
   }, [email]);
 
   const {
@@ -26,25 +24,20 @@ const Event = () => {
     isLoading,
     refetch,
   } = useQuery(["events", email], () =>
-    fetch(`https://secure-chamber-99191.herokuapp.com/getEvent/${email}`).then(
-      (res) => res.json()
-    )
+    fetch(`http://localhost:5000/getEvent/${email}`).then((res) => res.json())
   );
 
   if (isLoading) {
     return <Loading />;
   }
   const handleDelete = (id: string) => {
-    fetch(
-      `https://secure-chamber-99191.herokuapp.com/deleteEvent/${id}?email=${email}`,
-      {
-        method: "DELETE",
-        headers: {
-          "content-type": "application/json",
-          authorization: `bearer ${localStorage.getItem("accessToken")}`,
-        },
-      }
-    )
+    fetch(`http://localhost:5000/deleteEvent/${id}?email=${email}`, {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {

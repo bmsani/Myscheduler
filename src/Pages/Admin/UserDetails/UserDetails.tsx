@@ -4,9 +4,7 @@ import Loading from "../../../Shared/LoadingSpinner/Loading";
 
 const UserDetails = () => {
   const { data: event, isLoading } = useQuery(["event"], () =>
-    fetch("https://secure-chamber-99191.herokuapp.com/getAllEvent").then(
-      (res) => res.json()
-    )
+    fetch("http://localhost:5000/getAllEvent").then((res) => res.json())
   );
 
   if (isLoading) {

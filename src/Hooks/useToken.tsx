@@ -8,7 +8,7 @@ const useToken = (user: any) => {
     const name = user?.user?.displayName;
     const currentUser = { email: email, name: name };
     if (email) {
-      fetch(`https://secure-chamber-99191.herokuapp.com/user/${email}`, {
+      fetch(`http://localhost:5000/user/${email}`, {
         method: "PUT",
         headers: {
           "content-type": "application/json",
@@ -110,16 +110,13 @@ const useToken = (user: any) => {
       ],
     };
     if (email) {
-      fetch(
-        `https://secure-chamber-99191.herokuapp.com/userAvailability/${email}`,
-        {
-          method: "PUT",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(userAvailability),
-        }
-      )
+      fetch(`http://localhost:5000/userAvailability/${email}`, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(userAvailability),
+      })
         .then((res) => res.json())
         .then((data) => {
           if (data.acknowledged) {
