@@ -12,6 +12,7 @@ const IntervalEdit = ({ singleDay, days, refetch }: any) => {
       starting: starting,
       ending: ending,
     };
+    console.log(intervalValue);
     fetch(`http://localhost:5000/editInterval/${days}/${id}`, {
       method: "PUT",
       headers: {

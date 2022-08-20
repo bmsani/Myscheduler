@@ -10,7 +10,6 @@ import { HiMenu } from "react-icons/hi";
 import { BiDownArrow } from "react-icons/bi";
 import ShareLink from "../../Pages/ShareLink/ShareLink";
 import useAdmin from "../../Hooks/useAdmin";
-import GetUserInfo from "../GetUserInfo/GetUserInfo";
 
 const Navbar = () => {
   const [user, loading] = useAuthState(auth);
