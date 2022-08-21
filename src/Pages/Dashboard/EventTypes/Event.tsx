@@ -45,7 +45,7 @@ const Event = () => {
         <div className="flex items-center gap-4">
           {userInfo?.imageURL ? (
             <img
-              className="w-[50px] rounded-full border border-primary"
+              className="w-[50px] h-[50px] object-cover rounded-full border border-primary"
               src={userInfo?.imageURL as string}
               alt=""
             />

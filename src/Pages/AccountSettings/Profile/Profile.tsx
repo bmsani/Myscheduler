@@ -28,9 +28,7 @@ const Profile = () => {
 
     setLoading(true);
     const imgPath: any = getImg?.current?.files;
-    if (!imgPath[0]) {
-      return toast.error("Upload Your Logo");
-    } else {
+    if (imgPath?.length) {
       const formData = new FormData();
       formData.append("image", imgPath[0]);
       const url = `https://api.imgbb.com/1/upload?key=${imageStorageKey}`;
@@ -68,10 +66,63 @@ const Profile = () => {
             });
           setLoading(false);
         });
+    } else if (userInfo?.imageURL) {
+      const updatedUser = {
+        name: name,
+        message: message,
+        mobile: mobile,
+        imageURL: userInfo?.imageURL,
+      };
+      const url = `http://localhost:5000/updatedUser/${user?.email}`;
+      fetch(url, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+        body: JSON.stringify(updatedUser),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.acknowledged === true) {
+            toast.success("Profile successfully updated");
+            refetch();
+          } else {
+            toast.error("Failed to update");
+            refetch();
+          }
+          setLoading(false);
+        });
+    } else {
+      const updatedUser = {
+        name: name,
+        message: message,
+        mobile: mobile,
+      };
+      const url = `http://localhost:5000/updatedUser/${user?.email}`;
+      fetch(url, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+        body: JSON.stringify(updatedUser),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.acknowledged === true) {
+            toast.success("Profile successfully updated");
+            refetch();
+          } else {
+            toast.error("Failed to update");
+            refetch();
+          }
+          setLoading(false);
+        });
     }
   };
 
-  if (loading || isLoading) {
+  if (isLoading) {
     return <Loading />;
   }
   return (
@@ -83,7 +134,7 @@ const Profile = () => {
         <div className="flex items-center gap-5">
           {userInfo?.imageURL ? (
             <img
-              className="w-[120px] rounded-full border border-primary"
+              className="w-[120px] h-[120px] object-cover rounded-full border border-primary"
               src={userInfo?.imageURL as string}
               alt=""
             />
@@ -160,11 +211,17 @@ const Profile = () => {
           />
         </div>
         <div className="flex justify-between gap-5 mt-4">
-          <input
-            className="mt-4 bg-primary py-2 px-4 rounded-lg text-white hover:shadow-md hover:shadow-secondary duration-300 cursor-pointer"
-            type="submit"
-            value="Save Change"
-          />
+          {loading ? (
+            <button className="mt-4 bg-primary py-2 px-4 rounded-lg text-white hover:shadow-md hover:shadow-secondary duration-300 cursor-pointer">
+              Loading...
+            </button>
+          ) : (
+            <input
+              className="mt-4 bg-primary py-2 px-4 rounded-lg text-white hover:shadow-md hover:shadow-secondary duration-300 cursor-pointer"
+              type="submit"
+              value="Save Change"
+            />
+          )}
         </div>
       </form>
     </div>
