@@ -1,30 +1,19 @@
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { AiOutlinePlus } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../../init.firebase";
+import GetAllEvents from "../../../Shared/GetAllEvent/GetAllEvents";
 import GetUserInfo from "../../../Shared/GetUserInfo/GetUserInfo";
 import Loading from "../../../Shared/LoadingSpinner/Loading";
+
 const Event = () => {
   const [user] = useAuthState(auth);
   const email = user?.email;
   const firstLetter = user?.displayName?.slice(0, 1);
   const { userInfo } = GetUserInfo(email);
+  const { events, isLoading, refetch } = GetAllEvents(email);
 
-  const {
-    data: events,
-    isLoading,
-    refetch,
-  } = useQuery(["events", email], () =>
-    fetch(`http://localhost:5000/getEvent/${email}`).then((res) => res.json())
-  );
-
-  if (isLoading) {
-    return <Loading />;
-  }
   const handleDelete = (id: string) => {
     fetch(`http://localhost:5000/deleteEvent/${id}?email=${email}`, {
       method: "DELETE",
@@ -41,6 +30,15 @@ const Event = () => {
         }
       });
   };
+
+  const handleCopyToClipboard = (eventURL: string) => {
+    navigator.clipboard.writeText(eventURL);
+    toast.success("Copy To Clipboard");
+  };
+
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <div className="mr-10 ml-5 pt-12">
       <div className="flex flex-col md:flex-row items-center justify-between">
@@ -115,8 +113,15 @@ const Event = () => {
                         </Link>
                         <div className="divider"></div>
                         <div className="flex justify-between">
-                          <button className="mt-4 py-1 px-4 border border-primary rounded-full text-primary hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer">
-                            Share
+                          <button
+                            onClick={() =>
+                              handleCopyToClipboard(
+                                `http://localhost:3000/bookingCalender/${e._id}`
+                              )
+                            }
+                            className="mt-4 py-1 px-4 border border-primary rounded-full text-primary hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer"
+                          >
+                            Copy
                           </button>
                           <button
                             className="mt-4 py-1 px-4 border border-primary rounded-full text-primary hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer"
@@ -179,8 +184,15 @@ const Event = () => {
                     </Link>
                     <div className="divider"></div>
                     <div className="flex justify-between">
-                      <button className="mt-4 py-1 px-4 border border-primary rounded-full text-primary hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer">
-                        Share
+                      <button
+                        onClick={() =>
+                          handleCopyToClipboard(
+                            `http://localhost:3000/bookingCalender/${e._id}`
+                          )
+                        }
+                        className="mt-4 py-1 px-4 border border-primary rounded-full text-primary hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer"
+                      >
+                        Copy
                       </button>
                       <button
                         className="mt-4 py-1 px-4 border border-primary rounded-full text-primary hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer"
