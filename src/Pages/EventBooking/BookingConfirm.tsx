@@ -56,11 +56,9 @@ const BookingConfirm = ({
       })
       .then((response) => {
         if (response.status === 200) {
-          console.log(confirmEvent);
           axios
             .post("http://localhost:5000/api/createConfirmEvent", confirmEvent)
             .then((response) => {
-              console.log(response);
               toast.success("Event create success");
               event.target.reset();
               navigate("/eventSuccessMessage");

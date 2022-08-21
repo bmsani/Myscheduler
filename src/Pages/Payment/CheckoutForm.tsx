@@ -127,8 +127,8 @@ const CheckoutForm = ({ userInfo }: any) => {
         </div>
       )}
       {goForward && (
-        <Link className="" to="/createEvent">
-          <button className="bg-blue-500 text-white px-7 py-3 mt-4 w-full rounded-full">
+        <Link className="" to="/dashboard">
+          <button className="bg-blue-500 text-white px-7 py-2 mt-4 w-full rounded-full">
             Go Forward
           </button>
         </Link>

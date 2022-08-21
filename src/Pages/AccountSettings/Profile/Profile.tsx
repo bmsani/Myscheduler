@@ -1,5 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
-import React, { FormEvent, useEffect, useRef, useState } from "react";
+import React, { FormEvent, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import auth from "../../../init.firebase";
