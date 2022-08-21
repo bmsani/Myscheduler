@@ -1,6 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { AiOutlinePlus } from "react-icons/ai";
 import { Link } from "react-router-dom";
@@ -9,17 +7,10 @@ import auth from "../../../init.firebase";
 import GetUserInfo from "../../../Shared/GetUserInfo/GetUserInfo";
 import Loading from "../../../Shared/LoadingSpinner/Loading";
 const Event = () => {
-  const { userInfo } = GetUserInfo();
   const [user] = useAuthState(auth);
   const firstLetter = user?.displayName?.slice(0, 1);
   const email = user?.email;
-  const [singleUser, setSingleUser] = useState<any>({});
-
-  useEffect(() => {
-    axios.get(`http://localhost:5000/user/${email}`).then((response) => {
-      setSingleUser(response.data);
-    });
-  }, [email]);
+  const { userInfo } = GetUserInfo(email);
 
   const {
     data: events,
@@ -28,7 +19,7 @@ const Event = () => {
   } = useQuery(["events", email], () =>
     fetch(`http://localhost:5000/getEvent/${email}`).then((res) => res.json())
   );
-
+  console.log(userInfo);
   if (isLoading) {
     return <Loading />;
   }
@@ -77,7 +68,7 @@ const Event = () => {
           </div>
         </div>
         <div>
-          {singleUser.refreshToken ? (
+          {userInfo?.refreshToken ? (
             <Link to="/createEvent">
               <button className="mt-4 bg-primary py-2 px-4 text-white rounded-full hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer">
                 <span className="flex items-center gap-1">
@@ -135,7 +126,10 @@ const Event = () => {
       ) : (
         <div className="">
           <h2>You don't have any event types yet.</h2>
-          <p className="text-sm mt-4 font-thin">You'll want to add an event type to allow people to schedule with you.</p>
+          <p className="text-sm mt-4 font-thin">
+            You'll want to add an event type to allow people to schedule with
+            you.
+          </p>
         </div>
       )}
     </div>

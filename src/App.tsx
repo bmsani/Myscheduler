@@ -16,7 +16,6 @@ import Availability from "./Pages/Availability/Availability";
 import Workflow from "./Pages/Dashboard/Workflow/Workflow";
 import EventTypes from "./Pages/Dashboard/EventTypes/Event";
 import Scheduling from "./Pages/Dashboard/Scheduling/Scheduling";
-import RoutingForms from "./Pages/Dashboard/RoutingForms/RoutingForms";
 import CalenderConnection from "./Pages/CalenderConnection/CalenderConnection";
 import AddCalender from "./Pages/AddCalender/AddCalender";
 import ShareLink from "./Pages/ShareLink/ShareLink";
@@ -45,6 +44,7 @@ import PendingEvent from "./Pages/Dashboard/Scheduling/PendingEvent/PendingEvent
 import PastEvent from "./Pages/Dashboard/Scheduling/PastEvent/PastEvent";
 import EventSuccessMessage from "./Pages/EventBooking/EventSuccessMessage";
 import AllEvent from "./Pages/EventBooking/AllEvent";
+import ReviewInput from "./Pages/Dashboard/ReviewInput/ReviewInput";
 
 function App() {
   const [user] = useAuthState(auth);
@@ -53,7 +53,9 @@ function App() {
 
   return (
     <div>
-      {location === "bookingCalender" || location === "eventSuccessMessage" || location === "allEvent" ? (
+      {location === "bookingCalender" ||
+      location === "eventSuccessMessage" ||
+      location === "allEvent" ? (
         <></>
       ) : (
         <Navbar />
@@ -99,10 +101,7 @@ function App() {
           path="/eventSuccessMessage"
           element={<EventSuccessMessage />}
         ></Route>
-        <Route
-          path="/allEvent/:email"
-          element={<AllEvent />}
-        ></Route>
+        <Route path="/allEvent/:email" element={<AllEvent />}></Route>
 
         <Route path="login" element={<Login></Login>}></Route>
         <Route path="register" element={<Register></Register>}></Route>
@@ -124,7 +123,7 @@ function App() {
             <Route path="pendingEvent" element={<PendingEvent />} />
             <Route path="pastEvent" element={<PastEvent />} />
           </Route>
-          <Route path="routingForms" element={<RoutingForms />}></Route>
+          <Route path="reviewInput" element={<ReviewInput />}></Route>
         </Route>
         <Route
           path="calendarEvent"
