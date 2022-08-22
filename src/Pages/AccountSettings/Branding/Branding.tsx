@@ -43,7 +43,6 @@ const Branding = () => {
           const brandLogoLink = {
             brandLogo: imageUrl,
           };
-          console.log(brandLogoLink);
           fetch(
             `https://secure-chamber-99191.herokuapp.com/brandLogo/${user?.email}`,
             {
@@ -69,7 +68,7 @@ const Branding = () => {
         });
     }
   };
-  if (loading || isLoading) {
+  if (isLoading) {
     return <Loading></Loading>;
   }
   return (
@@ -112,11 +111,17 @@ const Branding = () => {
             Upload Image
           </label>
         </div>
-        <input
-          type="submit"
-          value="Save Change"
-          className="bg-primary py-2 px-4 rounded text-white hover:shadow-md hover:shadow-secondary duration-300 cursor-pointer"
-        />
+        {loading ? (
+          <button className="bg-primary py-2 px-4 rounded text-white hover:shadow-md hover:shadow-secondary duration-300 cursor-pointer">
+            Loading...
+          </button>
+        ) : (
+          <input
+            type="submit"
+            value="Save Change"
+            className="bg-primary py-2 px-4 rounded text-white hover:shadow-md hover:shadow-secondary duration-300 cursor-pointer"
+          />
+        )}
       </form>
     </div>
   );

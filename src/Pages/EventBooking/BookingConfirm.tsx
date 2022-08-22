@@ -56,14 +56,12 @@ const BookingConfirm = ({
       })
       .then((response) => {
         if (response.status === 200) {
-          console.log(confirmEvent);
           axios
             .post(
               "https://secure-chamber-99191.herokuapp.com/api/createConfirmEvent",
               confirmEvent
             )
             .then((response) => {
-              console.log(response);
               toast.success("Event create success");
               event.target.reset();
               navigate("/eventSuccessMessage");

@@ -8,23 +8,10 @@ import Loading from "../../../../Shared/LoadingSpinner/Loading";
 import EventDetailsAdd from "../EventDetailsAdd/EventDetailsAdd";
 import { MdArrowBackIos } from "react-icons/md";
 
-// interface data {
-//   dayData: {
-//     id: string;
-//     day: string;
-//     start: string;
-//     end: string;
-//     checked: boolean;
-//   }
-// }
-
 const CreateIndividualEvent = () => {
   const [eventName, setEventName] = useState("");
-  const [eventLocation, setEventLocation] = useState("");
   const [eventDescription, setEventDescription] = useState("");
   const [eventId, setEventId] = useState("");
-  // const [eventLink, setEventLink] = useState("");
-  // const [availabilities, setAvailabilities] = useState<any>([]);
   const [next, setNext] = useState(false);
   const durationRef = useRef<HTMLInputElement | null>(null);
   const [user] = useAuthState(auth);
@@ -52,7 +39,7 @@ const CreateIndividualEvent = () => {
     if (eventId) {
       const event = {
         eventName: eventName,
-        eventLocation: eventLocation,
+        eventLocation: "Google Meet",
         eventDescription: eventDescription,
         eventDuration: eventDuration,
       };
@@ -76,7 +63,7 @@ const CreateIndividualEvent = () => {
       const event = {
         email: email,
         eventName: eventName,
-        eventLocation: eventLocation,
+        eventLocation: "Google Meet",
         eventDescription: eventDescription,
         eventDuration: eventDuration,
         dayData: availabilities?.dayData,
@@ -123,7 +110,6 @@ const CreateIndividualEvent = () => {
                 <h2>What event is this?</h2>
                 <h2 className="text-sm font-light">
                   {eventName ? eventName : "No name given"},&nbsp;
-                  {eventLocation ? eventLocation : "No location given"}
                 </h2>
               </div>
               <div className="py-4">
@@ -133,9 +119,7 @@ const CreateIndividualEvent = () => {
                       Cancel
                     </button>
                   </Link>
-                  {eventName === "" ||
-                  eventLocation === "" ||
-                  eventDescription === "" ? (
+                  {eventName === "" || eventDescription === "" ? (
                     <button
                       className="px-4 py-1 rounded-full text-white bg-gray-400"
                       disabled
@@ -172,27 +156,11 @@ const CreateIndividualEvent = () => {
                   <span className="label-text">Location</span>
                 </label>
                 <div className="">
-                  <select
-                    required
-                    className="select border-blue-500 w-full max-w-sm"
-                    onChange={(e) => setEventLocation(e.target.value)}
-                  >
-                    <option disabled selected className="text-light">
-                      Add Your Location
-                    </option>
-                    <option>
-                      <div>
-                        <MdArrowBackIos />
-                        <h2>Google Meet</h2>
-                      </div>
-                    </option>
-                    <option>
-                      <div>
-                        <MdArrowBackIos />
-                        <h2>Zoom</h2>
-                      </div>
-                    </option>
-                  </select>
+                  <input
+                    readOnly
+                    defaultValue="Google Meet"
+                    className="input border-blue-500 w-full max-w-sm"
+                  ></input>
                 </div>
                 <label className="label">
                   <span className="label-text">Description/Instructions</span>
@@ -214,9 +182,7 @@ const CreateIndividualEvent = () => {
                     Cancel
                   </button>
                 </Link>
-                {eventName === "" ||
-                eventLocation === "" ||
-                eventDescription === "" ? (
+                {eventName === "" || eventDescription === "" ? (
                   // || eventLink === ""
                   <button
                     className="px-4 py-1 rounded-full text-white bg-gray-400"
@@ -240,7 +206,7 @@ const CreateIndividualEvent = () => {
         <EventDetailsAdd
           availabilities={availabilities}
           eventName={eventName}
-          eventLocation={eventLocation}
+          eventLocation={"Google Meet"}
           durationRef={durationRef}
           handleEvent={handleEvent}
           refetch={refetch}

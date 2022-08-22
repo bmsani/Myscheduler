@@ -1,10 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { useAuthState } from "react-firebase-hooks/auth";
-import auth from "../../init.firebase";
 
-const GetUserInfo = () => {
-  const [user] = useAuthState(auth);
-  const email = user?.email;
+const GetUserInfo = (email: any) => {
   const {
     data: userInfo,
     isLoading,

@@ -7,18 +7,17 @@ import "slick-carousel/slick/slick-theme.css";
 const CustomerReviews = () => {
   const [reviews, setReviews] = useState([]);
   useEffect(() => {
-    fetch("review.json")
+    fetch("https://secure-chamber-99191.herokuapp.com/reviews")
       .then((data) => data.json())
       .then((result) => setReviews(result));
   }, []);
-
   const settings = {
     speed: 500,
     dots: true,
     autoplay: true,
     autoplaySpeed: 4000,
     cssEase: "linear",
-    slidesToShow: 3,
+    slidesToShow: 2,
     slidesToScroll: 1,
     pauseOnHover: true,
     arrows: false,
@@ -26,18 +25,18 @@ const CustomerReviews = () => {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
           slidesToScroll: 3,
           infinite: true,
           dots: true,
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 830,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 1,
         },
       },
       {
@@ -54,44 +53,55 @@ const CustomerReviews = () => {
       <h2 className="text-2xl md:text-3xl lg:text-4xl text-neutral text-center font-bold">
         Our Satisfied Customers
       </h2>
-      <div className="mb-12">
+      <div>
         <Slider {...settings}>
-          {reviews.map(
+          {reviews?.map(
             (review: {
               name: string;
-              picture: "file";
+              position: string;
+              image: "file";
               rating: number;
-              _review: string;
+              review: string;
             }) => (
               <div>
-                <div className="mx-1 max-w-lg rounded-md bg-white p-2 text-black shadow-lg m-5">
-                  <div className="flex pt-4 pl-4">
-                    <div className="avatar">
-                      <div className="w-16 rounded-full">
-                        <img src={review.picture} alt="" />
+                <div className="relative mt-20 w-full text-black ">
+                  <div className="bg-gray-100 h-72 p-10 m-5 border rounded-md shadow-lg">
+                    <div className="avatar absolute top-[-45px] left-[45px]">
+                      <div className="w-20 border-[3px] border-secondary rounded-full">
+                        {review.image ? (
+                          <img src={review.image} alt="" />
+                        ) : (
+                          <img
+                            src="https://i.ibb.co/RN0yDmq/avator.png"
+                            alt="person"
+                          />
+                        )}
                       </div>
                     </div>
-                    <div className="ml-4">
-                      <h2 className="text-sm md:text-lg text-justify font-bold">
-                        {review.name}
-                      </h2>
-                      <h3 className="text-xs md:text-md text-justify">
-                        Position: CEO
-                      </h3>
-                    </div>
-                  </div>
-                  <div className="pl-4">
-                    <p className="text-sm md:text-lg text-justify mt-4">
-                      {review._review}
-                    </p>
-
-                    <div className="mt-2">
-                      <div className="flex items-center gap-1">
-                        <ReactStars
-                          size={20}
-                          value={review.rating}
-                          edit={false}
-                        ></ReactStars>
+                    <div>
+                      <p className="text-sm md:text-lg text-justify mt-4">
+                        {review.review.slice(0, 150)}...{" "}
+                      </p>
+                      <div>
+                        <div className="flex items-center gap-2 pt-4">
+                          <h2 className="text-sm md:text-lg text-justify font-bold">
+                            {review.name}
+                          </h2>
+                          <h3 className="text-xs md:text-md text-secondary">
+                            {review.position}
+                          </h3>
+                        </div>
+                        <div>
+                          <div>
+                            <div>
+                              <ReactStars
+                                size={20}
+                                value={review.rating}
+                                edit={false}
+                              ></ReactStars>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>

@@ -4,8 +4,14 @@ import single from "../../../../Utilities/icon/single-call.png";
 import { MdArrowBackIos } from "react-icons/md";
 import GetUserInfo from "../../../../Shared/GetUserInfo/GetUserInfo";
 import Loading from "../../../../Shared/LoadingSpinner/Loading";
+import auth from "../../../../init.firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+
+
 const CreateEventType = () => {
-  const { userInfo, isLoading } = GetUserInfo();
+  const [user] = useAuthState(auth);
+  const email = user?.email;
+  const { userInfo, isLoading } = GetUserInfo(email);
   if (isLoading) {
     return <Loading />;
   }
@@ -45,55 +51,6 @@ const CreateEventType = () => {
                 Create
               </button>
             </Link>
-          </div>
-        </div>
-        <div className=" md:flex items-center justify-between mx-4 lg:mx-40 mt-20">
-          <div>
-            <div className="flex items-center">
-              <div>
-                <img src={group} className="w-[48px]" alt="" />
-              </div>
-              <div className="ml-8">
-                <h2 className="text-xl" id="group">
-                  Group
-                </h2>
-                <h2 className="text-l">
-                  Let multiple invitees meet with you at one time.
-                </h2>
-              </div>
-            </div>
-          </div>
-          <div>
-            {userInfo?.paymentStatus ? (
-              <Link
-                to="/createGroupEvent"
-                className="w-full mt-3 lg:mt-0 bg-blue-500 text-white px-7 py-3 rounded-full"
-              >
-                Create
-              </Link>
-            ) : (
-              <Link
-                to="/priceCart"
-                className="w-full mt-3 lg:mt-0 bg-blue-500 text-white px-7 py-3 rounded-full"
-              >
-                Create
-              </Link>
-            )}
-          </div>
-        </div>
-        <div className="md:flex items-center justify-between mx-4 lg:mx-40 mt-20 bg-slate-200 p-4 rounded-md">
-          <div>
-            <h2>
-              <span className="font-bold">
-                Want to host shared events with others?
-              </span>{" "}
-              Add members to your account
-            </h2>
-          </div>
-          <div>
-            <button className="w-full mt-3 lg:mt-0 px-7 border-blue-400 border-2 py-3 rounded-full">
-              Invite members
-            </button>
           </div>
         </div>
       </div>
