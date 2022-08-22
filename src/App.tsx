@@ -16,12 +16,9 @@ import Availability from "./Pages/Availability/Availability";
 import Workflow from "./Pages/Dashboard/Workflow/Workflow";
 import EventTypes from "./Pages/Dashboard/EventTypes/Event";
 import Scheduling from "./Pages/Dashboard/Scheduling/Scheduling";
-import RoutingForms from "./Pages/Dashboard/RoutingForms/RoutingForms";
 import CalenderConnection from "./Pages/CalenderConnection/CalenderConnection";
 import AddCalender from "./Pages/AddCalender/AddCalender";
-import ShareLink from "./Pages/ShareLink/ShareLink";
 import Navbar from "./Shared/Navbar/Navbar";
-import MyLink from "./Pages/AccountSettings/MyLink/MyLink";
 import Event from "./Pages/Dashboard/EventTypes/Event";
 import Branding from "./Pages/AccountSettings/Branding/Branding";
 import Blogs from "./Pages/Blogs/Blogs";
@@ -30,7 +27,6 @@ import auth from "./init.firebase";
 import BlogDetails from "./Pages/Blogs/BlogDetails";
 import EventBooking from "./Pages/EventBooking/EventBooking";
 import BookingCalender from "./Pages/EventBooking/BookingCalender";
-import CalendarEvent from "./Pages/Dashboard/EventTypes/CreateCalendarEvent/CalendarEvent";
 import CreateEventType from "./Pages/Dashboard/EventTypes/CreateEventType/CreateEventType";
 import CreateIndividualEvent from "./Pages/Dashboard/EventTypes/CreateIndividualEvent/CreateIndividualEvent";
 import EventDetailsAdd from "./Pages/Dashboard/EventTypes/EventDetailsAdd/EventDetailsAdd";
@@ -38,13 +34,13 @@ import Admin from "./Pages/Admin/Admin";
 import Users from "./Pages/Admin/Users/Users";
 import UserDetails from "./Pages/Admin/UserDetails/UserDetails";
 import Payment from "./Pages/Payment/Payment";
-import CreateGroupEvent from "./Pages/Dashboard/EventTypes/CreacteGroupEvent/CreateGroupEvent";
 import PricingCard from "./Pages/Payment/PricingCard/PricingCard";
 import UpcomingEvent from "./Pages/Dashboard/Scheduling/UpcomingEvent/UpcomingEvent";
 import PendingEvent from "./Pages/Dashboard/Scheduling/PendingEvent/PendingEvent";
 import PastEvent from "./Pages/Dashboard/Scheduling/PastEvent/PastEvent";
 import EventSuccessMessage from "./Pages/EventBooking/EventSuccessMessage";
 import AllEvent from "./Pages/EventBooking/AllEvent";
+import ReviewInput from "./Pages/Dashboard/ReviewInput/ReviewInput";
 
 function App() {
   const [user] = useAuthState(auth);
@@ -53,7 +49,9 @@ function App() {
 
   return (
     <div>
-      {location === "bookingCalender" || location === "eventSuccessMessage" || location === "allEvent" ? (
+      {location === "bookingCalender" ||
+      location === "eventSuccessMessage" ||
+      location === "allEvent" ? (
         <></>
       ) : (
         <Navbar />
@@ -78,11 +76,6 @@ function App() {
           element={<CreateIndividualEvent></CreateIndividualEvent>}
         ></Route>
         <Route
-          path="/createGroupEvent"
-          element={<CreateGroupEvent></CreateGroupEvent>}
-        ></Route>
-
-        <Route
           path="/eventDetailsAdd"
           element={<EventDetailsAdd></EventDetailsAdd>}
         ></Route>
@@ -99,10 +92,7 @@ function App() {
           path="/eventSuccessMessage"
           element={<EventSuccessMessage />}
         ></Route>
-        <Route
-          path="/allEvent/:email"
-          element={<AllEvent />}
-        ></Route>
+        <Route path="/allEvent/:email" element={<AllEvent />}></Route>
 
         <Route path="login" element={<Login></Login>}></Route>
         <Route path="register" element={<Register></Register>}></Route>
@@ -124,16 +114,8 @@ function App() {
             <Route path="pendingEvent" element={<PendingEvent />} />
             <Route path="pastEvent" element={<PastEvent />} />
           </Route>
-          <Route path="routingForms" element={<RoutingForms />}></Route>
+          <Route path="reviewInput" element={<ReviewInput />}></Route>
         </Route>
-        <Route
-          path="calendarEvent"
-          element={
-            <RequiredAuth>
-              <CalendarEvent></CalendarEvent>
-            </RequiredAuth>
-          }
-        ></Route>
         <Route
           path="/availability"
           element={
@@ -164,21 +146,12 @@ function App() {
         >
           <Route path="profile" element={<Profile />}></Route>
           <Route path="branding" element={<Branding />}></Route>
-          <Route path="myLink" element={<MyLink />}></Route>
         </Route>
         <Route
           path="/calenderConnection"
           element={
             <RequiredAuth>
               <CalenderConnection />
-            </RequiredAuth>
-          }
-        ></Route>
-        <Route
-          path="/shareLink"
-          element={
-            <RequiredAuth>
-              <ShareLink />
             </RequiredAuth>
           }
         ></Route>

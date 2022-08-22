@@ -19,7 +19,10 @@ const Dashboard: any = () => {
             </Link>
           </li>
           <li>
-            <Link to="/dashboard/scheduling/upcomingEvent" className="font-semibold">
+            <Link
+              to="/dashboard/scheduling/upcomingEvent"
+              className="font-semibold"
+            >
               Scheduled event
             </Link>
           </li>
@@ -29,8 +32,8 @@ const Dashboard: any = () => {
             </Link>
           </li>
           <li>
-            <Link to="/dashboard/routingForms" className="font-semibold">
-              Routing forms
+            <Link to="/dashboard/reviewInput" className="font-semibold">
+              Review
             </Link>
           </li>
         </ul>
