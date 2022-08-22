@@ -24,7 +24,7 @@ const Event = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.acknowledged) {
+        if (data?.acknowledged) {
           toast.error("Event delete successful");
           refetch();
         }
