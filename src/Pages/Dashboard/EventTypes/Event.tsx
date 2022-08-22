@@ -9,8 +9,8 @@ import Loading from "../../../Shared/LoadingSpinner/Loading";
 
 const Event = () => {
   const [user] = useAuthState(auth);
-  const email = user?.email;
   const firstLetter = user?.displayName?.slice(0, 1);
+  const email = user?.email;
   const { userInfo } = GetUserInfo(email);
   const { events, isLoading, refetch } = GetAllEvents(email);
 
@@ -51,7 +51,7 @@ const Event = () => {
             />
           ) : (
             <p className="w-[50px] h-[50px] rounded-full border border-primary p-1 flex justify-center items-center bg-gray-200">
-              <span className="text-8xl font-semibold">{firstLetter}</span>
+              <span className="text-8xl font-semibold uppercase">{firstLetter}</span>
             </p>
           )}
           <div>
@@ -87,7 +87,7 @@ const Event = () => {
       </div>
       <div className="divider"></div>
 
-      {events.length ? (
+      {events?.length ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {events?.map((e: any, index: number) => (
             <div>
