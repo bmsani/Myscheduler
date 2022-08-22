@@ -184,7 +184,6 @@ const CreateIndividualEvent = () => {
                 </Link>
                 {eventName === "" ||
                 eventDescription === "" ? (
-                  // || eventLink === ""
                   <button
                     className="px-4 py-1 rounded-full text-white bg-gray-400"
                     disabled
@@ -207,7 +206,6 @@ const CreateIndividualEvent = () => {
         <EventDetailsAdd
           availabilities={availabilities}
           eventName={eventName}
-          eventLocation={"Google Meet"}
           durationRef={durationRef}
           handleEvent={handleEvent}
           refetch={refetch}
