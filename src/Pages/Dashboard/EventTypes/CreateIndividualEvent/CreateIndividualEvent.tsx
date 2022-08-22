@@ -8,7 +8,6 @@ import Loading from "../../../../Shared/LoadingSpinner/Loading";
 import EventDetailsAdd from "../EventDetailsAdd/EventDetailsAdd";
 import { MdArrowBackIos } from "react-icons/md";
 
-
 const CreateIndividualEvent = () => {
   const [eventName, setEventName] = useState("");
   const [eventDescription, setEventDescription] = useState("");
@@ -23,9 +22,9 @@ const CreateIndividualEvent = () => {
     isLoading,
     refetch,
   } = useQuery(["availabilities", email], () =>
-    fetch(`http://localhost:5000/availability/${email}`).then((res) =>
-      res.json()
-    )
+    fetch(
+      `https://secure-chamber-99191.herokuapp.com/availability/${email}`
+    ).then((res) => res.json())
   );
   const handleNext = () => {
     setNext(true);
@@ -44,13 +43,16 @@ const CreateIndividualEvent = () => {
         eventDescription: eventDescription,
         eventDuration: eventDuration,
       };
-      fetch(`http://localhost:5000/createNewEvent/${eventId}`, {
-        method: "PUT",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(event),
-      })
+      fetch(
+        `https://secure-chamber-99191.herokuapp.com/createNewEvent/${eventId}`,
+        {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(event),
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.acknowledged) {
@@ -66,7 +68,7 @@ const CreateIndividualEvent = () => {
         eventDuration: eventDuration,
         dayData: availabilities?.dayData,
       };
-      fetch(`http://localhost:5000/createNewEvent`, {
+      fetch(`https://secure-chamber-99191.herokuapp.com/createNewEvent`, {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -117,8 +119,7 @@ const CreateIndividualEvent = () => {
                       Cancel
                     </button>
                   </Link>
-                  {eventName === "" ||
-                  eventDescription === "" ? (
+                  {eventName === "" || eventDescription === "" ? (
                     <button
                       className="px-4 py-1 rounded-full text-white bg-gray-400"
                       disabled
@@ -159,8 +160,7 @@ const CreateIndividualEvent = () => {
                     readOnly
                     defaultValue="Google Meet"
                     className="input border-blue-500 w-full max-w-sm"
-                  >
-                  </input>
+                  ></input>
                 </div>
                 <label className="label">
                   <span className="label-text">Description/Instructions</span>
@@ -182,8 +182,7 @@ const CreateIndividualEvent = () => {
                     Cancel
                   </button>
                 </Link>
-                {eventName === "" ||
-                eventDescription === "" ? (
+                {eventName === "" || eventDescription === "" ? (
                   // || eventLink === ""
                   <button
                     className="px-4 py-1 rounded-full text-white bg-gray-400"

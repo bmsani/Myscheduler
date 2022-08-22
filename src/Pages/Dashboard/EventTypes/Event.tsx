@@ -15,13 +15,16 @@ const Event = () => {
   const { events, isLoading, refetch } = GetAllEvents(email);
 
   const handleDelete = (id: string) => {
-    fetch(`http://localhost:5000/deleteEvent/${id}?email=${email}`, {
-      method: "DELETE",
-      headers: {
-        "content-type": "application/json",
-        authorization: `bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
+    fetch(
+      `https://secure-chamber-99191.herokuapp.com/deleteEvent/${id}?email=${email}`,
+      {
+        method: "DELETE",
+        headers: {
+          "content-type": "application/json",
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data?.acknowledged) {
@@ -51,7 +54,9 @@ const Event = () => {
             />
           ) : (
             <p className="w-[50px] h-[50px] rounded-full border border-primary p-1 flex justify-center items-center bg-gray-200">
-              <span className="text-8xl font-semibold uppercase">{firstLetter}</span>
+              <span className="text-3xl font-semibold uppercase">
+                {firstLetter}
+              </span>
             </p>
           )}
           <div>
