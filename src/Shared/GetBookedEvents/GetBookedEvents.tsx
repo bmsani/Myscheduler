@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
 
 const GetBookedEvents = (email: any) => {
   const {

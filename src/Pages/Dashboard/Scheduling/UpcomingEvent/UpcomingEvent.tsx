@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import moment from "moment";
 import React from "react";
 import { GoCalendar, GoDash } from "react-icons/go";
@@ -14,7 +13,7 @@ const UpcomingEvent = () => {
   const [user] = useAuthState(auth);
   const email = user?.email;
   const { bookedEvents, isLoading } = GetBookedEvents(email);
-  
+
   if (isLoading) {
     <Loading />;
   }

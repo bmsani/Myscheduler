@@ -56,6 +56,7 @@ const EventDetailsAdd = ({
   if (loading) {
     return <Loading></Loading>;
   }
+  console.log(durationRef?.current?.value);
   return (
     <div>
       <div className="mt-4">
@@ -120,11 +121,7 @@ const EventDetailsAdd = ({
               <select
                 className="select border-blue-500 w-full "
                 ref={durationRef}
-                required
               >
-                <option disabled selected>
-                  Select Your Event Duration
-                </option>
                 <option>15</option>
                 <option>30</option>
                 <option>45</option>
