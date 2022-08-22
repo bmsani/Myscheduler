@@ -8,19 +8,15 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../../init.firebase";
 import axios from "axios";
 import { toast } from "react-toastify";
+import GetBookedEvents from "../../../../Shared/GetBookedEvents/GetBookedEvents";
 
 const PastEvent = () => {
-  const [user] = useAuthState(auth);
   const today = moment(new Date()).format();
-  const {
-    data: bookedEvents,
-    isLoading,
-    refetch,
-  } = useQuery(["bookedEvents"], () =>
-    fetch(`http://localhost:5000/api/bookedEvents/${user?.email}`, {
-      method: "GET",
-    }).then((res) => res.json())
-  );
+
+  const [user] = useAuthState(auth);
+  const email = user?.email;
+  const { bookedEvents, isLoading, refetch } = GetBookedEvents(email);
+
   if (isLoading) {
     <Loading />;
   }

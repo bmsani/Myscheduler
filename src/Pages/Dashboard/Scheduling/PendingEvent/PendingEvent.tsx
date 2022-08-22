@@ -6,16 +6,15 @@ import { GoCalendar, GoDash } from "react-icons/go";
 import Loading from "../../../../Shared/LoadingSpinner/Loading";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../../init.firebase";
+import GetBookedEvents from "../../../../Shared/GetBookedEvents/GetBookedEvents";
 
 const PendingEvent = () => {
   const [user] = useAuthState(auth);
+  const email = user?.email;
+  const { bookedEvents, isLoading } = GetBookedEvents(email);
   const today = moment(new Date()).format().split("T")[0];
   const todayWithDate = moment(new Date()).format();
-  const { data: bookedEvents, isLoading } = useQuery(["bookedEvents"], () =>
-    fetch(`http://localhost:5000/api/bookedEvents/${user?.email}`, {
-      method: "GET",
-    }).then((res) => res.json())
-  );
+
   if (isLoading) {
     <Loading />;
   }
