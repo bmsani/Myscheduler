@@ -32,7 +32,7 @@ import CreateIndividualEvent from "./Pages/Dashboard/EventTypes/CreateIndividual
 import EventDetailsAdd from "./Pages/Dashboard/EventTypes/EventDetailsAdd/EventDetailsAdd";
 import Admin from "./Pages/Admin/Admin";
 import Users from "./Pages/Admin/Users/Users";
-import UserDetails from "./Pages/Admin/UserDetails/UserDetails";
+import EventDetails from "./Pages/Admin/EventDetails/EventDetails";
 import Payment from "./Pages/Payment/Payment";
 import PricingCard from "./Pages/Payment/PricingCard/PricingCard";
 import UpcomingEvent from "./Pages/Dashboard/Scheduling/UpcomingEvent/UpcomingEvent";
@@ -134,7 +134,7 @@ function App() {
           }
         >
           <Route index element={<Users></Users>}></Route>
-          <Route path="userDetails" element={<UserDetails />}></Route>
+          <Route path="userDetails" element={<EventDetails />}></Route>
         </Route>
         <Route
           path="/accountSettings"

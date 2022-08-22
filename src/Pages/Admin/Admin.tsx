@@ -18,7 +18,7 @@ const Admin: any = () => {
             <Link to="/admin">Users Details</Link>
           </li>
           <li>
-            <Link to="/admin/userDetails">User events</Link>
+            <Link to="/admin/userDetails">User Events</Link>
           </li>
         </ul>
       </div>
