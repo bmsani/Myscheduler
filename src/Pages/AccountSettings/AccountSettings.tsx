@@ -20,24 +20,12 @@ const AccountSettings: any = () => {
         <NavLink
           className={({ isActive }) =>
             isActive
-              ? "font-bold text-error border-b-2 border-b-error hover:bg-white"
+              ? "font-bold text-secondary border-b-[3px] border-b-secondary hover:bg-white"
               : ""
           }
           to="/accountSettings/branding"
         >
           Branding
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          className={({ isActive }) =>
-            isActive
-              ? "font-bold text-primary border-b-2 border-b-primary hover:bg-white"
-              : ""
-          }
-          to="/accountSettings/myLink"
-        >
-          My Link
         </NavLink>
       </li>
     </>
