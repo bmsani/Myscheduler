@@ -41,6 +41,7 @@ import PastEvent from "./Pages/Dashboard/Scheduling/PastEvent/PastEvent";
 import EventSuccessMessage from "./Pages/EventBooking/EventSuccessMessage";
 import AllEvent from "./Pages/EventBooking/AllEvent";
 import ReviewInput from "./Pages/Dashboard/ReviewInput/ReviewInput";
+import AllBookings from "./Pages/Admin/AllBookings/AllBookings";
 
 function App() {
   const [user] = useAuthState(auth);
@@ -135,6 +136,7 @@ function App() {
         >
           <Route index element={<Users></Users>}></Route>
           <Route path="userDetails" element={<EventDetails />}></Route>
+          <Route path="allBookings" element={<AllBookings />}></Route>
         </Route>
         <Route
           path="/accountSettings"

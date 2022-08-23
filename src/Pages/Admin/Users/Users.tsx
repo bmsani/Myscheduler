@@ -30,6 +30,7 @@ const Users = () => {
               <th>Email</th>
               <th>Make admin</th>
               <th>Remove user</th>
+              <th>User Details</th>
             </tr>
           </thead>
           <tbody>
