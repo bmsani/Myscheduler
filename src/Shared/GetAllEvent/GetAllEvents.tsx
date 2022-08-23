@@ -7,9 +7,7 @@ const GetAllEvents = (email: any) => {
     isLoading,
     refetch,
   } = useQuery(["events", email], () =>
-    fetch(`https://secure-chamber-99191.herokuapp.com/getEvent/${email}`).then(
-      (res) => res.json()
-    )
+    fetch(`http://localhost:5000/getEvent/${email}`).then((res) => res.json())
   );
 
   return { events, isLoading, refetch };

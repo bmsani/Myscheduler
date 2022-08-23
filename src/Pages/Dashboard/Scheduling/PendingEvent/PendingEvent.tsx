@@ -12,12 +12,9 @@ const PendingEvent = () => {
   const today = moment(new Date()).format().split("T")[0];
   const todayWithDate = moment(new Date()).format();
   const { data: bookedEvents, isLoading } = useQuery(["bookedEvents"], () =>
-    fetch(
-      `https://secure-chamber-99191.herokuapp.com/api/bookedEvents/${user?.email}`,
-      {
-        method: "GET",
-      }
-    ).then((res) => res.json())
+    fetch(`http://localhost:5000/api/bookedEvents/${user?.email}`, {
+      method: "GET",
+    }).then((res) => res.json())
   );
   if (isLoading) {
     <Loading />;

@@ -26,7 +26,7 @@ const ReviewInput = () => {
     const rating = starRating;
     const reviewInfo = { name, image, position, review, rating };
 
-    fetch(`https://secure-chamber-99191.herokuapp.com/review`, {
+    fetch(`http://localhost:5000/review`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

@@ -18,9 +18,7 @@ const Branding = () => {
     isLoading,
     refetch,
   } = useQuery(["brandLogo", user?.email], () =>
-    fetch(
-      `https://secure-chamber-99191.herokuapp.com/user/${user?.email}`
-    ).then((res) => res.json())
+    fetch(`http://localhost:5000/user/${user?.email}`).then((res) => res.json())
   );
 
   const handleImgUpload = (e: React.FormEvent<HTMLFormElement>) => {
@@ -43,17 +41,14 @@ const Branding = () => {
           const brandLogoLink = {
             brandLogo: imageUrl,
           };
-          fetch(
-            `https://secure-chamber-99191.herokuapp.com/brandLogo/${user?.email}`,
-            {
-              method: "PUT",
-              headers: {
-                "content-type": "application/json",
-                authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-              },
-              body: JSON.stringify(brandLogoLink),
-            }
-          )
+          fetch(`http://localhost:5000/brandLogo/${user?.email}`, {
+            method: "PUT",
+            headers: {
+              "content-type": "application/json",
+              authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+            body: JSON.stringify(brandLogoLink),
+          })
             .then((res) => res.json())
             .then((data) => {
               if (data.acknowledged === true) {
