@@ -17,9 +17,12 @@ const PastEvent = () => {
     isLoading,
     refetch,
   } = useQuery(["bookedEvents"], () =>
-    fetch(`http://localhost:5000/api/bookedEvents/${user?.email}`, {
-      method: "GET",
-    }).then((res) => res.json())
+    fetch(
+      `https://secure-chamber-99191.herokuapp.com/api/bookedEvents/${user?.email}`,
+      {
+        method: "GET",
+      }
+    ).then((res) => res.json())
   );
   if (isLoading) {
     <Loading />;
@@ -31,7 +34,9 @@ const PastEvent = () => {
   );
   const handleDelete = (id: string) => {
     axios
-      .delete(`http://localhost:5000/api/bookedEventDelete/${id}`)
+      .delete(
+        `https://secure-chamber-99191.herokuapp.com/api/bookedEventDelete/${id}`
+      )
       .then((response) => {
         if (response?.status === 200) {
           toast.error("Past event deleted");

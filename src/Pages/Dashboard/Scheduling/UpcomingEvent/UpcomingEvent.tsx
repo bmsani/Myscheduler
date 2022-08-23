@@ -12,9 +12,12 @@ const UpcomingEvent = () => {
   const [user] = useAuthState(auth);
   const today = moment(new Date()).format().split("T")[0];
   const { data: bookedEvents, isLoading } = useQuery(["bookedEvents"], () =>
-    fetch(`http://localhost:5000/api/bookedEvents/${user?.email}`, {
-      method: "GET",
-    }).then((res) => res.json())
+    fetch(
+      `https://secure-chamber-99191.herokuapp.com/api/bookedEvents/${user?.email}`,
+      {
+        method: "GET",
+      }
+    ).then((res) => res.json())
   );
   if (isLoading) {
     <Loading />;
