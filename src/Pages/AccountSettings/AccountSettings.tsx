@@ -28,18 +28,6 @@ const AccountSettings: any = () => {
           Branding
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          className={({ isActive }) =>
-            isActive
-              ? "font-bold text-primary border-b-2 border-b-primary hover:bg-white"
-              : ""
-          }
-          to="/accountSettings/myLink"
-        >
-          My Link
-        </NavLink>
-      </li>
     </>
   );
   return (

@@ -8,7 +8,7 @@ const useToken = (user: any) => {
     const name = user?.user?.displayName;
     const currentUser = { email: email, name: name };
     if (email) {
-      fetch(`http://localhost:5000/user/${email}`, {
+      fetch(`https://secure-chamber-99191.herokuapp.com/user/${email}`, {
         method: "PUT",
         headers: {
           "content-type": "application/json",
@@ -19,7 +19,6 @@ const useToken = (user: any) => {
         .then((data) => {
           const accessToken = data.token;
           localStorage.setItem("accessToken", accessToken);
-          console.log(data);
           setToken(accessToken);
         });
     }
@@ -110,13 +109,16 @@ const useToken = (user: any) => {
       ],
     };
     if (email) {
-      fetch(`http://localhost:5000/userAvailability/${email}`, {
-        method: "PUT",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(userAvailability),
-      })
+      fetch(
+        `https://secure-chamber-99191.herokuapp.com/userAvailability/${email}`,
+        {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(userAvailability),
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.acknowledged) {

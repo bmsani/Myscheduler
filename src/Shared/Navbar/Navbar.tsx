@@ -12,7 +12,8 @@ import useAdmin from "../../Hooks/useAdmin";
 
 const Navbar = () => {
   const [user, loading] = useAuthState(auth);
-  const [admin] = useAdmin(user);
+  const email = user?.email;
+  const {admin, isLoading} = useAdmin(email);
   const { pathname } = useLocation();
   const [colorChange, setColorChange] = useState<boolean>(false);
 
@@ -26,7 +27,7 @@ const Navbar = () => {
     }
   }, [pathname, anotherRouteColorChange]);
 
-  if (loading) {
+  if (loading || isLoading) {
     return <Loading />;
   }
 

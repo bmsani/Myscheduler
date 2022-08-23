@@ -5,23 +5,13 @@ import arrowLeft from "../../Utilities/icon/calederArrow2.png";
 import { Link } from "react-router-dom";
 import auth from "../../init.firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useQuery } from "@tanstack/react-query";
 import Loading from "../../Shared/LoadingSpinner/Loading";
+import GetUserInfo from "../../Shared/GetUserInfo/GetUserInfo";
 
 const CalenderConnection = () => {
   const [user] = useAuthState(auth);
-
-  const { data: singleUser, isLoading } = useQuery(
-    ["singleUser", user?.email],
-    () =>
-      fetch(`http://localhost:5000/user/${user?.email}`, {
-        method: "GET",
-        headers: {
-          "content-type": "application/json",
-          authorization: `bearer ${localStorage.getItem("accessToken")}`,
-        },
-      }).then((res) => res.json())
-  );
+  const email = user?.email;
+  const { userInfo, isLoading } = GetUserInfo(email);
 
   if (isLoading) {
     return <Loading />;
@@ -31,7 +21,7 @@ const CalenderConnection = () => {
       <div className="shadow border container mx-auto pb-5 mt-8">
         <div className="flex justify-between py-4 px-8">
           <h2 className="text-xl">My calender Account</h2>
-          {singleUser.refreshToken ? (
+          {userInfo.refreshToken ? (
             <button className="rounded-lg btn btn-disabled btn-md btn-outline">
               Your Google Calendar Connected
             </button>
@@ -111,7 +101,7 @@ const CalenderConnection = () => {
                 <h1 className="font-bold text-lg">Add to calendar</h1>
                 <h2 className="text-light text-xs">
                   Set the calendar you would like to add new events to as
-                  they’re scheduled.
+                  they're scheduled.
                 </h2>
               </div>
             </div>

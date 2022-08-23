@@ -1,20 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
 
-const GetAllEvents = (email: any) => {
+const GetBookedEvents = (email: any) => {
   const {
-    data: events,
+    data: bookedEvents,
     isLoading,
     refetch,
-  } = useQuery(["events", email], () =>
-    fetch(`http://localhost:5000/getEvent/${email}`, {
+  } = useQuery(["bookedEvents"], () =>
+    fetch(`http://localhost:5000/api/bookedEvents/${email}`, {
+      method: "GET",
       headers: {
         "content-type": "application/json",
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     }).then((res) => res.json())
   );
-
-  return { events, isLoading, refetch };
+  return { bookedEvents, isLoading, refetch };
 };
 
-export default GetAllEvents;
+export default GetBookedEvents;

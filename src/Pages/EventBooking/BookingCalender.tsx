@@ -8,7 +8,6 @@ import defaultImg from "../../Utilities/icon/image.png";
 import { FaArrowLeft } from "react-icons/fa";
 import { FiClock } from "react-icons/fi";
 import { AiOutlineCalendar } from "react-icons/ai";
-import Timezone from "./Timezone";
 import DatePicker from "react-datetime";
 import moment from "moment";
 import "react-datetime/css/react-datetime.css";
@@ -28,13 +27,13 @@ const BookingCalender = () => {
   const [click, setClick] = useState(false);
 
   const { data: singleEvent, isLoading } = useQuery(["singleEvent", id], () =>
-    fetch(`http://localhost:5000/getSingleEvent/${id}`, {
+    fetch(`https://secure-chamber-99191.herokuapp.com/getSingleEvent/${id}`, {
       method: "GET",
     }).then((res) => res.json())
   );
 
   useEffect(() => {
-    const url = `http://localhost:5000/user/${singleEvent?.email}`;
+    const url = `http://localhost:5000/singleUser/${singleEvent?.email}`;
     fetch(url, {
       method: "GET",
       headers: {
@@ -81,7 +80,7 @@ const BookingCalender = () => {
   const intervalStart = dayFromDB?.interval?.starting;
   const intervalEnd = dayFromDB?.interval?.ending;
   const x = {
-    nextSlot: 30,
+    nextSlot: singleEvent?.eventDuration,
     breakTime: [[intervalStart, intervalEnd]],
     startTime: start,
     endTime: end,
@@ -114,7 +113,7 @@ const BookingCalender = () => {
     const selectDate = moment(selected).format().split("T")[0];
     const startTime = moment(selectDate + " " + selectedTime).format();
     const endTime = moment(selectDate + " " + selectedTime)
-      .add(30, "minutes")
+      .add(singleEvent?.eventDuration, "minutes")
       .format();
     const startEnd = startTime + "_" + endTime;
     setStartEndTime(startEnd);
@@ -168,7 +167,7 @@ const BookingCalender = () => {
               </h1>
               <div className="flex gap-2 mt-4">
                 <FiClock className="text-2xl" />
-                <h2 className="font-bold text-gray-500">30 Minute</h2>
+                <h2 className="font-bold text-gray-500">{singleEvent?.eventDuration} Minute</h2>
               </div>
               {startTime && endTimee && (
                 <div className="flex gap-2 mt-4">
@@ -198,9 +197,6 @@ const BookingCalender = () => {
                     timeFormat={false}
                     onChange={handleDate}
                   />
-                  {/* <div className="mt-4">
-                    <Timezone />
-                  </div> */}
                 </div>
                 <div className=" col-span-1">
                   <p className="mt-2 ml-2 mb-5">{format(selected, "PP")}</p>
