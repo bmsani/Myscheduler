@@ -46,7 +46,7 @@ const Profile = () => {
             mobile: mobile,
             imageURL: imageUrl,
           };
-          const url = `http://localhost:5000/updatedUser/${user?.email}`;
+          const url = `http://localhost:5000/updatedUser/${email}`;
           fetch(url, {
             method: "PUT",
             headers: {
@@ -60,12 +60,13 @@ const Profile = () => {
               if (data.acknowledged === true) {
                 toast.success("Profile successfully updated");
                 refetch();
+                setLoading(false);
               } else {
                 toast.error("Failed to update");
                 refetch();
+                setLoading(false);
               }
             });
-          setLoading(false);
         });
     } else if (userInfo?.imageURL) {
       const updatedUser = {
@@ -74,7 +75,7 @@ const Profile = () => {
         mobile: mobile,
         imageURL: userInfo?.imageURL,
       };
-      const url = `http://localhost:5000/updatedUser/${user?.email}`;
+      const url = `http://localhost:5000/updatedUser/${email}`;
       fetch(url, {
         method: "PUT",
         headers: {
@@ -88,11 +89,12 @@ const Profile = () => {
           if (data.acknowledged === true) {
             toast.success("Profile successfully updated");
             refetch();
+            setLoading(false);
           } else {
             toast.error("Failed to update");
             refetch();
+            setLoading(false);
           }
-          setLoading(false);
         });
     } else {
       const updatedUser = {
@@ -100,7 +102,7 @@ const Profile = () => {
         message: message,
         mobile: mobile,
       };
-      const url = `http://localhost:5000/updatedUser/${user?.email}`;
+      const url = `http://localhost:5000/updatedUser/${email}`;
       fetch(url, {
         method: "PUT",
         headers: {
@@ -114,11 +116,12 @@ const Profile = () => {
           if (data.acknowledged === true) {
             toast.success("Profile successfully updated");
             refetch();
+            setLoading(false);
           } else {
             toast.error("Failed to update");
             refetch();
+            setLoading(false);
           }
-          setLoading(false);
         });
     }
   };
@@ -213,7 +216,7 @@ const Profile = () => {
         </div>
         <div className="flex justify-between gap-5">
           {loading ? (
-            <ButtonSpinner/>
+            <ButtonSpinner />
           ) : (
             <input
               className="bg-primary py-2 px-4 rounded-lg text-white hover:shadow-md hover:shadow-secondary duration-300 cursor-pointer"

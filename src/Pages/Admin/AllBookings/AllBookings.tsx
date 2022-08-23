@@ -30,7 +30,7 @@ const AllBookings = () => {
             </tr>
           </thead>
           <tbody>
-            {allBookedEvents.map((event: any, index: number) => (
+            {allBookedEvents?.map((event: any, index: number) => (
               <AllBookingRow
                 key={event._id}
                 event={event}

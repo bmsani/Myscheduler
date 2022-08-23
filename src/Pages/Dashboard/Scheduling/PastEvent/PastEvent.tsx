@@ -42,7 +42,7 @@ const PastEvent = () => {
   return (
     <div>
       {pastEvents?.length ? (
-        <div className="grid grid-cols-2 gap-8 p-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8">
           {pastEvents?.map((event: any) => (
             <div className="text-primary card shadow-2xl">
               <div className="p-3 flex justify-between border bg-blue-200">
@@ -57,7 +57,7 @@ const PastEvent = () => {
                 </div>
               </div>
               <div className="p-4">
-                <div className="text-lg">
+                <div>
                   <div className="flex items-baseline justify-between gap-4">
                     <div className="w-1/2">
                       <p className="font-bold">Invitee Name</p>

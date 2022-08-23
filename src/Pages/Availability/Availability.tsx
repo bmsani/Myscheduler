@@ -6,6 +6,7 @@ import auth from "../../init.firebase";
 import Loading from "../../Shared/LoadingSpinner/Loading";
 import IntervalEdit from "./IntervalEdit/IntervalEdit";
 import AvailabilityEdit from "./AvailabilityEdit/AvailabilityEdit";
+import GetUserAvailablity from "../../Shared/GetUserAvailablity/GetUserAvailablity";
 
 type UserDays = {
   id: "string";
@@ -26,21 +27,11 @@ const Availability = () => {
 
   const email = user?.email;
 
-  const {
-    data: days,
-    isLoading,
-    refetch,
-  } = useQuery(["days", email], () =>
-    fetch(`http://localhost:5000/availability/${email}`, {
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    }).then((res) => res.json())
-  );
+  const {availabilities, isLoading, refetch} = GetUserAvailablity(email)
+
 
   const handleCheckedBox = (id: string, checkedBox: boolean) => {
-    const daysId = days._id;
+    const daysId = availabilities._id;
     const individualId = id;
     fetch(
       `http://localhost:5000/availability/checked/${daysId}?dayStatus=${!checkedBox}&dayDataId=${individualId}&email=${email}`,
@@ -101,7 +92,7 @@ const Availability = () => {
                 </tr>
               </thead>
               <tbody>
-                {days?.dayData?.map((day: UserDays) => (
+                {availabilities?.dayData?.map((day: UserDays) => (
                   <tr key={day.id} className="hover">
                     <th>
                       <label>
@@ -132,11 +123,11 @@ const Availability = () => {
                         <label htmlFor="edit-modal">
                           <BiEdit
                             className="text-5xl p-3 cursor-pointer text-center"
-                            onClick={() => handleEdit(days._id, day.id)}
+                            onClick={() => handleEdit(availabilities._id, day.id)}
                           />
                           <AvailabilityEdit
                             singleDay={singleDay}
-                            days={days._id}
+                            days={availabilities._id}
                             refetch={refetch}
                           />
                         </label>
@@ -153,12 +144,12 @@ const Availability = () => {
                       {day.checked && (
                         <label htmlFor="add-modal">
                           <BiMessageSquareEdit
-                            onClick={() => handleAdd(days._id, day.id)}
+                            onClick={() => handleAdd(availabilities._id, day.id)}
                             className="text-5xl p-3 cursor-pointer"
                           />
                           <IntervalEdit
                             singleDay={singleDay}
-                            days={days._id}
+                            days={availabilities._id}
                             refetch={refetch}
                           />
                         </label>

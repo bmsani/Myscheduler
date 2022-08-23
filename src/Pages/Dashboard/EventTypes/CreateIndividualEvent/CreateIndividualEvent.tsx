@@ -7,7 +7,7 @@ import auth from "../../../../init.firebase";
 import Loading from "../../../../Shared/LoadingSpinner/Loading";
 import EventDetailsAdd from "../EventDetailsAdd/EventDetailsAdd";
 import { MdArrowBackIos } from "react-icons/md";
-
+import GetUserAvailablity from "../../../../Shared/GetUserAvailablity/GetUserAvailablity";
 
 const CreateIndividualEvent = () => {
   const [eventName, setEventName] = useState("");
@@ -18,15 +18,8 @@ const CreateIndividualEvent = () => {
   const [user] = useAuthState(auth);
   const email = user?.email;
 
-  const {
-    data: availabilities,
-    isLoading,
-    refetch,
-  } = useQuery(["availabilities", email], () =>
-    fetch(`http://localhost:5000/availability/${email}`).then((res) =>
-      res.json()
-    )
-  );
+  const {availabilities, isLoading, refetch} = GetUserAvailablity(email)
+  
   const handleNext = () => {
     setNext(true);
   };
@@ -82,6 +75,7 @@ const CreateIndividualEvent = () => {
         });
     }
   };
+  console.log(availabilities);
   return (
     <div>
       {!next ? (
@@ -118,8 +112,7 @@ const CreateIndividualEvent = () => {
                       Cancel
                     </button>
                   </Link>
-                  {eventName === "" ||
-                  eventDescription === "" ? (
+                  {eventName === "" || eventDescription === "" ? (
                     <button
                       className="px-4 py-1 rounded-full text-white bg-gray-400"
                       disabled
@@ -160,8 +153,7 @@ const CreateIndividualEvent = () => {
                     readOnly
                     defaultValue="Google Meet"
                     className="input border-blue-500 w-full max-w-sm"
-                  >
-                  </input>
+                  ></input>
                 </div>
                 <label className="label">
                   <span className="label-text">Description/Instructions</span>
@@ -183,8 +175,7 @@ const CreateIndividualEvent = () => {
                     Cancel
                   </button>
                 </Link>
-                {eventName === "" ||
-                eventDescription === "" ? (
+                {eventName === "" || eventDescription === "" ? (
                   <button
                     className="px-4 py-1 rounded-full text-white bg-gray-400"
                     disabled
