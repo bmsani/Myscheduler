@@ -26,7 +26,7 @@ const ReviewInput = () => {
     const rating = starRating;
     const reviewInfo = { name, image, position, review, rating };
 
-    fetch(`http://localhost:5000/review`, {
+    fetch(`https://secure-chamber-99191.herokuapp.com/review`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -81,7 +81,7 @@ const ReviewInput = () => {
         </div>
 
         <div className="mt-4 flex gap-1">
-          {[...Array(5)].map((star, i) => {
+          {[...Array(5)]?.map((star, i) => {
             const ratingValue: any = i + 1;
             return (
               <label>

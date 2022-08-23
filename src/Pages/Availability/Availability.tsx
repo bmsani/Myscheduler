@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { BiMessageSquareEdit, BiEdit } from "react-icons/bi";

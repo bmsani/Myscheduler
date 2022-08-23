@@ -13,7 +13,6 @@ const PendingEvent = () => {
   const { bookedEvents, isLoading } = GetBookedEvents(email);
   const today = moment(new Date()).format().split("T")[0];
   const todayWithDate = moment(new Date()).format();
-
   if (isLoading) {
     <Loading />;
   }

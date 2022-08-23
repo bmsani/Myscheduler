@@ -27,7 +27,7 @@ const BookingCalender = () => {
   const [click, setClick] = useState(false);
 
   const { data: singleEvent, isLoading } = useQuery(["singleEvent", id], () =>
-    fetch(`http://localhost:5000/getSingleEvent/${id}`, {
+    fetch(`https://secure-chamber-99191.herokuapp.com/getSingleEvent/${id}`, {
       method: "GET",
     }).then((res) => res.json())
   );
