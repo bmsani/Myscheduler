@@ -26,9 +26,13 @@ const BlogCart = ({ blog, index }: blogInfo) => {
           : "border border-primary rounded-lg cursor-pointer hover:shadow-primary hover:shadow-md duration-300"
       }
     >
-      <img src={blogImg} className="h-[250px] object-cover w-full rounded-t-lg" alt="" />
+      <img
+        src={blogImg}
+        className="h-[250px] object-cover w-full rounded-t-lg"
+        alt=""
+      />
       <div className="p-5">
-        <p className="font-bold text-3xl text-secondary" aria-label="Article">
+        <p className="font-bold text-3xl text-primary" aria-label="Article">
           {title}
         </p>
         <p className="text-sm text-gray-500 mt-2">

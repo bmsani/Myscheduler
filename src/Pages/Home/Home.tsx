@@ -11,7 +11,7 @@ import Footer from "../../Shared/Footer/Footer";
 const Home = () => {
   return (
     <div>
-      <div className="mx-auto px-1 md:px-5 lg:px-20 max-w-[1400px]">
+      <div className="mx-auto px-2 md:px-5 lg:px-20 max-w-[1400px]">
         <Hero></Hero>
         <Steps></Steps>
         <PowerfulFeatures />

@@ -132,10 +132,10 @@ const Navbar = () => {
   return (
     <div className={nav === true ? "sticky top-0 z-50" : ""}>
       {user ? (
-        <div className="navbar bg-base-100 shadow-xl px-4">
-          <div className="container mx-auto">
-            <div className="flex-1 hidden md:block">
-              <div className="w-3/4 lg:w-1/2 md:w-3/5 lg:justify-start justify-between">
+        <div className=" bg-base-100 shadow-lg lg:px-4">
+          <div className="navbar mx-auto max-w-[1400px]">
+            <div className="flex-1 hidden lg:block">
+              <div className="w-3/4 lg:w-1/2 md:w-3/5 justify-start">
                 <Link className="normal-case text-xl" to="/dashboard">
                   <span className="flex items-end lg:items-center">
                     <img className="w-10" src={Logo} alt="" />
@@ -147,11 +147,14 @@ const Navbar = () => {
               </div>
             </div>
             <div className="flex-none">
-              <ul className="menu menu-horizontal p-0">
-                <li>
+              <ul className="menu menu-horizontal w-full p-0 flex items-center justify-between">
+                <p>
                   {pathname === "/dashboard" ||
                   pathname === "/dashboard/scheduling" ||
                   pathname === "/dashboard/workflow" ||
+                  pathname === "/dashboard/scheduling/upcomingEvent" ||
+                  pathname === "/dashboard/scheduling/pendingEvent" ||
+                  pathname === "/dashboard/scheduling/pastEvent" ||
                   pathname === "/dashboard/reviewInput" ? (
                     <label
                       htmlFor="my-drawer-2"
@@ -167,80 +170,100 @@ const Navbar = () => {
                       <HiMenu className="text-2xl" />
                     </label>
                   )}
-                </li>
-                <li>
-                  <Link className="px-1 md:px-4 font-semibold" to="/dashboard">
-                    Dashboard
-                  </Link>
-                </li>
-                {admin && (
+                </p>
+                <div className="flex items-center gap-5">
+                  <p>
+                    <NavLink
+                      className={({ isActive }) =>
+                        isActive
+                          ? "text-secondary font-medium"
+                          : "text-primary font-medium hover:text-secondary"
+                      }
+                      to="/dashboard"
+                    >
+                      Dashboard
+                    </NavLink>
+                  </p>
+                  {admin && (
+                    <p>
+                      <NavLink
+                        className={({ isActive }) =>
+                          isActive
+                            ? "text-secondary font-medium"
+                            : "text-primary font-medium hover:text-secondary"
+                        }
+                        to="/admin"
+                      >
+                        Admin
+                      </NavLink>
+                    </p>
+                  )}
+                  <p>
+                    <NavLink
+                      className={({ isActive }) =>
+                        isActive
+                          ? "text-secondary font-medium"
+                          : "text-primary font-medium hover:text-secondary"
+                      }
+                      to="/availability"
+                    >
+                      Availability
+                    </NavLink>
+                  </p>
                   <li>
-                    <Link className="px-1 md:px-4 font-semibold" to="/admin">
-                      Admin
-                    </Link>
+                    <div className="dropdown dropdown-end">
+                      <label
+                        tabIndex={0}
+                        className="cursor-pointer flex justify-center items-center gap-2"
+                      >
+                        <BiDownArrow />
+                        <div className="w-8 rounded-full ">
+                          <p className="w-full rounded-full border border-primary p-1 flex justify-center items-center bg-gray-200">
+                            <span className="text-md font-semibold">
+                              {firstLetter}
+                            </span>
+                          </p>
+                        </div>
+                      </label>
+                      <ul
+                        tabIndex={0}
+                        className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 mt-40"
+                      >
+                        <li>
+                          <Link
+                            to="/accountSettings/profile"
+                            className="w-full font-semibold"
+                          >
+                            Account setting
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/calenderConnection"
+                            className="w-full font-semibold"
+                          >
+                            Calender Connections
+                          </Link>
+                        </li>
+                        <li>
+                          <button
+                            className="w-full font-semibold"
+                            onClick={handleSignOut}
+                          >
+                            Logout
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
                   </li>
-                )}
-                <li>
-                  <Link
-                    className="px-1 md:px-4 font-semibold"
-                    to="/availability"
-                  >
-                    Availability
-                  </Link>
-                </li>
-                <li>
-                  <div className="dropdown dropdown-end">
-                    <label
-                      tabIndex={0}
-                      className="cursor-pointer flex justify-center items-center gap-2"
-                    >
-                      <BiDownArrow />
-                      <div className="w-8 rounded-full ">
-                        <p className="w-full rounded-full border border-primary p-1 flex justify-center items-center bg-gray-200">
-                          <span className="text-md font-semibold">
-                            {firstLetter}
-                          </span>
-                        </p>
-                      </div>
-                    </label>
-                    <ul
-                      tabIndex={0}
-                      className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 mt-40"
-                    >
-                      <li>
-                        <Link
-                          to="/accountSettings/profile"
-                          className="w-full font-semibold"
-                        >
-                          Account setting
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          to="/calenderConnection"
-                          className="w-full font-semibold"
-                        >
-                          Calender Connections
-                        </Link>
-                      </li>
-                      <li>
-                        <button
-                          className="w-full font-semibold"
-                          onClick={handleSignOut}
-                        >
-                          Logout
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
-                </li>
+                </div>
               </ul>
             </div>
           </div>
         </div>
       ) : (
         <div className={y === 0 ? "bg-white" : "bg-white shadow-md"}>
-          <div className="navbar text-black py-4  mx-auto px-2 md:px-5 lg:px-20 max-w-[1400px] ">
+          <div className="navbar text-primary py-4  mx-auto px-2 md:px-5 lg:px-20 max-w-[1400px] ">
             <div className="w-3/4 lg:w-1/2 md:w-3/5 lg:justify-start justify-between">
               <Link className="normal-case text-xl" to="/">
                 <span className="flex items-end lg:items-center">

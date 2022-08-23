@@ -1,20 +1,8 @@
 import { Link } from "react-router-dom";
-import group from "../../../../Utilities/icon/group-call.png";
 import single from "../../../../Utilities/icon/single-call.png";
 import { MdArrowBackIos } from "react-icons/md";
-import GetUserInfo from "../../../../Shared/GetUserInfo/GetUserInfo";
-import Loading from "../../../../Shared/LoadingSpinner/Loading";
-import auth from "../../../../init.firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
-
 
 const CreateEventType = () => {
-  const [user] = useAuthState(auth);
-  const email = user?.email;
-  const { userInfo, isLoading } = GetUserInfo(email);
-  if (isLoading) {
-    return <Loading />;
-  }
   return (
     <div>
       <div className="flex items-center justify-between my-4 mx-4 lg:mx-40 ">
