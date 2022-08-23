@@ -33,7 +33,7 @@ const BookingCalender = () => {
   );
 
   useEffect(() => {
-    const url = `http://localhost:5000/user/${singleEvent?.email}`;
+    const url = `http://localhost:5000/singleUser/${singleEvent?.email}`;
     fetch(url, {
       method: "GET",
       headers: {
@@ -49,7 +49,6 @@ const BookingCalender = () => {
   const backButton = () => {
     setClick(false);
   };
-  console.log(singleEvent);
 
   const dayFromCalendar = format(selected, "PPPPP").split(",")[0].slice(0, 3);
   const dayFromDB = singleEvent?.dayData?.find(

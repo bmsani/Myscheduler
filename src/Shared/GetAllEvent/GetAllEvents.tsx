@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
 
 const GetAllEvents = (email: any) => {
   const {
@@ -7,7 +6,12 @@ const GetAllEvents = (email: any) => {
     isLoading,
     refetch,
   } = useQuery(["events", email], () =>
-    fetch(`http://localhost:5000/getEvent/${email}`).then((res) => res.json())
+    fetch(`http://localhost:5000/getEvent/${email}`, {
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }).then((res) => res.json())
   );
 
   return { events, isLoading, refetch };

@@ -31,9 +31,12 @@ const Availability = () => {
     isLoading,
     refetch,
   } = useQuery(["days", email], () =>
-    fetch(`http://localhost:5000/availability/${email}`).then((res) =>
-      res.json()
-    )
+    fetch(`http://localhost:5000/availability/${email}`, {
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }).then((res) => res.json())
   );
 
   const handleCheckedBox = (id: string, checkedBox: boolean) => {

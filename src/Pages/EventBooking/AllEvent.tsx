@@ -1,16 +1,24 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import GetAllEvents from "../../Shared/GetAllEvent/GetAllEvents";
-import GetUserInfo from "../../Shared/GetUserInfo/GetUserInfo";
 import Loading from "../../Shared/LoadingSpinner/Loading";
 import { Link } from "react-router-dom";
 import { BsCircleFill } from "react-icons/bs";
 import { AiFillCaretRight } from "react-icons/ai";
+import { useQuery } from "@tanstack/react-query";
+import GetUserForInvitee from "../../Shared/GetUserForInvitee/GetUserForInvitee";
 
 const AllEvent = () => {
   const { email } = useParams();
-  const { events } = GetAllEvents(email);
-  const { userInfo, isLoading, refetch } = GetUserInfo(email);
+  const { singleUser } = GetUserForInvitee(email);
+
+  const { data: events, isLoading } = useQuery(["events", email], () =>
+    fetch(`http://localhost:5000/getUserEvents/${email}`, {
+      headers: {
+        "content-type": "application/json",
+      },
+    }).then((res) => res.json())
+  );
+
   if (isLoading) {
     return <Loading />;
   }
@@ -24,7 +32,7 @@ const AllEvent = () => {
           </div>
         </div>
         <div className="text-center text-gray-500 pt-6">
-          <h3 className="font-semibold text-lg pb-8">{userInfo?.name}</h3>
+          <h3 className="font-semibold text-lg pb-8">{singleUser?.name}</h3>
           <p className="w-72 mx-auto">
             Welcome to my scheduling page. Please follow the instructions to add
             an event to my calendar.

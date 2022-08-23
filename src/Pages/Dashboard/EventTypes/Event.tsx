@@ -51,7 +51,7 @@ const Event = () => {
             />
           ) : (
             <p className="w-[50px] h-[50px] rounded-full border border-primary p-1 flex justify-center items-center bg-gray-200">
-              <span className="text-8xl font-semibold uppercase">{firstLetter}</span>
+              <span className="text-3xl font-semibold uppercase">{firstLetter}</span>
             </p>
           )}
           <div>

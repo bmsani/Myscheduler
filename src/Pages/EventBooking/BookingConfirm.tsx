@@ -59,7 +59,18 @@ const BookingConfirm = ({
       .then((response) => {
         if (response.status === 200) {
           axios
-            .post("http://localhost:5000/api/createConfirmEvent", confirmEvent)
+            .post(
+              "http://localhost:5000/api/createConfirmEvent",
+              confirmEvent,
+              {
+                headers: {
+                  "content-type": "application/json",
+                  authorization: `Bearer ${localStorage.getItem(
+                    "accessToken"
+                  )}`,
+                },
+              }
+            )
             .then((response) => {
               event.target.reset();
               navigate("/eventSuccessMessage");
