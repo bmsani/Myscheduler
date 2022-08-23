@@ -13,14 +13,17 @@ const IntervalEdit = ({ singleDay, days, refetch }: any) => {
       ending: ending,
     };
     console.log(intervalValue);
-    fetch(`http://localhost:5000/editInterval/${days}/${id}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-        // authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-      body: JSON.stringify(intervalValue),
-    })
+    fetch(
+      `https://secure-chamber-99191.herokuapp.com/editInterval/${days}/${id}`,
+      {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+          // authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+        body: JSON.stringify(intervalValue),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount) {

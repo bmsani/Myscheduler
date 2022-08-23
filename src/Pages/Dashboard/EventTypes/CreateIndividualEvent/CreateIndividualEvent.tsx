@@ -22,9 +22,9 @@ const CreateIndividualEvent = () => {
     isLoading,
     refetch,
   } = useQuery(["availabilities", email], () =>
-    fetch(`http://localhost:5000/availability/${email}`).then((res) =>
-      res.json()
-    )
+    fetch(
+      `https://secure-chamber-99191.herokuapp.com/availability/${email}`
+    ).then((res) => res.json())
   );
   const handleNext = () => {
     setNext(true);
@@ -43,13 +43,16 @@ const CreateIndividualEvent = () => {
         eventDescription: eventDescription,
         eventDuration: eventDuration,
       };
-      fetch(`http://localhost:5000/createNewEvent/${eventId}`, {
-        method: "PUT",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(event),
-      })
+      fetch(
+        `https://secure-chamber-99191.herokuapp.com/createNewEvent/${eventId}`,
+        {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(event),
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.acknowledged) {
@@ -65,7 +68,7 @@ const CreateIndividualEvent = () => {
         eventDuration: eventDuration,
         dayData: availabilities?.dayData,
       };
-      fetch(`http://localhost:5000/createNewEvent`, {
+      fetch(`https://secure-chamber-99191.herokuapp.com/createNewEvent`, {
         method: "POST",
         headers: {
           "content-type": "application/json",

@@ -28,13 +28,13 @@ const BookingCalender = () => {
   const [click, setClick] = useState(false);
 
   const { data: singleEvent, isLoading } = useQuery(["singleEvent", id], () =>
-    fetch(`http://localhost:5000/getSingleEvent/${id}`, {
+    fetch(`https://secure-chamber-99191.herokuapp.com/getSingleEvent/${id}`, {
       method: "GET",
     }).then((res) => res.json())
   );
 
   useEffect(() => {
-    const url = `http://localhost:5000/user/${singleEvent?.email}`;
+    const url = `https://secure-chamber-99191.herokuapp.com/user/${singleEvent?.email}`;
     fetch(url, {
       method: "GET",
       headers: {
