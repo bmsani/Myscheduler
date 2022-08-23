@@ -23,7 +23,7 @@ const EventDetailsAdd = ({
   const handleCheckedBox = (id: string, checkedBox: boolean) => {
     const daysId = availabilities._id;
     fetch(
-      `http://localhost:5000/customAvailability/checked/${daysId}?dayStatus=${!checkedBox}&dayDataId=${id}&email=${email}`,
+      `https://secure-chamber-99191.herokuapp.com/customAvailability/checked/${daysId}?dayStatus=${!checkedBox}&dayDataId=${id}&email=${email}`,
       {
         method: "PUT",
         headers: {
@@ -37,7 +37,9 @@ const EventDetailsAdd = ({
       .then((data) => {
         if (data?.eventID) {
           setEventId(data?.eventID);
-          fetch(`http://localhost:5000/customAvailability/${data?.eventID}`)
+          fetch(
+            `https://secure-chamber-99191.herokuapp.com/customAvailability/${data?.eventID}`
+          )
             .then((res) => res.json())
             .then((data) => {
               setEventAvailability(data);
@@ -46,7 +48,9 @@ const EventDetailsAdd = ({
         }
         if (data?.eventId) {
           setEventId(data?.eventId);
-          fetch(`http://localhost:5000/customAvailability/${data?.eventId}`)
+          fetch(
+            `https://secure-chamber-99191.herokuapp.com/customAvailability/${data?.eventId}`
+          )
             .then((res) => res.json())
             .then((data) => {
               setEventAvailability(data);
