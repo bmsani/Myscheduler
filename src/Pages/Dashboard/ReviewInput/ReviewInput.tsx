@@ -81,7 +81,7 @@ const ReviewInput = () => {
         </div>
 
         <div className="mt-4 flex gap-1">
-          {[...Array(5)].map((star, i) => {
+          {[...Array(5)]?.map((star, i) => {
             const ratingValue: any = i + 1;
             return (
               <label>

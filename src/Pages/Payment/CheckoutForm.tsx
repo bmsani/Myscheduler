@@ -1,7 +1,7 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Loading from "../../Shared/LoadingSpinner/Loading";
+import ButtonSpinner from "../../Shared/ButtonSpinner/ButtonSpinner";
 
 const CheckoutForm = ({ userInfo }: any) => {
   const stripe: any = useStripe();
@@ -108,13 +108,19 @@ const CheckoutForm = ({ userInfo }: any) => {
             },
           }}
         />
-        <button
-          className="bg-blue-500 text-white px-5 py-2 rounded mt-5"
-          type="submit"
-          disabled={!stripe || !clientSecret}
-        >
-          Pay
-        </button>
+        <div className="mt-5">
+          {processing ? (
+            <ButtonSpinner />
+          ) : (
+            <button
+              className="bg-blue-500 text-white px-5 py-2 rounded"
+              type="submit"
+              disabled={!stripe || !clientSecret}
+            >
+              Pay
+            </button>
+          )}
+        </div>
       </form>
       {cardError && <p className="text-error">{cardError}</p>}
       {success && (

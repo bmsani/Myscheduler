@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import Loading from "../../../Shared/LoadingSpinner/Loading";
 
-const UserDetails = () => {
+const EventDetails = () => {
   const { data: event, isLoading } = useQuery(["event"], () =>
     fetch("http://localhost:5000/getAllEvent").then((res) => res.json())
   );
@@ -38,4 +38,4 @@ const UserDetails = () => {
   );
 };
 
-export default UserDetails;
+export default EventDetails;

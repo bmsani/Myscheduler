@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import moment from "moment";
 import React from "react";
 import { FcOvertime } from "react-icons/fc";
@@ -6,16 +5,14 @@ import { GoCalendar, GoDash } from "react-icons/go";
 import Loading from "../../../../Shared/LoadingSpinner/Loading";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../../init.firebase";
+import GetBookedEvents from "../../../../Shared/GetBookedEvents/GetBookedEvents";
 
 const PendingEvent = () => {
   const [user] = useAuthState(auth);
+  const email = user?.email;
+  const { bookedEvents, isLoading } = GetBookedEvents(email);
   const today = moment(new Date()).format().split("T")[0];
   const todayWithDate = moment(new Date()).format();
-  const { data: bookedEvents, isLoading } = useQuery(["bookedEvents"], () =>
-    fetch(`http://localhost:5000/api/bookedEvents/${user?.email}`, {
-      method: "GET",
-    }).then((res) => res.json())
-  );
   if (isLoading) {
     <Loading />;
   }
@@ -28,7 +25,7 @@ const PendingEvent = () => {
   return (
     <div>
       {pendingEvents?.length ? (
-        <div className="grid grid-cols-2 gap-8 p-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8">
           {pendingEvents?.map((event: any) => (
             <div className="text-primary card shadow-2xl">
               <div className="p-3 flex justify-between border bg-blue-200">
@@ -43,7 +40,7 @@ const PendingEvent = () => {
                 </div>
               </div>
               <div className="p-4">
-                <div className="text-lg">
+                <div>
                   <div className="flex items-baseline justify-between gap-4">
                     <div className="w-1/2">
                       <p className="font-bold">Invitee Name</p>

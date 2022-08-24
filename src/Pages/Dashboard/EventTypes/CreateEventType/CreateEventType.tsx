@@ -1,25 +1,29 @@
 import { Link } from "react-router-dom";
 import single from "../../../../Utilities/icon/single-call.png";
 import { MdArrowBackIos } from "react-icons/md";
+import ButtonOutline from "../../../../Shared/Button/ButtonOutline";
+import Button from "../../../../Shared/Button/Button";
 
 const CreateEventType = () => {
   return (
-    <div>
-      <div className="flex items-center justify-between my-4 mx-4 lg:mx-40 ">
+    <div className="mx-auto px-2 md:px-5 lg:px-20 max-w-[1400px]">
+      <div className="flex items-center justify-between my-4 py-8">
         <div>
           <Link to="/dashboard">
-            <button className=" border-blue-400 text-blue-500 flex items-center justify-center md:border rounded-full py-2 md:px-6 text-xl lg:text-lg">
-              <MdArrowBackIos />
-              <span className="hidden md:block">Back</span>
-            </button>
+            <ButtonOutline>
+              <div className="flex items-center">
+                <MdArrowBackIos />
+                <span className="hidden md:block">Back</span>
+              </div>
+            </ButtonOutline>
           </Link>
         </div>
         <div>
-          <h2 className="text-lg">Create New Event Type</h2>
+          <h2 className="text-lg">Create New Event</h2>
         </div>
       </div>
-      <div className="bg-gray-100 pt-2 pb-20">
-        <div className="md:flex items-center justify-between mx-4 lg:mx-40 mt-12">
+      <div className="bg-gray-100 pt-2 pb-20 rounded-lg">
+        <div className="md:flex items-center justify-between mx-5 mt-12 py-10">
           <div>
             <div className="flex items-center">
               <div>
@@ -35,9 +39,9 @@ const CreateEventType = () => {
           </div>
           <div>
             <Link to="/CreateIndividualEvent">
-              <button className="bg-blue-500 text-white px-7 py-3 mt-3 w-full md:mt-0 rounded-full">
-                Create
-              </button>
+              <Button>
+                <span>Create</span>
+              </Button>
             </Link>
           </div>
         </div>

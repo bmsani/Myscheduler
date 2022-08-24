@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { BiMessageSquareEdit, BiEdit } from "react-icons/bi";
 import { MdArrowBackIos } from "react-icons/md";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../../init.firebase";
@@ -8,7 +7,6 @@ import Loading from "../../../../Shared/LoadingSpinner/Loading";
 
 const EventDetailsAdd = ({
   eventName,
-  eventLocation,
   availabilities,
   refetch,
   setEventId,
@@ -58,6 +56,7 @@ const EventDetailsAdd = ({
   if (loading) {
     return <Loading></Loading>;
   }
+  console.log(durationRef?.current?.value);
   return (
     <div>
       <div className="mt-4">
@@ -84,7 +83,7 @@ const EventDetailsAdd = ({
             <h2 className="text-l font-light">What event is this?</h2>
             <h2 className="text-sm font-light">
               {eventName ? eventName : "No name given"},&nbsp;
-              {eventLocation ? eventLocation : "No location given"}
+              {"Google Meet"}
             </h2>
           </div>
         </div>
@@ -119,13 +118,15 @@ const EventDetailsAdd = ({
               <label className="label">
                 <span className="label-text font-bold">Duration</span>
               </label>
-              <input
-                type="number"
-                value={30}
-                readOnly
-                className="input border-blue-500 w-full "
+              <select
+                className="select border-blue-500 w-full "
                 ref={durationRef}
-              />
+              >
+                <option>15</option>
+                <option>30</option>
+                <option>45</option>
+                <option>60</option>
+              </select>
             </div>
             <div className="mt-10">
               <p className="text-md font-semibold">

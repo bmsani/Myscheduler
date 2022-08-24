@@ -12,7 +12,9 @@ import ButtonOutline from "../Button/ButtonOutline";
 import "./Navbar.css";
 const Navbar = () => {
   const [user, loading] = useAuthState(auth);
-  const [admin] = useAdmin(user);
+  const email = user?.email;
+  const { admin, isLoading } = useAdmin(email);
+  console.log(admin);
   const { pathname } = useLocation();
 
   const [nav, setNev] = useState(false);
@@ -36,8 +38,6 @@ const Navbar = () => {
     };
   }, [y]);
 
-  console.log(y);
-
   const [anotherRouteColorChange, setAnotherRouteColorChange] =
     useState<boolean>(false);
   useEffect(() => {
@@ -48,7 +48,7 @@ const Navbar = () => {
     }
   }, [pathname, anotherRouteColorChange]);
 
-  if (loading) {
+  if (loading || isLoading) {
     return <Loading />;
   }
 
@@ -139,9 +139,6 @@ const Navbar = () => {
                 <Link className="normal-case text-xl" to="/dashboard">
                   <span className="flex items-end lg:items-center">
                     <img className="w-10" src={Logo} alt="" />
-                    <span className="font-bold text-secondary pl-4 hidden lg:block">
-                      MyScheduler
-                    </span>
                   </span>
                 </Link>
               </div>
@@ -184,7 +181,7 @@ const Navbar = () => {
                       Dashboard
                     </NavLink>
                   </p>
-                  {admin && (
+                  {admin?.admin && (
                     <p>
                       <NavLink
                         className={({ isActive }) =>

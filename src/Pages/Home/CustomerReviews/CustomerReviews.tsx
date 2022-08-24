@@ -48,7 +48,7 @@ const CustomerReviews = () => {
       </h2>
       <div>
         <Slider {...settings}>
-          {reviews.map(
+          {reviews?.map(
             (review: {
               name: string;
               position: string;

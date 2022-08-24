@@ -139,7 +139,7 @@ const Register: React.FC = () => {
               </p>
               <input
                 type="submit"
-                className="rounded-full text-white hover:bg-primary bg-secondary shadow-lg  duration-300 cursor-pointer mt-4 p-2 text-1xl"
+                className="rounded-full text-white hover:bg-[#3825b1] bg-secondary shadow-lg  duration-300 cursor-pointer mt-4 p-2 text-1xl"
                 value="Register"
               />
             </form>
