@@ -17,8 +17,8 @@ const CreateIndividualEvent = () => {
   const [user] = useAuthState(auth);
   const email = user?.email;
 
-  const {availabilities, isLoading, refetch} = GetUserAvailablity(email)
-  
+  const { availabilities, isLoading, refetch } = GetUserAvailablity(email);
+
   const handleNext = () => {
     setNext(true);
   };
@@ -36,16 +36,13 @@ const CreateIndividualEvent = () => {
         eventDescription: eventDescription,
         eventDuration: eventDuration,
       };
-      fetch(
-        `https://secure-chamber-99191.herokuapp.com/createNewEvent/${eventId}`,
-        {
-          method: "PUT",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(event),
-        }
-      )
+      fetch(`http://localhost:5000/createNewEvent/${eventId}`, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(event),
+      })
         .then((res) => res.json())
         .then((data) => {
           if (data.acknowledged) {
@@ -61,7 +58,7 @@ const CreateIndividualEvent = () => {
         eventDuration: eventDuration,
         dayData: availabilities?.dayData,
       };
-      fetch(`https://secure-chamber-99191.herokuapp.com/createNewEvent`, {
+      fetch(`http://localhost:5000/createNewEvent`, {
         method: "POST",
         headers: {
           "content-type": "application/json",

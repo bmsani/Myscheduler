@@ -9,7 +9,7 @@ const UserRow = ({ user, refetch, index }: any) => {
   const [openModal, setOpenModal] = useState("");
   const { userInfo, isLoading } = GetUserInfo(email);
   const makeAdmin = () => {
-    fetch(`https://secure-chamber-99191.herokuapp.com/user/admin/${email}`, {
+    fetch(`http://localhost:5000/user/admin/${email}`, {
       method: "PUT",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -30,7 +30,7 @@ const UserRow = ({ user, refetch, index }: any) => {
   };
 
   const removeUser = (id: string) => {
-    fetch(`https://secure-chamber-99191.herokuapp.com/removeUser/${email}`, {
+    fetch(`http://localhost:5000/removeUser/${email}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",
@@ -77,7 +77,11 @@ const UserRow = ({ user, refetch, index }: any) => {
         </td>
       </tr>
       {openModal && (
-        <UserDetailsModal email={openModal} setOpenModal={setOpenModal} userInfo={userInfo} />
+        <UserDetailsModal
+          email={openModal}
+          setOpenModal={setOpenModal}
+          userInfo={userInfo}
+        />
       )}
     </>
   );
