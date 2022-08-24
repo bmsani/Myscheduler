@@ -9,7 +9,7 @@ const CreateEventType = () => {
     <div className="mx-auto px-2 md:px-5 lg:px-20 max-w-[1400px]">
       <div className="flex items-center justify-between my-4 py-8">
         <div>
-          <Link to="/dashboard">
+          <Link to="/dashboard/allEvents">
             <ButtonOutline>
               <div className="flex items-center">
                 <MdArrowBackIos />

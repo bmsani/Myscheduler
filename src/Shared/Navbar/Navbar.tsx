@@ -136,7 +136,7 @@ const Navbar = () => {
           <div className="navbar mx-auto max-w-[1400px]">
             <div className="flex-1 hidden lg:block">
               <div className="w-3/4 lg:w-1/2 md:w-3/5 justify-start">
-                <Link className="normal-case text-xl" to="/dashboard">
+                <Link className="normal-case text-xl" to="/dashboard/allEvents">
                   <span className="flex items-end lg:items-center">
                     <img className="w-10" src={Logo} alt="" />
                   </span>
@@ -176,7 +176,7 @@ const Navbar = () => {
                           ? "text-secondary font-medium"
                           : "text-primary font-medium hover:text-secondary"
                       }
-                      to="/dashboard"
+                      to="/dashboard/allEvents"
                     >
                       Dashboard
                     </NavLink>
@@ -207,7 +207,7 @@ const Navbar = () => {
                       Availability
                     </NavLink>
                   </p>
-                  <li>
+                  <span>
                     <div className="dropdown dropdown-end">
                       <label
                         tabIndex={0}
@@ -224,7 +224,7 @@ const Navbar = () => {
                       </label>
                       <ul
                         tabIndex={0}
-                        className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 mt-40"
+                        className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
                       >
                         <li>
                           <Link
@@ -252,7 +252,7 @@ const Navbar = () => {
                         </li>
                       </ul>
                     </div>
-                  </li>
+                  </span>
                 </div>
               </ul>
             </div>

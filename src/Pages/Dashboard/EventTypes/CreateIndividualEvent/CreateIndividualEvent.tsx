@@ -7,6 +7,7 @@ import Loading from "../../../../Shared/LoadingSpinner/Loading";
 import EventDetailsAdd from "../EventDetailsAdd/EventDetailsAdd";
 import { MdArrowBackIos } from "react-icons/md";
 import GetUserAvailablity from "../../../../Shared/GetUserAvailablity/GetUserAvailablity";
+import ButtonOutline from "../../../../Shared/Button/ButtonOutline";
 
 const CreateIndividualEvent = () => {
   const [eventName, setEventName] = useState("");
@@ -74,19 +75,20 @@ const CreateIndividualEvent = () => {
         });
     }
   };
-  console.log(availabilities);
   return (
-    <div>
+    <div className="mx-auto px-2 md:px-5 lg:px-20 max-w-[1400px]">
       {!next ? (
         <div>
-          <div className="mt-4">
-            <div className="md:flex justify-center md:justify-between items-center py-4 mx-4 lg:mx-40">
+          <div>
+            <div className="md:flex justify-center md:justify-between items-center py-4 mt-2 lg:mx-20">
               <div>
                 <Link to="/createEvent">
-                  <button className="text-blue-500 border-blue-400  md:border md:px-7 py-2 rounded-full flex items-center ">
-                    <MdArrowBackIos />
-                    Back
-                  </button>
+                  <ButtonOutline>
+                    <span className="flex items-center">
+                      <MdArrowBackIos />
+                      <span> Back</span>
+                    </span>
+                  </ButtonOutline>
                 </Link>
               </div>
               <div>
@@ -96,12 +98,12 @@ const CreateIndividualEvent = () => {
               </div>
             </div>
           </div>
-          <div className="mx-4 lg:mx-40 sm:mx-8 border-2 border-zinc-500 mt-4 mb-8">
+          <div className="border-2 border-gray-400 mt-4 mb-8 rounded-lg lg:mx-20">
             <div className="flex items-center justify-between border-b px-2 md:px-8 py-2">
               <div>
                 <h2>What event is this?</h2>
-                <h2 className="text-sm font-light">
-                  {eventName ? eventName : "No name given"},&nbsp;
+                <h2 className="text-sm font-bold text-secondary">
+                  {eventName ? eventName : "No name given!"}&nbsp;
                 </h2>
               </div>
               <div className="py-4">
@@ -121,7 +123,7 @@ const CreateIndividualEvent = () => {
                     </button>
                   ) : (
                     <button
-                      className="px-4 py-1 rounded-full text-white bg-blue-500"
+                      className="px-4 py-1 rounded-full text-white bg-secondary"
                       onClick={handleNext}
                     >
                       Next
@@ -132,37 +134,32 @@ const CreateIndividualEvent = () => {
             </div>
             <div className="mx-2 md:mx-8 mb-6">
               <form className="form-control">
-                <label className="label">
-                  <span className="label-text">Event Name</span>
-                </label>
-                <div className="">
+                <div className="mt-4">
                   <input
                     required
                     onChange={(e) => setEventName(e.target.value)}
                     type="text"
-                    placeholder="Type here"
-                    className="input border-blue-500 w-full max-w-sm"
+                    placeholder="Event Name"
+                    className="border border-gray-400 focus:outline-none focus:border-secondary block rounded-lg p-2 mt-1 max-w-sm w-full"
                   />
                 </div>
-                <label className="label">
-                  <span className="label-text">Location</span>
+                <label className="label mt-2">
+                  <span className="label-text">Event Location</span>
                 </label>
-                <div className="">
+                <div>
                   <input
                     readOnly
                     defaultValue="Google Meet"
-                    className="input border-blue-500 w-full max-w-sm"
+                    className="border border-gray-400 focus:outline-none focus:border-secondary block rounded-lg p-2 mt-1 max-w-sm w-full"
                   ></input>
                 </div>
-                <label className="label">
-                  <span className="label-text">Description/Instructions</span>
-                </label>
-                <div className="">
+                <div className="mt-4">
                   <textarea
                     required
                     onChange={(e) => setEventDescription(e.target.value)}
-                    className="textarea border-blue-500 w-full max-w-sm"
-                    placeholder="Bio"
+                    className="border border-gray-400 focus:outline-none focus:border-secondary block rounded-lg p-2 mt-1 max-w-sm w-full"
+                    placeholder="Description/Instructions"
+                    rows={3}
                   ></textarea>
                 </div>
               </form>
@@ -183,7 +180,7 @@ const CreateIndividualEvent = () => {
                   </button>
                 ) : (
                   <button
-                    className="px-4 py-1 rounded-full text-white bg-blue-500"
+                    className="px-4 py-1 rounded-full text-white bg-secondary"
                     onClick={handleNext}
                   >
                     Next

@@ -1,9 +1,8 @@
 import { useAuthState } from "react-firebase-hooks/auth";
-import { AiOutlinePlus } from "react-icons/ai";
+import { GoPlus } from "react-icons/go";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../../init.firebase";
-import Button from "../../../Shared/Button/Button";
 import ButtonOutline from "../../../Shared/Button/ButtonOutline";
 import GetAllEvents from "../../../Shared/GetAllEvent/GetAllEvents";
 import GetUserInfo from "../../../Shared/GetUserInfo/GetUserInfo";
@@ -63,7 +62,7 @@ const Event = () => {
             <Link
               target="_blank"
               to={`/allEvent/${email}`}
-              className="text-secondary text-xs md:text-lg"
+              className="text-accent text-xs md:text-lg"
             >
               myscheduler.com/{email}
             </Link>
@@ -72,17 +71,17 @@ const Event = () => {
         <div className="mt-4">
           {userInfo?.refreshToken ? (
             <Link to="/createEvent">
-              <Button>
-                <span className="flex items-center gap-1">
-                  <AiOutlinePlus /> New Event
+              <button className="mt-4 py-2 px-4 border-[2px] border-secondary  text-secondary rounded-full hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer">
+                <span className="flex font-medium items-center gap-1">
+                  <GoPlus /> New Event
                 </span>
-              </Button>
+              </button>
             </Link>
           ) : (
             <Link to="/calenderConnection">
               <ButtonOutline>
                 <span className="flex items-center gap-1">
-                  <AiOutlinePlus /> New Event
+                  <GoPlus /> New Event
                 </span>
               </ButtonOutline>
             </Link>
@@ -111,7 +110,7 @@ const Event = () => {
                         <Link
                           target="_blank"
                           to={`/bookingCalender/${e._id}`}
-                          className="text-secondary mt-2"
+                          className="text-accent mt-2"
                         >
                           View booking page
                         </Link>
@@ -152,7 +151,7 @@ const Event = () => {
                         <div className="flex justify-between">
                           <Link
                             to="/priceCart"
-                            className="mt-4 py-1 px-4 border border-primary rounded-full text-white bg-blue-500 hover:shadow-md hover:shadow-blue-500 duration-300 cursor-pointer"
+                            className="mt-4 py-1 px-4 border border-primary rounded-full text-white bg-accent hover:shadow-md hover:shadow-accent duration-300 cursor-pointer"
                           >
                             Pay
                           </Link>
@@ -182,7 +181,7 @@ const Event = () => {
                     <Link
                       target="_blank"
                       to={`/bookingCalender/${e._id}`}
-                      className="text-secondary mt-2"
+                      className="text-accent mt-2"
                     >
                       View booking page
                     </Link>

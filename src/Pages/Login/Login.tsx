@@ -37,7 +37,8 @@ const Login: React.FC = () => {
   const location = useLocation();
   const [token] = useToken(user || GUser);
 
-  let from = (location.state as LocationState)?.from?.pathname || "/dashboard";
+  let from =
+    (location.state as LocationState)?.from?.pathname || "/dashboard/allEvents";
 
   if (loading || GLoading) {
     return <Loading></Loading>;

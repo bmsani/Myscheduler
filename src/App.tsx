@@ -107,7 +107,7 @@ function App() {
             </RequiredAuth>
           }
         >
-          <Route index element={<Event></Event>}></Route>
+          <Route path="allEvents" element={<Event></Event>}></Route>
           <Route path="workflow" element={<Workflow />}></Route>
           <Route path="eventTypes" element={<EventTypes />}></Route>
           <Route path="scheduling" element={<Scheduling />}>
