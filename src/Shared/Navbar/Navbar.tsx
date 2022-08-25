@@ -1,21 +1,42 @@
 import { signOut } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link, useLocation } from "react-router-dom";
-import Logo from "../../../src/Utilities/icon/calendar.png";
+import { NavLink, Link, useLocation } from "react-router-dom";
+import Logo from "../../../src/Utilities/Logos/MyScheduler.png";
 import auth from "../../init.firebase";
-import Button from "../Button/Button";
 import Loading from "../LoadingSpinner/Loading";
 import { HiMenu } from "react-icons/hi";
 import { BiDownArrow } from "react-icons/bi";
 import useAdmin from "../../Hooks/useAdmin";
-
+import ButtonOutline from "../Button/ButtonOutline";
+import "./Navbar.css";
 const Navbar = () => {
   const [user, loading] = useAuthState(auth);
   const email = user?.email;
-  const {admin, isLoading} = useAdmin(email);
+  const { admin, isLoading } = useAdmin(email);
+  console.log(admin);
   const { pathname } = useLocation();
-  const [colorChange, setColorChange] = useState<boolean>(false);
+
+  const [nav, setNev] = useState(false);
+
+  const handleNavigation = (e: any) => {
+    const window = e.currentTarget;
+    if (y > window.scrollY) {
+      setNev(true);
+    } else if (y < window.scrollY) {
+      setNev(false);
+    }
+    setY(window.scrollY);
+  };
+  const [y, setY] = useState(window.scrollY);
+
+  useEffect(() => {
+    window.addEventListener("scroll", (e) => handleNavigation(e));
+
+    return () => {
+      window.removeEventListener("scroll", (e) => handleNavigation(e));
+    };
+  }, [y]);
 
   const [anotherRouteColorChange, setAnotherRouteColorChange] =
     useState<boolean>(false);
@@ -31,165 +52,215 @@ const Navbar = () => {
     return <Loading />;
   }
 
-  const changeNavbarColor = () => {
-    if (window.scrollY >= 80 || pathname !== "/") {
-      setColorChange(true);
-    } else {
-      setColorChange(false);
-    }
-  };
-  window.addEventListener("scroll", changeNavbarColor);
-
   const handleSignOut = () => {
     localStorage.removeItem("accessToken");
     signOut(auth);
   };
-  const items = (
+  const items: any = (
     <>
-      <li>
-        <Link to="/">Home</Link>
-      </li>
-      <li>
-        <Link to="/types">Types</Link>
-      </li>
-      <li>
-        <Link to="/story">Story</Link>
-      </li>
-      <li>
-        <Link to="/about">About Us</Link>
-      </li>
-      <li>
-        <Link to="/blogs">Blogs</Link>
-      </li>
-      <li>
+      <p>
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? "text-secondary lg:border-b-[2px] lg:border-b-secondary navDesign"
+              : "nevEffect lg:after:bg-secondary"
+          }
+          to="/"
+        >
+          Home
+        </NavLink>
+      </p>
+      <p>
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? "text-secondary lg:border-b-[2px] lg:border-b-secondary navDesign"
+              : "nevEffect lg:after:bg-secondary"
+          }
+          to="/types"
+        >
+          Types
+        </NavLink>
+      </p>
+      <p>
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? "text-secondary lg:border-b-[2px] lg:border-b-secondary navDesign"
+              : "nevEffect lg:after:bg-secondary"
+          }
+          to="/story"
+        >
+          Story
+        </NavLink>
+      </p>
+      <p>
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? "text-secondary lg:border-b-[2px] lg:border-b-secondary navDesign"
+              : "nevEffect lg:after:bg-secondary"
+          }
+          to="/about"
+        >
+          About Us
+        </NavLink>
+      </p>
+      <p>
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? "text-secondary lg:border-b-[2px] lg:border-b-secondary navDesign"
+              : "nevEffect lg:after:bg-secondary"
+          }
+          to="/blogs"
+        >
+          Blogs
+        </NavLink>
+      </p>
+      <p>
         <Link className="block lg:hidden text-start" to="/login">
-          <Button>
+          <ButtonOutline>
             <span className="px-0 lg:px-4">Login</span>
-          </Button>
+          </ButtonOutline>
         </Link>
-      </li>
+      </p>
     </>
   );
   const firstLetter = user?.displayName?.slice(0, 1);
 
   return (
-    <div className="sticky top-0 z-50">
+    <div className={nav === true ? "sticky top-0 z-50" : ""}>
       {user ? (
-        <div className="navbar bg-base-100 shadow-xl px-4">
-          <div className="container mx-auto">
-            <div className="flex-1 hidden md:block">
-              <div className="w-3/4 lg:w-1/2 md:w-3/5 lg:justify-start justify-between">
-                <Link className="normal-case text-xl" to="/dashboard">
+        <div className=" bg-base-100 shadow-lg lg:px-4">
+          <div className="navbar mx-auto max-w-[1400px]">
+            <div className="flex-1 hidden lg:block">
+              <div className="w-3/4 lg:w-1/2 md:w-3/5 justify-start">
+                <Link className="normal-case text-xl" to="/dashboard/allEvents">
                   <span className="flex items-end lg:items-center">
                     <img className="w-10" src={Logo} alt="" />
-                    <span className="font-bold text-secondary pl-4 hidden lg:block">
-                      MyScheduler
-                    </span>
                   </span>
                 </Link>
               </div>
             </div>
             <div className="flex-none">
-              <ul className="menu menu-horizontal p-0">
-                <li>
+              <ul className="menu menu-horizontal w-full p-0 flex items-center justify-between">
+                <p>
                   {pathname === "/dashboard" ||
                   pathname === "/dashboard/scheduling" ||
                   pathname === "/dashboard/workflow" ||
-                  pathname === "/dashboard/routingForms" ? (
+                  pathname === "/dashboard/scheduling/upcomingEvent" ||
+                  pathname === "/dashboard/scheduling/pendingEvent" ||
+                  pathname === "/dashboard/scheduling/pastEvent" ||
+                  pathname === "/dashboard/reviewInput" ? (
                     <label
                       htmlFor="my-drawer-2"
-                      className="bg-transparent drawer-button lg:hidden"
+                      className=" drawer-button lg:hidden"
                     >
                       <HiMenu className="text-2xl" />
                     </label>
                   ) : (
                     <label
                       htmlFor="my-drawer-2"
-                      className="bg-transparent drawer-button hidden"
+                      className="drawer-button hidden"
                     >
                       <HiMenu className="text-2xl" />
                     </label>
                   )}
-                </li>
-                <li>
-                  <Link className="px-1 md:px-4 font-semibold" to="/dashboard">
-                    Dashboard
-                  </Link>
-                </li>
-                {admin && (
-                  <li>
-                    <Link className="px-1 md:px-4 font-semibold" to="/admin">
-                      Admin
-                    </Link>
-                  </li>
-                )}
-                <li>
-                  <Link
-                    className="px-1 md:px-4 font-semibold"
-                    to="/availability"
-                  >
-                    Availability
-                  </Link>
-                </li>
-                <li>
-                  <div className="dropdown dropdown-end">
-                    <label
-                      tabIndex={0}
-                      className="cursor-pointer flex justify-center items-center gap-2"
+                </p>
+                <div className="flex items-center gap-5">
+                  <p>
+                    <NavLink
+                      className={({ isActive }) =>
+                        isActive
+                          ? "text-secondary font-medium"
+                          : "text-primary font-medium hover:text-secondary"
+                      }
+                      to="/dashboard/allEvents"
                     >
-                      <BiDownArrow />
-                      <div className="w-8 rounded-full ">
-                        <p className="w-full rounded-full border border-primary p-1 flex justify-center items-center bg-gray-200">
-                          <span className="text-md font-semibold">
-                            {firstLetter}
-                          </span>
-                        </p>
-                      </div>
-                    </label>
-                    <ul
-                      tabIndex={0}
-                      className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 mt-40"
+                      Home
+                    </NavLink>
+                  </p>
+                  {admin?.admin && (
+                    <p>
+                      <NavLink
+                        className={({ isActive }) =>
+                          isActive
+                            ? "text-secondary font-medium"
+                            : "text-primary font-medium hover:text-secondary"
+                        }
+                        to="/admin/userDetails"
+                      >
+                        Admin
+                      </NavLink>
+                    </p>
+                  )}
+                  <p>
+                    <NavLink
+                      className={({ isActive }) =>
+                        isActive
+                          ? "text-secondary font-medium"
+                          : "text-primary font-medium hover:text-secondary"
+                      }
+                      to="/availability"
                     >
-                      <li>
-                        <Link
-                          to="/accountSettings/profile"
-                          className="w-full font-semibold"
-                        >
-                          Account setting
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          to="/calenderConnection"
-                          className="w-full font-semibold"
-                        >
-                          Calender Connections
-                        </Link>
-                      </li>
-                      <li>
-                        <button
-                          className="w-full font-semibold"
-                          onClick={handleSignOut}
-                        >
-                          Logout
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
-                </li>
+                      Availability
+                    </NavLink>
+                  </p>
+                  <span>
+                    <div className="dropdown dropdown-end">
+                      <label
+                        tabIndex={0}
+                        className="cursor-pointer flex justify-center items-center gap-2"
+                      >
+                        <BiDownArrow />
+                        <div className="w-8 rounded-full ">
+                          <p className="w-full rounded-full border border-primary p-1 flex justify-center items-center bg-gray-200">
+                            <span className="text-md font-semibold">
+                              {firstLetter}
+                            </span>
+                          </p>
+                        </div>
+                      </label>
+                      <ul
+                        tabIndex={0}
+                        className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+                      >
+                        <li>
+                          <Link
+                            to="/accountSettings/profile"
+                            className="w-full font-semibold"
+                          >
+                            Account setting
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/calenderConnection"
+                            className="w-full font-semibold"
+                          >
+                            Calender Connections
+                          </Link>
+                        </li>
+                        <li>
+                          <button
+                            className="w-full font-semibold"
+                            onClick={handleSignOut}
+                          >
+                            Logout
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+                  </span>
+                </div>
               </ul>
             </div>
           </div>
         </div>
       ) : (
-        <div>
-          <div
-            className={
-              colorChange || anotherRouteColorChange
-                ? "navbar bg-base-100 absolute text-black shadow-lg"
-                : "navbar bg-transparent absolute text-black lg:text-white duration-300"
-            }
-          >
+        <div className={y === 0 ? "bg-white" : "bg-white shadow-md"}>
+          <div className="navbar text-primary py-4  mx-auto px-2 md:px-5 lg:px-20 max-w-[1400px] ">
             <div className="w-3/4 lg:w-1/2 md:w-3/5 lg:justify-start justify-between">
               <Link className="normal-case text-xl" to="/">
                 <span className="flex items-end lg:items-center">
@@ -201,7 +272,7 @@ const Navbar = () => {
               </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
-              <ul className="menu menu-horizontal p-0 font-semibold xl:gap-8">
+              <ul className="menu menu-horizontal p-0 font-semibold md:gap-10">
                 {items}
               </ul>
             </div>
@@ -210,11 +281,7 @@ const Navbar = () => {
                 <label tabIndex={0} className="btn glass lg:hidden">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className={
-                      colorChange
-                        ? "h-5 w-5 text-secondary"
-                        : "h-5 w-5 text-white"
-                    }
+                    className="h-5 w-5 text-secondary"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -229,15 +296,15 @@ const Navbar = () => {
                 </label>
                 <ul
                   tabIndex={0}
-                  className="menu menu-compact dropdown-content mt-3 p-2 shadow-2xl bg-base-100 rounded-box w-52"
+                  className="menu menu-compact dropdown-content mt-2 p-3 shadow-md shadow-secondary bg-gray-100 rounded-box w-52 flex flex-col gap-3"
                 >
                   {items}
                 </ul>
               </div>
               <Link className="hidden lg:block text-end" to="/login">
-                <Button>
+                <ButtonOutline>
                   <span className="px-0 lg:px-4 w-full">Login</span>
-                </Button>
+                </ButtonOutline>
               </Link>
             </div>
           </div>

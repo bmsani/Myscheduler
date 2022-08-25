@@ -69,13 +69,14 @@ const Availability = () => {
   };
 
   return (
-    <div className="w-4/6 mx-auto py-10">
-      <h2 className="text-xl md:text-3xl font-bold text-center">
-        Availability setup
+    <div className="md:w-4/6 mx-auto px-2 md:px-5 lg:px-20 max-w-[1400px]">
+      <h2 className="text-primary text-xl md:text-3xl font-bold text-center pt-5 uppercase tracking-wide ">
+        availability
       </h2>
+
       <div>
-        <h4 className="text-lg md:text-2xl border-2 px-4 py-1 w-60 rounded-lg text-center border-gray-600 mx-auto my-3">
-          Working schedule
+        <h4 className="text-gray-500 text-sm md:text-lg text-center pb-2 border-b border-b-primary w-full mx-auto">
+          Setup your working days and times
         </h4>
         <div className="mt-6">
           <div className="overflow-x-auto w-full border rounded">

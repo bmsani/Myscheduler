@@ -107,7 +107,7 @@ function App() {
             </RequiredAuth>
           }
         >
-          <Route index element={<Event></Event>}></Route>
+          <Route path="allEvents" element={<Event></Event>}></Route>
           <Route path="workflow" element={<Workflow />}></Route>
           <Route path="eventTypes" element={<EventTypes />}></Route>
           <Route path="scheduling" element={<Scheduling />}>
@@ -134,8 +134,8 @@ function App() {
             </RequiredAuth>
           }
         >
-          <Route index element={<Users></Users>}></Route>
-          <Route path="userDetails" element={<EventDetails />}></Route>
+          <Route path="userDetails" element={<Users></Users>}></Route>
+          <Route path="eventDetails" element={<EventDetails />}></Route>
           <Route path="allBookings" element={<AllBookings />}></Route>
         </Route>
         <Route

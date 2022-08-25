@@ -36,7 +36,7 @@ const Register: React.FC = () => {
     return <Loading></Loading>;
   }
   if (token) {
-    navigate("/dashboard/event");
+    navigate("/dashboard/allEvents");
   }
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
@@ -45,12 +45,12 @@ const Register: React.FC = () => {
     reset();
   };
   return (
-    <div className="grid loginRegBg grid-cols-1 md:grid-cols-2 h-[100vh] pt-8">
-      <div className="bg-primary hidden md:flex justify-center items-center">
+    <div className="mx-auto px-2 md:px-5 lg:px-20 max-w-[1400px] grid grid-cols-1 md:grid-cols-2 items-center content-center py-6 bg-[#F1F3F8]">
+      <div className="hidden md:flex justify-center items-center">
         <img className="w-[500px]" src={regImg} alt="" />
       </div>
-      <div className="flex justify-center bg-[#e1f7f7]">
-        <div className="w-[500px] p-5 my-12 ">
+      <div className="flex justify-center">
+        <div className="w-[400px] p-5 border border-secondary rounded-lg shadow-sm shadow-secondary bg-base-100">
           <div>
             <div className="text-primary text-center">
               <p className="text-3xl font-bold">Create Account</p>
@@ -63,7 +63,7 @@ const Register: React.FC = () => {
               <input
                 type="text"
                 placeholder="Your Name"
-                className="bg-[#e1f7f7] w-full border-b border-b-primary mt-4 p-2 text-1xl focus:outline-none focus:border-b-secondary"
+                className="w-full border-b border-b-primary mt-4 p-2 text-1xl focus:outline-none focus:border-b-secondary"
                 {...register("name", {
                   required: {
                     value: true,
@@ -82,7 +82,7 @@ const Register: React.FC = () => {
               <input
                 type="email"
                 placeholder="Your Email"
-                className="bg-[#e1f7f7] w-full border-b border-b-primary mt-4 p-2 text-1xl focus:outline-none focus:border-b-secondary"
+                className="w-full border-b border-b-primary mt-2 p-2 text-1xl focus:outline-none focus:border-b-secondary"
                 {...register("email", {
                   required: {
                     value: true,
@@ -110,7 +110,7 @@ const Register: React.FC = () => {
               <input
                 type="Password"
                 placeholder="Password"
-                className="bg-[#e1f7f7] w-full border-b border-b-primary mt-4 p-2 text-1xl focus:outline-none focus:border-b-secondary"
+                className="w-full border-b border-b-primary mt-2 p-2 text-1xl focus:outline-none focus:border-b-secondary"
                 {...register("password", {
                   required: {
                     value: true,
@@ -139,7 +139,7 @@ const Register: React.FC = () => {
               </p>
               <input
                 type="submit"
-                className="rounded-full text-white hover:bg-secondary bg-primary shadow-lg  duration-300 cursor-pointer mt-6 p-2 text-1xl"
+                className="rounded-full text-white hover:bg-[#3825b1] bg-secondary shadow-lg  duration-300 cursor-pointer mt-4 p-2 text-1xl"
                 value="Register"
               />
             </form>
@@ -154,8 +154,7 @@ const Register: React.FC = () => {
               </Link>
             </div>
 
-            <div className="mt-6 flex items-center gap-5">
-              <span>Or create account with</span>
+            <div className="mt-6 w-full">
               <SocialLogin signInWithGoogle={signInWithGoogle} />
             </div>
           </div>

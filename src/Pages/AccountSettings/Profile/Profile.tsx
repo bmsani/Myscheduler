@@ -130,11 +130,8 @@ const Profile = () => {
     return <Loading />;
   }
   return (
-    <div className="flex justify-center items-center py-8">
-      <form
-        onSubmit={handleProfile}
-        className="mx-2 w-full md:w-[500px] md:mx-0"
-      >
+    <div className="flex justify-center items-center">
+      <form onSubmit={handleProfile} className="w-full">
         <div className="flex items-center gap-5">
           {userInfo?.imageURL ? (
             <img
@@ -154,7 +151,7 @@ const Profile = () => {
             data-tip="Upload Image"
           >
             <label
-              className="hover:shadow hover:shadow-primary cursor-pointer w-10 h-10 rounded-full flex justify-center items-center bg-primary text-3xl  text-base-100 hover:bg-secondary duration-300 "
+              className="hover:shadow hover:shadow-primary cursor-pointer w-10 h-10 rounded-full flex justify-center items-center bg-primary text-3xl  text-base-100 hover:bg-accent duration-300 "
               htmlFor="image"
             >
               <svg
@@ -216,10 +213,12 @@ const Profile = () => {
         </div>
         <div className="flex justify-between gap-5">
           {loading ? (
-            <ButtonSpinner />
+            <button className="w-[150px] bg-primary py-2 px-4 rounded-full text-white hover:shadow-md hover:shadow-secondary duration-300 cursor-pointer">
+              <ButtonSpinner />
+            </button>
           ) : (
             <input
-              className="bg-primary py-2 px-4 rounded-lg text-white hover:shadow-md hover:shadow-secondary duration-300 cursor-pointer"
+              className="w-[150px] bg-primary py-2 px-4 rounded-full text-white hover:shadow-md hover:shadow-secondary duration-300 cursor-pointer"
               type="submit"
               value="Save Change"
             />

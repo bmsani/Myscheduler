@@ -1,37 +1,31 @@
 import { Link } from "react-router-dom";
 import Button from "../../../Shared/Button/Button";
-import "./Hero.css";
+import heroImg from "../../../Utilities/Image/heroImg.png";
 
 const Hero = () => {
   return (
-    <div
-      className="w-full h-[60vh] md:h-[100vh] flex items-center"
-      style={{
-        backgroundImage: `url("https://i.ibb.co/vJsCvR7/banner.jpg")`,
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
-        backgroundSize: "cover",
-      }}
-    >
-      <div className="md:grid md:grid-cols-2 w-full">
-        <div className="mx-2 md:mx-8">
-          <div className="text-white text-xl md:text-2xl lg:text-4xl font-bold mb-3">
-            <h1>Easy to maintain</h1>
-            <h1>Interview, meetings</h1>
-            <h1>MyScheduler Website</h1>
+    <div className="w-full py-16">
+      <div className="flex flex-col-reverse gap-7 lg:grid lg:grid-cols-3 w-full items-center">
+        <div className="mx-2 lg:col-span-2">
+          <div className="text-primary text-4xl lg:text-5xl font-bold flex flex-col md:gap-2">
+            <h1>Easy to Maintain</h1>
+            <h1>Interview, Meetings</h1>
+            {/* <h1>MyScheduler Website</h1> */}
           </div>
-          <p className="mb-5 pr-20 md:pr-10 font-medium text-xs md:text-md lg:text-xl text-justify text-gray-100 md:text-gray-300">
+          <p className="my-4 md:my-7 text-lg text-gray-500">
             MyScheduler is your hub for scheduling meetings professionally and
             efficiently, eliminating the hassle of back-and-forth emails so you
             can get back to work.
           </p>
           <Link to="/register">
             <Button>
-              <span>Get Start</span>
+              <span className="mx-4">Get Start</span>
             </Button>
           </Link>
         </div>
-        <div></div>
+        <div className="flex justify-center">
+          <img className="w-[240px] md:w-[400px]" src={heroImg} alt="" />
+        </div>
       </div>
     </div>
   );
