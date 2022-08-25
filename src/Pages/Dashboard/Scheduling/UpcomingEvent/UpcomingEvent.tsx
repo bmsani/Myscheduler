@@ -80,7 +80,7 @@ const UpcomingEvent = () => {
             <h2 className="text-2xl font-semibold my-2">No Events Yet</h2>
             <p className=" mb-4">Share Event Type links to schedule events.</p>
             <Link
-              to="/dashboard"
+              to="/dashboard/allEvents"
               className="bg-blue-500 text-white px-5 py-2 rounded-full"
             >
               View Event Types

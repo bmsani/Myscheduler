@@ -134,8 +134,8 @@ function App() {
             </RequiredAuth>
           }
         >
-          <Route index element={<Users></Users>}></Route>
-          <Route path="userDetails" element={<EventDetails />}></Route>
+          <Route path="userDetails" element={<Users></Users>}></Route>
+          <Route path="eventDetails" element={<EventDetails />}></Route>
           <Route path="allBookings" element={<AllBookings />}></Route>
         </Route>
         <Route

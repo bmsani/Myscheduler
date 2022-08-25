@@ -129,10 +129,12 @@ const BookingConfirm = ({
 
         <div className="flex justify-between gap-5 mt-4">
           {loading ? (
-            <ButtonSpinner />
+            <button className="w-[160px] bg-primary py-2 px-4 rounded-full text-white hover:shadow-md hover:shadow-secondary duration-300 cursor-pointer">
+              <ButtonSpinner />
+            </button>
           ) : (
             <input
-              className="bg-primary py-2 px-4 rounded-lg text-white hover:shadow-md hover:shadow-secondary duration-300 cursor-pointer"
+              className="w-[160px] bg-primary py-2 px-4 rounded-full text-white hover:shadow-md hover:shadow-secondary duration-300 cursor-pointer"
               type="submit"
               value="Booking Confirm"
             />

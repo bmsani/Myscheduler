@@ -36,7 +36,7 @@ const Register: React.FC = () => {
     return <Loading></Loading>;
   }
   if (token) {
-    navigate("/dashboard/event");
+    navigate("/dashboard/allEvents");
   }
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {

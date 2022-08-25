@@ -189,7 +189,7 @@ const Navbar = () => {
                             ? "text-secondary font-medium"
                             : "text-primary font-medium hover:text-secondary"
                         }
-                        to="/admin"
+                        to="/admin/userDetails"
                       >
                         Admin
                       </NavLink>

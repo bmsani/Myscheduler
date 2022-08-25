@@ -29,7 +29,7 @@ const About = () => {
             </div>
           </div>
         </div>
-        <div className="flex items-center gap-10 mt-20">
+        <div className="grid lg:grid-cols-2 items-center gap-10 mt-20">
           <div className="w-ful">
             <img
               className="lg:w-[1000px] w-full rounded-3xl"

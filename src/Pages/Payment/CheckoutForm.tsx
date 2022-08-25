@@ -110,10 +110,12 @@ const CheckoutForm = ({ userInfo }: any) => {
         />
         <div className="mt-5">
           {processing ? (
-            <ButtonSpinner />
+            <button className="w-[80px] bg-blue-500 text-white px-5 py-2 rounded">
+              <ButtonSpinner />
+            </button>
           ) : (
             <button
-              className="bg-blue-500 text-white px-5 py-2 rounded"
+              className="w-[80px] bg-blue-500 text-white px-5 py-2 rounded"
               type="submit"
               disabled={!stripe || !clientSecret}
             >
