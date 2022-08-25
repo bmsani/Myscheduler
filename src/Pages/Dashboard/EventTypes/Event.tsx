@@ -122,7 +122,7 @@ const Event = () => {
                           <button
                             onClick={() =>
                               handleCopyToClipboard(
-                                `http://localhost:3000/bookingCalender/${e._id}`
+                                `https://myscheduler-893bf.web.app/bookingCalender/${e._id}`
                               )
                             }
                             className="mt-4 py-1 px-4 border border-primary rounded-full text-primary hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer"
