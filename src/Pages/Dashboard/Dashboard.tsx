@@ -17,8 +17,8 @@ const Dashboard: any = () => {
           }
           to="/dashboard/allEvents"
         >
-          <span className="flex items-center gap-2">
-            <MdOutlineEventAvailable className="text-xl" />
+          <span className="flex items-center gap-3">
+            <MdOutlineEventAvailable className="text-2xl" />
             Event Type
           </span>
         </NavLink>
@@ -31,9 +31,9 @@ const Dashboard: any = () => {
           }
           to="/dashboard/scheduling/upcomingEvent"
         >
-          <span className="flex items-center gap-2">
-            <MdSchedule className="text-xl" />
-            Scheduled event
+          <span className="flex items-center gap-3">
+            <MdSchedule className="text-2xl" />
+            Scheduled Event
           </span>
         </NavLink>
       </p>
@@ -44,7 +44,7 @@ const Dashboard: any = () => {
           }
           to="/dashboard/workflow"
         >
-          <span className="flex items-center gap-2">
+          <span className="flex items-center gap-3">
             <FcWorkflow className="text-xl" />
             Workflows
           </span>
@@ -57,7 +57,7 @@ const Dashboard: any = () => {
           }
           to="/dashboard/reviewInput"
         >
-          <span className="flex items-center gap-2">
+          <span className="flex items-center gap-3">
             <MdOutlineRateReview className="text-xl" />
             Review
           </span>
@@ -69,13 +69,13 @@ const Dashboard: any = () => {
     <div className="mx-auto max-w-[1400px]">
       <div className="drawer drawer-mobile">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content pt-10 px-2 md:px-5">
+        <div className="drawer-content p-5">
           {/* <!-- Page content here --> */}
           <Outlet></Outlet>
         </div>
         <div className="drawer-side w-48">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-          <ul className="menu p-4 overflow-y-auto w-full bg-[#D6E5FA] gap-5">
+          <ul className="menu px-4 pt-8 overflow-y-auto w-full bg-[#D6E5FA] gap-6">
             {/* <!-- Sidebar content here --> */}
             {sideLinks}
           </ul>

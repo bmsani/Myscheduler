@@ -178,7 +178,7 @@ const Navbar = () => {
                       }
                       to="/dashboard/allEvents"
                     >
-                      Dashboard
+                      Home
                     </NavLink>
                   </p>
                   {admin?.admin && (

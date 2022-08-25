@@ -151,7 +151,7 @@ const Event = () => {
                         <div className="flex justify-between">
                           <Link
                             to="/priceCart"
-                            className="mt-4 py-1 px-4 border border-primary rounded-full text-white bg-accent hover:shadow-md hover:shadow-accent duration-300 cursor-pointer"
+                            className="mt-4 py-1 px-4 border-2 border-secondary rounded-full text-secondary font-medium hover:shadow-md hover:shadow-secondary duration-300 cursor-pointer"
                           >
                             Pay
                           </Link>

@@ -8,7 +8,7 @@ const Scheduling = () => {
         <NavLink
           className={({ isActive }) =>
             isActive
-              ? "font-medium text-success border-b-2 border-b-success py-4 px-5 "
+              ? "font-medium text-accent border-b-2 border-b-accent py-4 px-5 "
               : "py-4 px-5 font-medium text-primary"
           }
           to="/dashboard/scheduling/upcomingEvent"
@@ -20,7 +20,7 @@ const Scheduling = () => {
         <NavLink
           className={({ isActive }) =>
             isActive
-              ? "font-medium text-success border-b-2 border-b-success py-4 px-5"
+              ? "font-medium text-accent border-b-2 border-b-accent py-4 px-5"
               : "py-4 px-5 font-medium text-primary"
           }
           to="/dashboard/scheduling/pendingEvent"
@@ -32,7 +32,7 @@ const Scheduling = () => {
         <NavLink
           className={({ isActive }) =>
             isActive
-              ? "font-medium text-success border-b-2 border-b-success py-4 px-5"
+              ? "font-medium text-accent border-b-2 border-b-accent py-4 px-5"
               : "py-4 px-5 font-medium text-primary"
           }
           to="/dashboard/scheduling/pastEvent"
