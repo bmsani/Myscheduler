@@ -22,18 +22,18 @@ const CreateEventType = () => {
           <h2 className="text-lg">Create New Event</h2>
         </div>
       </div>
-      <div className="bg-gray-100 pt-2 pb-20 rounded-lg">
-        <div className="md:flex items-center justify-between mx-5 mt-12 py-10">
+      <div className="bg-gray-100 p-6 md:p-20 rounded-lg">
+        <div className="flex items-center justify-between gap-2">
           <div>
-            <div className="flex items-center">
-              <div>
+            <div className="flex flex-col items-start md:flex-row md:items-center">
+              <div className="">
                 <img src={single} className="w-[48px]" alt="" />
               </div>
-              <div className="ml-8">
+              <div className="md:ml-8 ">
                 <h2 className="text-xl" id="one-on-one">
                   One-on-One
                 </h2>
-                <h2>Let an invitee pick a time to meet with you.</h2>
+                <h2 className="">Let an invitee pick a time to meet with you.</h2>
               </div>
             </div>
           </div>

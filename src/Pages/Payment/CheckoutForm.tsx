@@ -110,12 +110,12 @@ const CheckoutForm = ({ userInfo }: any) => {
         />
         <div className="mt-5">
           {processing ? (
-            <button className="w-[80px] bg-blue-500 text-white px-5 py-2 rounded">
+            <button className="w-[90px] bg-blue-500 text-white px-5 py-2 rounded">
               <ButtonSpinner />
             </button>
           ) : (
             <button
-              className="w-[80px] bg-blue-500 text-white px-5 py-2 rounded"
+              className="w-[90px] bg-blue-500 text-white px-5 py-2 rounded"
               type="submit"
               disabled={!stripe || !clientSecret}
             >
@@ -126,7 +126,7 @@ const CheckoutForm = ({ userInfo }: any) => {
       </form>
       {cardError && <p className="text-error">{cardError}</p>}
       {success && (
-        <div className="text-green-500">
+        <div className="text-green-500 mt-2">
           <p>{success}</p>
           <p>
             Your transaction id:{" "}
@@ -135,7 +135,7 @@ const CheckoutForm = ({ userInfo }: any) => {
         </div>
       )}
       {goForward && (
-        <Link className="" to="/dashboard">
+        <Link className="" to="/dashboard/allEvents">
           <button className="bg-blue-500 text-white px-7 py-2 mt-4 w-full rounded-full">
             Go Forward
           </button>
