@@ -69,7 +69,7 @@ const Availability = () => {
   };
 
   return (
-    <div className="md:w-4/6 mx-auto px-2 md:px-5 lg:px-20 max-w-[1400px]">
+    <div className="md:w-4/6 mx-auto px-2 md:px-5 py-12 max-w-[1400px]">
       <h2 className="text-primary text-xl md:text-3xl font-bold text-center pt-5 uppercase tracking-wide ">
         availability
       </h2>

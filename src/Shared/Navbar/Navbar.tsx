@@ -3,18 +3,18 @@ import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { NavLink, Link, useLocation } from "react-router-dom";
 import Logo from "../../../src/Utilities/Logos/MyScheduler.png";
-import auth from "../../init.firebase";
 import Loading from "../LoadingSpinner/Loading";
 import { HiMenu } from "react-icons/hi";
 import { BiDownArrow } from "react-icons/bi";
 import useAdmin from "../../Hooks/useAdmin";
 import ButtonOutline from "../Button/ButtonOutline";
 import "./Navbar.css";
+import auth from "../../init.firebase";
+
 const Navbar = () => {
   const [user, loading] = useAuthState(auth);
   const email = user?.email;
   const { admin, isLoading } = useAdmin(email);
-  console.log(admin);
   const { pathname } = useLocation();
 
   const [nav, setNev] = useState(false);
@@ -132,9 +132,9 @@ const Navbar = () => {
   return (
     <div className={nav === true ? "sticky top-0 z-50" : ""}>
       {user ? (
-        <div className=" bg-base-100 shadow-lg lg:px-4">
+        <div className="bg-base-100 shadow-lg lg:px-4">
           <div className="navbar mx-auto max-w-[1400px]">
-            <div className="flex-1 hidden lg:block">
+            <div className="flex-1 hidden md:block">
               <div className="w-3/4 lg:w-1/2 md:w-3/5 justify-start">
                 <Link className="normal-case text-xl" to="/dashboard/allEvents">
                   <span className="flex items-end lg:items-center">
@@ -145,25 +145,27 @@ const Navbar = () => {
             </div>
             <div className="flex-none">
               <ul className="menu menu-horizontal w-full p-0 flex items-center justify-between">
-                <p>
-                  {pathname === "/dashboard" ||
-                  pathname === "/dashboard/scheduling" ||
-                  pathname === "/dashboard/workflow" ||
-                  pathname === "/dashboard/scheduling/upcomingEvent" ||
-                  pathname === "/dashboard/scheduling/pendingEvent" ||
-                  pathname === "/dashboard/scheduling/pastEvent" ||
-                  pathname === "/dashboard/reviewInput" ? (
+                <p className="pr-6">
+                  {(pathname === "/dashboard" ||
+                    pathname === "/dashboard/allEvents" ||
+                    pathname === "/dashboard/scheduling" ||
+                    pathname === "/dashboard/workflow" ||
+                    pathname === "/dashboard/scheduling/upcomingEvent" ||
+                    pathname === "/dashboard/scheduling/pendingEvent" ||
+                    pathname === "/dashboard/scheduling/pastEvent" ||
+                    pathname === "/dashboard/reviewInput") && (
                     <label
                       htmlFor="my-drawer-2"
-                      className=" drawer-button lg:hidden"
+                      className="drawer-button lg:hidden"
                     >
                       <HiMenu className="text-2xl" />
                     </label>
-                  ) : (
-                    <label
-                      htmlFor="my-drawer-2"
-                      className="drawer-button hidden"
-                    >
+                  )}
+                  {(pathname === "/admin" ||
+                    pathname === "/admin/userDetails" ||
+                    pathname === "/admin/eventDetails" ||
+                    pathname === "/admin/allBookings") && (
+                    <label htmlFor="admin-drawer" className="drawer-overlay">
                       <HiMenu className="text-2xl" />
                     </label>
                   )}

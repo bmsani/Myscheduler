@@ -1,5 +1,5 @@
 import React from "react";
-import { FaUserFriends, FaUsers } from "react-icons/fa";
+import { FaUsers } from "react-icons/fa";
 import { HiOutlineClock } from "react-icons/hi";
 import { MdEventAvailable } from "react-icons/md";
 import { NavLink, Outlet } from "react-router-dom";
@@ -51,13 +51,13 @@ const Admin: any = () => {
   return (
     <div className="mx-auto max-w-[1400px]">
       <div className="drawer drawer-mobile ">
-        <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+        <input id="admin-drawer" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content p-5">
           {/* <!-- Page content here --> */}
           <Outlet></Outlet>
         </div>
         <div className="drawer-side w-48">
-          <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
+          <label htmlFor="admin-drawer" className="drawer-overlay"></label>
           <ul className="menu p-4 overflow-y-auto w-full bg-[#D6E5FA]  gap-4 font-medium">
             {/* <!-- Sidebar content here --> */}
             {sideLinks}
