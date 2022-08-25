@@ -23,7 +23,7 @@ const AllEvent = () => {
     return <Loading />;
   }
   return (
-    <div className="p-20 min-h-screen bg-gray-50">
+    <div className="p-2 md:p-20 min-h-screen mx-auto max-w-[1400px] bg-gray-50">
       <div className="card shadow-xl border bg-base-100">
         <div className="absolute">
           <div className="p-2 text-gray-400 bg-blue-50 rounded-br-xl">
