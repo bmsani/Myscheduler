@@ -1,0 +1,24 @@
+.nevEffect {
+  position: relative;
+  letter-spacing: 1px;
+  padding: 0 10px;
+}
+.nevEffect:after {
+  content: "";
+  position: absolute;
+  height: 2px;
+  width: 0%;
+  left: 0;
+  bottom: -7px;
+  transition: 0.3s;
+}
+
+.nevEffect:hover:after {
+  width: 100%;
+}
+
+.navDesign {
+  letter-spacing: 1px;
+  width: 100%;
+  padding: 0 10px 5px;
+}

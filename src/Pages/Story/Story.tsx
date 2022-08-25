@@ -25,8 +25,8 @@ const Story = () => {
     pauseOnHover: false,
   };
   return (
-    <div className="pt-8">
-      <div className="px-12">
+    <div className="mx-auto px-2 md:px-5 lg:px-20 max-w-[1400px]">
+      <div>
         <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
           <div className="grid gap-5 row-gap-10 lg:grid-cols-2 sm:grid-cols-1">
             <div className="flex flex-col mt-12 mb-6 order-2 lg:order-1">
@@ -81,7 +81,7 @@ const Story = () => {
           </div>
         </div>
         <div>
-          <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+          <div className="py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl lg:py-20">
             <div className="grid gap-5 row-gap-10 lg:grid-cols-2">
               <div>
                 <img
@@ -204,7 +204,7 @@ const Story = () => {
             </div>
           </div>
           <div>
-            <div className="card w-11/12 bg-base-100 hover:drop-shadow-2xl">
+            <div className="card bg-base-100 hover:drop-shadow-2xl">
               <figure className="px-4 pt-10">
                 <img src={summa} alt="Shoes" className="rounded-xl w-[150px]" />
               </figure>
@@ -220,7 +220,7 @@ const Story = () => {
             </div>
           </div>
           <div>
-            <div className="card w-11/12 bg-base-100 hover:drop-shadow-2xl">
+            <div className="card bg-base-100 hover:drop-shadow-2xl">
               <figure className="px-4 pt-10">
                 <img src={tesa} alt="Shoes" className="rounded-xl w-[150px]" />
               </figure>
@@ -235,7 +235,7 @@ const Story = () => {
             </div>
           </div>
           <div>
-            <div className="card w-11/12 bg-base-100 hover:drop-shadow-2xl">
+            <div className="card bg-base-100 hover:drop-shadow-2xl">
               <figure className="px-4 pt-10">
                 <img src={uvex} alt="Shoes" className="rounded-xl w-[150px]" />
               </figure>

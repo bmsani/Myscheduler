@@ -27,7 +27,7 @@ const BookingCalender = () => {
   const [click, setClick] = useState(false);
 
   const { data: singleEvent, isLoading } = useQuery(["singleEvent", id], () =>
-    fetch(`https://secure-chamber-99191.herokuapp.com/getSingleEvent/${id}`, {
+    fetch(`http://localhost:5000/getSingleEvent/${id}`, {
       method: "GET",
     }).then((res) => res.json())
   );
@@ -167,7 +167,9 @@ const BookingCalender = () => {
               </h1>
               <div className="flex gap-2 mt-4">
                 <FiClock className="text-2xl" />
-                <h2 className="font-bold text-gray-500">{singleEvent?.eventDuration} Minute</h2>
+                <h2 className="font-bold text-gray-500">
+                  {singleEvent?.eventDuration} Minute
+                </h2>
               </div>
               {startTime && endTimee && (
                 <div className="flex gap-2 mt-4">
