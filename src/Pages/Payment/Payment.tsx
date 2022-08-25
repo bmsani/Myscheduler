@@ -18,7 +18,7 @@ const Payment = () => {
     return <Loading />;
   }
   return (
-    <div>
+    <div className="px-2 py-8">
       <div className="flex justify-center items-center h-[80vh]">
         <div className="bg-base-100 border border-primary rounded-lg p-8 shadow-lg">
           <div>

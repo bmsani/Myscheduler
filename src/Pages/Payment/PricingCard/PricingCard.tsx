@@ -8,7 +8,8 @@ const PricingCard = () => {
     navigate("/payment");
   };
   return (
-    <div className="flex justify-center items-center h-[85vh]">
+    <div className="py-12 px-2">
+      <div className="flex justify-center items-center h-[85vh]">
       <div className="w-[400px] border border-primary rounded-lg">
         <div className="bg-primary rounded-t-lg text-white text-center p-8">
           <p className=" uppercase text-xl font-bold">professional</p>
@@ -61,6 +62,7 @@ const PricingCard = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };
