@@ -165,7 +165,7 @@ const Navbar = () => {
                     pathname === "/admin/userDetails" ||
                     pathname === "/admin/eventDetails" ||
                     pathname === "/admin/allBookings") && (
-                    <label htmlFor="admin-drawer" className="drawer-overlay">
+                    <label htmlFor="admin-drawer" className="drawer-overlay lg:hidden">
                       <HiMenu className="text-2xl" />
                     </label>
                   )}
