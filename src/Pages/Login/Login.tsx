@@ -37,7 +37,8 @@ const Login: React.FC = () => {
   const location = useLocation();
   const [token] = useToken(user || GUser);
 
-  let from = (location.state as LocationState)?.from?.pathname || "/dashboard";
+  let from =
+    (location.state as LocationState)?.from?.pathname || "/dashboard/allEvents";
 
   if (loading || GLoading) {
     return <Loading></Loading>;
@@ -52,12 +53,12 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="grid loginRegBg grid-cols-1 md:grid-cols-2 h-[100vh]">
-      <div className="bg-primary hidden md:flex justify-center items-center">
-        <img className="w-[550px]" src={loginImg} alt="" />
+    <div className="mx-auto px-2 md:px-5 lg:px-20 max-w-[1400px] grid grid-cols-1 md:grid-cols-2 items-center content-center py-12 bg-[#F1F3F8]">
+      <div className=" hidden md:flex justify-center items-center">
+        <img className="w-[470px]" src={loginImg} alt="" />
       </div>
-      <div className="flex justify-center bg-[#e1f7f7] pt-12">
-        <div className="w-[500px] p-5 my-12 ">
+      <div className="flex justify-center">
+        <div className="w-[400px] p-5 border border-secondary rounded-lg shadow-sm shadow-secondary bg-base-100">
           <div>
             <div className="text-primary text-center">
               <p className="text-3xl font-bold">Login</p>
@@ -68,7 +69,7 @@ const Login: React.FC = () => {
               <input
                 type="email"
                 placeholder="Your Email"
-                className="bg-[#e1f7f7] w-full border-b border-b-primary mt-4 p-2 text-1xl focus:outline-none focus:border-b-secondary"
+                className="w-full border-b border-b-primary mt-4 p-2 text-1xl focus:outline-none focus:border-b-secondary"
                 {...register("email", {
                   required: {
                     value: true,
@@ -96,7 +97,7 @@ const Login: React.FC = () => {
               <input
                 type="Password"
                 placeholder="Password"
-                className="bg-[#e1f7f7] w-full border-b border-b-primary mt-4 p-2 text-1xl focus:outline-none focus:border-b-secondary"
+                className=" w-full border-b border-b-primary mt-4 p-2 text-1xl focus:outline-none focus:border-b-secondary"
                 {...register("password", {
                   required: {
                     value: true,
@@ -121,12 +122,11 @@ const Login: React.FC = () => {
                 )}
               </label>
               <p className="text-error text-sm">
-                {(error || GError) &&
-                  (error?.message || GError?.message)}
+                {(error || GError) && (error?.message || GError?.message)}
               </p>
               <input
                 type="submit"
-                className="rounded-full text-white hover:bg-secondary bg-primary shadow-lg  duration-300 cursor-pointer mt-6 p-2 text-1xl"
+                className="rounded-full text-white hover:bg-[#3825b1] bg-secondary shadow-lg  duration-300 cursor-pointer mt-6 p-2 text-1xl"
                 value="Login"
               />
             </form>
@@ -141,11 +141,8 @@ const Login: React.FC = () => {
               </Link>
             </div>
 
-            <div className="mt-6 flex items-center gap-5">
-              <span>Or login with</span>
-              <SocialLogin
-                signInWithGoogle={signInWithGoogle}
-              />
+            <div className="mt-6 w-full">
+              <SocialLogin signInWithGoogle={signInWithGoogle} />
             </div>
           </div>
         </div>

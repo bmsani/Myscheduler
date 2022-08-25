@@ -2,6 +2,7 @@ import React, { FormEvent, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import auth from "../../../init.firebase";
+import ButtonSpinner from "../../../Shared/ButtonSpinner/ButtonSpinner";
 import GetUserInfo from "../../../Shared/GetUserInfo/GetUserInfo";
 import Loading from "../../../Shared/LoadingSpinner/Loading";
 
@@ -45,7 +46,7 @@ const Profile = () => {
             mobile: mobile,
             imageURL: imageUrl,
           };
-          const url = `https://secure-chamber-99191.herokuapp.com/updatedUser/${user?.email}`;
+          const url = `http://localhost:5000/updatedUser/${email}`;
           fetch(url, {
             method: "PUT",
             headers: {
@@ -59,12 +60,13 @@ const Profile = () => {
               if (data.acknowledged === true) {
                 toast.success("Profile successfully updated");
                 refetch();
+                setLoading(false);
               } else {
                 toast.error("Failed to update");
                 refetch();
+                setLoading(false);
               }
             });
-          setLoading(false);
         });
     } else if (userInfo?.imageURL) {
       const updatedUser = {
@@ -73,7 +75,7 @@ const Profile = () => {
         mobile: mobile,
         imageURL: userInfo?.imageURL,
       };
-      const url = `https://secure-chamber-99191.herokuapp.com/updatedUser/${user?.email}`;
+      const url = `http://localhost:5000/updatedUser/${email}`;
       fetch(url, {
         method: "PUT",
         headers: {
@@ -87,11 +89,12 @@ const Profile = () => {
           if (data.acknowledged === true) {
             toast.success("Profile successfully updated");
             refetch();
+            setLoading(false);
           } else {
             toast.error("Failed to update");
             refetch();
+            setLoading(false);
           }
-          setLoading(false);
         });
     } else {
       const updatedUser = {
@@ -99,7 +102,7 @@ const Profile = () => {
         message: message,
         mobile: mobile,
       };
-      const url = `https://secure-chamber-99191.herokuapp.com/updatedUser/${user?.email}`;
+      const url = `http://localhost:5000/updatedUser/${email}`;
       fetch(url, {
         method: "PUT",
         headers: {
@@ -113,11 +116,12 @@ const Profile = () => {
           if (data.acknowledged === true) {
             toast.success("Profile successfully updated");
             refetch();
+            setLoading(false);
           } else {
             toast.error("Failed to update");
             refetch();
+            setLoading(false);
           }
-          setLoading(false);
         });
     }
   };
@@ -126,11 +130,8 @@ const Profile = () => {
     return <Loading />;
   }
   return (
-    <div className="flex justify-center items-center py-8">
-      <form
-        onSubmit={handleProfile}
-        className="mx-2 w-full md:w-[500px] md:mx-0"
-      >
+    <div className="flex justify-center items-center">
+      <form onSubmit={handleProfile} className="w-full">
         <div className="flex items-center gap-5">
           {userInfo?.imageURL ? (
             <img
@@ -150,7 +151,7 @@ const Profile = () => {
             data-tip="Upload Image"
           >
             <label
-              className="hover:shadow hover:shadow-primary cursor-pointer w-10 h-10 rounded-full flex justify-center items-center bg-primary text-3xl  text-base-100 hover:bg-secondary duration-300 "
+              className="hover:shadow hover:shadow-primary cursor-pointer w-10 h-10 rounded-full flex justify-center items-center bg-primary text-3xl  text-base-100 hover:bg-accent duration-300 "
               htmlFor="image"
             >
               <svg
@@ -198,7 +199,7 @@ const Profile = () => {
           ></textarea>
         </div>
 
-        <div className="mt-4">
+        <div className="my-4">
           <label className="text-primary font-medium" htmlFor="mobile">
             Mobile
           </label>
@@ -210,14 +211,12 @@ const Profile = () => {
             defaultValue={userInfo?.mobile}
           />
         </div>
-        <div className="flex justify-between gap-5 mt-4">
+        <div className="flex justify-between gap-5">
           {loading ? (
-            <button className="mt-4 bg-primary py-2 px-4 rounded-lg text-white hover:shadow-md hover:shadow-secondary duration-300 cursor-pointer">
-              Loading...
-            </button>
+            <ButtonSpinner />
           ) : (
             <input
-              className="mt-4 bg-primary py-2 px-4 rounded-lg text-white hover:shadow-md hover:shadow-secondary duration-300 cursor-pointer"
+              className="bg-primary py-2 px-4 rounded-lg text-white hover:shadow-md hover:shadow-accent duration-300 cursor-pointer"
               type="submit"
               value="Save Change"
             />

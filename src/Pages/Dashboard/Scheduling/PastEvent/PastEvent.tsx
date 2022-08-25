@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import moment from "moment";
 import React from "react";
 import { FcOvertime } from "react-icons/fc";
@@ -8,22 +7,15 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../../init.firebase";
 import axios from "axios";
 import { toast } from "react-toastify";
+import GetBookedEvents from "../../../../Shared/GetBookedEvents/GetBookedEvents";
 
 const PastEvent = () => {
-  const [user] = useAuthState(auth);
   const today = moment(new Date()).format();
-  const {
-    data: bookedEvents,
-    isLoading,
-    refetch,
-  } = useQuery(["bookedEvents"], () =>
-    fetch(
-      `https://secure-chamber-99191.herokuapp.com/api/bookedEvents/${user?.email}`,
-      {
-        method: "GET",
-      }
-    ).then((res) => res.json())
-  );
+
+  const [user] = useAuthState(auth);
+  const email = user?.email;
+  const { bookedEvents, isLoading, refetch } = GetBookedEvents(email);
+
   if (isLoading) {
     <Loading />;
   }
@@ -34,9 +26,12 @@ const PastEvent = () => {
   );
   const handleDelete = (id: string) => {
     axios
-      .delete(
-        `https://secure-chamber-99191.herokuapp.com/api/bookedEventDelete/${id}`
-      )
+      .delete(`http://localhost:5000/api/bookedEventDelete/${id}`, {
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
       .then((response) => {
         if (response?.status === 200) {
           toast.error("Past event deleted");
@@ -47,7 +42,7 @@ const PastEvent = () => {
   return (
     <div>
       {pastEvents?.length ? (
-        <div className="grid grid-cols-2 gap-8 p-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8">
           {pastEvents?.map((event: any) => (
             <div className="text-primary card shadow-2xl">
               <div className="p-3 flex justify-between border bg-blue-200">
@@ -62,7 +57,7 @@ const PastEvent = () => {
                 </div>
               </div>
               <div className="p-4">
-                <div className="text-lg">
+                <div>
                   <div className="flex items-baseline justify-between gap-4">
                     <div className="w-1/2">
                       <p className="font-bold">Invitee Name</p>

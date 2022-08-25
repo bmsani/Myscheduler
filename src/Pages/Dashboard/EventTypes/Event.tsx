@@ -1,8 +1,9 @@
 import { useAuthState } from "react-firebase-hooks/auth";
-import { AiOutlinePlus } from "react-icons/ai";
+import { GoPlus } from "react-icons/go";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../../init.firebase";
+import ButtonOutline from "../../../Shared/Button/ButtonOutline";
 import GetAllEvents from "../../../Shared/GetAllEvent/GetAllEvents";
 import GetUserInfo from "../../../Shared/GetUserInfo/GetUserInfo";
 import Loading from "../../../Shared/LoadingSpinner/Loading";
@@ -15,16 +16,13 @@ const Event = () => {
   const { events, isLoading, refetch } = GetAllEvents(email);
 
   const handleDelete = (id: string) => {
-    fetch(
-      `https://secure-chamber-99191.herokuapp.com/deleteEvent/${id}?email=${email}`,
-      {
-        method: "DELETE",
-        headers: {
-          "content-type": "application/json",
-          authorization: `bearer ${localStorage.getItem("accessToken")}`,
-        },
-      }
-    )
+    fetch(`http://localhost:5000/deleteEvent/${id}?email=${email}`, {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data?.acknowledged) {
@@ -43,18 +41,18 @@ const Event = () => {
     return <Loading />;
   }
   return (
-    <div className="mr-10 ml-5 pt-12">
-      <div className="flex flex-col md:flex-row items-center justify-between">
+    <div className="">
+      <div className="flex flex-col justify-start md:flex-row md:items-center md:justify-between">
         <div className="flex items-center gap-4">
           {userInfo?.imageURL ? (
             <img
-              className="w-[50px] h-[50px] object-cover rounded-full border border-primary"
+              className="w-[60px] h-[60px] object-cover rounded-full border border-primary"
               src={userInfo?.imageURL as string}
               alt=""
             />
           ) : (
             <p className="w-[50px] h-[50px] rounded-full border border-primary p-1 flex justify-center items-center bg-gray-200">
-              <span className="text-3xl font-semibold uppercase">
+              <span className="text-4xl font-semibold uppercase">
                 {firstLetter}
               </span>
             </p>
@@ -64,28 +62,28 @@ const Event = () => {
             <Link
               target="_blank"
               to={`/allEvent/${email}`}
-              className="text-secondary"
+              className="text-accent text-xs md:text-lg"
             >
               myscheduler.com/{email}
             </Link>
           </div>
         </div>
-        <div>
+        <div className="mt-4">
           {userInfo?.refreshToken ? (
             <Link to="/createEvent">
-              <button className="mt-4 bg-primary py-2 px-4 text-white rounded-full hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer">
-                <span className="flex items-center gap-1">
-                  <AiOutlinePlus /> New Event
+              <button className="mt-4 py-2 px-4 border-[2px] border-secondary  text-secondary rounded-full hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer">
+                <span className="flex font-medium items-center gap-1">
+                  <GoPlus /> New Event
                 </span>
               </button>
             </Link>
           ) : (
             <Link to="/calenderConnection">
-              <button className="mt-4 bg-primary py-2 px-4 rounded-full text-white hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer">
+              <ButtonOutline>
                 <span className="flex items-center gap-1">
-                  <AiOutlinePlus /> New Event
+                  <GoPlus /> New Event
                 </span>
-              </button>
+              </ButtonOutline>
             </Link>
           )}
         </div>
@@ -93,17 +91,17 @@ const Event = () => {
       <div className="divider"></div>
 
       {events?.length ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-6">
           {events?.map((e: any, index: number) => (
             <div>
               {index > 1 ? (
                 <>
                   {userInfo?.paymentStatus ? (
                     <div
-                      className="card w-[300] md:w-[320px] shadow hover:shadow-xl duration-300 cursor-pointer"
+                      className="card min-w-[300px] shadow hover:shadow-xl duration-300 cursor-pointer bg-base-100"
                       key={e._id}
                     >
-                      <div className="bg-blue-500 h-2 w-full rounded-t-2xl"></div>
+                      <div className="bg-primary h-2 w-full rounded-t-2xl"></div>
                       <div className="p-5">
                         <h2 className="text-xl">{e.eventName}</h2>
                         <p className="text-sm">
@@ -112,7 +110,7 @@ const Event = () => {
                         <Link
                           target="_blank"
                           to={`/bookingCalender/${e._id}`}
-                          className="text-secondary mt-2"
+                          className="text-accent mt-2"
                         >
                           View booking page
                         </Link>
@@ -139,7 +137,7 @@ const Event = () => {
                     </div>
                   ) : (
                     <div
-                      className="card w-[300] md:w-[320px] shadow hover:shadow-xl duration-300 cursor-pointer text-gray-400"
+                      className="card min-w-[300px] shadow hover:shadow-xl duration-300 cursor-pointer text-gray-400"
                       key={e._id}
                     >
                       <div className="bg-gray-400 h-2 w-full rounded-t-2xl"></div>
@@ -153,7 +151,7 @@ const Event = () => {
                         <div className="flex justify-between">
                           <Link
                             to="/priceCart"
-                            className="mt-4 py-1 px-4 border border-primary rounded-full text-white bg-blue-500 hover:shadow-md hover:shadow-blue-500 duration-300 cursor-pointer"
+                            className="mt-4 py-1 px-4 border-2 border-secondary rounded-full text-secondary font-medium hover:shadow-md hover:shadow-secondary duration-300 cursor-pointer"
                           >
                             Pay
                           </Link>
@@ -171,10 +169,10 @@ const Event = () => {
                 </>
               ) : (
                 <div
-                  className="card w-[300] md:w-[320px] shadow hover:shadow-xl duration-300 cursor-pointer"
+                  className="card min-w-[300px] shadow hover:shadow-xl duration-300 cursor-pointer bg-base-100"
                   key={e._id}
                 >
-                  <div className="bg-blue-500 h-2 w-full rounded-t-2xl"></div>
+                  <div className="bg-primary h-2 w-full rounded-t-2xl"></div>
                   <div className="p-5">
                     <h2 className="text-xl">{e.eventName}</h2>
                     <p className="text-sm">
@@ -183,7 +181,7 @@ const Event = () => {
                     <Link
                       target="_blank"
                       to={`/bookingCalender/${e._id}`}
-                      className="text-secondary mt-2"
+                      className="text-accent mt-2"
                     >
                       View booking page
                     </Link>
@@ -213,7 +211,7 @@ const Event = () => {
           ))}
         </div>
       ) : (
-        <div className="">
+        <div>
           <h2>You don't have any event types yet.</h2>
           <p className="text-sm mt-4 font-thin">
             You'll want to add an event type to allow people to schedule with

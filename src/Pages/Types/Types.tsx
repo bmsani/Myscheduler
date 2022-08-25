@@ -7,7 +7,7 @@ import Footer from "../../Shared/Footer/Footer";
 const Types = () => {
   return (
     <section>
-      <div className="container mx-auto mb-20">
+      <div className="mx-auto px-2 md:px-5 lg:px-20 max-w-[1400px]">
         <div>
           <div>
             <div className="hero h-screen bg-base-100">
@@ -29,7 +29,7 @@ const Types = () => {
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 justify-center items-center px-5 md:px-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 justify-center items-center">
             <div className="md:order-2">
               <img
                 src={"https://i.ibb.co/dppvYJQ/assistant-meeting.webp"}
@@ -72,7 +72,7 @@ const Types = () => {
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 justify-center items-center px-5 md:px-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 justify-center items-center">
             <div className="md:order-2">
               <img src={"https://i.ibb.co/hD8kLCY/scheduling.jpg"} alt="" />
             </div>
@@ -116,7 +116,7 @@ const Types = () => {
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 justify-center items-center px-5 md:px-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 justify-center items-center">
             <div className="md:order-2">
               <img src={"https://i.ibb.co/Z8pyKWd/team-meet.jpg"} alt="" />
             </div>

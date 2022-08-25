@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import moment from "moment";
 import React from "react";
 import { GoCalendar, GoDash } from "react-icons/go";
@@ -7,18 +6,14 @@ import Loading from "../../../../Shared/LoadingSpinner/Loading";
 import { FcOvertime } from "react-icons/fc";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../../init.firebase";
+import GetBookedEvents from "../../../../Shared/GetBookedEvents/GetBookedEvents";
 
 const UpcomingEvent = () => {
-  const [user] = useAuthState(auth);
   const today = moment(new Date()).format().split("T")[0];
-  const { data: bookedEvents, isLoading } = useQuery(["bookedEvents"], () =>
-    fetch(
-      `https://secure-chamber-99191.herokuapp.com/api/bookedEvents/${user?.email}`,
-      {
-        method: "GET",
-      }
-    ).then((res) => res.json())
-  );
+  const [user] = useAuthState(auth);
+  const email = user?.email;
+  const { bookedEvents, isLoading } = GetBookedEvents(email);
+
   if (isLoading) {
     <Loading />;
   }

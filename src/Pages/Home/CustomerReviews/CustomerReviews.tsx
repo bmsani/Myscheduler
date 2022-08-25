@@ -7,7 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 const CustomerReviews = () => {
   const [reviews, setReviews] = useState([]);
   useEffect(() => {
-    fetch("https://secure-chamber-99191.herokuapp.com/reviews")
+    fetch("http://localhost:5000/reviews")
       .then((data) => data.json())
       .then((result) => setReviews(result));
   }, []);
@@ -39,18 +39,11 @@ const CustomerReviews = () => {
           initialSlide: 1,
         },
       },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
     ],
   };
   return (
-    <div className="px-10 my-20">
-      <h2 className="text-2xl md:text-3xl lg:text-4xl text-neutral text-center font-bold">
+    <div className="pb-20">
+      <h2 className="text-2xl md:text-3xl lg:text-4xl text-primary text-center font-bold mb-8">
         Our Satisfied Customers
       </h2>
       <div>

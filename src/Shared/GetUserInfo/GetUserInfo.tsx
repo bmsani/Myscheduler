@@ -6,9 +6,12 @@ const GetUserInfo = (email: any) => {
     isLoading,
     refetch,
   } = useQuery(["userInfo", email], () =>
-    fetch(`https://secure-chamber-99191.herokuapp.com/user/${email}`).then(
-      (res) => res.json()
-    )
+    fetch(`http://localhost:5000/user/${email}`, {
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }).then((res) => res.json())
   );
 
   return { userInfo, isLoading, refetch };

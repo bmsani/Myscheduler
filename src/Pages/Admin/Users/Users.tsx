@@ -9,7 +9,7 @@ const Users = () => {
     isLoading,
     refetch,
   } = useQuery(["users"], () =>
-    fetch("https://secure-chamber-99191.herokuapp.com/user", {
+    fetch("http://localhost:5000/user", {
       method: "GET",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -30,6 +30,7 @@ const Users = () => {
               <th>Email</th>
               <th>Make admin</th>
               <th>Remove user</th>
+              <th>User Details</th>
             </tr>
           </thead>
           <tbody>

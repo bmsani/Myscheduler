@@ -1,7 +1,7 @@
 import axios from "axios";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import ButtonSpinner from "../../Shared/ButtonSpinner/ButtonSpinner";
 
 const BookingConfirm = ({
   startEndTime,
@@ -9,6 +9,7 @@ const BookingConfirm = ({
   hostEmail,
   eventLocation,
 }: any) => {
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const getName = useRef<HTMLInputElement | null>(null);
   const getMessage = useRef<HTMLTextAreaElement | null>(null);
@@ -16,6 +17,7 @@ const BookingConfirm = ({
 
   const handleBooking = (event: any) => {
     event.preventDefault();
+    setLoading(true);
     const startTimeDate = startEndTime?.split("_")[0];
     const endTimeDate = startEndTime?.split("_")[1];
     const name = getName?.current?.value;
@@ -50,7 +52,7 @@ const BookingConfirm = ({
       description: eventDescription,
     };
     axios
-      .post("https://secure-chamber-99191.herokuapp.com/api/create-event", {
+      .post("http://localhost:5000/api/create-event", {
         bookingConfirm,
         hostEmail,
       })
@@ -58,15 +60,24 @@ const BookingConfirm = ({
         if (response.status === 200) {
           axios
             .post(
-              "https://secure-chamber-99191.herokuapp.com/api/createConfirmEvent",
-              confirmEvent
+              "http://localhost:5000/api/createConfirmEvent",
+              confirmEvent,
+              {
+                headers: {
+                  "content-type": "application/json",
+                  authorization: `Bearer ${localStorage.getItem(
+                    "accessToken"
+                  )}`,
+                },
+              }
             )
             .then((response) => {
-              toast.success("Event create success");
               event.target.reset();
               navigate("/eventSuccessMessage");
+              setLoading(false);
             });
         }
+        setLoading(false);
       })
       .catch((error) => console.log(error.message));
   };
@@ -117,11 +128,15 @@ const BookingConfirm = ({
         </div>
 
         <div className="flex justify-between gap-5 mt-4">
-          <input
-            className="mt-4 bg-primary py-2 px-4 rounded-lg text-white hover:shadow-md hover:shadow-secondary duration-300 cursor-pointer"
-            type="submit"
-            value="Booking Confirm"
-          />
+          {loading ? (
+            <ButtonSpinner />
+          ) : (
+            <input
+              className="bg-primary py-2 px-4 rounded-lg text-white hover:shadow-md hover:shadow-secondary duration-300 cursor-pointer"
+              type="submit"
+              value="Booking Confirm"
+            />
+          )}
         </div>
       </form>
     </div>

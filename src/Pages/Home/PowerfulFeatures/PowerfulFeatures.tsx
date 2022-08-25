@@ -20,7 +20,7 @@ const PowerfulFeatures = () => {
     },
   ];
   return (
-    <section className="w-full text-center mt-20 px-10">
+    <section className="w-full text-center mt-20">
       <div className="mb-8">
         <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-primary">
           Powerful features
@@ -30,7 +30,7 @@ const PowerfulFeatures = () => {
           customers.
         </p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
         {cardData.map((data) => (
           <PowerCard data={data} key={data.id} />
         ))}

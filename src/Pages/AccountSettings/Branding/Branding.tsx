@@ -1,27 +1,20 @@
-import { useQuery } from "@tanstack/react-query";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import auth from "../../../init.firebase";
+import ButtonSpinner from "../../../Shared/ButtonSpinner/ButtonSpinner";
+import GetUserInfo from "../../../Shared/GetUserInfo/GetUserInfo";
 import Loading from "../../../Shared/LoadingSpinner/Loading";
 import imgIcon from "../../../Utilities/icon/image.png";
 
 const Branding = () => {
   const [loading, setLoading] = useState(false);
   const [user] = useAuthState(auth);
+  const email = user?.email;
   const getImg = useRef<HTMLInputElement | null>(null);
-
   const imageStorageKey = "8c4220582d4b8f04cc8ea7c8298a1449";
 
-  const {
-    data: brandLogo,
-    isLoading,
-    refetch,
-  } = useQuery(["brandLogo", user?.email], () =>
-    fetch(
-      `https://secure-chamber-99191.herokuapp.com/user/${user?.email}`
-    ).then((res) => res.json())
-  );
+  const { userInfo, isLoading, refetch } = GetUserInfo(email);
 
   const handleImgUpload = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -43,17 +36,14 @@ const Branding = () => {
           const brandLogoLink = {
             brandLogo: imageUrl,
           };
-          fetch(
-            `https://secure-chamber-99191.herokuapp.com/brandLogo/${user?.email}`,
-            {
-              method: "PUT",
-              headers: {
-                "content-type": "application/json",
-                authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-              },
-              body: JSON.stringify(brandLogoLink),
-            }
-          )
+          fetch(`http://localhost:5000/brandLogo/${email}`, {
+            method: "PUT",
+            headers: {
+              "content-type": "application/json",
+              authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+            body: JSON.stringify(brandLogoLink),
+          })
             .then((res) => res.json())
             .then((data) => {
               if (data.acknowledged === true) {
@@ -71,13 +61,14 @@ const Branding = () => {
   if (isLoading) {
     return <Loading></Loading>;
   }
+
   return (
     <div className="w-full max-w-sm lg:max-w-md mx-auto py-8">
       <h1 className="text-2xl text-gray-600 mb-2">Logo</h1>
       <div className="w-full h-[200px] border border-gray-400 rounded">
-        {brandLogo ? (
+        {userInfo.brandLogo ? (
           <div className="h-full flex items-center justify-center">
-            <img className="w-[150px]" src={brandLogo.brandLogo} alt="" />
+            <img className="w-[150px]" src={userInfo.brandLogo} alt="" />
           </div>
         ) : (
           <div className="h-full flex items-center justify-center">
@@ -112,9 +103,7 @@ const Branding = () => {
           </label>
         </div>
         {loading ? (
-          <button className="bg-primary py-2 px-4 rounded text-white hover:shadow-md hover:shadow-secondary duration-300 cursor-pointer">
-            Loading...
-          </button>
+          <ButtonSpinner />
         ) : (
           <input
             type="submit"
