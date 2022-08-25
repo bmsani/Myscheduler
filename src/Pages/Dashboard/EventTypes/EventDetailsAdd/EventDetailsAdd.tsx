@@ -337,9 +337,11 @@ const EventDetailsAdd = ({
           </div>
           <div className="pt-3 grid place-items-end">
             <div>
-              <button className="mr-4 hover:underline text-sm font-medium">
-                Cancel
-              </button>
+              <Link to="/dashboard/allEvents">
+                <button className="mr-4 hover:underline text-sm font-medium">
+                  Cancel
+                </button>
+              </Link>
               <Link to="/dashboard/allEvents">
                 <button
                   className="px-4 py-1 rounded-full text-white bg-secondary"

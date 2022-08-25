@@ -102,17 +102,17 @@ const Event = () => {
                   {userInfo?.paymentStatus ? (
                     <div
                       className="card min-w-[300px] shadow hover:shadow-xl duration-300 cursor-pointer bg-base-100"
-                      key={e._id}
+                      key={e?._id}
                     >
                       <div className="bg-primary h-2 w-full rounded-t-2xl"></div>
                       <div className="p-5">
-                        <h2 className="text-xl">{e.eventName}</h2>
+                        <h2 className="text-xl">{e?.eventName}</h2>
                         <p className="text-sm">
-                          {e.eventDuration} mins, One-on-One
+                          {e?.eventDuration} mins, One-on-One
                         </p>
                         <Link
                           target="_blank"
-                          to={`/bookingCalender/${e._id}`}
+                          to={`/bookingCalender/${e?._id}`}
                           className="text-accent mt-2"
                         >
                           View booking page
@@ -122,7 +122,7 @@ const Event = () => {
                           <button
                             onClick={() =>
                               handleCopyToClipboard(
-                                `https://myscheduler-893bf.web.app/bookingCalender/${e._id}`
+                                `https://myscheduler-893bf.web.app/bookingCalender/${e?._id}`
                               )
                             }
                             className="mt-4 py-1 px-4 border border-primary rounded-full text-primary hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer"
@@ -131,7 +131,7 @@ const Event = () => {
                           </button>
                           <button
                             className="mt-4 py-1 px-4 border border-primary rounded-full text-primary hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer"
-                            onClick={() => handleDelete(e._id)}
+                            onClick={() => handleDelete(e?._id)}
                           >
                             Delete
                           </button>
@@ -141,13 +141,13 @@ const Event = () => {
                   ) : (
                     <div
                       className="card min-w-[300px] shadow hover:shadow-xl duration-300 cursor-pointer text-gray-400"
-                      key={e._id}
+                      key={e?._id}
                     >
                       <div className="bg-gray-400 h-2 w-full rounded-t-2xl"></div>
                       <div className="p-5">
-                        <h2 className="text-xl">{e.eventName}</h2>
+                        <h2 className="text-xl">{e?.eventName}</h2>
                         <p className="text-sm">
-                          {e.eventDuration} mins, One-on-One
+                          {e?.eventDuration} mins, One-on-One
                         </p>
                         <p>Please pay for active this Event</p>
                         <div className="divider"></div>
@@ -161,7 +161,7 @@ const Event = () => {
 
                           <button
                             className="mt-4 py-1 px-4 border border-primary rounded-full text-primary hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer"
-                            onClick={() => handleDelete(e._id)}
+                            onClick={() => handleDelete(e?._id)}
                           >
                             Delete
                           </button>
@@ -173,13 +173,13 @@ const Event = () => {
               ) : (
                 <div
                   className="card min-w-[300px] shadow hover:shadow-xl duration-300 cursor-pointer bg-base-100"
-                  key={e._id}
+                  key={e?._id}
                 >
                   <div className="bg-primary h-2 w-full rounded-t-2xl"></div>
                   <div className="p-5">
-                    <h2 className="text-xl">{e.eventName}</h2>
+                    <h2 className="text-xl">{e?.eventName}</h2>
                     <p className="text-sm">
-                      {e.eventDuration} mins, One-on-One
+                      {e?.eventDuration} mins, One-on-One
                     </p>
                     <Link
                       target="_blank"
@@ -193,7 +193,7 @@ const Event = () => {
                       <button
                         onClick={() =>
                           handleCopyToClipboard(
-                            `http://localhost:3000/bookingCalender/${e._id}`
+                            `https://myscheduler-893bf.web.app/bookingCalender/${e?._id}`
                           )
                         }
                         className="mt-4 py-1 px-4 border border-primary rounded-full text-primary hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer"
@@ -202,7 +202,7 @@ const Event = () => {
                       </button>
                       <button
                         className="mt-4 py-1 px-4 border border-primary rounded-full text-primary hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer"
-                        onClick={() => handleDelete(e._id)}
+                        onClick={() => handleDelete(e?._id)}
                       >
                         Delete
                       </button>

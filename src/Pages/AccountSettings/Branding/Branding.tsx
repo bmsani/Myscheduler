@@ -66,8 +66,8 @@ const Branding = () => {
   }
 
   return (
-    <div className="w-full max-w-sm lg:max-w-md mx-auto py-8">
-      <h1 className="text-2xl text-gray-600 mb-2">Logo</h1>
+    <div className="w-full max-w-sm lg:max-w-md mx-auto">
+      <h1 className="text-2xl text-gray-600 mb-2">Branding Logo</h1>
       <div className="w-full h-[200px] border border-gray-400 rounded">
         {userInfo.brandLogo ? (
           <div className="h-full flex items-center justify-center">
@@ -87,7 +87,7 @@ const Branding = () => {
         <div>
           <input ref={getImg} type="file" name="image" id="image" hidden />
           <label
-            className="flex items-center gap-3 border border-gray-500 py-2 px-4 rounded text-gray-500 hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer"
+            className="flex items-center gap-3 border border-gray-500 py-2 px-4 rounded-full text-gray-500 hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer"
             htmlFor="image"
           >
             <svg
@@ -106,12 +106,14 @@ const Branding = () => {
           </label>
         </div>
         {loading ? (
-          <ButtonSpinner />
+          <button className="w-[150px] bg-primary py-2 px-4 rounded-full text-white hover:shadow-md hover:shadow-secondary duration-300 cursor-pointer">
+            <ButtonSpinner />
+          </button>
         ) : (
           <input
             type="submit"
             value="Save Change"
-            className="bg-primary py-2 px-4 rounded text-white hover:shadow-md hover:shadow-secondary duration-300 cursor-pointer"
+            className="w-[150px] bg-primary py-2 px-4 rounded-full text-white hover:shadow-md hover:shadow-secondary duration-300 cursor-pointer"
           />
         )}
       </form>

@@ -111,7 +111,7 @@ const CreateIndividualEvent = () => {
               </div>
               <div className="py-4">
                 <div>
-                  <Link to="/dashboard">
+                  <Link to="/dashboard/allEvents">
                     <button className="mr-4 hover:underline text-sm font-medium">
                       Cancel
                     </button>
@@ -169,7 +169,7 @@ const CreateIndividualEvent = () => {
             </div>
             <div className="border-t grid place-items-end">
               <div className="mx-2 md:mx-8 py-4">
-                <Link to="/dashboard">
+                <Link to="/dashboard/allEvents">
                   <button className="mr-4 hover:underline text-sm font-medium">
                     Cancel
                   </button>
