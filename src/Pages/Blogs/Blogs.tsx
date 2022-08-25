@@ -15,7 +15,7 @@ const Blogs = () => {
   const [blogs, setBlogs] = useState<blogInfo[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/blogs")
+    fetch("https://secure-chamber-99191.herokuapp.com/blogs")
       .then((res) => res.json())
       .then((data) => setBlogs(data));
   }, []);

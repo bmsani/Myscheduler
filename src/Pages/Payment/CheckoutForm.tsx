@@ -15,7 +15,7 @@ const CheckoutForm = ({ userInfo }: any) => {
   const price = 99.95;
   const { _id, name, email } = userInfo;
   useEffect(() => {
-    fetch("http://localhost:5000/create-payment-intent", {
+    fetch("https://secure-chamber-99191.herokuapp.com/create-payment-intent", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -69,7 +69,7 @@ const CheckoutForm = ({ userInfo }: any) => {
         orderId: _id,
         transactionId: paymentIntent.id,
       };
-      fetch(`http://localhost:5000/user/${email}`, {
+      fetch(`https://secure-chamber-99191.herokuapp.com/user/${email}`, {
         method: "PATCH",
         headers: {
           "content-type": "application/json",

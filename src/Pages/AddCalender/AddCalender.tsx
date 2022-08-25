@@ -30,16 +30,19 @@ const AddCalender = () => {
   const responseGoogle = (response: any) => {
     const { code } = response;
     axios
-      .post("http://localhost:5000/api/create-tokens", {
+      .post("https://secure-chamber-99191.herokuapp.com/api/create-tokens", {
         code,
       })
       .then((response) => {
         const refreshToken = response?.data?.refresh_token;
         if (refreshToken) {
           axios
-            .put(`http://localhost:5000/refreshToken/${user?.email}`, {
-              refreshToken,
-            })
+            .put(
+              `https://secure-chamber-99191.herokuapp.com/refreshToken/${user?.email}`,
+              {
+                refreshToken,
+              }
+            )
             .then((res) => {
               if (res.status === 200) {
                 navigate("/createEvent");

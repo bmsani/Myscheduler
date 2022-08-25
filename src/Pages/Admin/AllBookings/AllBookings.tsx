@@ -7,9 +7,9 @@ const AllBookings = () => {
   const { data: allBookedEvents, isLoading } = useQuery(
     ["allBookedEvents"],
     () =>
-      fetch("http://localhost:5000/api/allBookedEvents").then((res) =>
-        res.json()
-      )
+      fetch(
+        "https://secure-chamber-99191.herokuapp.com/api/allBookedEvents"
+      ).then((res) => res.json())
   );
   if (isLoading) {
     return <Loading />;

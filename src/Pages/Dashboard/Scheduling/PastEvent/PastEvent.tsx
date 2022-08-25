@@ -26,12 +26,15 @@ const PastEvent = () => {
   );
   const handleDelete = (id: string) => {
     axios
-      .delete(`http://localhost:5000/api/bookedEventDelete/${id}`, {
-        headers: {
-          "content-type": "application/json",
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
+      .delete(
+        `https://secure-chamber-99191.herokuapp.com/api/bookedEventDelete/${id}`,
+        {
+          headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      )
       .then((response) => {
         if (response?.status === 200) {
           toast.error("Past event deleted");

@@ -36,14 +36,17 @@ const Branding = () => {
           const brandLogoLink = {
             brandLogo: imageUrl,
           };
-          fetch(`http://localhost:5000/brandLogo/${email}`, {
-            method: "PUT",
-            headers: {
-              "content-type": "application/json",
-              authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-            },
-            body: JSON.stringify(brandLogoLink),
-          })
+          fetch(
+            `https://secure-chamber-99191.herokuapp.com/brandLogo/${email}`,
+            {
+              method: "PUT",
+              headers: {
+                "content-type": "application/json",
+                authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+              },
+              body: JSON.stringify(brandLogoLink),
+            }
+          )
             .then((res) => res.json())
             .then((data) => {
               if (data.acknowledged === true) {

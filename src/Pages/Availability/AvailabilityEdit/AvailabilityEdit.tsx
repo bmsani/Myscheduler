@@ -12,13 +12,16 @@ const AvailabilityEdit = ({ singleDay, days, refetch }: any) => {
       newStart: start,
       newEnd: end,
     };
-    fetch(`http://localhost:5000/editAvailability/${days}/${singleId}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(timeValue),
-    })
+    fetch(
+      `https://secure-chamber-99191.herokuapp.com/editAvailability/${days}/${singleId}`,
+      {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(timeValue),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount) {

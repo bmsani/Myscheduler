@@ -6,13 +6,16 @@ const GetBookedEvents = (email: any) => {
     isLoading,
     refetch,
   } = useQuery(["bookedEvents"], () =>
-    fetch(`http://localhost:5000/api/bookedEvents/${email}`, {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    }).then((res) => res.json())
+    fetch(
+      `https://secure-chamber-99191.herokuapp.com/api/bookedEvents/${email}`,
+      {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    ).then((res) => res.json())
   );
   return { bookedEvents, isLoading, refetch };
 };

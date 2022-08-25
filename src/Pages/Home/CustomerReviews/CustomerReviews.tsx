@@ -7,7 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 const CustomerReviews = () => {
   const [reviews, setReviews] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/reviews")
+    fetch("https://secure-chamber-99191.herokuapp.com/reviews")
       .then((data) => data.json())
       .then((result) => setReviews(result));
   }, []);
