@@ -1,6 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
+import { signOut } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
+import auth from '../../init.firebase';
 
 const GetUserAvailablity = (email: any) => {
+  const navigate = useNavigate();
     const {
         data: availabilities,
         isLoading,
@@ -11,7 +15,14 @@ const GetUserAvailablity = (email: any) => {
             "content-type": "application/json",
             authorization: `Bearer ${localStorage.getItem("accessToken")}`,
           },
-        }).then((res) => res.json())
+        }).then((res) => {
+          if (res.status === 401 || res.status === 403) {
+            signOut(auth);
+            localStorage.removeItem("accessToken");
+            navigate("/login");
+          }
+          return res.json();
+        })
       );
     return {availabilities, isLoading, refetch}
 };

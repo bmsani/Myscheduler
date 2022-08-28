@@ -1,10 +1,26 @@
 import { useQuery } from "@tanstack/react-query";
+import { signOut } from "firebase/auth";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import auth from "../../../init.firebase";
 import Loading from "../../../Shared/LoadingSpinner/Loading";
 
 const EventDetails = () => {
+  const navigate = useNavigate();
   const { data: event, isLoading } = useQuery(["event"], () =>
-    fetch("http://localhost:5000/getAllEvent").then((res) => res.json())
+    fetch("http://localhost:5000/getAllEvent", {
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }).then((res) => {
+      if (res.status === 401 || res.status === 403) {
+        signOut(auth);
+        localStorage.removeItem("accessToken");
+        navigate("/login");
+      }
+      return res.json();
+    })
   );
 
   if (isLoading) {
