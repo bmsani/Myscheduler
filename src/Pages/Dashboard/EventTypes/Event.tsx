@@ -70,7 +70,7 @@ const Event = () => {
       <div className=" divider"></div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {events.map((e: any) => (
+        {events?.map((e: any) => (
           <div
             className="cart border rounded-2xl w-[300] md:w-[320px] shadow hover:shadow-xl duration-300 cursor-pointer"
             key={e._id}

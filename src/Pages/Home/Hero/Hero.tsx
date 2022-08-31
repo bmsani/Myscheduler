@@ -18,7 +18,7 @@ const Hero = () => {
             can get back to work.
           </p>
           <Link to="/register">
-            <Button><span>Get Start</span></Button>
+            <Button data-testid1="login-button1"><span>Get Start</span></Button>
           </Link>
         </div>
         <div></div>

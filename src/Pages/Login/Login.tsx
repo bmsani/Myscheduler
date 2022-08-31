@@ -129,6 +129,7 @@ const Login: React.FC = () => {
               </p>
               <input
                 type="submit"
+                data-testid="login-button"
                 className="rounded-full text-white hover:bg-secondary bg-primary shadow-lg  duration-300 cursor-pointer mt-6 p-2 text-1xl"
                 value="Login"
               />
