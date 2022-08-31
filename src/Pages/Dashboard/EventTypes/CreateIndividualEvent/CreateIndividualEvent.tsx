@@ -10,10 +10,10 @@ import GetUserAvailablity from "../../../../Shared/GetUserAvailablity/GetUserAva
 import ButtonOutline from "../../../../Shared/Button/ButtonOutline";
 
 const CreateIndividualEvent = () => {
-  const [eventName, setEventName] = useState("");
-  const [eventDescription, setEventDescription] = useState("");
-  const [eventId, setEventId] = useState("");
-  const [next, setNext] = useState(false);
+  const [eventName, setEventName] = useState<string>("");
+  const [eventDescription, setEventDescription] = useState<string>("");
+  const [eventId, setEventId] = useState<string>("");
+  const [next, setNext] = useState<boolean>(false);
   const durationRef = useRef<HTMLInputElement | null>(null);
   const [user] = useAuthState(auth);
   const email = user?.email;

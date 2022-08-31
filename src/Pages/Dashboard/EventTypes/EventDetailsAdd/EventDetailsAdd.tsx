@@ -6,6 +6,16 @@ import auth from "../../../../init.firebase";
 import Loading from "../../../../Shared/LoadingSpinner/Loading";
 import ButtonOutline from "../../../../Shared/Button/ButtonOutline";
 
+interface eventDetailsProps {
+  eventName: string;
+  availabilities: any;
+  refetch: any;
+  setEventId: any;
+  eventId: string;
+  durationRef: any;
+  handleEvent: any;
+}
+
 const EventDetailsAdd = ({
   eventName,
   availabilities,
@@ -14,7 +24,7 @@ const EventDetailsAdd = ({
   eventId,
   durationRef,
   handleEvent,
-}: any) => {
+}: eventDetailsProps) => {
   const [availabilityModify, setAvailabilityModify] = useState(false);
   const [eventAvailability, setEventAvailability] = useState<any>({});
   const [user, loading] = useAuthState(auth);
@@ -57,7 +67,7 @@ const EventDetailsAdd = ({
   if (loading) {
     return <Loading></Loading>;
   }
-  console.log(durationRef?.current?.value);
+
   return (
     <div>
       <div>
