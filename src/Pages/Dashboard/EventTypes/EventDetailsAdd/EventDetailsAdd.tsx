@@ -15,7 +15,7 @@ const EventDetailsAdd = ({
   durationRef,
   handleEvent,
 }: any) => {
-  const [availabilityModify, setAvailabilityModify] = useState(false);
+  const [availabilityModify, setAvailabilityModify] = useState<boolean>(false);
   const [eventAvailability, setEventAvailability] = useState<any>({});
   const [user, loading] = useAuthState(auth);
   const email = user?.email;
