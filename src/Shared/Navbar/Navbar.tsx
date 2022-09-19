@@ -10,11 +10,13 @@ import useAdmin from "../../Hooks/useAdmin";
 import ButtonOutline from "../Button/ButtonOutline";
 import "./Navbar.css";
 import auth from "../../init.firebase";
+import GetUserInfo from "../GetUserInfo/GetUserInfo";
 
 const Navbar = () => {
   const [user, loading] = useAuthState(auth);
   const email = user?.email;
   const { admin, isLoading } = useAdmin(email);
+  const { userInfo, refetch } = GetUserInfo(email);
   const { pathname } = useLocation();
 
   const [nav, setNev] = useState(false);
@@ -49,7 +51,7 @@ const Navbar = () => {
   }, [pathname, anotherRouteColorChange]);
 
   if (loading || isLoading) {
-    return <Loading />;
+    return <p className="hidden">Loading...</p>;
   }
 
   const handleSignOut = () => {
@@ -127,7 +129,7 @@ const Navbar = () => {
       </p>
     </>
   );
-  const firstLetter = user?.displayName?.slice(0, 1);
+  const firstLetter = userInfo?.name?.slice(0, 1);
 
   return (
     <div className={nav === true ? "sticky top-0 z-50" : ""}>

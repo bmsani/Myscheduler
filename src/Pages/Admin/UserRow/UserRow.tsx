@@ -47,7 +47,7 @@ const UserRow = ({ user, refetch, index }: any) => {
   };
 
   if (isLoading) {
-    return <Loading />;
+    return <p className="hidden">Loading...</p>;
   }
   return (
     <>
@@ -62,9 +62,11 @@ const UserRow = ({ user, refetch, index }: any) => {
           )}
         </td>
         <td>
-          <button className="btn btn-xs" onClick={() => removeUser(user._id)}>
-            Remove user
-          </button>
+          {role !== "admin" && (
+            <button className="btn btn-xs" onClick={() => removeUser(user._id)}>
+              Remove user
+            </button>
+          )}
         </td>
         <td>
           <label
