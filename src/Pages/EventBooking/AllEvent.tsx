@@ -23,7 +23,7 @@ const AllEvent = () => {
     return <Loading />;
   }
   return (
-    <div className="p-20 min-h-screen bg-gray-50">
+    <div className="p-2 md:p-20 min-h-screen mx-auto max-w-[1400px] bg-gray-50">
       <div className="card shadow-xl border bg-base-100">
         <div className="absolute">
           <div className="p-2 text-gray-400 bg-blue-50 rounded-br-xl">
@@ -40,25 +40,54 @@ const AllEvent = () => {
         </div>
         {events.length ? (
           <div className="w-4/5 mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 py-16">
-            {events?.map((e: any) => (
-              <Link to={`/bookingCalender/${e._id}`} key={e._id}>
-                <div className="w-full border-t cursor-pointer hover:bg-gray-100 duration-300">
-                  <div className="p-5">
-                    <div className="flex items-center justify-between">
-                      <span className="flex items-center gap-2">
-                        <BsCircleFill className="w-[25px] h-[25px] text-violet-600" />
-                        <h2 className="text-xl font-semibold">
-                          {e?.eventName}
-                        </h2>
-                      </span>
-                      <span>
-                        <AiFillCaretRight className="w-[25px] h-[25px]" />
-                      </span>
+            {events?.map((e: any, index: number) => (
+              <div>
+                {index > 1 ? (
+                  <>
+                    {singleUser?.paymentStatus && (
+                      <Link to={`/bookingCalender/${e._id}`} key={e._id}>
+                        <div className="w-full border-t cursor-pointer hover:bg-gray-100 duration-300">
+                          <div className="p-5">
+                            <div className="flex items-center justify-between">
+                              <span className="flex items-center gap-2">
+                                <BsCircleFill className="w-[25px] h-[25px] text-violet-600" />
+                                <h2 className="text-xl font-semibold">
+                                  {e?.eventName}
+                                </h2>
+                              </span>
+                              <span>
+                                <AiFillCaretRight className="w-[25px] h-[25px]" />
+                              </span>
+                            </div>
+                            <p className="mt-6 font-thin">
+                              {e?.eventDescription}
+                            </p>
+                          </div>
+                        </div>
+                      </Link>
+                    )}
+                  </>
+                ) : (
+                  <Link to={`/bookingCalender/${e._id}`} key={e._id}>
+                    <div className="w-full border-t cursor-pointer hover:bg-gray-100 duration-300">
+                      <div className="p-5">
+                        <div className="flex items-center justify-between">
+                          <span className="flex items-center gap-2">
+                            <BsCircleFill className="w-[25px] h-[25px] text-violet-600" />
+                            <h2 className="text-xl font-semibold">
+                              {e?.eventName}
+                            </h2>
+                          </span>
+                          <span>
+                            <AiFillCaretRight className="w-[25px] h-[25px]" />
+                          </span>
+                        </div>
+                        <p className="mt-6 font-thin">{e?.eventDescription}</p>
+                      </div>
                     </div>
-                    <p className="mt-6 font-thin">{e?.eventDescription}</p>
-                  </div>
-                </div>
-              </Link>
+                  </Link>
+                )}
+              </div>
             ))}
           </div>
         ) : (

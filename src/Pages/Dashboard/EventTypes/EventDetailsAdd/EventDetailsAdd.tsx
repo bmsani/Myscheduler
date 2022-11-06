@@ -156,7 +156,7 @@ const EventDetailsAdd = ({
                     type="text"
                     readOnly
                     onClick={() => setAvailabilityModify(true)}
-                    value={"Set custom hours"}
+                    value={"Set custom day"}
                   />
                 </div>
               </div>
