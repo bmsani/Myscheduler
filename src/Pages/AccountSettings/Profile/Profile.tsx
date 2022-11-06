@@ -19,7 +19,7 @@ const Profile = () => {
   const getMobile = useRef<HTMLInputElement | null>(null);
   const getImg = useRef<HTMLInputElement | null>(null);
 
-  const firstLetter = user?.displayName?.slice(0, 1);
+  const firstLetter = userInfo?.name?.slice(0, 1);
 
   const handleProfile = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

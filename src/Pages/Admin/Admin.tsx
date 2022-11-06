@@ -58,7 +58,7 @@ const Admin: any = () => {
         </div>
         <div className="drawer-side w-48">
           <label htmlFor="admin-drawer" className="drawer-overlay"></label>
-          <ul className="menu p-4 overflow-y-auto w-full bg-[#D6E5FA]  gap-4 font-medium">
+          <ul className="menu p-4 pt-6 overflow-y-auto w-full bg-[#D6E5FA]  gap-4 font-medium">
             {/* <!-- Sidebar content here --> */}
             {sideLinks}
           </ul>

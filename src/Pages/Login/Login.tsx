@@ -70,6 +70,7 @@ const Login: React.FC = () => {
                 type="email"
                 placeholder="Your Email"
                 className="w-full border-b border-b-primary mt-4 p-2 text-1xl focus:outline-none focus:border-b-secondary"
+                defaultValue="admin@gmail.com"
                 {...register("email", {
                   required: {
                     value: true,
@@ -98,6 +99,7 @@ const Login: React.FC = () => {
                 type="Password"
                 placeholder="Password"
                 className=" w-full border-b border-b-primary mt-4 p-2 text-1xl focus:outline-none focus:border-b-secondary"
+                defaultValue="123456"
                 {...register("password", {
                   required: {
                     value: true,

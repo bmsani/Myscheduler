@@ -1,15 +1,29 @@
 import { useQuery } from "@tanstack/react-query";
+import { signOut } from "firebase/auth";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import auth from "../../../init.firebase";
 import Loading from "../../../Shared/LoadingSpinner/Loading";
 import AllBookingRow from "./AllBookingRow";
 
 const AllBookings = () => {
+  const navigate = useNavigate();
   const { data: allBookedEvents, isLoading } = useQuery(
     ["allBookedEvents"],
     () =>
-      fetch(
-        "https://secure-chamber-99191.herokuapp.com/api/allBookedEvents"
-      ).then((res) => res.json())
+      fetch("https://secure-chamber-99191.herokuapp.com/api/allBookedEvents", {
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }).then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          signOut(auth);
+          localStorage.removeItem("accessToken");
+          navigate("/login");
+        }
+        return res.json();
+      })
   );
   if (isLoading) {
     return <Loading />;
