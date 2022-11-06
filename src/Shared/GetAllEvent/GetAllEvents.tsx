@@ -4,13 +4,13 @@ import { useNavigate } from "react-router-dom";
 import auth from "../../init.firebase";
 
 const GetAllEvents = (email: any) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const {
     data: events,
     isLoading,
     refetch,
   } = useQuery(["events", email], () =>
-    fetch(`http://localhost:5000/getEvent/${email}`, {
+    fetch(`https://secure-chamber-99191.herokuapp.com/getEvent/${email}`, {
       headers: {
         "content-type": "application/json",
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

@@ -46,7 +46,7 @@ const Profile = () => {
             mobile: mobile,
             imageURL: imageUrl,
           };
-          const url = `http://localhost:5000/updatedUser/${email}`;
+          const url = `https://secure-chamber-99191.herokuapp.com/updatedUser/${email}`;
           fetch(url, {
             method: "PUT",
             headers: {
@@ -75,7 +75,7 @@ const Profile = () => {
         mobile: mobile,
         imageURL: userInfo?.imageURL,
       };
-      const url = `http://localhost:5000/updatedUser/${email}`;
+      const url = `https://secure-chamber-99191.herokuapp.com/updatedUser/${email}`;
       fetch(url, {
         method: "PUT",
         headers: {
@@ -102,7 +102,7 @@ const Profile = () => {
         message: message,
         mobile: mobile,
       };
-      const url = `http://localhost:5000/updatedUser/${email}`;
+      const url = `https://secure-chamber-99191.herokuapp.com/updatedUser/${email}`;
       fetch(url, {
         method: "PUT",
         headers: {

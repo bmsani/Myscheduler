@@ -11,7 +11,7 @@ const AllBookings = () => {
   const { data: allBookedEvents, isLoading } = useQuery(
     ["allBookedEvents"],
     () =>
-      fetch("http://localhost:5000/api/allBookedEvents", {
+      fetch("https://secure-chamber-99191.herokuapp.com/api/allBookedEvents", {
         headers: {
           "content-type": "application/json",
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,

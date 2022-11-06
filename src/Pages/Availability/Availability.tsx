@@ -26,14 +26,13 @@ const Availability = () => {
 
   const email = user?.email;
 
-  const {availabilities, isLoading, refetch} = GetUserAvailablity(email)
-
+  const { availabilities, isLoading, refetch } = GetUserAvailablity(email);
 
   const handleCheckedBox = (id: string, checkedBox: boolean) => {
     const daysId = availabilities._id;
     const individualId = id;
     fetch(
-      `http://localhost:5000/availability/checked/${daysId}?dayStatus=${!checkedBox}&dayDataId=${individualId}&email=${email}`,
+      `https://secure-chamber-99191.herokuapp.com/availability/checked/${daysId}?dayStatus=${!checkedBox}&dayDataId=${individualId}&email=${email}`,
       {
         method: "PUT",
         headers: {
@@ -56,14 +55,16 @@ const Availability = () => {
 
   const handleAdd = async (daysId: string, dayId: string) => {
     const response = await fetch(
-      `http://localhost:5000/availability/${daysId}/${dayId}`
+      `https://secure-chamber-99191.herokuapp.com/availability/${daysId}/${dayId}`
     );
     const data = await response.json();
     setSingleDay(data);
   };
 
   const handleEdit = async (daysId: string, dayId: string) => {
-    fetch(`http://localhost:5000/availability/${daysId}/${dayId}`)
+    fetch(
+      `https://secure-chamber-99191.herokuapp.com/availability/${daysId}/${dayId}`
+    )
       .then((res) => res.json())
       .then((data) => setSingleDay(data));
   };
@@ -123,7 +124,9 @@ const Availability = () => {
                         <label htmlFor="edit-modal">
                           <BiEdit
                             className="text-5xl p-3 cursor-pointer text-center"
-                            onClick={() => handleEdit(availabilities._id, day.id)}
+                            onClick={() =>
+                              handleEdit(availabilities._id, day.id)
+                            }
                           />
                           <AvailabilityEdit
                             singleDay={singleDay}
@@ -144,7 +147,9 @@ const Availability = () => {
                       {day.checked && (
                         <label htmlFor="add-modal">
                           <BiMessageSquareEdit
-                            onClick={() => handleAdd(availabilities._id, day.id)}
+                            onClick={() =>
+                              handleAdd(availabilities._id, day.id)
+                            }
                             className="text-5xl p-3 cursor-pointer"
                           />
                           <IntervalEdit
