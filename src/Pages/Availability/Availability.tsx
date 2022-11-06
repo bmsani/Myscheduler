@@ -74,9 +74,8 @@ const Availability = () => {
       <h2 className="text-primary text-xl md:text-3xl font-bold text-center pt-5 uppercase tracking-wide ">
         availability
       </h2>
-
       <div>
-        <h4 className="text-gray-500 text-sm md:text-lg text-center pb-2 border-b border-b-primary w-full mx-auto">
+        <h4 className="text-gray-500 text-sm md:text-lg text-center pb-4 border-b border-b-primary w-full mx-auto">
           Setup your working days and times
         </h4>
         <div className="mt-6">
