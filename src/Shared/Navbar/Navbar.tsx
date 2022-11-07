@@ -11,12 +11,13 @@ import ButtonOutline from "../Button/ButtonOutline";
 import "./Navbar.css";
 import auth from "../../init.firebase";
 import GetUserInfo from "../GetUserInfo/GetUserInfo";
+import { FaUserCircle } from "react-icons/fa";
 
 const Navbar = () => {
   const [user, loading] = useAuthState(auth);
   const email = user?.email;
   const { admin, isLoading } = useAdmin(email);
-  const { userInfo, refetch } = GetUserInfo(email);
+  // const { userInfo, refetch } = GetUserInfo(email);
   const { pathname } = useLocation();
 
   const [nav, setNev] = useState(false);
@@ -129,12 +130,12 @@ const Navbar = () => {
       </p>
     </>
   );
-  const firstLetter = userInfo?.name?.slice(0, 1);
+  // const firstLetter = userInfo?.name?.slice(0, 1);
 
   return (
     <div className={nav === true ? "sticky top-0 z-50" : ""}>
       {user ? (
-        <div className="bg-base-100 shadow-lg lg:px-4">
+        <div className="bg-base-100 shadow-lg shadow-secondary/5 lg:px-4">
           <div className="navbar mx-auto max-w-[1400px]">
             <div className="flex-1 hidden md:block">
               <div className="w-3/4 lg:w-1/2 md:w-3/5 justify-start">
@@ -167,7 +168,10 @@ const Navbar = () => {
                     pathname === "/admin/userDetails" ||
                     pathname === "/admin/eventDetails" ||
                     pathname === "/admin/allBookings") && (
-                    <label htmlFor="admin-drawer" className="drawer-overlay lg:hidden">
+                    <label
+                      htmlFor="admin-drawer"
+                      className="drawer-overlay lg:hidden"
+                    >
                       <HiMenu className="text-2xl" />
                     </label>
                   )}
@@ -219,16 +223,17 @@ const Navbar = () => {
                       >
                         <BiDownArrow />
                         <div className="w-8 rounded-full ">
-                          <p className="w-full rounded-full border border-primary p-1 flex justify-center items-center bg-gray-200">
-                            <span className="text-md font-semibold">
+                          <span>
+                            {/* <span className="text-md font-semibold">
                               {firstLetter}
-                            </span>
-                          </p>
+                            </span> */}
+                            <FaUserCircle className="w-6 h-6" />
+                          </span>
                         </div>
                       </label>
                       <ul
                         tabIndex={0}
-                        className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+                        className="mt-4 dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
                       >
                         <li>
                           <Link
@@ -248,7 +253,7 @@ const Navbar = () => {
                         </li>
                         <li>
                           <button
-                            className="w-full font-semibold"
+                            className="my-4 ml-4 px-6 py-2 w-fit bg-primary text-white font-bold text-center"
                             onClick={handleSignOut}
                           >
                             Logout

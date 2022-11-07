@@ -44,8 +44,8 @@ const Event = () => {
     return <Loading />;
   }
   return (
-    <div className="">
-      <div className="flex flex-col justify-start md:flex-row md:items-center md:justify-between">
+    <div>
+      <div className="lg:mt-2 flex flex-col justify-start md:flex-row md:items-center md:justify-between">
         <div className="flex items-center gap-4">
           {userInfo?.imageURL ? (
             <img
@@ -61,7 +61,9 @@ const Event = () => {
             </p>
           )}
           <div>
-            <p>{user?.displayName}</p>
+            <p className="font-semibold md:text-xl capitalize">
+              {user?.displayName}
+            </p>
             <Link
               target="_blank"
               to={`/allEvent/${email}`}
@@ -71,10 +73,10 @@ const Event = () => {
             </Link>
           </div>
         </div>
-        <div className="mt-4">
+        <div className="mt-4 md:mt-0">
           {userInfo?.refreshToken ? (
             <Link to="/createEvent">
-              <button className="mt-4 py-2 px-4 border-[2px] border-secondary  text-secondary rounded-full hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer">
+              <button className="mt-4 md:mt-0 py-2 px-4 border-[2px] border-secondary  text-secondary rounded-full hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer">
                 <span className="flex font-medium items-center gap-1">
                   <GoPlus /> New Event
                 </span>
@@ -118,19 +120,19 @@ const Event = () => {
                           View booking page
                         </Link>
                         <div className="divider"></div>
-                        <div className="flex justify-between">
+                        <div className="mt-4 flex justify-between">
                           <button
                             onClick={() =>
                               handleCopyToClipboard(
                                 `https://myscheduler-893bf.web.app/bookingCalender/${e?._id}`
                               )
                             }
-                            className="mt-4 py-1 px-4 border border-primary rounded-full text-primary hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer"
+                            className="py-1 px-4 border border-primary rounded-full text-primary hover:border-green-500 hover:text-green-500 duration-300 cursor-pointer"
                           >
                             Copy
                           </button>
                           <button
-                            className="mt-4 py-1 px-4 border border-primary rounded-full text-primary hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer"
+                            className="py-1 px-4 border border-primary rounded-full text-primary hover:border-red-400 hover:text-red-400 duration-300 cursor-pointer"
                             onClick={() => handleDelete(e?._id)}
                           >
                             Delete
@@ -151,16 +153,16 @@ const Event = () => {
                         </p>
                         <p>Please pay for active this Event</p>
                         <div className="divider"></div>
-                        <div className="flex justify-between">
+                        <div className="mt-4 flex justify-between">
                           <Link
                             to="/priceCart"
-                            className="mt-4 py-1 px-4 border-2 border-secondary rounded-full text-secondary font-medium hover:shadow-md hover:shadow-secondary duration-300 cursor-pointer"
+                            className="py-1 px-4 border-2 border-secondary rounded-full text-secondary font-medium hover:border-green-500 hover:text-green-500 cursor-pointer"
                           >
                             Pay
                           </Link>
 
                           <button
-                            className="mt-4 py-1 px-4 border border-primary rounded-full text-primary hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer"
+                            className="py-1 px-4 border border-primary rounded-full text-primary hover:border-red-400 hover:text-red-400 duration-300 cursor-pointer"
                             onClick={() => handleDelete(e?._id)}
                           >
                             Delete
@@ -189,19 +191,19 @@ const Event = () => {
                       View booking page
                     </Link>
                     <div className="divider"></div>
-                    <div className="flex justify-between">
+                    <div className="mt-4 flex justify-between">
                       <button
                         onClick={() =>
                           handleCopyToClipboard(
                             `https://myscheduler-893bf.web.app/bookingCalender/${e?._id}`
                           )
                         }
-                        className="mt-4 py-1 px-4 border border-primary rounded-full text-primary hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer"
+                        className="py-1 px-4 border border-primary rounded-full text-primary hover:border-green-500 hover:text-green-500 duration-300 cursor-pointer"
                       >
                         Copy
                       </button>
                       <button
-                        className="mt-4 py-1 px-4 border border-primary rounded-full text-primary hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer"
+                        className="py-1 px-4 border border-primary rounded-full text-primary hover:border-red-400 hover:text-red-400 duration-300 cursor-pointer"
                         onClick={() => handleDelete(e?._id)}
                       >
                         Delete
