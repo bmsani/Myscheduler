@@ -88,18 +88,22 @@ const Branding = () => {
     <div className="w-full max-w-sm lg:max-w-md mx-auto">
       <h1 className="text-2xl text-gray-600 mb-2">Branding Logo</h1>
       <div className="w-full h-[200px] border border-gray-400 rounded">
-        {userInfo.brandLogo ? (
+        {preview ? (
           <div className="h-full flex items-center justify-center">
-            <img className="w-[150px]" src={userInfo.brandLogo} alt="" />
+            <img className="w-[150px]" src={preview} alt="" />
           </div>
         ) : (
-          <div className="h-full flex items-center justify-center">
-            {preview ? (
-              <img className="w-[150px]" src={preview} alt="" />
+          <>
+            {userInfo.brandLogo ? (
+              <div className="h-full flex items-center justify-center">
+                <img className="w-[150px]" src={userInfo.brandLogo} alt="" />
+              </div>
             ) : (
-              <img className="w-32" src={imgIcon} alt="" />
+              <div className="h-full flex items-center justify-center">
+                <img className="w-[150px]" src={imgIcon} alt="" />
+              </div>
             )}
-          </div>
+          </>
         )}
       </div>
 
