@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import auth from "../../../init.firebase";
@@ -9,12 +9,32 @@ import imgIcon from "../../../Utilities/icon/image.png";
 
 const Branding = () => {
   const [loading, setLoading] = useState(false);
+  const [selectedFile, setSelectedFile] = useState();
+  const [preview, setPreview] = useState();
   const [user] = useAuthState(auth);
   const email = user?.email;
   const getImg = useRef<HTMLInputElement | null>(null);
   const imageStorageKey = "8c4220582d4b8f04cc8ea7c8298a1449";
 
   const { userInfo, isLoading, refetch } = GetUserInfo(email);
+
+  useEffect(() => {
+    if (!selectedFile) {
+      setPreview(undefined);
+      return;
+    }
+    const objectUrl: any = URL.createObjectURL(selectedFile);
+    setPreview(objectUrl);
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [selectedFile]);
+
+  const onSelectFile = (e: any) => {
+    if (!e.target.files || e.target.files.length === 0) {
+      setSelectedFile(undefined);
+      return;
+    }
+    setSelectedFile(e.target.files[0]);
+  };
 
   const handleImgUpload = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -64,7 +84,6 @@ const Branding = () => {
   if (isLoading) {
     return <Loading></Loading>;
   }
-
   return (
     <div className="w-full max-w-sm lg:max-w-md mx-auto">
       <h1 className="text-2xl text-gray-600 mb-2">Branding Logo</h1>
@@ -75,7 +94,11 @@ const Branding = () => {
           </div>
         ) : (
           <div className="h-full flex items-center justify-center">
-            <img className="w-32" src={imgIcon} alt="" />
+            {preview ? (
+              <img className="w-[150px]" src={preview} alt="" />
+            ) : (
+              <img className="w-32" src={imgIcon} alt="" />
+            )}
           </div>
         )}
       </div>
@@ -85,7 +108,14 @@ const Branding = () => {
         className="flex justify-between items-center mt-6"
       >
         <div>
-          <input ref={getImg} type="file" name="image" id="image" hidden />
+          <input
+            onChange={onSelectFile}
+            ref={getImg}
+            type="file"
+            name="image"
+            id="image"
+            hidden
+          />
           <label
             className="flex items-center gap-3 border border-gray-500 py-2 px-4 rounded-full text-gray-500 hover:shadow-md hover:shadow-gray-500 duration-300 cursor-pointer"
             htmlFor="image"

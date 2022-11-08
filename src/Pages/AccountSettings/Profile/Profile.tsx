@@ -141,7 +141,7 @@ const Profile = () => {
             />
           ) : (
             <p className="w-[120px] h-[120px] rounded-full border border-primary p-1 flex justify-center items-center bg-gray-200">
-              <span className="text-8xl font-semibold">{firstLetter}</span>
+              <span className="text-8xl font-semibold uppercase">{firstLetter}</span>
             </p>
           )}
 

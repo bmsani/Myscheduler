@@ -47,7 +47,6 @@ const ReviewInput = () => {
   if (loading || isLoading) {
     return <Loading />;
   }
-  console.log(starRating);
   return (
     <div className="flex justify-center items-center pt-14">
       <form
