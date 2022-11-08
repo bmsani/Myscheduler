@@ -10,14 +10,12 @@ import useAdmin from "../../Hooks/useAdmin";
 import ButtonOutline from "../Button/ButtonOutline";
 import "./Navbar.css";
 import auth from "../../init.firebase";
-import GetUserInfo from "../GetUserInfo/GetUserInfo";
 import { FaUserCircle } from "react-icons/fa";
 
 const Navbar = () => {
   const [user, loading] = useAuthState(auth);
   const email = user?.email;
   const { admin, isLoading } = useAdmin(email);
-  // const { userInfo, refetch } = GetUserInfo(email);
   const { pathname } = useLocation();
 
   const [nav, setNev] = useState(false);
@@ -130,7 +128,6 @@ const Navbar = () => {
       </p>
     </>
   );
-  // const firstLetter = userInfo?.name?.slice(0, 1);
 
   return (
     <div className={nav === true ? "sticky top-0 z-50" : ""}>
@@ -224,9 +221,6 @@ const Navbar = () => {
                         <BiDownArrow />
                         <div className="w-8 rounded-full ">
                           <span>
-                            {/* <span className="text-md font-semibold">
-                              {firstLetter}
-                            </span> */}
                             <FaUserCircle className="w-6 h-6" />
                           </span>
                         </div>
