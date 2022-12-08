@@ -8,7 +8,7 @@ import Loading from "../../../Shared/LoadingSpinner/Loading";
 const EventDetails = () => {
   const navigate = useNavigate();
   const { data: event, isLoading } = useQuery(["event"], () =>
-    fetch("https://secure-chamber-99191.herokuapp.com/getAllEvent", {
+    fetch("https://myscheduler-server.onrender.com/getAllEvent", {
       headers: {
         "content-type": "application/json",
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

@@ -12,7 +12,7 @@ const AllEvent = () => {
   const { singleUser } = GetUserForInvitee(email);
 
   const { data: events, isLoading } = useQuery(["events", email], () =>
-    fetch(`https://secure-chamber-99191.herokuapp.com/getUserEvents/${email}`, {
+    fetch(`https://myscheduler-server.onrender.com/getUserEvents/${email}`, {
       headers: {
         "content-type": "application/json",
       },

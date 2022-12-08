@@ -10,7 +10,7 @@ const GetUserInfo = (email: any) => {
     isLoading,
     refetch,
   } = useQuery(["userInfo", email], () =>
-    fetch(`https://secure-chamber-99191.herokuapp.com/user/${email}`, {
+    fetch(`https://myscheduler-server.onrender.com/user/${email}`, {
       headers: {
         "content-type": "application/json",
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

@@ -10,7 +10,7 @@ const GetUserAvailablity = (email: any) => {
     isLoading,
     refetch,
   } = useQuery(["availabilities", email], () =>
-    fetch(`https://secure-chamber-99191.herokuapp.com/availability/${email}`, {
+    fetch(`https://myscheduler-server.onrender.com/availability/${email}`, {
       headers: {
         "content-type": "application/json",
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

@@ -17,7 +17,7 @@ const Event = () => {
 
   const handleDelete = (id: string) => {
     fetch(
-      `https://secure-chamber-99191.herokuapp.com/deleteEvent/${id}?email=${email}`,
+      `https://myscheduler-server.onrender.com/deleteEvent/${id}?email=${email}`,
       {
         method: "DELETE",
         headers: {

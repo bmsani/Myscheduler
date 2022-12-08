@@ -10,16 +10,13 @@ const GetBookedEvents = (email: any) => {
     isLoading,
     refetch,
   } = useQuery(["bookedEvents"], () =>
-    fetch(
-      `https://secure-chamber-99191.herokuapp.com/api/bookedEvents/${email}`,
-      {
-        method: "GET",
-        headers: {
-          "content-type": "application/json",
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      }
-    ).then((res) => {
+    fetch(`https://myscheduler-server.onrender.com/api/bookedEvents/${email}`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }).then((res) => {
       if (res.status === 401 || res.status === 403) {
         signOut(auth);
         localStorage.removeItem("accessToken");

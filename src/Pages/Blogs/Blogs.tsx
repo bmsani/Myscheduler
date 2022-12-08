@@ -15,7 +15,7 @@ const Blogs = () => {
   const [blogs, setBlogs] = useState<blogInfo[]>([]);
 
   useEffect(() => {
-    fetch("https://secure-chamber-99191.herokuapp.com/blogs")
+    fetch("https://myscheduler-server.onrender.com/blogs")
       .then((res) => res.json())
       .then((data) => setBlogs(data));
   }, []);

@@ -26,7 +26,7 @@ const ReviewInput = () => {
     const rating = starRating;
     const reviewInfo = { name, image, position, review, rating };
 
-    fetch(`https://secure-chamber-99191.herokuapp.com/review`, {
+    fetch(`https://myscheduler-server.onrender.com/review`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

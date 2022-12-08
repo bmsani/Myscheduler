@@ -32,7 +32,7 @@ const Availability = () => {
     const daysId = availabilities._id;
     const individualId = id;
     fetch(
-      `https://secure-chamber-99191.herokuapp.com/availability/checked/${daysId}?dayStatus=${!checkedBox}&dayDataId=${individualId}&email=${email}`,
+      `https://myscheduler-server.onrender.com/availability/checked/${daysId}?dayStatus=${!checkedBox}&dayDataId=${individualId}&email=${email}`,
       {
         method: "PUT",
         headers: {
@@ -55,7 +55,7 @@ const Availability = () => {
 
   const handleAdd = async (daysId: string, dayId: string) => {
     const response = await fetch(
-      `https://secure-chamber-99191.herokuapp.com/availability/${daysId}/${dayId}`
+      `https://myscheduler-server.onrender.com/availability/${daysId}/${dayId}`
     );
     const data = await response.json();
     setSingleDay(data);
@@ -63,7 +63,7 @@ const Availability = () => {
 
   const handleEdit = async (daysId: string, dayId: string) => {
     fetch(
-      `https://secure-chamber-99191.herokuapp.com/availability/${daysId}/${dayId}`
+      `https://myscheduler-server.onrender.com/availability/${daysId}/${dayId}`
     )
       .then((res) => res.json())
       .then((data) => setSingleDay(data));

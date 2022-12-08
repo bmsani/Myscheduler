@@ -14,7 +14,7 @@ const IntervalEdit = ({ singleDay, days, refetch }: any) => {
     };
     console.log(intervalValue);
     fetch(
-      `https://secure-chamber-99191.herokuapp.com/editInterval/${days}/${id}`,
+      `https://myscheduler-server.onrender.com/editInterval/${days}/${id}`,
       {
         method: "PUT",
         headers: {

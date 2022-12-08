@@ -30,7 +30,7 @@ const AddCalender = () => {
   const responseGoogle = (response: any) => {
     const { code } = response;
     axios
-      .post("https://secure-chamber-99191.herokuapp.com/api/create-tokens", {
+      .post("https://myscheduler-server.onrender.com/api/create-tokens", {
         code,
       })
       .then((response) => {
@@ -38,7 +38,7 @@ const AddCalender = () => {
         if (refreshToken) {
           axios
             .put(
-              `https://secure-chamber-99191.herokuapp.com/refreshToken/${user?.email}`,
+              `https://myscheduler-server.onrender.com/refreshToken/${user?.email}`,
               {
                 refreshToken,
               }
@@ -62,8 +62,8 @@ const AddCalender = () => {
         <div className="py-4">
           <h1 className="text-xl">Select Calendar</h1>
           <h2 className="text-light text-sm">
-            Connect your calendar to let MyScheduler know when you're available and
-            update your calendar as events are scheduled.
+            Connect your calendar to let MyScheduler know when you're available
+            and update your calendar as events are scheduled.
           </h2>
         </div>
         <div className="flex py-3 border-t border-b bg-gray-50">

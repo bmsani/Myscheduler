@@ -52,7 +52,7 @@ const BookingConfirm = ({
       description: eventDescription,
     };
     axios
-      .post("https://secure-chamber-99191.herokuapp.com/api/create-event", {
+      .post("https://myscheduler-server.onrender.com/api/create-event", {
         bookingConfirm,
         hostEmail,
       })
@@ -60,7 +60,7 @@ const BookingConfirm = ({
         if (response.status === 200) {
           axios
             .post(
-              "https://secure-chamber-99191.herokuapp.com/api/createConfirmEvent",
+              "https://myscheduler-server.onrender.com/api/createConfirmEvent",
               confirmEvent,
               {
                 headers: {

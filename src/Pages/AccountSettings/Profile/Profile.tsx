@@ -46,7 +46,7 @@ const Profile = () => {
             mobile: mobile,
             imageURL: imageUrl,
           };
-          const url = `https://secure-chamber-99191.herokuapp.com/updatedUser/${email}`;
+          const url = `https://myscheduler-server.onrender.com/updatedUser/${email}`;
           fetch(url, {
             method: "PUT",
             headers: {
@@ -75,7 +75,7 @@ const Profile = () => {
         mobile: mobile,
         imageURL: userInfo?.imageURL,
       };
-      const url = `https://secure-chamber-99191.herokuapp.com/updatedUser/${email}`;
+      const url = `https://myscheduler-server.onrender.com/updatedUser/${email}`;
       fetch(url, {
         method: "PUT",
         headers: {
@@ -102,7 +102,7 @@ const Profile = () => {
         message: message,
         mobile: mobile,
       };
-      const url = `https://secure-chamber-99191.herokuapp.com/updatedUser/${email}`;
+      const url = `https://myscheduler-server.onrender.com/updatedUser/${email}`;
       fetch(url, {
         method: "PUT",
         headers: {
@@ -141,7 +141,9 @@ const Profile = () => {
             />
           ) : (
             <p className="w-[120px] h-[120px] rounded-full border border-primary p-1 flex justify-center items-center bg-gray-200">
-              <span className="text-8xl font-semibold uppercase">{firstLetter}</span>
+              <span className="text-8xl font-semibold uppercase">
+                {firstLetter}
+              </span>
             </p>
           )}
 

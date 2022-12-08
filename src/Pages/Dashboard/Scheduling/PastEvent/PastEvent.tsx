@@ -27,7 +27,7 @@ const PastEvent = () => {
   const handleDelete = (id: string) => {
     axios
       .delete(
-        `https://secure-chamber-99191.herokuapp.com/api/bookedEventDelete/${id}`,
+        `https://myscheduler-server.onrender.com/api/bookedEventDelete/${id}`,
         {
           headers: {
             "content-type": "application/json",

@@ -38,7 +38,7 @@ const CreateIndividualEvent = () => {
         eventDuration: eventDuration,
       };
       fetch(
-        `https://secure-chamber-99191.herokuapp.com/createNewEvent/${eventId}`,
+        `https://myscheduler-server.onrender.com/createNewEvent/${eventId}`,
         {
           method: "PUT",
           headers: {
@@ -62,7 +62,7 @@ const CreateIndividualEvent = () => {
         eventDuration: eventDuration,
         dayData: availabilities?.dayData,
       };
-      fetch(`https://secure-chamber-99191.herokuapp.com/createNewEvent`, {
+      fetch(`https://myscheduler-server.onrender.com/createNewEvent`, {
         method: "POST",
         headers: {
           "content-type": "application/json",

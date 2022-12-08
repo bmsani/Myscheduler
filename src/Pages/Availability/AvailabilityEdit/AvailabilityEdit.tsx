@@ -13,7 +13,7 @@ const AvailabilityEdit = ({ singleDay, days, refetch }: any) => {
       newEnd: end,
     };
     fetch(
-      `https://secure-chamber-99191.herokuapp.com/editAvailability/${days}/${singleId}`,
+      `https://myscheduler-server.onrender.com/editAvailability/${days}/${singleId}`,
       {
         method: "PUT",
         headers: {
