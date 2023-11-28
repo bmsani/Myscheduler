@@ -45,7 +45,7 @@ const Register: React.FC = () => {
     reset();
   };
   return (
-    <div className="mx-auto px-2 md:px-5 lg:px-20 max-w-[1400px] grid grid-cols-1 md:grid-cols-2 items-center content-center py-6 bg-[#F1F3F8]">
+    <div className="mx-auto px-2 md:px-5 lg:px-20 min-h-screen grid grid-cols-1 md:grid-cols-2 items-center content-center py-6 bg-[#F1F3F8]">
       <div className="hidden md:flex justify-center items-center">
         <img className="w-[500px]" src={regImg} alt="" />
       </div>

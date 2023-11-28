@@ -66,7 +66,7 @@ const Dashboard: any = () => {
     </>
   );
   return (
-    <div className="mx-auto max-w-[1400px]">
+    <div className="mx-auto">
       <div className="drawer drawer-mobile">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content p-5">

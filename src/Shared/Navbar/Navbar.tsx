@@ -173,7 +173,7 @@ const Navbar = () => {
                     </label>
                   )}
                 </p>
-                <div className="flex items-center gap-5">
+                <div className="flex items-center gap-2 md:gap-5">
                   <p>
                     <NavLink
                       className={({ isActive }) =>
@@ -227,7 +227,7 @@ const Navbar = () => {
                       </label>
                       <ul
                         tabIndex={0}
-                        className="mt-4 dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+                        className="mt-4 dropdown-content menu p-2 shadow bg-base-100 rounded-box w-56"
                       >
                         <li>
                           <Link

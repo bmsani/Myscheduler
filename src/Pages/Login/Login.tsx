@@ -53,7 +53,7 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="mx-auto px-2 md:px-5 lg:px-20 max-w-[1400px] grid grid-cols-1 md:grid-cols-2 items-center content-center py-12 bg-[#F1F3F8]">
+    <div className="mx-auto px-2 md:px-5 lg:px-20 grid grid-cols-1 md:grid-cols-2 items-center content-center py-12 bg-[#F1F3F8] min-h-screen">
       <div className=" hidden md:flex justify-center items-center">
         <img className="w-[470px]" src={loginImg} alt="" />
       </div>
