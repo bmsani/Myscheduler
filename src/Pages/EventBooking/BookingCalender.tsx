@@ -33,17 +33,31 @@ const BookingCalender = () => {
   );
 
   useEffect(() => {
-    const url = `https://myscheduler-server.onrender.com/singleUser/${singleEvent?.email}`;
-    fetch(url, {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
+    async function fetchUserData() {
+      try {
+        const url = `https://myscheduler-server.onrender.com/singleUser/${singleEvent?.email}`;
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const data = await response.json();
         setUserInfo(data);
-      });
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+        // Handle errors here
+      }
+    }
+
+    if (singleEvent?.email) {
+      fetchUserData();
+    }
   }, [singleEvent?.email]);
 
   const backButton = () => {
